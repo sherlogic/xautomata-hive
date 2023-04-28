@@ -1,0 +1,8 @@
+sqlalchemy
+argparse
+urllib3
+tqdm
+requests
+pandas
+tabulate
+pytz
