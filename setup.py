@@ -2,14 +2,9 @@ from setuptools import find_packages, setup
 
 version = '1.0'
 
-sqlalchemy = 'sqlalchemy'
-argparse = 'argparse'
-urllib3 = 'urllib3'
-tqdm = 'tqdm'
-requests = 'requests'
-pandas = 'pandas'
-tabulate = 'tabulate'
-pytz = 'pytz'
+urllib3 = 'urllib3==1.26.13'
+tqdm = 'tqdm==4.64.1'
+requests = 'requests==2.28.1'
 
 # start
 requires_dict = {

@@ -1,8 +1,3 @@
-sqlalchemy
-argparse
-urllib3
-tqdm
-requests
-pandas
-tabulate
-pytz
+urllib3==1.26.13
+tqdm==4.64.1
+requests==2.28.1
