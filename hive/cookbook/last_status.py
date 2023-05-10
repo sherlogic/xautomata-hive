@@ -90,5 +90,5 @@ class LastStatus(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/last_status/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, params=params, **kwargs)
+                                warm_start=warm_start, params=params, payload=payload, **kwargs)
         return response
