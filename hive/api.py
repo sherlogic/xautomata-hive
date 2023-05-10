@@ -264,13 +264,15 @@ from hive.cookbook.services import Services
 from hive.cookbook.ts_service import TsService
 from hive.cookbook.webhooks import Webhooks
 from hive.cookbook.ingest import Ingest
+from hive.cookbook.users import Users
 import gc
 
 
 class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
                    VirtualDomains, TsCostManagement, TsMetric,
                    ProfileTopics, LastStatus, ExternalTickets,
-                   MetricTypes, Sites, Probes, Services, TsService, Webhooks, Ingest):
+                   MetricTypes, Sites, Probes, Services, TsService,
+                   Webhooks, Ingest, Users):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
