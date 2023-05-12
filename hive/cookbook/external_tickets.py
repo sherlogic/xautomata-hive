@@ -22,9 +22,14 @@ class ExternalTickets(ApiManager):
         response = self.execute('PUT', path=f'/external_tickets/{uuid}', payload=payload, **kwargs)
         return response
 
-    def external_tickets_bulk(self, kwargs: dict = None, payload = None):
+    def external_tickets_bulk(self, kwargs: dict = None, payload=None):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/external_tickets/bulk/read/', payload=payload, **kwargs)
+        return response
+
+    def external_tickets_create_bulk(self, kwargs: dict = None, payload=None):
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/external_tickets/bulk/create/', payload=payload, **kwargs)
         return response
 
     def external_tickets_by_date(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
