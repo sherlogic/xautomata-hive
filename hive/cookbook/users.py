@@ -36,22 +36,57 @@ class Users(ApiManager):
                                 warm_start=warm_start, params=params, **kwargs)
         return response
 
+    def users_create(self, kwargs: dict = None, **payload):
+        """
+        Register new user
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            name (str, mandatory): additional filter
+            active (bool, mandatory): additional filter
+            email (str, mandatory): additional filter
+            phone (str, mandatory): additional filter
+            acl (dict, mandatory): additional filter
+            uuid_acl_override (str, optional): additional filter
+
+        Returns: list
+        """
+
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/users/', payload=payload, **kwargs)
+        return response
+
     def users_customers_create(self, user_name: str, uuid_customer: str, kwargs: dict = None):
         """
-        creare i link user customer in bulk
+        creare i link user customer
 
         Args:
             user_name
             uuid_customer
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path=f'/users/{user_name}/customers/{uuid_customer}', **kwargs)
+        return response
+
+    def users_widgetgroups_create(self, user_name: str, uuid_widget_groups: str, kwargs: dict = None):
+        """
+        creare i link user uuid_widget_groups
+
+        Args:
+            user_name
+            uuid_widget_groups
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/users/{user_name}/widget_groups/{uuid_widget_groups}', **kwargs)
         return response
 
     def users_customers_create_bulk(self, users_customers: list,  best_effort: bool = True, single_page: bool = False,
@@ -64,8 +99,15 @@ class Users(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Example:
+            users_customers = [
+                              {
+                                "username": "string",
+                                "uuid_customer": "string"
+                              }
+                            ]
 
         Returns: list
         """
