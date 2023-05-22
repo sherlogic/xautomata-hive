@@ -116,3 +116,22 @@ class Metrics(ApiManager):
         response = self.execute('DELETE', path='/metrics/bulk/delete/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=metrics, **kwargs)
         return response
+
+    def metrics_read_bulk(self, metrics: list, single_page: bool = False,
+                          page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+        """
+        fetch le metriche in bulk
+
+        Args:
+            metrics (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/metrics/bulk/read/', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=metrics, **kwargs)
+        return response
