@@ -128,15 +128,20 @@ class TsService(ApiManager):
             profile (str, optional): additional filter
             name (str, optional): additional filter
             description (str, optional): additional filter
-            status (str, optional): additional filter
+            service_status (str, optional): additional filter
             timestamp_start (str, optional): additional filter
             timestamp_end (str, optional): additional filter
 
+        Example:
+            Per estrarre l'ultimo valore puo essere fatto con la seguente chimata pandas:
+                last = pd_caster(spell.ts_services_query(profile=profile_m, statys = 'red', timestamp_start=ts_start.isoformat())).sort_values(by='timestamp', ascending=True).groupby('uuid_service').tail(1)
+                in questo modo vengono ricavati i servizzi a partire da ts_start e viene restituito solo l'ultimo valore per servizio
 
         Returns: list
 
         """
         if kwargs is None: kwargs = dict()
+        if 'service_status' in list(params.keys()): params['status'] = params.pop('service_status')
         response = self.execute('GET', path='/ts_service_' + status + '/query/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, params=params, **kwargs)
         return response
