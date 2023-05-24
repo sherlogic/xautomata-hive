@@ -91,6 +91,7 @@ class ApiManager:
 
         bulk = True if 'bulk' in path else False  # verifico dalla path se è una api bulk
         bulk = True if path == '/metric_ingest/' else bulk  # il metric_ingest e' una bulk ma non compare nel nome
+        bulk = True if path == '/probes_log_ingest/' else bulk  # il metric_ingest e' una bulk ma non compare nel nome
         read = True if 'read' in path else False  # verifico dalla path se è una api get, valido solo per le bulk
         query = True if 'query' in path else False  # verifico dalla path se è una api get, valido solo per le bulk
         query = True if path == '/last_status/' and mode == 'POST' else query  # caso specifico della last_status che non ha features riconoscibili
