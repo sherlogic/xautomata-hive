@@ -301,3 +301,30 @@ class Objects(ApiManager):
         response = self.execute('DELETE', path='/objects/bulk/delete/groups', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=objects_groups, **kwargs)
         return response
+
+    def objects_groups_create_bulk(self, objects_groups: list, single_page: bool = False,
+                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+        """
+        elimina le metriche in bulk
+
+        Args:
+            objects_groups (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            objects_groups = [
+                              {
+                                "uuid_group": "string",
+                                "uuid_object": "string"
+                              }
+                            ]
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/create/groups', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=objects_groups, **kwargs)
+        return response
