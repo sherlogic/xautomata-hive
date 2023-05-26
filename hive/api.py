@@ -1,7 +1,6 @@
 import json
 from typing import Literal, Dict, List, Tuple
 from uuid import uuid4
-
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
@@ -177,6 +176,9 @@ class ApiManager:
         if post_params is None: post_params = {}
         url_post = url_get if url_post is None else url_post
         get_count, post_count, put_count = 0, 0, 0
+
+        # a meno di definizioni diverse le chiamate get vengono sempre fatte in like = False
+        get_params['like'] = get_params.get('like', False)
 
         try:
             # il primo tentativo e' di chiedere l'oggetto con una get
