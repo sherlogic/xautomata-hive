@@ -244,6 +244,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
 
         Keyword Args:
             join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
@@ -303,9 +304,9 @@ class Objects(ApiManager):
         return response
 
     def objects_groups_create_bulk(self, objects_groups: list, single_page: bool = False,
-                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
-        elimina le metriche in bulk
+        create le metriche in bulk
 
         Args:
             objects_groups (list[dict], optional): List dict to create.
@@ -313,6 +314,10 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
 
         Examples:
             objects_groups = [
@@ -326,5 +331,5 @@ class Objects(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/objects/bulk/create/groups', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=objects_groups, **kwargs)
+                                warm_start=warm_start, payload=objects_groups, params=params, **kwargs)
         return response
