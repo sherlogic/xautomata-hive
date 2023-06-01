@@ -177,6 +177,10 @@ class ApiManager:
         url_post = url_get if url_post is None else url_post
         get_count, post_count, put_count = 0, 0, 0
 
+        # se uno passa lo stesso dizionario sia per get che per post, con la seguente riga impedisce di applicare le modifiche fatte alla get anche alla post
+        get_params = get_params.copy()
+        post_params = post_params.copy()
+
         # a meno di definizioni diverse le chiamate get vengono sempre fatte in like = False
         get_params['like'] = get_params.get('like', False)
 
