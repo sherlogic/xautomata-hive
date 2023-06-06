@@ -266,6 +266,7 @@ from hive.cookbook.webhooks import Webhooks
 from hive.cookbook.ingest import Ingest
 from hive.cookbook.users import Users
 from hive.cookbook.widget_groups import WidgetGroups
+from hive.cookbook.anomalies import Anomalies
 import gc
 
 
@@ -273,7 +274,7 @@ class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
                    VirtualDomains, TsCostManagement, TsMetric,
                    ProfileTopics, LastStatus, ExternalTickets,
                    MetricTypes, Sites, Probes, Services, TsService,
-                   Webhooks, Ingest, Users, WidgetGroups):
+                   Webhooks, Ingest, Users, WidgetGroups, Anomalies):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
