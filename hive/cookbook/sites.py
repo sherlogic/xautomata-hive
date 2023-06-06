@@ -66,6 +66,33 @@ class Sites(ApiManager):
         response = self.execute('GET', path=f'/sites/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
 
+    def sites_groups(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
+                     **params):
+        """
+        Fetch all groups linked with site.
+
+        Args:
+            uuid (str, required): uuid del sito
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API
+
+        Keyword Args:
+            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
+            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
+            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
+            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('GET', path=f'/sites/{uuid}/groups', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, params=params, **kwargs)
+        return response
+
     def site_put(self, uuid: str, geocode: bool = False, kwargs: dict = None, **payload):
         """
         update selected metric.
@@ -127,5 +154,24 @@ class Sites(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('DELETE', path='/sites/bulk/delete/', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=sites, **kwargs)
+        return response
+
+    def sites_read_bulk(self, sites: list, single_page: bool = False,
+                        page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+        """
+        elimina le metriche in bulk
+
+        Args:
+            sites (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/sites/bulk/read/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=sites, **kwargs)
         return response

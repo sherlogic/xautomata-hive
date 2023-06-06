@@ -128,7 +128,7 @@ class Groups(ApiManager):
         return response
 
     def groups_delete_bulk(self, groups: list, single_page: bool = False,
-                           page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+                           page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
@@ -142,8 +142,8 @@ class Groups(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path='/groups/bulk/delete/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups, **kwargs)
+        response = self.execute('POST', path='/groups/bulk/delete/', single_page=single_page, page_size=page_size,
+                                payload=groups, **kwargs)
         return response
 
     def groups_bulk(self, groups: list, single_page: bool = False,
