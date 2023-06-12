@@ -8,6 +8,7 @@ from tqdm import tqdm
 from requests import HTTPError
 from hive.decorators import ratelimiter, refresh, paginate, warmstart
 from hive.exceptions import UnauthorizedException
+import warnings
 
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
@@ -235,6 +236,145 @@ class ApiManager:
 
         return response_content[0]['uuid'], get_count, post_count, put_count
 
+    def get_post_bulk(self, url_get: str, url_post: str = None, url_put: str = None, get_params: List[dict] = None, post_params: List[dict] = None,
+                      add_get_params: dict = None, add_post_params: dict = None, silence_put: bool = False) -> Tuple[List[str], int, int, int]:
+        """
+        metodo che prova a fare una get con i parametri selezionati, se la get fallisce perche mancavano i dati
+        richiesti allora viene fatta una post per creare il dato cercato
+
+        Args:
+            url_get (str): url dell'api di get
+            url_post (str, optional): url dell'api di post, se non viene fornito nessun url, viene usato quello della
+                get. Default to None.
+            url_put (str): url dell'api di put
+            get_params (list[dict], optional): parametri della api di get. Default to None.
+            post_params (list[dict], optional): parametri della api di post. Default to None.
+            add_get_params (dict, optional): parametri della get che non rientrano nel payload. Default to None.
+            add_post_params (dict, optional): parametri della post, put che non rientrano nel payload
+            silence_put (bool, optional): se a True le put non vengono fatte.
+
+        Returns:
+            uuid (list[str]): lista di tutti gli uuid degli oggetti richiesti
+            get_count (int): 1 se il metodo e' risultato in una get e 0 se e' risultato in una post
+            post_count (int): 1 se il metodo e' risutltato in una post e 0 se e' risultato in una get
+        """
+
+        # se viene dato il solo elemento dell'url, questo viene convertito nella sua versione bulk
+        if 'bulk/read' not in url_get: url_get = '/' + url_get.lstrip('/').rstrip('/') + '/bulk/read_by/'
+        else:                          url_get = '/' + url_get.lstrip('/').rstrip('/') + '/'
+
+        # inizializzo url post se non viene passato
+        if url_post is None: url_post = url_get.split('bulk/read')[0]
+        if 'bulk/create' not in url_post: url_post = '/' + url_post.lstrip('/').rstrip('/') + '/bulk/create/'
+        else:                             url_post = '/' + url_post.lstrip('/').rstrip('/') + '/'
+
+        # inizializzo url put se non viene passato
+        url_put = url_get.split('bulk')[0] if url_put is None else url_put
+        url_put = '/' + url_put.lstrip('/').rstrip('/') + '/'
+
+        if get_params is not None and post_params is not None and len(get_params) != len(post_params):
+            raise ValueError('get_params and post_params needs to have the same length')
+
+        # se non vengono dati parametri questi vengono convertiti in una lista vuota
+        if post_params is None and get_params is not None: post_params = [{} for _ in get_params]
+        if get_params is None and post_params is not None: get_params = [{} for _ in post_params]
+        if get_params is None and post_params is None: get_params, post_params = [{}], [{}]
+
+        get_count, post_count, put_count = 0, 0, 0
+
+        # se uno passa lo stesso dizionario sia per get che per post, con la seguente riga impedisce di applicare le modifiche fatte alla get anche alla post
+        get_params = get_params.copy()
+        post_params = post_params.copy()
+
+        # a meno di definizioni diverse le chiamate get vengono sempre fatte in like = False
+        for get_param in get_params: get_param['like'] = get_param.get('like', False)
+
+        # si chiedono tutti gli oggetti in con la get e si ottiene una lista di riposta con gli uuid di quelli trovati e dei None per quelli non trovati
+        response_content_temp = self.execute('POST', url_get, payload=get_params, params=add_get_params)
+
+        ###################################################
+        # ottiene le chiavi usate per la get, usa il primo elemento come campione per tutti gli elementi successivi
+        chiavi = list(get_params[0].keys())
+        chiavi = [k for k in chiavi if k != 'like']
+        # precrea una lista vuota
+        response_content = [None for _ in range(len(get_params))]
+
+        # cicla su tutti gli elementi usati per fare la get
+        for i, ele in enumerate(get_params):
+            # se non ho altri valori tra cui cercare termino il ciclo
+            if len(response_content_temp) == 0: break
+            # ciclo su ogni elemento presente nella risposta
+            for j, temp_ele in enumerate(response_content_temp):
+                # controllo se tra le chiavi principali di ele e quelle di temp_ele ci sono gli stessi valori
+                yes = all([ele.get(k) == temp_ele.get(k) for k in chiavi])
+                # se c'e' un riscontro lo aggiorno
+                if yes:
+                    # mi porto dentro alla risposta response_content il risultato della get
+                    response_content[i] = temp_ele
+                    # elimino il valore appena abbinato dalla ricerca
+                    response_content_temp.pop(j)
+                    break
+        ###################################################
+
+        # seleziono dalla lista postata gli indici degli elementi che hanno dato un None come risultato dalla get
+        id_element_to_post, id_element_getted = [], []
+        for i, val in enumerate(response_content):
+            if val is None: id_element_to_post.append(i)
+            else: id_element_getted.append(i)
+
+        # scrivo in una variabile quanti elementi sono legati alla get e su quanti adra provata la post
+        get_count = len(id_element_getted)
+        post_count = len(id_element_to_post)
+
+        # popolo una lista con gli elementi da postare legati ai solo oggetti che non hanno ricevuto risposta con la get
+        element_to_post = []
+        for _id in id_element_to_post:
+            element_to_post.append(post_params[_id])
+
+        # faccio la post di tutti gli elementi che hanno dato None nella get
+        # se in modalita test genero gli uuid
+        if len(element_to_post) > 0:
+            if self._get_only: response_content_post = ['F4FF' + str(uuid4())[4:] for _ in range(len(element_to_post))]
+            else: response_content_post = self.execute('POST', url_post, payload=element_to_post, params=add_post_params)[0]['uuids']
+
+            # inserisco i nuovi uuid trovati nella risposta originale
+            for i, _id in enumerate(id_element_to_post):
+                response_content[_id] = {'uuid': response_content_post[i]}
+
+        # se post_params è vuoto o se siamo in modalita silence, la put non viene provata
+        if post_params and not silence_put:
+            # ciclo su tutti gli oggetti che hanno ottenuto un uuid con la get e verifico uno ad uno se deve ottenere una put
+            for _id in id_element_getted:
+                # se l'oggetto esiste controllo le sue chiavi
+                for chiave in post_params[_id]:  # ciclo sulle chiavi dei parametri postabili
+                    # se incontro un parametro di quelli decisi per il post che è abbinato ad un valore diverso rispetto
+                    # a quello che è nella risposta, allora faccio una put
+                    if post_params[_id][chiave] != response_content[_id][chiave]:
+                        # estraggo lo uuid dell'oggetto
+                        uuid = response_content[_id]['uuid']
+                        # compio la put con il nuovo set di parametri
+                        if not self._get_only:
+                            response_content[_id] = self.execute('PUT', url_put+uuid, payload=post_params[_id], params=add_post_params)[0]
+                        # alzo il contatore delle put e riduco le get
+                        put_count += 1
+                        get_count -= 1
+                        break
+
+        # seleziono dalla lista postata gli indici degli elementi che hanno dato un None come risultato dalla get
+        uuid_res = []
+        none_count = 0
+        for val in response_content:
+            if val is None:
+                uuid_res.append(val)
+                none_count += 1
+            else:
+                uuid_res.append(val['uuid'])
+
+        if none_count > 0:
+            warnings.warn(f'{none_count} elements have not been matched with a uuid and can be found as None in the resutl list')
+
+        return uuid_res, get_count, post_count, put_count
+
 
 def handling_single_page_methods(kwargs, params):
     """
@@ -413,6 +553,6 @@ class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
         # lista degli uuid degli oggetti da legare a questo dispacter
         for uuid in uuids:
             if types == 'metric':
-                self.execute(mode='POST', path = f'/dispatcehrs/{uuid_d}/metrics{uuid}')
+                self.execute(mode='POST', path=f'/dispatcehrs/{uuid_d}/metrics{uuid}')
             else:
                 raise NotImplementedError
