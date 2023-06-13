@@ -8,6 +8,7 @@ from tqdm import tqdm
 from requests import HTTPError
 from hive.decorators import ratelimiter, refresh, paginate, warmstart
 from hive.exceptions import UnauthorizedException
+from hive.infrastrucure_keys import Keys
 import warnings
 
 
@@ -236,22 +237,23 @@ class ApiManager:
 
         return response_content[0]['uuid'], get_count, post_count, put_count
 
-    def get_post_bulk(self, url_get: str, url_post: str = None, url_put: str = None, get_params: List[dict] = None, post_params: List[dict] = None,
-                      add_get_params: dict = None, add_post_params: dict = None, silence_put: bool = False) -> Tuple[List[str], int, int, int]:
+    def get_post_bulk(self, post_params: List[dict], url_get: str, url_post: str = None, url_put: str = None,
+                      add_get_params: dict = None, add_post_params: dict = None, silence_put: bool = False,
+                      page_size: int = 5000) -> Tuple[List[str], int, int, int]:
         """
         metodo che prova a fare una get con i parametri selezionati, se la get fallisce perche mancavano i dati
         richiesti allora viene fatta una post per creare il dato cercato
 
         Args:
+            post_params (list[dict], optional): parametri della api di post. Default to None.
             url_get (str): url dell'api di get
             url_post (str, optional): url dell'api di post, se non viene fornito nessun url, viene usato quello della
                 get. Default to None.
             url_put (str): url dell'api di put
-            get_params (list[dict], optional): parametri della api di get. Default to None.
-            post_params (list[dict], optional): parametri della api di post. Default to None.
             add_get_params (dict, optional): parametri della get che non rientrano nel payload. Default to None.
             add_post_params (dict, optional): parametri della post, put che non rientrano nel payload
             silence_put (bool, optional): se a True le put non vengono fatte.
+            page_size (int, optional): numero di elementi che vengono caricati in un unica chiamata
 
         Returns:
             uuid (list[str]): lista di tutti gli uuid degli oggetti richiesti
@@ -272,93 +274,134 @@ class ApiManager:
         url_put = url_get.split('bulk')[0] if url_put is None else url_put
         url_put = '/' + url_put.lstrip('/').rstrip('/') + '/'
 
-        if get_params is not None and post_params is not None and len(get_params) != len(post_params):
-            raise ValueError('get_params and post_params needs to have the same length')
-
-        # se non vengono dati parametri questi vengono convertiti in una lista vuota
-        if post_params is None and get_params is not None: post_params = [{} for _ in get_params]
-        if get_params is None and post_params is not None: get_params = [{} for _ in post_params]
-        if get_params is None and post_params is None: get_params, post_params = [{}], [{}]
+        method = url_get.split('/')[1]
 
         get_count, post_count, put_count = 0, 0, 0
 
         # se uno passa lo stesso dizionario sia per get che per post, con la seguente riga impedisce di applicare le modifiche fatte alla get anche alla post
-        get_params = get_params.copy()
         post_params = post_params.copy()
 
-        # a meno di definizioni diverse le chiamate get vengono sempre fatte in like = False
-        for get_param in get_params: get_param['like'] = get_param.get('like', False)
+        # ottiene le chiavi usate per la get, usa il primo elemento come campione per tutti gli elementi successivi
+        # chiavi = [k for k in list(get_params[0].keys()) if k != 'like']
+
+        # ottengo le chiavi univoche da un dizionario
+        chiavi_dict = {'customers': Keys.customer_keys, 'virtual_domains': Keys.virtual_domain_keys, 'sites': Keys.site_keys,
+                       'groups': Keys.group_keys, 'objects': Keys.object_keys, 'metric_types': Keys.metric_type_keys,
+                       'metric': Keys.metric_keys, 'services': Keys.service_keys}
+        chiavi = chiavi_dict[method]['univocal']
 
         # si chiedono tutti gli oggetti in con la get e si ottiene una lista di riposta con gli uuid di quelli trovati e dei None per quelli non trovati
-        response_content_temp = self.execute('POST', url_get, payload=get_params, params=add_get_params)
+        # non serve filtrare le richieste alla get con le sole chiavi primarie perche l'API fa il filtro internamente
+        response_content_temp = self.execute('POST', url_get, payload=post_params, params=add_get_params, page_size=page_size)  # questo metodo puo introdurre dei duplicati se lo stesso oggetto viene chiesto piu volte e si sta paginando
+
+        # creo un dizionario con gli elementi primari come chiavi e le rispote come valori
+        post_params_dict = dict()
+        for params in post_params:
+            # creo le chiavi con il risultato dei valori degli elementi primari
+            chiave = tuple(params[k] for k in chiavi)
+            # abbino a questa chiave il contenuto della risposta
+            post_params_dict[chiave] = params
 
         ###################################################
-        # ottiene le chiavi usate per la get, usa il primo elemento come campione per tutti gli elementi successivi
-        chiavi = list(get_params[0].keys())
-        chiavi = [k for k in chiavi if k != 'like']
+        # se post_params è vuoto o se siamo in modalita silence, la put non viene provata
+        if not silence_put:
+            # ciclo sulla risposta della get con i soli oggetti trovati dalla get
+            for res_get in response_content_temp:
+
+                # creo le chiavi con il risultato dei valori degli elementi primari dentro alle risposte ottenute
+                chiave = tuple(res_get[k] for k in chiavi)
+
+                # se l'oggetto esiste controllo le sue chiavi
+                for chiave_getted in res_get:  # ciclo sulle chiavi dei parametri ottenuti
+
+                    # se incontro un parametro di quelli decisi per il post che è abbinato ad un valore diverso rispetto
+                    # a quello che è nella risposta, allora faccio una put
+
+                    # vado a prendere il valore delle post che combacia con il risultato ottenuto dalle get
+                    # la chiave viene chiesta con il metodo get su post_params perche non necessariamente i parametri data dall'utente hanno tutte le chiavi
+                    if res_get[chiave_getted] != post_params_dict[chiave].get(chiave_getted, res_get[chiave_getted]):
+
+                        # estraggo lo uuid dell'oggetto
+                        uuid = res_get['uuid']
+                        # compio la put con il nuovo set di parametri
+                        if not self._get_only: self.execute('PUT', url_put+uuid, payload=post_params_dict[chiave], params=add_post_params)  # la put va a modificare il dato sul db ma non mi serve che venga poi inserito il valore nello script
+                        # alzo il contatore delle put e riduco le get
+                        put_count += 1
+                        break
+        ###################################################
+
+        ###################################################
+        # creo un dizionario con gli elementi primari come chiavi e le rispote come valori
+        response_content_temp_dict = dict()
+        for cont in response_content_temp:
+            # creo le chiavi con il risultato dei valori degli elementi primari
+            chiave = tuple(cont[k] for k in chiavi)
+            # abbino a questa chiave il contenuto della risposta
+            response_content_temp_dict[chiave] = cont
+
+        # il numero delle get reali sono il numero di chiavi uniche presenti nella riposta delle get, meno quelli su cui e' stata fatta una put
+        get_count = len(response_content_temp_dict) - put_count
+
+        # elimino la lista della risposta originale per pulizia
+        del response_content_temp
+
         # precrea una lista vuota
-        response_content = [None for _ in range(len(get_params))]
-
-        # cicla su tutti gli elementi usati per fare la get
-        for i, ele in enumerate(get_params):
-            # se non ho altri valori tra cui cercare termino il ciclo
-            if len(response_content_temp) == 0: break
-            # ciclo su ogni elemento presente nella risposta
-            for j, temp_ele in enumerate(response_content_temp):
-                # controllo se tra le chiavi principali di ele e quelle di temp_ele ci sono gli stessi valori
-                yes = all([ele.get(k) == temp_ele.get(k) for k in chiavi])
-                # se c'e' un riscontro lo aggiorno
-                if yes:
-                    # mi porto dentro alla risposta response_content il risultato della get
-                    response_content[i] = temp_ele
-                    # elimino il valore appena abbinato dalla ricerca
-                    response_content_temp.pop(j)
-                    break
-        ###################################################
+        response_content = [None for _ in range(len(post_params))]
 
         # seleziono dalla lista postata gli indici degli elementi che hanno dato un None come risultato dalla get
-        id_element_to_post, id_element_getted = [], []
-        for i, val in enumerate(response_content):
-            if val is None: id_element_to_post.append(i)
-            else: id_element_getted.append(i)
+        id_element_to_post, id_element_getted, key_post = [], [], []
+        # cicla su tutti gli elementi e discrimino quelli che sono gia stati ottenuti da quelli che mancano
+        for i, ele in enumerate(post_params):
+            # creo una chiave con i valori degli elementi principali
+            chiave = tuple(ele[k] for k in chiavi)
+            # vado a cercare nella risposta se presente la chiave cercata, in caso positivo inserisco quel valore come elemento del vettore risposte
+            # questo mi garantisce di mantenere lo stesso ordine delle richieste
+            # se una richiesta genera piu risposte viene considerata solo l'ultima
+            # se una richiesta non genera nessuna risposta viene abbinato il None
+            # se vengono fatte piu richieste uguali vengono abbinati sempre gli stessi risultati tutte le volte che sono stati chiesti
+            # a senconda se il responce e' None o meno popolo un vettore diverso dell'incide
+            if chiave in response_content_temp_dict:
+                response_content[i] = response_content_temp_dict[chiave]
+                id_element_getted.append(i)
+            else:
+                response_content[i] = chiave
+                id_element_to_post.append(i)
+                # mi creo una lista che contiene le chiavi primarie degli oggetti da postare
+                key_post.append(tuple(ele[k] for k in chiavi))
+            # response_content[i] = response_content_temp_dict[chiave] if chiave in response_content_temp_dict else None
 
-        # scrivo in una variabile quanti elementi sono legati alla get e su quanti adra provata la post
-        get_count = len(id_element_getted)
-        post_count = len(id_element_to_post)
+        ###################################################
 
-        # popolo una lista con gli elementi da postare legati ai solo oggetti che non hanno ricevuto risposta con la get
-        element_to_post = []
-        for _id in id_element_to_post:
-            element_to_post.append(post_params[_id])
+        # ottendo le chiavi univoche per postare gli elementi, eliminando eventuali ripetizioni
+        key_post = set(key_post)
+
+        # il numero delle post sono tutti gli elementi che non sono tornati da una get
+        post_count = len(key_post)
+
+        # # popolo una lista con gli elementi da postare legati ai solo oggetti che non hanno ricevuto risposta con la get
+        # element_to_post = []
+        # for _id in id_element_to_post:
+        #     post_params[_id]
+        #     element_to_post.append(post_params[_id])
+
+        # prese le chiavi univoche degli elementi da postare, vengono recuperati gli oggetti da postare dal dizionario dei parametri da postare
+        element_to_post = [post_params_dict[id_key] for id_key in key_post]
 
         # faccio la post di tutti gli elementi che hanno dato None nella get
         # se in modalita test genero gli uuid
         if len(element_to_post) > 0:
             if self._get_only: response_content_post = ['F4FF' + str(uuid4())[4:] for _ in range(len(element_to_post))]
-            else: response_content_post = self.execute('POST', url_post, payload=element_to_post, params=add_post_params)[0]['uuids']
+            else: response_content_post = self.execute('POST', url_post, payload=element_to_post, params=add_post_params,
+                                                       page_size=page_size)[0]['uuids']
+
+            post_to_key_res_dict = dict()
+            for i, id_key in enumerate(key_post):
+                post_to_key_res_dict[id_key] = response_content_post[i]
 
             # inserisco i nuovi uuid trovati nella risposta originale
             for i, _id in enumerate(id_element_to_post):
-                response_content[_id] = {'uuid': response_content_post[i]}
-
-        # se post_params è vuoto o se siamo in modalita silence, la put non viene provata
-        if post_params and not silence_put:
-            # ciclo su tutti gli oggetti che hanno ottenuto un uuid con la get e verifico uno ad uno se deve ottenere una put
-            for _id in id_element_getted:
-                # se l'oggetto esiste controllo le sue chiavi
-                for chiave in post_params[_id]:  # ciclo sulle chiavi dei parametri postabili
-                    # se incontro un parametro di quelli decisi per il post che è abbinato ad un valore diverso rispetto
-                    # a quello che è nella risposta, allora faccio una put
-                    if post_params[_id][chiave] != response_content[_id][chiave]:
-                        # estraggo lo uuid dell'oggetto
-                        uuid = response_content[_id]['uuid']
-                        # compio la put con il nuovo set di parametri
-                        if not self._get_only:
-                            response_content[_id] = self.execute('PUT', url_put+uuid, payload=post_params[_id], params=add_post_params)[0]
-                        # alzo il contatore delle put e riduco le get
-                        put_count += 1
-                        get_count -= 1
-                        break
+                chiave = response_content[_id]
+                response_content[_id] = {'uuid': post_to_key_res_dict[chiave]}
 
         # seleziono dalla lista postata gli indici degli elementi che hanno dato un None come risultato dalla get
         uuid_res = []
