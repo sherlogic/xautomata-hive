@@ -37,6 +37,31 @@ class Objects(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
+    def objects_post(self, kwargs: dict = None, **payload):
+        """
+        post selected objects.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            name (str): additional filter, required
+            description (str, optional): additional filter
+            feedback_for_operator (str, optional): additional filter
+            ip_cidr (dict, optional): additional filter
+            profile (str): additional filter, required
+            data_profile (dict, optional): additional filter
+            automata_domain (list, optional): additional filter
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/objects/', payload=payload, **kwargs)
+        return response
+
     def object(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
         """
         Fetch single metric.
@@ -221,7 +246,7 @@ class Objects(ApiManager):
         response = self.execute('DELETE', path=f'/objects/{uuid}/probes/{uuid_probe}', payload=payload, **kwargs)
         return response
 
-    def object_downtimes(self, uuid: str, single_page: bool = False, page_size: int = 5000,
+    def objects_downtimes(self, uuid: str, single_page: bool = False, page_size: int = 5000,
                              warm_start: bool = False, kwargs: dict = None, **params):
         """
         get the downtimes linked with the object.
@@ -269,12 +294,14 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
-    def object_put(self, uuid: str, kwargs: dict = None, **payload):
+
+    def objects_put(self, uuid: str, uuid_probe: str = None, kwargs: dict = None, **payload):
         """
         update selected object.
 
         Args:
             uuid (str): uuid della object da modificare
+            uuid_probe (str, optional): uuid della probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API
 
@@ -292,10 +319,11 @@ class Objects(ApiManager):
 
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, **kwargs)
+        uuid_probe = dict() if uuid_probe is None else{'uuid_probe': uuid_probe}
+        response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, params=uuid_probe, **kwargs)
         return response
 
-    def object_delete(self, uuid: str, kwargs: dict = None):
+    def objects_delete(self, uuid: str, kwargs: dict = None):
         """
 
         delete single object.
@@ -348,7 +376,7 @@ class Objects(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path='/objects/bulk/delete/', single_page=single_page, page_size=page_size,
+        response = self.execute('POST', path='/objects/bulk/delete/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=objects, **kwargs)
         return response
 
@@ -375,7 +403,7 @@ class Objects(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path='/objects/bulk/delete/groups', single_page=single_page, page_size=page_size,
+        response = self.execute('POST', path='/objects/bulk/delete/groups', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=objects_groups, **kwargs)
         return response
 
