@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 /.idea
 *.xlsx
+test*
 
 # C extensions
 *.so
