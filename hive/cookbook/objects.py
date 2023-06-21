@@ -294,7 +294,23 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
+    
+    def objects_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+        """
+        create link between selected object and selected dispatcher.
 
+        Args:
+            uuid (str): uuid della object
+            uuid_probe (str): uuid della group
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/objects/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+        return response
     def objects_put(self, uuid: str, uuid_probe: str = None, kwargs: dict = None, **payload):
         """
         update selected object.
