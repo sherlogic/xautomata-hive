@@ -8,12 +8,12 @@ rispetto a quella generica
 
 ## Installazione editabile
 ```
-pip install -e git+https://github.com/sherlogic/xautomata-hive.git#egg=Tages[hive]
+pip install -e git+https://github.com/sherlogic/xautomata-hive.git#egg=hive[hive]
 ```
 
 Se si e' interessati ad una specifica versione, bisogna inserire la versione scelta dopo la @, come indicato di seguito
 ```
-pip install -e git+https://github.com/sherlogic/xautomata-hive.git@0.0.1#egg=Tages[modulo]
+pip install -e git+https://github.com/sherlogic/xautomata-hive.git@0.0.1#egg=hive[modulo]
 ```
 
 in alternativa si puo scaricare il source code dalla release desiderata e pip installare il source code direttamente
