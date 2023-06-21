@@ -204,3 +204,29 @@ get the downtimes linked with the metrics.
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/metrics/{uuid}/dispatchers', single_page=single_page, page_size=page_size,warm_start=warm_start, params=params, **kwargs)
         return response
+    def metrics_services_post(self, uuid: str, uuid_service: str, kwargs: dict = None, **payload):
+        """
+        create link between selected object and selected metrics service.
+        Args:
+            uuid (str, required): uuid della metrics
+            uuid_service (str, required): uuid del service
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/metrics/{uuid}/services/{uuid_service}', payload=payload, **kwargs)
+        return response
+    def metrics_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+        """
+        create link between selected dispatcher and selected metrics service.
+        Args:
+            uuid (str, required): uuid della metrics
+            uuid_service (str, required): uuid del service
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/metrics/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+        return response
