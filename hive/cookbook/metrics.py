@@ -184,6 +184,21 @@ get the downtimes linked with the metrics.
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/metrics/{uuid}/downtimes', single_page=single_page, page_size=page_size,warm_start=warm_start, params=params, **kwargs)
         return response
+    
+    def metrics_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
+        """
+        delete service linked with selected metric.
+        Args:
+            uuid (str) : uuid del metric
+            uuid_downtime (str) : uuid downtime da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/metrics/{uuid}/services/{uuid_downtime}', **kwargs)
+        return response
+    
     def metrics_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """ metodo che restituisce i dispatchers di una metrics
         Args:
@@ -217,6 +232,21 @@ get the downtimes linked with the metrics.
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path=f'/metrics/{uuid}/services/{uuid_service}', payload=payload, **kwargs)
         return response
+    
+    def metrics_services_delete(self, uuid: str, uuid_service: str, kwargs: dict = None):
+        """
+        delete service linked with selected metric.
+        Args:
+            uuid (str) : id del metric
+            uuid_service (str): id del service da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/metrics/{uuid}/services/{uuid_service}', **kwargs)
+        return response
+    
     def metrics_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
         """
         create link between selected dispatcher and selected metrics service.
