@@ -79,7 +79,22 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def objects_metric_types(self, uuid: str, single_page: bool = False, page_size: int = 5000,
+    def object_delete(self, uuid: str, kwargs: dict = None):
+        """
+
+        delete single object.
+
+        Args:
+            uuid: id del object da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/objects/{uuid}', **kwargs)
+        return response
+
+    def object_metric_types(self, uuid: str, single_page: bool = False, page_size: int = 5000,
                              warm_start: bool = False, kwargs: dict = None, **params):
         """
         Fetch all metric_types related to a certain object, referenced by its UUID
@@ -105,7 +120,7 @@ class Objects(ApiManager):
                                 page_size=page_size, warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def objects_hosted(self, uuid: str, single_page: bool = False, page_size: int = 5000,
+    def object_hosted(self, uuid: str, single_page: bool = False, page_size: int = 5000,
                              warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che restituisce tutti gli host di un oggetto
@@ -133,7 +148,7 @@ class Objects(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
-    def objects_groups(self, uuid: str, kwargs: dict = None, **params):
+    def object_groups(self, uuid: str, kwargs: dict = None, **params):
         """
         get the groups linked with the object.
 
@@ -156,7 +171,7 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}/groups', params=params, **kwargs)
         return response
 
-    def objects_groups_post(self, uuid: str, uuid_group: str, kwargs: dict = None, **payload):
+    def object_groups_post(self, uuid: str, uuid_group: str, kwargs: dict = None, **payload):
         """
         create link between selected object and selected group.
 
@@ -173,7 +188,7 @@ class Objects(ApiManager):
         response = self.execute('POST', path=f'/objects/{uuid}/groups/{uuid_group}', payload=payload, **kwargs)
         return response
 
-    def objects_groups_delete(self, uuid: str, uuid_group: str, kwargs: dict = None):
+    def object_groups_delete(self, uuid: str, uuid_group: str, kwargs: dict = None):
         """
         delete link between selected object and selected group.
 
@@ -294,7 +309,79 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
-    
+    def object_downtimes_post(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
+
+        """
+        create link between selected object and selected downtime.
+        Args:
+
+            uuid (str): uuid della object
+
+            uuid_probe (str): uuid della group
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('POST', path=f'/objects/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+
+        return response
+    def object_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
+
+        """
+        remove downtime linked with the object.
+        Args:
+
+            uuid (str): uuid della object
+
+            uuid_downtime (str): uuid del downtime
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/objects/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+
+        return response
+
+
+   
+
+    def object_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+
+        """
+
+        delete dispatcher linked with the object.
+
+        Args:
+
+            uuid (str, required): uuid della object
+
+            uuid_dispatcher (str, required): uuid del dispatcher
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/objects/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+
+        return response
+
+   
     def objects_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
         """
         create link between selected object and selected dispatcher.
@@ -337,21 +424,6 @@ class Objects(ApiManager):
         if kwargs is None: kwargs = dict()
         uuid_probe = dict() if uuid_probe is None else{'uuid_probe': uuid_probe}
         response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, params=uuid_probe, **kwargs)
-        return response
-
-    def objects_delete(self, uuid: str, kwargs: dict = None):
-        """
-
-        delete single object.
-
-        Args:
-            uuid: id del object da eliminare
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/objects/{uuid}', **kwargs)
         return response
 
     def objects_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):

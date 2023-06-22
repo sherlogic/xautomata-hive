@@ -38,6 +38,22 @@ class MetricTypes(ApiManager):
         response = self.execute('GET', path=f'/metric_types/', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
+    def metric_types_post(self, kwargs: dict = None, **payload):
+        """
+        post selected metric_types.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/metric_types/', payload=payload, **kwargs)
+        return response
+
 
     def metric_type(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
         """
@@ -58,6 +74,21 @@ class MetricTypes(ApiManager):
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params=params)
         response = self.execute('GET', path=f'/metric_types/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
+    def metric_type_delete(self, uuid: str, kwargs: dict = None):
+        """
+
+        delete single metric_type.
+
+        Args:
+            uuid (str): uuid del metric_type da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}', **kwargs)
+        return response
+
     def metric_type_metrics(self, uuid:str ,single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
                 **params):
         """
@@ -113,7 +144,31 @@ class MetricTypes(ApiManager):
         response = self.execute('GET', path=f'/metric_types/{uuid}/downtimes', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
+    def metric_types_downtimes_post(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
 
+        """
+
+        create link between selected metrics_type and selected downtime.
+
+        Args:
+
+            uuid (str): uuid della metrics
+
+            uuid_downtime (str): uuid del downtime
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('POST', path=f'/metrics_types/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+
+        return response
 
     def metric_type_put(self, uuid: str, kwargs: dict = None, **payload):
         """
@@ -171,21 +226,33 @@ class MetricTypes(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/metric_types/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
         return response
-    def metric_type_delete(self, uuid: str, kwargs: dict = None):
+    
+    def metrics_type_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+
         """
 
-        delete single metric_type.
+        create link between selected dispatcher and selected metric_type.
 
         Args:
-            uuid: id del metric_type da eliminare
+
+            uuid (str): uuid della metrics
+
+            uuid_service (str): uuid del service
+
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/metric_types/{uuid}', **kwargs)
-        return response
+            **payload: additional parameters for the API
 
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('POST', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+
+        return response
+   
     def metric_types_delete_bulk(self, metric_types: list, single_page: bool = False,
                                  page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
@@ -222,4 +289,57 @@ class MetricTypes(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/read/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=metric_types, **kwargs)
+        return response
+
+ 
+
+    def metrics_type_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
+
+        """
+
+        delete selected dispatcher linked with the metric_type.
+
+        Args:
+
+            uuid (str, required): uuid della metric_type
+
+            uuid_dispatcher (str, required): uuid del downtime
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+
+        return response
+    
+    def metric_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+
+        """
+
+        delete selected dispatcher linked with the metric  type.
+
+        Args:
+
+            uuid (str, required): uuid della metric type
+
+            uuid_dispatcher (str, required): uuid del dispatcher
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+
         return response

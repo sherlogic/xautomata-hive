@@ -39,6 +39,30 @@ class Groups(ApiManager):
         response = self.execute('GET', path=f'/groups/', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
+    def groups_post(self, kwargs: dict = None, **payload):
+        """
+        post selected groups.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            name (str): additional filter, required
+            description (str, optional): additional filter
+            feedback_for_operator (str, optional): additional filter
+            ip_cidr (dict, optional): additional filter
+            profile (str): additional filter, required
+            data_profile (dict, optional): additional filter
+            automata_domain (list, optional): additional filter
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/groups/', payload=payload, **kwargs)
+        return response
 
     def group(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
         """
@@ -85,7 +109,58 @@ class Groups(ApiManager):
         response = self.execute('GET', path=f'/groups/{uuid}/objects', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, params=params, **kwargs)
         return response
+    def groups_object_post(self, uuid: str, uuid_object: str, kwargs: dict = None, **payload):
+        """
+        create link between selected group and selected object.
 
+        Args:
+            uuid (str): uuid della group
+            uuid_object (str): uuid della object
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/groups/{uuid}/objects/{uuid_object}', payload=payload, **kwargs)
+        return response
+    
+    def groups_object_delete(self, uuid: str, uuid_object: str, kwargs: dict = None):
+        """
+        delete link between selected group and selected object.
+
+        Args:
+            uuid (str): uuid della group
+            uuid_group (str): uuid della object
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Keyword Args:
+            name (str, optional): additional filter
+
+            description (str, optional): additional filter
+
+            feedback_for_operator (str, optional): additional filter
+
+            ip_cidr (dict, optional): additional filter
+
+            profile (str, optional): additional filter
+
+            data_profile (dict, optional): additional filter
+
+            automata_domain (list, optional): additional filter
+
+            status (str): additional filter, required
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/groups/{uuid}/objects/{uuid_object}', **kwargs)
+        return response
+
+    
+    
+    
     def group_put(self, uuid: str, kwargs: dict = None, **payload):
         """
         update selected group.
@@ -126,7 +201,205 @@ class Groups(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('DELETE', path=f'/groups/{uuid}', **kwargs)
         return response
+    def groups_user(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
 
+        """ get the user linked with a group.
+
+        Args:
+
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+
+            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
+
+            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
+
+            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
+
+            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
+
+            active_at_timestamp (str, optional): additional filter
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('GET', path=f'/groups/{uuid}/users', single_page=single_page, page_size=page_size, params=params,
+
+                                warm_start=warm_start, **kwargs)
+
+        return response
+    def groups_users_post(self, kwargs: dict = None, uuid=str, name=str, **payload):
+
+        """
+
+        post selected groups_users.
+
+        Args:
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Keyword Args:
+
+            name (str): additional filter, required
+
+            description (str, optional): additional filter
+
+            feedback_for_operator (str, optional): additional filter
+
+            ip_cidr (dict, optional): additional filter
+
+            profile (str): additional filter, required
+
+            data_profile (dict, optional): additional filter
+
+            automata_domain (list, optional): additional filter
+
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', payload=payload, **kwargs)
+
+        return response
+    def groups_users_delete(self, kwargs: dict = None, uuid=str, name=str, **payload):
+
+        """
+
+        delete selected groups_users.
+
+        Args:
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+            name (str, required) :
+
+        Keyword Args:
+
+            name (str): additional filter, required
+
+            description (str, optional): additional filter
+
+            feedback_for_operator (str, optional): additional filter
+
+            ip_cidr (dict, optional): additional filter
+
+            profile (str): additional filter, required
+
+            data_profile (dict, optional): additional filter
+
+            automata_domain (list, optional): additional filter
+
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/groups/{uuid}/users/{name}', payload=payload, **kwargs)
+
+        return response
+    
+    def group_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
+
+
+
+
+        """
+
+        remove downtime linked with the group.
+
+        Args:
+            uuid (str): uuid della group
+
+            uuid_downtime (str): uuid del downtime
+            
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Keyword Args: 
+            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
+            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
+            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
+            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
+            active_at_timestamp (str, optional): additional filter
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()       
+        response = self.execute('DELETE', path=f'/groups/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+        return response
+    def groups_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+
+        """
+        create link between selected group and selected dispatcher.
+        Args:
+
+            uuid (str, required): uuid della 
+
+            uuid_service (str, required): uuid del service
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('POST', path=f'/groups/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+
+        return response
+    def group_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+
+        """
+
+        delete dispatcher linked with the group.
+
+        Args:
+
+            uuid (str, required): uuid della group
+
+            uuid_dispatcher (str, required): uuid del dispatcher
+
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+            **payload: additional parameters for the API            
+
+        Returns: list
+
+        """
+
+        if kwargs is None: kwargs = dict()
+
+        response = self.execute('DELETE', path=f'/groups/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+
+        return response  
     def groups_delete_bulk(self, groups: list, single_page: bool = False,
                            page_size: int = 5000, kwargs: dict = None):
         """
