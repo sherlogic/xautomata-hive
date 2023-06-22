@@ -153,7 +153,7 @@ class Sites(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path='/sites/bulk/delete/', single_page=single_page, page_size=page_size,
+        response = self.execute('POST', path='/sites/bulk/delete/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=sites, **kwargs)
         return response
 
