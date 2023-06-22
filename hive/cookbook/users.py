@@ -36,6 +36,32 @@ class Users(ApiManager):
                                 warm_start=warm_start, params=params, **kwargs)
         return response
 
+    def users_customers(self, name: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
+                        **params):
+        """
+        Fetch all Users data.
+
+        Args:
+            name (str): customer name.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API
+
+        Keyword Args:
+            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
+            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
+            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
+            not_in (bool, optional): additional parameters.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('GET', path=f'/users/{name}/customers', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, params=params, **kwargs)
+        return response
+
     def users_create(self, kwargs: dict = None, **payload):
         """
         Register new user
@@ -72,6 +98,21 @@ class Users(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path=f'/users/{user_name}/customers/{uuid_customer}', **kwargs)
+        return response
+
+    def users_customers_delete(self, user_name: str, uuid_customer: str, kwargs: dict = None):
+        """
+        creare i link user customer
+
+        Args:
+            user_name
+            uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/users/{user_name}/customers/{uuid_customer}', **kwargs)
         return response
 
     def users_widgetgroups_create(self, user_name: str, uuid_widget_groups: str, kwargs: dict = None):
@@ -114,4 +155,30 @@ class Users(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/users/bulk/create/customers', single_page=single_page, page_size=page_size,
                                 payload=users_customers, params={'best_effort': best_effort}, **kwargs)
+        return response
+
+    def users_customers_delete_bulk(self, users_customers: list, single_page: bool = False,
+                                    page_size: int = 5000, kwargs: dict = None):
+        """
+        creare i link user customer in bulk
+
+        Args:
+            users_customers (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Example:
+            users_customers = [
+                              {
+                                "username": "string",
+                                "uuid_customer": "string"
+                              }
+                            ]
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/users/bulk/delete/customers', single_page=single_page, page_size=page_size,
+                                payload=users_customers, **kwargs)
         return response
