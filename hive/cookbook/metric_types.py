@@ -267,7 +267,7 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
         return response
    
-    def metrics_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
+    def metrics_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
         """
         delete service linked with selected metric.
         Args:
