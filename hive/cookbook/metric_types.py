@@ -44,7 +44,7 @@ class MetricTypes(ApiManager):
         Fetch single metric_type.
 
         Args:
-            uuid (str): uuid del metric_type da recuperare
+            uuid (str, required): uuid del metric_type da recuperare
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
@@ -61,13 +61,11 @@ class MetricTypes(ApiManager):
 
     def metrics_types_delete(self, uuid: str, kwargs: dict = None):
         """
-
         delete single object.
 
         Args:
-            uuid: id del object da eliminare
+            uuid(str, required): id del object da eliminare
             kwargs (dict, optional): additional parameters for execute. Default to None.
-
         Returns: list
         """
         if kwargs is None: kwargs = dict()
@@ -80,12 +78,18 @@ class MetricTypes(ApiManager):
         post selected metrics.
 
         Args:
+            uuid object (str, required): string <uuid4> (Uuid Object)
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API
+            status(str, required): string (Status) <= 1 characters
+        Keyword Args:
             name (str, required): string (Name) <= 255 characters
             profile(str, required): string (Profile) <= 64 characters
-            status(str, required): string (Status) <= 1 characters
-            uuid object (str, required): string <uuid4> (Uuid Object)
+            description(str, optional): additional filter    <= 255 characters
+            feedback_for_operator(str, optional): additional filter  <= 255 characters
+            data_profile(str, optional): additional filter
+            automata_domain(str, optional): additional filter
+            profile(str, required): 
         Returns: list
 
         """
@@ -100,6 +104,7 @@ class MetricTypes(ApiManager):
         metodo che restituisce le metrics del metric type inserito
 
         Args:
+            uuid (str, required): uuid della metric_type da cercare
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -132,6 +137,7 @@ class MetricTypes(ApiManager):
         """ get the downtimes linked with a metric type.
 
         Args:
+            uuid (str, required): uuid del metric da cercare
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -209,6 +215,7 @@ class MetricTypes(ApiManager):
     def metric_type_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """ metodo che restituisce i dispatchers di una metric type
         Args:
+            uuid (str, required): uuid della dispatcher da cercare
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -222,23 +229,13 @@ class MetricTypes(ApiManager):
             join (bool, optional): additional filter
             not_in (nool, optional): additional filter
         Returns: list
-
-        Args:
-            uuid (str): _description_
-            single_page (bool, optional): _description_. Defaults to False.
-            page_size (int, optional): _description_. Defaults to 5000.
-            warm_start (bool, optional): _description_. Defaults to False.
-            kwargs (dict, optional): _description_. Defaults to None.
-
-        Returns:
-            _type_: _description_
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/metric_types/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
         return response
    
    
-    def metrics_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
+    def metrics_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
         """
         delete selected dispatcher from the selected metric_type service.
         Args:
@@ -249,7 +246,7 @@ class MetricTypes(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}',**kwargs)
         return response
    
    
@@ -266,19 +263,6 @@ class MetricTypes(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
         return response
-   
-    def metrics_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
-        """
-        delete service linked with selected metric.
-        Args:
-            uuid(str): uuid del metric
-            uuid_dispatcher (str): uuid dispatcher da eliminare
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/metrics/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
    
    
     def metric_type_delete(self, uuid: str, kwargs: dict = None):
