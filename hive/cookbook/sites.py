@@ -167,30 +167,17 @@ class Sites(ApiManager):
         Keyword Args:
 
             skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
-
             limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
-
             count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
-
             like (bool, optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True.
-
             join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
-
             not_in (bool, optional): additional filter
 
-
-
-
         Returns: list
-
         """
 
         if kwargs is None: kwargs = dict()
-
-        response = self.execute('GET', path=f'/sites/{uuid}/contacts', single_page=single_page, page_size=page_size,
-
-                                warm_start=warm_start, params=params, **kwargs)
-
+        response = self.execute('GET', path=f'/sites/{uuid}/contacts', single_page=single_page, page_size=page_size, warm_start=warm_start, params=params, **kwargs)
         return response
 
    
@@ -259,10 +246,10 @@ class Sites(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
-def _delete(self, uuid: str, kwargs: dict = None):
+    def sites_coordinates_delete(self, uuid: str, kwargs: dict = None):
         """
 
-        delete single object.
+        delete coordinate.
 
         Args:
             uuid: id del object da eliminare
