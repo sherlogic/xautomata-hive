@@ -234,7 +234,7 @@ class Groups(ApiManager):
         response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', **kwargs)
         return response
     
-    def groups_users_delete(self, uuid:str, name:str, kwargs: dict = None, **payload):
+    def groups_users_delete(self, uuid:str, name:str, kwargs: dict = None):
 
         """
 
@@ -250,19 +250,12 @@ class Groups(ApiManager):
         Keyword Args:
 
             name (str): additional filter, required
-
             description (str, optional): additional filter
-
             feedback_for_operator (str, optional): additional filter
-
             ip_cidr (dict, optional): additional filter
-
             profile (str): additional filter, required
-
             data_profile (dict, optional): additional filter
-
             automata_domain (list, optional): additional filter
-
             status (str): additional filter, required
 
         Returns: list
@@ -538,6 +531,7 @@ class Groups(ApiManager):
     def groups_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """ metodo che restituisce i dispatchers di un group
         Args:
+            uuid (str): uuid della groups
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
