@@ -169,13 +169,13 @@ class Groups(ApiManager):
                                 warm_start=warm_start, payload=groups, params=params, **kwargs)
         return response
 
-    def groups_objects_create_bulk(self, groups_objects: list, best_effort: bool = True, single_page: bool = False,
+    def groups_objects_create_bulk(self, uuids: list, best_effort: bool = True, single_page: bool = False,
                                    page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            groups_objects (list[dict], optional): List dict to create.
+            uuids (list[dict], optional): List dict to create.
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -183,28 +183,27 @@ class Groups(ApiManager):
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
-            objects_groups = [
-                              {
-                                "uuid_group": "string",
-                                "uuid_object": "string"
-                              }
-                            ]
+            uuids = [
+                      {
+                        "uuid_group": "string",
+                        "uuid_object": "string"
+                      }
+                    ]
 
         Returns: list
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/objects', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups_objects, params={'best_effort': best_effort}, **kwargs)
+                                warm_start=warm_start, payload=uuids, params={'best_effort': best_effort}, **kwargs)
         return response
 
-    def groups_objects_delete_bulk(self, groups_objects: list, single_page: bool = False,
+    def groups_objects_delete_bulk(self, uuids: list, single_page: bool = False,
                                    page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            groups_objects (list[dict], optional): List dict to create.
-            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+            uuids (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -222,5 +221,5 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/objects', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups_objects, **kwargs)
+                                warm_start=warm_start, payload=uuids, **kwargs)
         return response
