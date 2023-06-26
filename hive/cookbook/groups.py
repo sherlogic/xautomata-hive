@@ -241,19 +241,18 @@ class Groups(ApiManager):
 
         return response
     
-    def groups_users_delete(self, kwargs: dict = None, uuid=str, name=str, **payload):
+    def groups_users_delete(self, uuid:str, name:str, kwargs: dict = None, **payload):
 
         """
 
         delete selected groups_users.
 
         Args:
-
+            uuid
+            name (str, required) :
             kwargs (dict, optional): additional parameters for execute. Default to None.
-
             **payload: additional parameters for the API
 
-            name (str, required) :
 
         Keyword Args:
 
