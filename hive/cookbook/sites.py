@@ -310,4 +310,4 @@ class Sites(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path=f'/sites/coordinates/',payload=payload, **kwargs)
         return response
-    
+    #da cancellare
