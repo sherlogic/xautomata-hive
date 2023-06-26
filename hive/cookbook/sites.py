@@ -244,7 +244,25 @@ class Sites(ApiManager):
         response = self.execute('GET', path=f'/sites/coordinates/', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
-
+    
+    def sites_coordinates_post(self, kwargs: dict = None, **payload):
+        """
+        metodo che crea le coordinate di un sito
+        Args: 
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+        Keyword Args:
+            longitude(str, required)
+            latitude(str, required)
+            uuid_site(str, required)
+       
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/sites/coordinates/',payload=payload, **kwargs)
+        return response
+    
+    
     def sites_coordinates_delete(self, uuid_site : str, kwargs: dict = None):
         """
 
@@ -260,6 +278,26 @@ class Sites(ApiManager):
         response = self.execute('DELETE', path=f'/sites/coordinates/{uuid_site}', **kwargs)
         return response
 
+    def sites_coordinates_put(self, uuid_site: str, kwargs: dict = None, **payload):
+        """
+        update selected coordinates.
+
+        Args:
+            uuid_site(str): uuid del site da modificare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            longitude(str, required): additional filter
+            latitude(str, required): additional filter
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('PUT', path=f'/sites/coordinates/{uuid_site}', payload=payload, **kwargs)
+        return response
+    
     def sites_delete_bulk(self, sites: list, single_page: bool = False,
                           page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
@@ -298,16 +336,4 @@ class Sites(ApiManager):
                                 warm_start=warm_start, payload=sites, **kwargs)
         return response
         
-    def sites_coordinates_post(self, kwargs: dict = None, **payload):
-        """
-        metodo che crea le coordinate di un sito
-        Args:
-        longitude(str, required)
-        latitude(str, required)
-        uuid_site(str, required)
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('POST', path=f'/sites/coordinates/',payload=payload, **kwargs)
-        return response
-    #da cancellare
+   
