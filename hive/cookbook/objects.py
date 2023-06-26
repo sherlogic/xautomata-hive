@@ -37,7 +37,6 @@ class Objects(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
-
     def objects_post(self, kwargs: dict = None, **payload):
         """
         post selected objects.
@@ -292,21 +291,6 @@ class Objects(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
-    def object_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None, **payload):
-        """
-        remove downtime linked with the ob.
-        Args:
-            uuid (str): uuid della object
-            uuid_downtime (str): uuid del downtime
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/objects/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
-
-
-    
     def object_downtimes_post(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
 
         """
@@ -327,6 +311,7 @@ class Objects(ApiManager):
         response = self.execute('POST', path=f'/objects/{uuid}/downtimes/{uuid_downtime}',  **kwargs)
 
         return response
+    
     def object_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
 
         """
@@ -344,35 +329,6 @@ class Objects(ApiManager):
         if kwargs is None: kwargs = dict()
 
         response = self.execute('DELETE', path=f'/objects/{uuid}/downtimes/{uuid_downtime}', **kwargs)
-
-        return response
-
-
-   
-
-    def object_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None, **payload):
-
-        """
-
-        delete dispatcher linked with the object.
-
-        Args:
-
-            uuid (str, required): uuid della object
-
-            uuid_dispatcher (str, required): uuid del dispatcher
-
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-            **payload: additional parameters for the API
-
-        Returns: list
-
-        """
-
-        if kwargs is None: kwargs = dict()
-
-        response = self.execute('DELETE', path=f'/objects/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
 
         return response
 
@@ -531,6 +487,7 @@ class Objects(ApiManager):
         response = self.execute('POST', path='/objects/bulk/create/groups', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=objects_groups, params=params, **kwargs)
         return response
+    
     def objects_put(self, uuid: str, kwargs: dict = None, **payload):
         """
         update selected object.
