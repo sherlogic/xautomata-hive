@@ -262,7 +262,6 @@ class Sites(ApiManager):
         response = self.execute('POST', path=f'/sites/coordinates/',payload=payload, **kwargs)
         return response
     
-    
     def sites_coordinates_delete(self, uuid_site : str, kwargs: dict = None):
         """
 

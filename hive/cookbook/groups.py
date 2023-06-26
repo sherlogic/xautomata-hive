@@ -39,6 +39,7 @@ class Groups(ApiManager):
         response = self.execute('GET', path=f'/groups/', single_page=single_page, page_size=page_size, params=params,
                                 warm_start=warm_start, **kwargs)
         return response
+    
     def groups_post(self, kwargs: dict = None, **payload):
         """
         post selected groups.
@@ -216,6 +217,7 @@ class Groups(ApiManager):
                                 warm_start=warm_start, **kwargs)
 
         return response
+    
     def groups_users_post(self, kwargs: dict = None, uuid=str, name=str):
 
         """
@@ -267,6 +269,7 @@ class Groups(ApiManager):
         response = self.execute('DELETE', path=f'/groups/{uuid}/users/{name}', **kwargs)
 
         return response
+    
     def groups_downtime(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
 
         """ 
@@ -374,6 +377,7 @@ class Groups(ApiManager):
         response = self.execute('POST', path=f'/groups/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
 
         return response
+    
     def group_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
 
         """
@@ -486,76 +490,4 @@ class Groups(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/objects', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=groups_objects, **kwargs)
-        return response
-    
-    def groups_downtime(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
-        """ get the downtimes linked with a group.
-
-        Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: parametri in piu che si vuole passare alla API
-            uuid (str, required) : string <uuid> (Uuid)
-            uuid_downtime (str, required) : string <uuid> (Uuid Downtime)
-        Keyword Args:
-            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
-            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
-            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
-            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
-            active_at_timestamp (str, optional): additional filter
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('GET', path=f'/groups/{uuid}/downtimes', single_page=single_page, page_size=page_size, params=params,
-                                warm_start=warm_start, **kwargs)
-        return response
-    
-        
-    def groups_users_post(self, uuid:str, name:str, kwargs: dict = None):
-        """
-        post selected groups_users.
-
-        Args:
-            uuid
-            name (str): additional filter, required
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-        Returns: list
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', **kwargs)
-        return response
-    
-    def groups_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
-        """ metodo che restituisce i dispatchers di un group
-        Args:
-            uuid (str): uuid della groups
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: parametri in piu che si vuole passare alla API
-        Keyword Args:
-            skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
-            limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
-            count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
-            like (bool, optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True.
-            join (bool, optional): additional filter
-            not_in (nool, optional): additional filter
-        Returns: list
-
-        Args:
-            uuid (str): _description_
-            single_page (bool, optional): _description_. Defaults to False.
-            page_size (int, optional): _description_. Defaults to 5000.
-            warm_start (bool, optional): _description_. Defaults to False.
-            kwargs (dict, optional): _description_. Defaults to None.
-
-        Returns:
-            _type_: _description_
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('GET', path=f'/groups/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
         return response
