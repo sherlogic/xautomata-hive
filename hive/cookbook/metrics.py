@@ -245,6 +245,7 @@ get the downtimes linked with the metrics.
             count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
             join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
             active_at_timestamp (str, optional): additional filter
+            fetch all(bool, optional): additiional filter
         Returns: list
         """
         if kwargs is None: kwargs = dict()
