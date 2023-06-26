@@ -244,19 +244,19 @@ class Sites(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
-    def sites_coordinates_delete(self, uuid: str, kwargs: dict = None):
+    def sites_coordinates_delete(self, uuid_site : str, kwargs: dict = None):
         """
 
         delete coordinate.
 
         Args:
-            uuid: id del object da eliminare
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
+            uuid_site (str, required) 
+            kwargs (dict, optional): additional parameters for execute. Default to None
+            
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/objects/{uuid}', **kwargs)
+        response = self.execute('DELETE', path=f'/sites/coordinates/{uuid_site}', **kwargs)
         return response
 
     def sites_delete_bulk(self, sites: list, single_page: bool = False,
@@ -356,7 +356,7 @@ class Sites(ApiManager):
 
     def sites_coordinates_post(self, kwargs: dict = None, **payload):
         """
-        metodo che restituisce le coordinate di un sito
+        metodo che crea le coordinate di un sito
         Args:
         longitude(str, required)
         latitude(str, required)
