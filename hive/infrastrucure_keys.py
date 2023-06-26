@@ -41,7 +41,7 @@ class Keys:
                       "name": {"len": 255, "unique": True},  # univo con la tripla uuid_stie, uuid_vd
                       "description": {"len": 255},
                       "status": {"len": 8}},
-        "optional": {"automata_domain": {"len": 1}}
+        "optional": {"automata_domain": {"type": 'list'}}
     }
 
     object_keys = {
@@ -78,7 +78,14 @@ class Keys:
     }
 
     service_keys = {
-        "univocal": [],
-        "mandatory": {},
-        "optional": {}
+        # uuid_parend?
+        "univocal": ['uuid_customer', 'name', 'profile'],
+        "mandatory": {'profile': {'len': 64},
+                      'name': {'len': 255},
+                      'description': {'len': 255},
+                      'status': {'len': 1}},
+        "optional": {'uuid_parent': {'type': 'uuid'},
+                     'automata_domain': {'type': 'list'},
+                     'rule': {'type': 'list'}
+                     }
     }
