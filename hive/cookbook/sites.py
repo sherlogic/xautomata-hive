@@ -233,7 +233,7 @@ class Sites(ApiManager):
         response = self.execute('DELETE', path=f'//sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs)
         return response 
 
-    def sites_coordinates(self,uuid_site=str ,single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
+    def sites_coordinates(self, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
                **params):
         """
         metodo che restituisce le coordinate di un sito

@@ -485,17 +485,19 @@ class Groups(ApiManager):
         return response
     
         
-    def groups_users_post(self, kwargs: dict = None, uuid=str, name=str, **payload):
+    def groups_users_post(self, uuid:str, name:str, kwargs: dict = None):
         """
         post selected groups_users.
+
         Args:
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
+            uuid
             name (str): additional filter, required
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', payload=payload, **kwargs)
+        response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', **kwargs)
         return response
     
     def groups_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
