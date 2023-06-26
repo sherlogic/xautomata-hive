@@ -25,7 +25,7 @@ class Metrics(ApiManager):
             null_fileds (str, optional): Stringa separata da virgole di campi di cui si vuole rimuovere, o imporre, un valore nullo nel result set. Esempio "campo:nullable". Default to "".
             join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
             extract_severity (bool, optional): Se True nella risposta e' anche presente la severita, Default to False.
-            uuid_metric_type (str, optional): additional filter
+            uuid_metric (str, optional): additional filter
             name (str, optional): additional filter
             description (str, optional): additional filter
             feedback_for_operator (str, optional): additional filter
@@ -83,7 +83,7 @@ class Metrics(ApiManager):
             **payload: additional parameters for the API
 
         Keyword Args:
-            uuid_metric_type (str, optional): additional filter
+            uuid_metric (str, optional): additional filter
             name (str, optional): additional filter
             description (str, optional): additional filter
             feedback_for_operator (str, optional): additional filter
