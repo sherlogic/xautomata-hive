@@ -74,11 +74,19 @@ class MetricTypes(ApiManager):
 
     def metrics_type_delete(self, uuid: str, kwargs: dict = None):
         """
+<<<<<<< HEAD
         delete single metric type.
 
         Args:
             uuid(str): uuid della metric type da eliminare
             kwargs (dict): additional parameters for execute. Default to None.
+=======
+        delete single object.
+
+        Args:
+            uuid(str, required): id del object da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+>>>>>>> 5470321ff30def63dcbc59dd78ae4dfd2f293a95
         Returns: list
         """
         if kwargs is None: kwargs = dict()
@@ -91,7 +99,11 @@ class MetricTypes(ApiManager):
         post selected metrics.
 
         Args:
+<<<<<<< HEAD
             uuid metric (str, required): string <uuid4> (Uuid Object)
+=======
+            uuid object (str, required): string <uuid4> (Uuid Object)
+>>>>>>> 5470321ff30def63dcbc59dd78ae4dfd2f293a95
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API
             status(str, required): string (Status) <= 1 characters
@@ -143,7 +155,11 @@ class MetricTypes(ApiManager):
         """ get the downtimes linked with a metric type.
 
         Args:
+<<<<<<< HEAD
             uuid (str, required): uuid del metric type 
+=======
+            uuid (str, required): uuid del metric da cercare
+>>>>>>> 5470321ff30def63dcbc59dd78ae4dfd2f293a95
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -247,7 +263,10 @@ class MetricTypes(ApiManager):
             active_at_timestamp (str, optional): additional filter
         
         Returns: list
+<<<<<<< HEAD
         
+=======
+>>>>>>> 5470321ff30def63dcbc59dd78ae4dfd2f293a95
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/metric_types/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
