@@ -411,39 +411,37 @@ class Objects(ApiManager):
                                 warm_start=warm_start, payload=uuids, params=params, **kwargs)
         return response
 
-    def objects_delete_bulk(self, objects: list, single_page: bool = False,
-                            page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def objects_delete_bulk(self, uuids: list, single_page: bool = False,
+                            page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            objects (list[dict], optional): List dict to create.
+            uuids (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/objects/bulk/delete/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=objects, **kwargs)
+                                payload=uuids, **kwargs)
         return response
 
-    def objects_groups_delete_bulk(self, objects_groups: list, single_page: bool = False,
-                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def objects_groups_delete_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000,  kwargs: dict = None):
         """
-        elimina le metriche in bulk
+        elimina una lista tra oggetti e gruppi
 
         Args:
-            objects_groups (list[dict], optional): List dict to create.
+            uuids (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
-            objects_groups = [
+                    uuids = [
                               {
                                 "uuid_group": "string",
                                 "uuid_object": "string"
@@ -454,19 +452,18 @@ class Objects(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/objects/bulk/delete/groups', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=objects_groups, **kwargs)
+                                payload=uuids, **kwargs)
         return response
 
-    def objects_groups_create_bulk(self, objects_groups: list, single_page: bool = False,
-                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+    def objects_groups_create_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000,  kwargs: dict = None, **params):
         """
-        create le metriche in bulk
+        crea una lista tra oggetti e gruppi
 
         Args:
-            objects_groups (list[dict], optional): List dict to create.
+            uuids (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: parametri in piu che si vuole passare alla API
 
@@ -474,7 +471,7 @@ class Objects(ApiManager):
             best_effort (bool, optional): additional filter. Default to True
 
         Examples:
-            objects_groups = [
+                    uuids = [
                               {
                                 "uuid_group": "string",
                                 "uuid_object": "string"
@@ -485,7 +482,7 @@ class Objects(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/objects/bulk/create/groups', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=objects_groups, params=params, **kwargs)
+                                 payload=uuids, params=params, **kwargs)
         return response
     
     def objects_put(self, uuid: str, kwargs: dict = None, **payload):
@@ -514,3 +511,174 @@ class Objects(ApiManager):
         response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, **kwargs)
         return response
 
+    def objects_read_by_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        reads objects_bulk by code
+        
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            name (str, required): additional filter
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/objects/bulk/read_by/", single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+
+    def objects_create_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        create gli objects in bulk
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
+
+        Examples:
+            uuids = [
+                    {
+                    "name": "string",
+                    "description": "string",
+                    "feedback_for_operator": "string",
+                    "ip_cidr": {},
+                    "profile": "string",
+                    "data_profile": {},
+                    "automata_domain": [
+                    "string"
+                    ],
+                    "status": "s"
+                    }
+                    ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/create', single_page=single_page, page_size=page_size,
+                                        payload=uuids, params=params, **kwargs)
+        return response
+    
+    def objects_downtimes_create_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        crea una lista tra oggetti e downtimes
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
+
+        Examples:
+            uuids = [
+                     {
+                            "uuid_downtime": "string",
+                            "uuid_object": "string"
+                     }
+                 ]
+            
+            
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/create/downtimes', single_page=single_page, page_size=page_size,
+                                        payload=uuids, params=params, **kwargs)
+        return response
+    
+    def objects_downtimes_delete_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000,  kwargs: dict = None):
+        """
+        elimina una lista tra oggetti e downtimes
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+                    uuids = [
+                              {
+                                "uuid_downtime": "string",
+                                "uuid_object": "string"
+                              }
+                            ]
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/delete/downtimes', single_page=single_page, page_size=page_size,
+                                payload=uuids, **kwargs)
+        return response
+    
+    def objects_probes_create_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        crea una lista tra oggetti e probes
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
+
+        Examples:
+            uuids = [
+                     {
+                            "uuid_object": "string",
+                            "uuid_probes": "string"     
+                     }
+                    ]
+            
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/create/probes', single_page=single_page, page_size=page_size,
+                                        payload=uuids, params=params, **kwargs)
+        return response
+    
+    def objects_probes_delete_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000,  kwargs: dict = None):
+        """
+        elimina una lista tra oggetti e probes
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+                   uuids = [
+                            {
+                              "uuid_object": "string",
+                              "uuid_probes": "string"     
+                            }
+                           ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/objects/bulk/delete/probes', single_page=single_page, page_size=page_size,
+                                payload=uuids, **kwargs)
+        return response
