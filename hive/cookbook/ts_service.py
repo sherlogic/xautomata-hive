@@ -44,13 +44,13 @@ class TsService(ApiManager):
                                 warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def ts_services_bulk(self, uuids: list, ts_start: str, ts_end: str, status: Literal['status', 'value'] = 'status', single_page: bool = False,
+    def ts_services_bulk(self, payload: list, ts_start: str, ts_end: str, status: Literal['status', 'value'] = 'status', single_page: bool = False,
                          page_size: int = 100, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
 
         Args:
-            uuids (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             ts_start (str): start time range. MANDATORY.
             ts_end (str): end time range. MANDATORY.
             status (['status', 'value'], optional): discrimina tra le metriche di stato e di valore. Default to "status".
@@ -65,16 +65,16 @@ class TsService(ApiManager):
         if kwargs is None: kwargs = dict()
         params = {'ts_start': ts_start, 'ts_end': ts_end, **params}
         response = self.execute('POST', path='/ts_service_' + status + "/bulk/read/", single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
-    def ts_services_bulk_create(self, services: list, status: Literal['status', 'value'] = 'status', single_page: bool = False,
+    def ts_services_bulk_create(self, payload: list, status: Literal['status', 'value'] = 'status', single_page: bool = False,
                          page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
 
         Args:
-            services (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             status (['status', 'value'], optional): discrimina tra le metriche di stato e di valore. Default to "status".
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -100,7 +100,7 @@ class TsService(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/ts_service_' + status + "/bulk/create/", single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=services, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
     def ts_services_query(self, status: Literal['status', 'value'] = 'status', single_page: bool = False, page_size: int = 5000,

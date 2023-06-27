@@ -36,8 +36,7 @@ class Webhooks(ApiManager):
                                 warm_start=warm_start, params=params, **kwargs)
         return response
 
-
-    def webhook(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
+    def webhook(self, uuid: str, warm_start: bool = False, kwargs: dict = None):
 
         """
         Fetch all webhooks.
@@ -53,10 +52,8 @@ class Webhooks(ApiManager):
         """
 
         if kwargs is None: kwargs = dict()
-        response = self.execute('GET', path='/webkooks/{uuid}', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, params=params, **kwargs)
+        response = self.execute('GET', path=f'/webkooks/{uuid}', warm_start=warm_start, **kwargs)
         return response
-
 
     def webhook_put(self, uuid: str, auth_token: str, uuid_probe: str, kwargs: dict = None, **payload):
         
@@ -65,8 +62,8 @@ class Webhooks(ApiManager):
 
         Args:
             uuid (str): uuid del webhook da modificare
-            auth_token (str): auth token del webhook da modificare
-            uuid (str): uuid della probe da modificare
+            uuid_probe (str): auth token del webhook da modificare
+            auth_token (str): uuid della probe da modificare
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API
 
@@ -74,5 +71,5 @@ class Webhooks(ApiManager):
 
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('PUT', path=f'/webhooks/{uuid}', auth_token=auth_token, uuid_probe=uuid_probe, **kwargs)  # todo da verificare se funziona
+        response = self.execute('PUT', path=f'/webhooks/{uuid}', auth_token=auth_token, uuid_probe=uuid_probe, payload=payload, **kwargs)
         return response

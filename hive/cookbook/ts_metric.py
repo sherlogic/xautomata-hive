@@ -45,13 +45,13 @@ class TsMetric(ApiManager):
                                 warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def ts_metrics_bulk(self, uuids: list, ts_start: str, ts_end: str, status: Literal['status', 'value'] = 'status', single_page: bool = False,
+    def ts_metrics_bulk(self, payload: list, ts_start: str, ts_end: str, status: Literal['status', 'value'] = 'status', single_page: bool = False,
                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
 
         Args:
-            uuids (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             ts_start (str): start time range. MANDATORY.
             ts_end (str): end time range. MANDATORY.
             status (['status', 'value'], optional): discrimina tra le metriche di stato e di valore. Default to "status".
@@ -66,5 +66,5 @@ class TsMetric(ApiManager):
         if kwargs is None: kwargs = dict()
         params = {'ts_start': ts_start, 'ts_end': ts_end, **params}
         response = self.execute('POST', path='/ts_metric_' + status + "/bulk/read/", single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response

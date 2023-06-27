@@ -120,7 +120,7 @@ class Sites(ApiManager):
 
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('PUT', path=f'/sites/{uuid}', payload=payload, params={'geocode': geocode}, **kwargs)  # todo da verificare se funziona
+        response = self.execute('PUT', path=f'/sites/{uuid}', payload=payload, params={'geocode': geocode}, **kwargs)
         return response
 
     def site_delete(self, uuid: str, kwargs: dict = None):
@@ -138,32 +138,31 @@ class Sites(ApiManager):
         response = self.execute('DELETE', path=f'/sites/{uuid}', **kwargs)
         return response
 
-    def sites_delete_bulk(self, sites: list, single_page: bool = False,
-                          page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def sites_delete_bulk(self, payload: list, single_page: bool = False,
+                          page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            sites (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/sites/bulk/delete/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=sites, **kwargs)
+                                payload=payload, **kwargs)
         return response
 
-    def sites_read_bulk(self, sites: list, single_page: bool = False,
+    def sites_bulk(self, payload: list, single_page: bool = False,
                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            sites (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -173,5 +172,5 @@ class Sites(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/sites/bulk/read/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=sites, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response

@@ -130,20 +130,20 @@ class Users(ApiManager):
         response = self.execute('POST', path=f'/users/{user_name}/widget_groups/{uuid_widget_groups}', **kwargs)
         return response
 
-    def users_customers_create_bulk(self, users_customers: list,  best_effort: bool = True, single_page: bool = False,
+    def users_customers_create_bulk(self, payload: list,  best_effort: bool = True, single_page: bool = False,
                                     page_size: int = 5000, kwargs: dict = None):
         """
         creare i link user customer in bulk
 
         Args:
-            users_customers (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Example:
-            users_customers = [
+            payload = [
                               {
                                 "username": "string",
                                 "uuid_customer": "string"
@@ -154,22 +154,22 @@ class Users(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/users/bulk/create/customers', single_page=single_page, page_size=page_size,
-                                payload=users_customers, params={'best_effort': best_effort}, **kwargs)
+                                payload=payload, params={'best_effort': best_effort}, **kwargs)
         return response
 
-    def users_customers_delete_bulk(self, users_customers: list, single_page: bool = False,
+    def users_customers_delete_bulk(self, payload: list, single_page: bool = False,
                                     page_size: int = 5000, kwargs: dict = None):
         """
         creare i link user customer in bulk
 
         Args:
-            users_customers (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Example:
-            users_customers = [
+            payload = [
                               {
                                 "username": "string",
                                 "uuid_customer": "string"
@@ -180,5 +180,5 @@ class Users(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/users/bulk/delete/customers', single_page=single_page, page_size=page_size,
-                                payload=users_customers, **kwargs)
+                                payload=payload, **kwargs)
         return response

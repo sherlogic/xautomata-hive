@@ -3,13 +3,13 @@ from hive.api import ApiManager
 
 class Ingest(ApiManager):
 
-    def metric_ingest(self, metrics: list, single_page: bool = False, page_size: int = 5000,
+    def metric_ingest(self, payload: list, single_page: bool = False, page_size: int = 5000,
                       warm_start: bool = False, kwargs: dict = None):
         """
         metodo che permette di inviare in blocco una serie di metriche. Si puo scegliere se inviare metriche di stato o di valore.
 
         Args:
-            metrics (list[dict], optional): List dict to send.
+            payload (list[dict], optional): List dict to send.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -61,7 +61,7 @@ class Ingest(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_ingest/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=metrics, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response
 
     def probes_log_ingest(self, uuid_probe: str, payload: list, single_page: bool = False, page_size: int = 5000,

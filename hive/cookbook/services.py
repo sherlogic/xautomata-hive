@@ -208,13 +208,13 @@ class Services(ApiManager):
                                 warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
-    def services_bulk_create(self, services: list, single_page: bool = False,
+    def services_bulk_create(self, payload: list, single_page: bool = False,
                              page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
 
         Args:
-            services (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -244,16 +244,16 @@ class Services(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/services/bulk/create/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=services, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
-    def services_metrics_bulk_create(self, uuids: list, single_page: bool = False,
+    def services_metrics_bulk_create(self, payload: list, single_page: bool = False,
                                      page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di legare una metrica a un servizio, in modo bulk.
 
         Args:
-            uuids (list[dict], optional): additional filter
+            payload (list[dict], optional): additional filter
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -263,7 +263,7 @@ class Services(ApiManager):
             best_effort (str, optional): Default to True.
 
         Examples:
-            uuids: [
+            payload: [
                     {
                       "uuid_metric": "string",
                       "uuid_service": "string"
@@ -275,7 +275,7 @@ class Services(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/services/bulk/create/metrics', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
     def services_metrics(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
