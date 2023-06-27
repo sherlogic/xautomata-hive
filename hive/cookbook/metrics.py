@@ -342,3 +342,186 @@ class Metrics(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('DELETE', path=f'/metrics/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
         return response
+    
+    def metrics_services_link_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        crea le bulk di metrics_services
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:
+            objects_groups = [
+                                {
+                                    "uuid_metric": "string",
+                                    "uuid_service": "string"
+                                }
+                            ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/metrics/bulk/create/services', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+    
+    def metrics_read_by_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        reads metrics_bulk by code
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
+
+        Examples:[
+                    {
+                        "uuid_metric_type": "string",
+                        "name": "string"
+                    }
+                ]
+                    
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/metrics/bulk/read_by/", single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+     
+    def metrics_downtimes_link_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        crea le bulk di metrics_downtime
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:
+            objects_groups = [
+                                {
+                                    "uuid_downtime": "string",
+                                    "uuid_metric": "string"
+                                }
+                            ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/metrics/bulk/create/downtimes', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+    
+    def metrics_downtimes_unlink_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        cancella le bulk di metrics_downtimes
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Examples:[
+                    {
+                        "uuid_metric_type": "string",
+                        "name": "string"
+                    }
+                ]
+                    
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/metrics/bulk/delete/downtimes", single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+    
+    def metrics_services_unlink_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        cancella le bulk di metrics_services
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Examples:[
+                    {
+                        "uuid_metric": "string",
+                        "uuid_service": "string"
+                    }
+                ]
+                    
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/metrics/bulk/delete/services", single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+    
+    def metrics_create_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        crea le bulk di metrics
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:
+            objects_groups = [
+                                {
+                                    "uuid_metric_type": "string",
+                                    "name": "string",
+                                    "description": "string",
+                                    "feedback_for_operator": "string",
+                                    "profile": "string",
+                                    "data_profile": {},
+                                    "automata_domain": [
+                                    "string"
+                                    ],
+                                    "status": "s"
+                                }
+                            ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/metrics/bulk/create/', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
