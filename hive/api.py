@@ -113,15 +113,20 @@ class ApiManager:
 
         if mode == 'POST' or mode == 'DELETE' or mode == 'PUT':
 
-            if self._get_only and not(read and bulk) and not query:  # il controllo qui impedisce di fare chiamate se in modalita POST DELETE PUT se in modalita test, con l'eccezione della presenza della parola read nel path che indica una bulk in lettura
+            # il controllo qui impedisce di fare chiamate se in modalita POST DELETE PUT se in modalita test,
+            # con l'eccezione della presenza della parola read nel path che indica una bulk in lettura
+            if self._get_only and not(read and bulk) and not query:
                 raise ValueError('you are trying to access a not get_only API')
 
-            # se è una bulk i seguenti parametri restano come se fosse una GET
-            # se è una query i seguenti parametri restano come se fosse una GET
+            # tutto quello che non è bulk e query gli viene impedito di paginare
+            # mentre le bulk e query post/delete possono paginare come le get
             if not bulk and not query:
                 single_page = True
                 warm_start = False
                 _params_.pop('count')
+
+            # le bulk o query post/delete non devono poter fare warm_start mai, se viene impostato a True è per errore e qui viene forzato a False
+            if bulk or query: warm_start = False
 
         url = f'{self.root}{path}'
 
