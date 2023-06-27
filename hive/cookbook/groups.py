@@ -437,7 +437,7 @@ class Groups(ApiManager):
         return response
 
     def groups_objects_create_bulk(self, groups_objects: list, best_effort: bool = True, single_page: bool = False,
-                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+                                   page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
@@ -446,7 +446,6 @@ class Groups(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -461,11 +460,11 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/objects', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups_objects, params={'best_effort': best_effort}, **kwargs)
+                                payload=groups_objects, params={'best_effort': best_effort}, **kwargs)
         return response
 
     def groups_objects_delete_bulk(self, groups_objects: list, single_page: bool = False,
-                                   page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+                                   page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
@@ -474,7 +473,6 @@ class Groups(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -490,4 +488,177 @@ class Groups(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/objects', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=groups_objects, **kwargs)
+        return response
+
+    def groups_downtimes_create_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000,  kwargs: dict = None, **params):
+        """
+        crea le bulk di groups_downtime
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:[
+                    {
+                        "uuid_downtime": "string",
+                        "uuid_group": "string"
+                    }
+                ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/groups/bulk/create/downtimes', single_page=single_page, page_size=page_size,
+                                 payload=uuids, params=params, **kwargs)
+        return response
+    
+    def groups_downtimes_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        cancella le bulk di groups_downtimes
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Examples:[
+                    {
+                        "uuid_metric_type": "string",
+                        "name": "string"
+                    }
+                ]
+                    
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/groups/bulk/delete/downtimes", single_page=single_page, page_size=page_size,
+                                 payload=uuids, params=params, **kwargs)
+        return response
+    
+    def groups_users_create_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000,  kwargs: dict = None, **params):
+        """
+        crea le bulk di groups_users
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:[
+                    {
+                    "username": "string",
+                    "uuid_group": "string"
+                    }
+                ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/groups/bulk/create/users', single_page=single_page, page_size=page_size,
+                                 payload=uuids, params=params, **kwargs)
+        return response
+    
+    def groups_users_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        cancella le bulk di groups_users
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Examples:[
+                    {
+                    "username": "string",
+                    "uuid_group": "string"
+                    }
+                ]
+                    
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/users/bulk/delete/downtimes", single_page=single_page, page_size=page_size,
+                                 payload=uuids, params=params, **kwargs)
+        return response
+    
+    def groups_read_by_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        reads groups_bulk by code
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+
+        Keyword Args:
+            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
+
+        Examples:[
+                    {
+                        "uuid_site": "string",
+                        "uuid_virtual_domain": "string",
+                        "name": "string"
+                    }
+                ]          
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/groups/bulk/read_by/", single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+        return response
+    
+    def groups_create_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000,  kwargs: dict = None, **params):
+        """
+        crea le bulk di groups
+
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+            
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+
+        Examples:[
+                    {
+                        "uuid_parent": "string",
+                        "uuid_site": "string",
+                        "uuid_virtual_domain": "string",
+                        "type": "string",
+                        "name": "string",
+                        "description": "string",
+                        "automata_domain":[
+                            "string"
+                        ]
+                        "status": "s"
+                    }
+                ]
+
+        Returns: list
+        """
+        
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/groups/bulk/create/', single_page=single_page, page_size=page_size,
+                                payload=uuids, params=params, **kwargs)
         return response
