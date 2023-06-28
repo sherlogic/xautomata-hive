@@ -343,7 +343,7 @@ class Metrics(ApiManager):
         response = self.execute('DELETE', path=f'/metrics/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
         return response
     
-    def metrics_services_link_bulk(self, uuids: list, single_page: bool = False,
+    def metrics_services_create_bulk(self, uuids: list, single_page: bool = False,
                                page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le bulk di metrics_services
@@ -403,7 +403,7 @@ class Metrics(ApiManager):
                                 warm_start=warm_start, payload=uuids, params=params, **kwargs)
         return response
      
-    def metrics_downtimes_link_bulk(self, uuids: list, single_page: bool = False,
+    def metrics_downtimes_create_bulk(self, uuids: list, single_page: bool = False,
                                page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le bulk di metrics_downtime
@@ -434,7 +434,7 @@ class Metrics(ApiManager):
                                  payload=uuids, params=params, **kwargs)
         return response
     
-    def metrics_downtimes_unlink_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+    def metrics_downtimes_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
         """
         cancella le bulk di metrics_downtimes
         Args:
@@ -458,7 +458,7 @@ class Metrics(ApiManager):
                                  payload=uuids, params=params, **kwargs)
         return response
     
-    def metrics_services_unlink_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+    def metrics_services_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
         """
         cancella le bulk di metrics_services
         Args:

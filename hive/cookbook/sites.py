@@ -298,7 +298,7 @@ class Sites(ApiManager):
         return response
     
     def sites_delete_bulk(self, sites: list, single_page: bool = False,
-                          page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+                          page_size: int = 5000, kwargs: dict = None):
         """
         elimina le metriche in bulk
 
@@ -306,20 +306,19 @@ class Sites(ApiManager):
             sites (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/sites/bulk/delete/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=sites, **kwargs)
+                                 payload=sites, **kwargs)
         return response
 
     def sites_read_bulk(self, sites: list, single_page: bool = False,
                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
-        elimina le metriche in bulk
+        legge le metriche in bulk
 
         Args:
             sites (list[dict], optional): List dict to create.
@@ -334,5 +333,132 @@ class Sites(ApiManager):
         response = self.execute('POST', path='/sites/bulk/read/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=sites, **kwargs)
         return response
+             
+    def sites_read_by_bulk(self, sites: list, single_page: bool = False,
+                        page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+        """
+        legge le metriche in bulk
+
+        Args:
+            sites (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/sites/bulk/read_by/', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=sites, **kwargs)
+        return response
         
+    def sites_create_bulk(self, uuids: list, single_page: bool = False,
+                               page_size: int = 5000,  kwargs: dict = None, geocode: bool = False, **params):
+        """
+        crea le bulk di groups
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params
+        kwargs:
+            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+        Examples:[
+                    {
+                        "uuid_customer": "string",
+                        "type": "string",
+                        "code": "string",
+                        "description": "string",
+                        "address": "string",
+                        "zip_code": "string",
+                        "city": "string",
+                        "country": "str",
+                        "notes": "string",
+                        "state_province": "string",
+                        "status": "s"
+                    }
+                ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/groups/bulk/create/', single_page=single_page, page_size=page_size,
+                                payload=uuids, params={'geocode': geocode, 'uuids': uuids}, **kwargs)
+        return response
    
+    def sites_create_contacts_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        create i sites_contacts in bulk
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
+        Examples:
+            uuids = [
+                        {
+                            "uuid_contact": "string",
+                            "uuid_site": "string",
+                            "type": "string"
+                        }
+                    ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/sites/bulk/create/contacts', single_page=single_page, page_size=page_size,
+                                        payload=uuids, params=params, **kwargs)
+        return response
+    
+    def sites_contacts_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        cancella le bulk di sites_contacts
+        Args:
+            uuids (list[str], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Examples:[
+                    {
+                        "uuid_contact": "string",
+                        "uuid_site": "string"
+                    }
+                 ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path="/sites/bulk/delete/contacts", single_page=single_page, page_size=page_size,
+                                payload=uuids, params=params, **kwargs)
+        return response
+    
+    def sites_coordinates_create_bulk(self, uuids: list, single_page: bool = False,
+                                   page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        create i sites_coordinates in bulk
+        Args:
+            uuids (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: parametri in piu che si vuole passare alla API
+        Keyword Args:
+            best_effort (bool, optional): additional filter. Default to True
+        Examples:
+            uuids = [
+                        {
+                            "longitude": 0,
+                            "latitude": 0,
+                            "uuid_site": "string"
+                        }
+                    ]
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/sites/coordinates/bulk/create/', single_page=single_page, page_size=page_size,
+                                        payload=uuids, params=params, **kwargs)
+        return response
