@@ -90,7 +90,8 @@ class ApiManager:
             response (list): risposta dell'API selezionata
         """
 
-        bulk = True if 'bulk' in path else False  # verifico dalla path se è una api bulk
+        bulk = True if isinstance(payload, list) else False
+        bulk = True if 'bulk' in path else bulk  # verifico dalla path se è una api bulk
         bulk = True if path == '/metric_ingest/' else bulk  # il metric_ingest e' una bulk ma non compare nel nome
         bulk = True if path == '/probes_log_ingest/' else bulk  # il metric_ingest e' una bulk ma non compare nel nome
         read = True if 'read' in path else False  # verifico dalla path se è una api get, valido solo per le bulk
