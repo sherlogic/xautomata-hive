@@ -40,6 +40,31 @@ class Groups(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
 
+    def groups_post(self, kwargs: dict = None, **payload):
+        """
+        post selected groups.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            uuid_parent (str, optionsl): uuid della parent
+            uuid_site (str, required): uuid del site
+            uuid_virtual_domain (str, required): additional filter
+            name (str): additional filter, required
+            description (str, optional): additional filter
+            type (str): additional filter, required
+            automata_domain (list, optional): additional filter
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/groups/', payload=payload, **kwargs)
+        return response
+
     def group(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
         """
         Fetch single metric.

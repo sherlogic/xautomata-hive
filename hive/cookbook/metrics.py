@@ -83,6 +83,22 @@ class Metrics(ApiManager):
         response = self.execute('PUT', path=f'/metrics/{uuid}', payload=payload, **kwargs)
         return response
 
+    def metrics_post(self, kwargs: dict = None, **payload):
+        """
+        post selected metrics.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/metrics/', payload=payload, **kwargs)
+        return response
+
     def metric_delete(self, uuid: str, kwargs: dict = None):
         """
 

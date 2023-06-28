@@ -219,6 +219,31 @@ class Objects(ApiManager):
         response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, **kwargs)
         return response
 
+    def objects_post(self, kwargs: dict = None, **payload):
+        """
+        post selected objects.
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            name (str): additional filter, required
+            description (str, optional): additional filter
+            feedback_for_operator (str, optional): additional filter
+            ip_cidr (dict, optional): additional filter
+            profile (str): additional filter, required
+            data_profile (dict, optional): additional filter
+            automata_domain (list, optional): additional filter
+            status (str): additional filter, required
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path=f'/objects/', payload=payload, **kwargs)
+        return response
+
     def object_delete(self, uuid: str, kwargs: dict = None):
         """
 
