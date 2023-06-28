@@ -69,7 +69,7 @@ class TsService(ApiManager):
         return response
 
     def ts_services_bulk_create(self, payload: list, status: Literal['status', 'value'] = 'status', single_page: bool = False,
-                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+                                page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
 
