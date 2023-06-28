@@ -487,7 +487,7 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/objects', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups_objects, **kwargs)
+                            payload=groups_objects, **kwargs)
         return response
 
     def groups_downtimes_create_bulk(self, uuids: list, single_page: bool = False,

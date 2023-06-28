@@ -366,3 +366,4 @@ class MetricTypes(ApiManager):
         response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
 
         return response
+    #Ciao

@@ -682,3 +682,4 @@ class Objects(ApiManager):
         response = self.execute('POST', path='/objects/bulk/delete/probes', single_page=single_page, page_size=page_size,
                                 payload=uuids, **kwargs)
         return response
+#Ciao

@@ -462,3 +462,4 @@ class Sites(ApiManager):
         response = self.execute('POST', path='/sites/coordinates/bulk/create/', single_page=single_page, page_size=page_size,
                                         payload=uuids, params=params, **kwargs)
         return response
+    #Ciao
