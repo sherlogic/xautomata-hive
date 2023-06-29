@@ -1,6 +1,7 @@
 # Xautomata API
 Pacchetto che fornisca una interfaccia semplice per usare le API di Xautomata in python
 
+
 # Installazione
 
 Delle installazioni presentate qui di seguito si consiglia di usare l'installazione editabile, che appare essere piu stabile

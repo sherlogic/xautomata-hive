@@ -156,17 +156,17 @@ class Customers(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('POST', path='/customers/bulk/delete/', single_page=single_page, page_size=page_size,
+        response = self.execute('DELETE', path='/customers/bulk/delete/', single_page=single_page, page_size=page_size,
                                 warm_start=warm_start, payload=payload, **kwargs)
         return response
 
-    def customers_bulk(self, uuids: list, single_page: bool = False,
-                            page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def customers_bulk(self, payload: list, single_page: bool = False,
+                       page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         fetch customers bulk
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -176,5 +176,63 @@ class Customers(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/customers/bulk/read/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response
+
+    def customer(self, payload: str, warm_start: bool = False, kwargs: dict = None, **params):
+        """
+        Fetch single customer.
+
+        Args:
+            payload (str): uuid della metrica da recuperare
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params=params)
+        response = self.execute('GET', path=f'/customers/{payload}', warm_start=warm_start, params=params, **kwargs)
+        return response
+
+    def customers_put(self, uuid: str, kwargs: dict = None, **payload):
+        """
+        update selected customer.
+
+        Args:
+            uuid (str): uuid della metrica da modificare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            name (str, optional): additional filter
+            description (str, optional): additional filter
+            feedback_for_operator (str, optional): additional filter
+            profile (str, optional): additional filter
+            status (str, optional): additional filter
+            data_profile (list or dict, optional): data profile
+            automata_domain (list or dict, optional): automata domain
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('PUT', path=f'/customers/{uuid}', payload=payload, **kwargs)
+        return response
+
+    def customers_delete(self, uuid: str, kwargs: dict = None):
+
+        """
+        delete single customer.
+
+        Args:
+            uuid (str): uuid della metrica da eliminare
+            kwargs (dict, optional): additional parameters for execute. Default to None..
+
+        Returns: list
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('DELETE', path=f'/customers/{uuid}', **kwargs)
+        return response
+
