@@ -55,7 +55,7 @@ class Anomalies(ApiManager):
         response = self.execute('GET', path=f'/anomalies/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def anomalies_create_bulk(self, payload : list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+    def anomalies_create_bulk(self, payload: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
         """
         create anomalies.
 
@@ -108,8 +108,6 @@ class Anomalies(ApiManager):
         Post delle anomaly.
 
         Args:
-            uuid (str): uuid dell'anomalia da recuperare
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
@@ -159,4 +157,3 @@ class Anomalies(ApiManager):
         response = self.execute('POST', path='/anomalies/bulk/delete/', single_page=single_page, page_size=page_size,
                                 payload=payload, **kwargs)
         return response
-

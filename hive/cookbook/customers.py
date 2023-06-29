@@ -235,4 +235,3 @@ class Customers(ApiManager):
         if kwargs is None: kwargs = dict()
         response = self.execute('DELETE', path=f'/customers/{uuid}', **kwargs)
         return response
-
