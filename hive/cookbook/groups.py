@@ -83,7 +83,7 @@ class Groups(ApiManager):
         response = self.execute('GET', path=f'/groups/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
      
-    def group_put(self, uuid: str, kwargs: dict = None, **payload):
+    def groups_put(self, uuid: str, kwargs: dict = None, **payload):
         """
         update selected group.
 
@@ -109,7 +109,7 @@ class Groups(ApiManager):
         response = self.execute('PUT', path=f'/groups/{uuid}', payload=payload, **kwargs)
         return response
 
-    def group_delete(self, uuid: str, kwargs: dict = None):
+    def groups_delete(self, uuid: str, kwargs: dict = None):
         
         """
         delete single group.
@@ -193,6 +193,7 @@ class Groups(ApiManager):
         get the user linked with a group.
 
         Args:
+            uuid (str): uuid group
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -213,7 +214,6 @@ class Groups(ApiManager):
 
         if kwargs is None: kwargs = dict()
         response = self.execute('GET', path=f'/groups/{uuid}/users', single_page=single_page, page_size=page_size, params=params,
-
                                 warm_start=warm_start, **kwargs)
 
         return response
@@ -236,32 +236,20 @@ class Groups(ApiManager):
         response = self.execute('POST', path=f'/groups/{uuid}/users/{name}', **kwargs)
         return response
     
-    def groups_users_delete(self, uuid:str, name:str, kwargs: dict = None):
+    def groups_users_delete(self, uuid: str, name: str, kwargs: dict = None):
 
         """
-
         delete selected groups_users.
 
         Args:
             uuid (str): uuid della group
             name (str): additional filter
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
-
 
         Keyword Args:
-
             name (str): additional filter, required
-            description (str, optional): additional filter
-            feedback_for_operator (str, optional): additional filter
-            ip_cidr (dict, optional): additional filter
-            profile (str): additional filter, required
-            data_profile (dict, optional): additional filter
-            automata_domain (list, optional): additional filter
-            status (str): additional filter, required
 
         Returns: list
-
         """
 
         if kwargs is None: kwargs = dict()
@@ -277,7 +265,8 @@ class Groups(ApiManager):
 
         Args:
             uuid (str, required): uuid del group
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: parametri in piu che si vuole passare alla API
@@ -317,7 +306,7 @@ class Groups(ApiManager):
         response = self.execute('POST', path=f'/groups/{uuid}/downtimes/{uuid_downtime}',  **kwargs)
         return response
     
-    def group_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
+    def groups_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
         
         """
         remove downtime linked with the group.
@@ -358,7 +347,8 @@ class Groups(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('GET', path=f'/groups/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
+        response = self.execute('GET', path=f'/groups/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,
+                                warm_start=warm_start, **kwargs)
         return response
 
     def groups_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
@@ -378,7 +368,7 @@ class Groups(ApiManager):
 
         return response
     
-    def group_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
+    def groups_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
 
         """
         delete dispatcher linked with the group.
@@ -391,35 +381,34 @@ class Groups(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/groups/{uuid}/dispatchers/{uuid_dispatcher}' **kwargs)
+        response = self.execute('DELETE', path=f'/groups/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
         return response  
     
-    def groups_delete_bulk(self, groups: list, single_page: bool = False,
+    def groups_delete_bulk(self, payload: list, single_page: bool = False,
                            page_size: int = 5000, kwargs: dict = None):
         """
         elimina i groups in bulk
 
         Args:
-            groups (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list        
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/', single_page=single_page, page_size=page_size,
-                                payload=groups, **kwargs)
+                                payload=payload, **kwargs)
         return response
 
-    def groups_bulk(self, groups: list, single_page: bool = False,
+    def groups_bulk(self, payload: list, single_page: bool = False,
                     page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
         fetch i groups in bulk
 
         Args:
-            groups (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -433,16 +422,16 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/read/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=groups, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, params=params, **kwargs)
         return response
 
-    def groups_objects_create_bulk(self, groups_objects: list, best_effort: bool = True, single_page: bool = False,
+    def groups_objects_create_bulk(self, payload: list, best_effort: bool = True, single_page: bool = False,
                                    page_size: int = 5000, kwargs: dict = None):
         """
         elimina la lista tra groups e object in bulk
 
         Args:
-            groups_objects (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -460,17 +449,16 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/objects', single_page=single_page, page_size=page_size,
-                                payload=groups_objects, params={'best_effort': best_effort}, **kwargs)
+                                payload=payload, params={'best_effort': best_effort}, **kwargs)
         return response
 
-    def groups_objects_delete_bulk(self, groups_objects: list, single_page: bool = False,
+    def groups_objects_delete_bulk(self, payload: list, single_page: bool = False,
                                    page_size: int = 5000, kwargs: dict = None):
         """
         elimina i groups in bulk
 
         Args:
-            groups_objects (list[dict], optional): List dict to create.
-            best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -487,15 +475,15 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/delete/objects', single_page=single_page, page_size=page_size,
-                            payload=groups_objects, **kwargs)
+                                payload=payload, **kwargs)
         return response
 
-    def groups_downtimes_create_bulk(self, uuids: list, single_page: bool = False,
-                               page_size: int = 5000,  kwargs: dict = None, **params):
+    def groups_downtimes_create_bulk(self, payload: list, single_page: bool = False,
+                                     page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le bulk di groups_downtime
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -516,22 +504,23 @@ class Groups(ApiManager):
         
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/downtimes', single_page=single_page, page_size=page_size,
-                                 payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response
     
-    def groups_downtimes_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+    def groups_downtimes_delete_bulk(self, payload: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None):
         """
         cancella le bulk di groups_downtimes
         Args:
-            uuids (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: parametri in piu che si vuole passare alla API
-        Examples:[
+
+        Examples:
+            payload = [payload
                     {
-                        "uuid_metric_type": "string",
-                        "name": "string"
+                        "uuid_downtime": "string",
+                        "uuid_group": "string"
                     }
                 ]
                     
@@ -540,15 +529,15 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path="/groups/bulk/delete/downtimes", single_page=single_page, page_size=page_size,
-                                 payload=uuids, params=params, **kwargs)
+                                payload=payload, **kwargs)
         return response
     
-    def groups_users_create_bulk(self, uuids: list, single_page: bool = False,
-                               page_size: int = 5000,  kwargs: dict = None, **params):
+    def groups_users_create_bulk(self, payload: list, single_page: bool = False,
+                                 page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le bulk di groups_users
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -569,19 +558,20 @@ class Groups(ApiManager):
         
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/users', single_page=single_page, page_size=page_size,
-                                 payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response
     
-    def groups_users_delete_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
+    def groups_users_delete_bulk(self, payload: list, single_page: bool = False, page_size: int = 5000, kwargs: dict = None, **params):
         """
         cancella le bulk di groups_users
         Args:
-            uuids (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: parametri in piu che si vuole passare alla API
-        Examples:[
+        Examples:
+            payload = [
                     {
                     "username": "string",
                     "uuid_group": "string"
@@ -593,22 +583,18 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path="/users/bulk/delete/downtimes", single_page=single_page, page_size=page_size,
-                                 payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response
     
-    def groups_read_by_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+    def groups_read_by_bulk(self, payload: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         reads groups_bulk by code
         Args:
-            uuids (list[str], optional): additional filter
+            payload (list[str], optional): additional filter
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: parametri in piu che si vuole passare alla API
-
-        Keyword Args:
-            join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
 
         Examples:[
                     {
@@ -622,16 +608,16 @@ class Groups(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path="/groups/bulk/read_by/", single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, params=params, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response
     
-    def groups_create_bulk(self, uuids: list, single_page: bool = False,
-                               page_size: int = 5000,  kwargs: dict = None, **params):
+    def groups_create_bulk(self, payload: list, single_page: bool = False,
+                           page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le bulk di groups
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -660,5 +646,5 @@ class Groups(ApiManager):
         
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/groups/bulk/create/', single_page=single_page, page_size=page_size,
-                                payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response

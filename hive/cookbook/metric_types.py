@@ -5,7 +5,7 @@ from hive.api import handling_single_page_methods
 class MetricTypes(ApiManager):
 
     def metric_types(self, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
-                **params):
+                     **params):
         """
         metodo che restituisce tutti i metric_types
 
@@ -72,7 +72,7 @@ class MetricTypes(ApiManager):
         response = self.execute('GET', path=f'/metric_types/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def metrics_type_delete(self, uuid: str, kwargs: dict = None):
+    def metrics_types_delete(self, uuid: str, kwargs: dict = None):
         """
         delete single metric type.
 
@@ -93,7 +93,7 @@ class MetricTypes(ApiManager):
             uuid metric (str, required): string <uuid4> (Uuid Object)
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API
-            status(str, required): string (Status) <= 1 characters
+
         Keyword Args:
             name (str, required): string (Name) <= 255 characters
             profile(str, required): string (Profile) <= 64 characters
@@ -102,6 +102,8 @@ class MetricTypes(ApiManager):
             data_profile(str, optional): additional filter
             automata_domain(str, optional): additional filter
             profile(str, required): 
+            status(str, required): string (Status) <= 1 characters
+
         Returns: list
 
         """
@@ -109,8 +111,8 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path=f'/metric_types/', payload=payload, **kwargs)
         return response
     
-    def metric_type_metrics(self, uuid:str ,single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
-                **params):
+    def metric_types_metrics(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
+                             **params):
         """
         metodo che restituisce le metrics del metric type inserito
 
@@ -137,7 +139,7 @@ class MetricTypes(ApiManager):
                                 warm_start=warm_start, **kwargs)
         return response
     
-    def metric_type_downtime(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+    def metric_types_downtime(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """ get the downtimes linked with a metric type.
 
         Args:
@@ -177,7 +179,7 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path=f'/metrics_types/{uuid}/downtimes/{uuid_downtime}', **kwargs)
         return response
 
-    def metrics_type_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
+    def metrics_types_downtimes_delete(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
         """
         delete selected dispatcher and selected metric_type service.
         Args:
@@ -188,10 +190,10 @@ class MetricTypes(ApiManager):
         
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/metric_types/{uuid}/downtimes/{uuid_downtime}', payload=payload, **kwargs)
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}/downtimes/{uuid_downtime}', **kwargs)
         return response
 
-    def metric_type_put(self, uuid: str, kwargs: dict = None, **payload):
+    def metric_types_put(self, uuid: str, kwargs: dict = None, **payload):
         """
         update selected metric_type.
 
@@ -217,7 +219,7 @@ class MetricTypes(ApiManager):
         response = self.execute('PUT', path=f'/metric_types/{uuid}', payload=payload, **kwargs)
         return response
 
-    def metric_type_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+    def metric_types_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         
         """ metodo che restituisce i dispatchers di una metric type
         Args:
@@ -240,24 +242,25 @@ class MetricTypes(ApiManager):
         
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('GET', path=f'/metric_types/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,warm_start=warm_start, **kwargs)
+        response = self.execute('GET', path=f'/metric_types/{uuid}/dispatchers', single_page=single_page, page_size=page_size, params=params,
+                                warm_start=warm_start, **kwargs)
         return response
 
-    def metrics_type_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
+    def metrics_types_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
         """
         delete selected dispatcher linked with the metric type.
         Args:
             uuid (str, required): uuid della metrics_type
-            uuid_service (str, required): uuid del service
+            uuid_dispatcher (str, required): uuid del dispatcher
             kwargs (dict, optional): additional parameters for execute. Default to None.
         
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}',**kwargs)
+        response = self.execute('DELETE', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
         return response
       
-    def metrics_type_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
+    def metrics_types_dispatchers_post(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
         """
         create link between selected dispatcher and selected metric_type service.
         Args:
@@ -272,32 +275,28 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', **kwargs)
         return response
     
-    def metric_type_delete(self, uuid: str, kwargs: dict = None):
+    def metric_types_delete(self, uuid: str, kwargs: dict = None):
         """
 
         delete metric type selected
         Args:
             uuid (str): uuid della metrics
-            uuid_service (str): uuid del service
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
         Returns: list
 
         """
-
         if kwargs is None: kwargs = dict()
-
-        response = self.execute('POST', path=f'/metric_types/{uuid}/dispatchers/{uuid_dispatcher}', payload=payload, **kwargs)
+        response = self.execute('POST', path=f'/metric_types/{uuid}/', **kwargs)
 
         return response
    
-    def metric_types_delete_bulk(self, uuids: list, single_page: bool = False,
+    def metric_types_delete_bulk(self, payload: list, single_page: bool = False,
                                  page_size: int = 5000,  kwargs: dict = None):
         """
         elimina le metriche in bulk
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -305,17 +304,17 @@ class MetricTypes(ApiManager):
         Returns: list
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('DELETE', path='/metric_types/bulk/delete/', single_page=single_page, page_size=page_size,
-                                 payload=uuids, **kwargs)
+        response = self.execute('POST', path='/metric_types/bulk/delete/', single_page=single_page, page_size=page_size,
+                                payload=payload, **kwargs)
         return response
 
-    def metric_types_bulk(self, uuids: list, single_page: bool = False,
-                               page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def metric_types_bulk(self, payload: list, single_page: bool = False,
+                          page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         fetch le metric types in bulk
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -325,23 +324,23 @@ class MetricTypes(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/read/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response
     
-    def metric_types_read_by_bulk(self, uuids: list, single_page: bool = False,
-                               page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
+    def metric_types_read_by_bulk(self, payload: list, single_page: bool = False,
+                                  page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         fetch metric types by uuid object and name
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
-                    uuids = [
+                    payload = [
                               {
                                 "uuid_object": "string",
                                 "name": "string"
@@ -352,15 +351,15 @@ class MetricTypes(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/read_by/', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=uuids, **kwargs)
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response   
      
-    def metric_types_create_bulk(self, uuids: list, single_page: bool = False,
-                                   page_size: int = 5000,  kwargs: dict = None, **params):
+    def metric_types_create_bulk(self, payload: list, single_page: bool = False,
+                                 page_size: int = 5000,  kwargs: dict = None, **params):
         """
         crea le metric types in bulk
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -389,16 +388,16 @@ class MetricTypes(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/create/', single_page=single_page, page_size=page_size,
-                                 payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response
     
-    def metric_types_downtimes_create_bulk(self, uuids: list, single_page: bool = False,
-                                   page_size: int = 5000, kwargs: dict = None, **params):
+    def metric_types_downtimes_create_bulk(self, payload: list, single_page: bool = False,
+                                           page_size: int = 5000, kwargs: dict = None, **params):
         """
         crea una lista tra metric types e downtimes
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -420,16 +419,16 @@ class MetricTypes(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/create/downtimes', single_page=single_page, page_size=page_size,
-                                        payload=uuids, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
         return response
     
-    def metric_types_downtimes_delete_bulk(self, uuids: list, single_page: bool = False,
-                                   page_size: int = 5000,  kwargs: dict = None):
+    def metric_types_downtimes_delete_bulk(self, payload: list, single_page: bool = False,
+                                           page_size: int = 5000,  kwargs: dict = None):
         """
         elimina una lista tra metric types e downtimes
 
         Args:
-            uuids (list[dict], optional): List dict to create.
+            payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -446,6 +445,6 @@ class MetricTypes(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/metric_types/bulk/delete/downtimes', single_page=single_page, page_size=page_size,
-                                payload=uuids, **kwargs)
+                                payload=payload, **kwargs)
         return response
     
