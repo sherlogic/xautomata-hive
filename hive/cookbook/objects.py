@@ -7,7 +7,7 @@ class Objects(ApiManager):
     def objects(self, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None,
                 **params):
         """
-        metodo che restituisce tutti i objects
+        metodo che restituisce tutti gli objects
 
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -63,6 +63,7 @@ class Objects(ApiManager):
         return response
 
     def object(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
+        
         """
         Fetch single object.
 
@@ -78,14 +79,39 @@ class Objects(ApiManager):
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params=params)
         response = self.execute('GET', path=f'/objects/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
+    
+    def objects_put(self, uuid: str, kwargs: dict = None, **payload):
+        """
+        update selected object.
 
+        Args:
+            uuid (str): uuid dell object da modificare
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API
+
+        Keyword Args:
+            uuid_object (str, optional): additional filter
+            name (str, optional): additional filter
+            description (str, optional): additional filter
+            feedback_for_operator (str, optional): additional filter
+            profile (str, optional): additional filter
+            status (str, optional): additional filter
+            data_profile (list or dict, optional): data profile
+            automata_domain (list or dict, optional): automata domain
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, **kwargs)
+        return response
+    
     def object_delete(self, uuid: str, kwargs: dict = None):
         """
-
         delete single object.
 
         Args:
-            uuid: id del object da eliminare
+            uuid (str): uuid del object da eliminare
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
@@ -173,7 +199,7 @@ class Objects(ApiManager):
         response = self.execute('GET', path=f'/objects/{uuid}/groups', params=params, **kwargs)
         return response
 
-    def object_groups_post(self, uuid: str, uuid_group: str, kwargs: dict = None, **payload):
+    def object_groups_post(self, uuid: str, uuid_group: str, kwargs: dict = None):
         """
         create link between selected object and selected group.
 
@@ -181,13 +207,12 @@ class Objects(ApiManager):
             uuid (str): uuid della object
             uuid_group (str): uuid della group
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
-
+            
         Returns: list
 
         """
         if kwargs is None: kwargs = dict()
-        response = self.execute('POST', path=f'/objects/{uuid}/groups/{uuid_group}', payload=payload, **kwargs)
+        response = self.execute('POST', path=f'/objects/{uuid}/groups/{uuid_group}', **kwargs)
         return response
 
     def object_groups_delete(self, uuid: str, uuid_group: str, kwargs: dict = None):
@@ -198,7 +223,6 @@ class Objects(ApiManager):
             uuid (str): uuid della object
             uuid_group (str): uuid della group
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
 
         Returns: list
 
@@ -248,14 +272,13 @@ class Objects(ApiManager):
 
     def objects_probes_delete(self, uuid: str, uuid_probe: str, kwargs: dict = None):
         """
-        delete link between selected object and selected group.
+        delete link between selected object and selected probe.
 
         Args:
             uuid (str): uuid della object
             uuid_probe (str): uuid della probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
            
-
         Returns: list
 
         """
@@ -283,6 +306,7 @@ class Objects(ApiManager):
             active_at_timestamp (str, optional): additional filter
             not_in (bool,optional): additional filter
             true (bool,optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True.
+       
         Returns: list
 
         """
@@ -295,12 +319,10 @@ class Objects(ApiManager):
 
         """
         create link between selected object and selected downtime.
+        
         Args:
-
             uuid (str): uuid della object
-
             uuid_downtime (str): uuid del downtime
-
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
 
@@ -317,11 +339,8 @@ class Objects(ApiManager):
         """
         remove downtime linked with the object.
         Args:
-
             uuid (str): uuid della object
-
             uuid_downtime (str): uuid del downtime
-
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
@@ -390,7 +409,7 @@ class Objects(ApiManager):
 
     def objects_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
-        metodo che permette di recuperare la time serie di tutte le metriche. Si puo scegliere se ottenere le metriche di stato o di valore.
+        metodo che permette di recuperare la time serie di tutti gli obects.
 
         Args:
             uuids (list[str], optional): additional filter
@@ -484,36 +503,10 @@ class Objects(ApiManager):
         response = self.execute('POST', path='/objects/bulk/create/groups', single_page=single_page, page_size=page_size,
                                  payload=uuids, params=params, **kwargs)
         return response
-    
-    def objects_put(self, uuid: str, kwargs: dict = None, **payload):
-        """
-        update selected object.
-
-        Args:
-            uuid (str): uuid dell object da modificare
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API
-
-        Keyword Args:
-            uuid_object (str, optional): additional filter
-            name (str, optional): additional filter
-            description (str, optional): additional filter
-            feedback_for_operator (str, optional): additional filter
-            profile (str, optional): additional filter
-            status (str, optional): additional filter
-            data_profile (list or dict, optional): data profile
-            automata_domain (list or dict, optional): automata domain
-
-        Returns: list
-
-        """
-        if kwargs is None: kwargs = dict()
-        response = self.execute('PUT', path=f'/objects/{uuid}', payload=payload, **kwargs)
-        return response
 
     def objects_read_by_bulk(self, uuids: list, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
-        reads objects_bulk by code
+        reads objects bulk by code
         
         Args:
             uuids (list[str], optional): additional filter
@@ -682,4 +675,3 @@ class Objects(ApiManager):
         response = self.execute('POST', path='/objects/bulk/delete/probes', single_page=single_page, page_size=page_size,
                                 payload=uuids, **kwargs)
         return response
-#Ciao

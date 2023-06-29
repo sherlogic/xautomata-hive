@@ -123,7 +123,6 @@ class Metrics(ApiManager):
             metrics (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
@@ -133,7 +132,7 @@ class Metrics(ApiManager):
                                  payload=uuids, **kwargs)
         return response
 
-    def metrics_read_bulk(self, uuids: list, single_page: bool = False,
+    def metrics_bulk(self, uuids: list, single_page: bool = False,
                           page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
         fetch le metriche in bulk
@@ -153,7 +152,8 @@ class Metrics(ApiManager):
         return response
 
     def metrics_last_value(self, uuid: str, warm_start: bool = False, kwargs: dict = None, **params):
-        """ cerca l'ultimo valore della metrics
+        """
+        Cerca l'ultimo valore della metrics
 
         Args:
             uuid (str): uuid della metrica da cercare
@@ -219,7 +219,7 @@ class Metrics(ApiManager):
 
         Args:
             uuid: uuid del metric 
-            uuid_service: id del service da eliminare
+            uuid_service: uuid del service da eliminare
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list
@@ -289,7 +289,7 @@ class Metrics(ApiManager):
 
     def metrics_dispatchers(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
-        metodo che restituisce i dispatchers di una metrics
+        metodo che restituisce i dispatchers di una metric
 
         Args:
             uuid (str): uuid metric
@@ -330,7 +330,7 @@ class Metrics(ApiManager):
     def metrics_dispatchers_delete(self, uuid: str, uuid_dispatcher: str, kwargs: dict = None):
         """
 
-        delete service linked with selected metric.
+        delete dispatcher linked with selected metric.
 
         Args:
             uuid(str): uuid del metric 
@@ -359,7 +359,7 @@ class Metrics(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
 
         Examples:
-            objects_groups = [
+                            [
                                 {
                                     "uuid_metric": "string",
                                     "uuid_service": "string"
@@ -419,7 +419,7 @@ class Metrics(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
 
         Examples:
-            objects_groups = [
+                    uuids = [
                                 {
                                     "uuid_downtime": "string",
                                     "uuid_metric": "string"
@@ -498,7 +498,7 @@ class Metrics(ApiManager):
             best_effort (bool, optional): se a True forza a proseguire anche se un elemento genera un errore
 
         Examples:
-            objects_groups = [
+                    uuids = [
                                 {
                                     "uuid_metric_type": "string",
                                     "name": "string",
@@ -520,4 +520,4 @@ class Metrics(ApiManager):
         response = self.execute('POST', path='/metrics/bulk/create/', single_page=single_page, page_size=page_size,
                                 payload=uuids, params=params, **kwargs)
         return response
-    #Ciao
+    
