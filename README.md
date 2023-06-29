@@ -28,6 +28,8 @@ pip install -e ./xautomata-hive[modulo]
 ## Installazione generica
 Per l'installazione generica basta rimuovere il **-e** dalla riga di comando, sconsigliato perche meno stabile con la tipologia di setup di questo pacchetto
 
+## gestione dei moduli
+
 # Manuale d'uso
 
 La libreria *hive* è stata pensata per facilitare l'interazione con le API di XAutomata.
@@ -43,6 +45,12 @@ L'uso di questa libreria garantisce una serie di feature aggiuntive automatiche,
 - richiamate: se una chiamata fallisce vengono fatti una serie di tentativi prima di restituire un errore.
 
 **Ogni metodo usato restituisce sempre una lista di elementi.**
+
+Le API trovate sullo swagger (*https://portal.xautomata.com/api/v0/docs#/*) sono chiamabili in maniera semplificata come metodi della
+libreria *XautomataAPI*. In alternativa si puo usare una metodologia piu simile alla libreria *request* che richiede l'url
+dell'API. Di seguito i due tipi di approccio.
+
+## API come metodi
 
 ```python
 from hive.api import XautomataApi
@@ -60,7 +68,7 @@ uuid_c = customers[0]['uuid']
 sites = xa.sites(uuid_customer=uuid_c, status='A')
 ```
 
-Si puo vedere come le chiamate alle API hanno la stessa terminologie trovata sullo swagger (*https://portal.xautomata.com/api/v0/docs#/*)
+Si puo vedere come le chiamate alle API hanno la stessa terminologie trovata sullo swagger
 cosi come tutti i parametri di filtro evidenziati dentro lo swagger.
 Suddetti filtri vengono selezionati semplicemente aggiungendo la chiave:valore nel metodo scelto.
 In aggiunta ai filtri degli specifici endpoint sono presenti in aggiunta:
@@ -80,10 +88,44 @@ xa = XautomataApi(root='root', user='user', password='passw')
 
 lista_uuid = ['uuid1', 'uuid2', 'uuid3']
 
-customers = xa.sites_read_bulk(uuids=lista_uuid)
+customers = xa.sites_bulk(payload=lista_uuid)
 ```
 
-## sviluppo nuovo endpoint
+## API come url
+
+In alternativa e' possibile usare XautomataApi tramite l'url dell'endpoint. La differenza chiave sul passare tramite
+questo approccio e' che si possono chiamare anche API non ancora implemetate in modalita metodi, o manipolare in modo piu
+diretto cosa viene passato alla chiamata. Resta ugualmente preferibile usare XautomataApi rispetto a *request*
+perche anche tramite la chiamta url vengono mantenute le proprieta di paginazione, cache, riautenticazione etc.
+
+Qui di seguito si puo vedere la chiamata fatta per ottenere i clienti con codice 'DEMO' in modalita url.
+
+```python
+from hive.api import XautomataApi
+xa = XautomataApi(root='root', user='user', password='passw')
+
+params = {'code': 'DEMO',
+          'like': True}
+
+customers = xa.execute(mode='GET', path='/customers/', params=params, page_size=50)
+```
+
+a differenza della modalita per metodi, in questo caso i parametri devono essere inseriti all'interno di un dizionario
+che viene passato a **params** se si sta fornendo un parametri, e a **payload** se si sta fornendo un *corpo* (tipicamente
+usato per le post)
+
+## tips and tricks
+
+esiste un parametri privato *_get_only* che se forzato a True impedisce di usare API di POST/PUT/DELETE. Fatta eccezione
+delle bulk e query dove vengono inibite solo le chiamtate che andrebbero ad apportare modifiche al db
+
+```python
+from hive.api import XautomataApi
+xa = XautomataApi(root='root', user='user', password='passw')
+xa._get_only = True
+```
+
+# sviluppo nuovo endpoint
 nel caso dovessero essere implementati nuovi api, qui sotto viene presentata una piccola guida con esempi per le diverse possibilita di codice.
 La prima cosa da fare è locare il file corretto su cui aggiungere il nuovo API: nella cartella **coockbook** sono presenti tanti file quante le diverse categorie di API su XAutomata,
 se la categorie è gia presente si deve lavorare li dentro, se non è presente deve essere aggiunto nuovo.
