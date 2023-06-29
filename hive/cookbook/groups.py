@@ -397,7 +397,7 @@ class Groups(ApiManager):
     def groups_delete_bulk(self, groups: list, single_page: bool = False,
                            page_size: int = 5000, kwargs: dict = None):
         """
-        elimina le metriche in bulk
+        elimina i groups in bulk
 
         Args:
             groups (list[dict], optional): List dict to create.
@@ -416,7 +416,7 @@ class Groups(ApiManager):
     def groups_bulk(self, groups: list, single_page: bool = False,
                     page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
         """
-        fetch le metriche in bulk
+        fetch i groups in bulk
 
         Args:
             groups (list[dict], optional): List dict to create.
@@ -439,7 +439,7 @@ class Groups(ApiManager):
     def groups_objects_create_bulk(self, groups_objects: list, best_effort: bool = True, single_page: bool = False,
                                    page_size: int = 5000, kwargs: dict = None):
         """
-        elimina le metriche in bulk
+        elimina la lista tra groups e object in bulk
 
         Args:
             groups_objects (list[dict], optional): List dict to create.
@@ -466,7 +466,7 @@ class Groups(ApiManager):
     def groups_objects_delete_bulk(self, groups_objects: list, single_page: bool = False,
                                    page_size: int = 5000, kwargs: dict = None):
         """
-        elimina le metriche in bulk
+        elimina i groups in bulk
 
         Args:
             groups_objects (list[dict], optional): List dict to create.
