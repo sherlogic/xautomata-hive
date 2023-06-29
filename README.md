@@ -30,6 +30,19 @@ Per l'installazione generica basta rimuovere il **-e** dalla riga di comando, sc
 
 ## gestione dei moduli
 
+come si vede dalle chiamte elencate sopra, al fondo degli url delle chiamte pip viene sempre aggiunto un
+elemento tra due parentesi quadre **[modulo]**. Questo e' un metodo con cui vengono gestite le dipendenze specifiche per ogni uso.
+In fase di installazione della libreria e' sempre possibile chiedere di installare le dipendenze dei soli file o cartelle usati.
+Per fare cio basta inserire nello spazio **modulo** il percorso del pacchetto o del file interessato.
+Di seguito un esempio di installazione di hive per una situazione in cui si e' interessati all'uso di un solo file e una cartella della libreria.
+
+```
+pip install -e ./xautomata-hive[hive.cookbook,hive.decorators]
+```
+L'esempio non ha necessariamente senso, ma se fatto verrebbero installate solo le librerie necessarie per 
+usare tutti gli script nella cartella cookbook e quelli nel file decorators.
+
+
 # Manuale d'uso
 
 La libreria *hive* è stata pensata per facilitare l'interazione con le API di XAutomata.
