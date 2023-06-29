@@ -41,7 +41,7 @@ class MetricTypes(ApiManager):
     
     def metric_types_post(self, kwargs: dict = None, **payload):
         """
-        post selected metric_types.
+        post selected metric types.
 
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -87,7 +87,7 @@ class MetricTypes(ApiManager):
 
     def metrics_types_post(self, kwargs: dict = None, **payload):
         """
-        post selected metrics.
+        post selected metric type.
 
         Args:
             uuid metric (str, required): string <uuid4> (Uuid Object)
@@ -163,17 +163,11 @@ class MetricTypes(ApiManager):
     def metric_types_downtimes_post(self, uuid: str, uuid_downtime: str, kwargs: dict = None):
 
         """
-
         create link between selected metrics_type and selected downtime.
-
         Args:
-
             uuid (str): uuid della metrics
-
             uuid_downtime (str): uuid del downtime
-
             kwargs (dict, optional): additional parameters for execute. Default to None.
-
         Returns: list
 
         """
@@ -190,7 +184,6 @@ class MetricTypes(ApiManager):
             uuid (str): uuid della metrics
             uuid_downtime (str): uuid del downtime
             kwargs (dict, optional): additional parameters for execute. Default to None.
-        
         Returns: list
         
         """
@@ -283,17 +276,11 @@ class MetricTypes(ApiManager):
         """
 
         delete metric type selected
-
         Args:
-
             uuid (str): uuid della metrics
-
             uuid_service (str): uuid del service
-
             kwargs (dict, optional): additional parameters for execute. Default to None.
-
             **payload: additional parameters for the API
-
         Returns: list
 
         """
@@ -461,4 +448,4 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path='/metric_types/bulk/delete/downtimes', single_page=single_page, page_size=page_size,
                                 payload=uuids, **kwargs)
         return response
-    #Ciao
+    

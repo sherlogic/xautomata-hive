@@ -143,37 +143,22 @@ class Sites(ApiManager):
                          kwargs: dict = None, **params):
 
         """
-
         Get the services linked with the sites_contacts.
-
-
-
-
         Args:
-
             uuid (str, required): uuid contacts
-
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-
             kwargs (dict, optional): additional parameters for execute. Default to None.
-
             **params: additional parameters for the API
-
             type (str, required): Body
-
         Keyword Args:
-
             skip (int, optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0.
             limit (int, optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000.
             count (bool, optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False.
             like (bool, optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True.
             join (bool, optional): Se join = true, ogni riga restituita conterrà chiavi aggiuntive che fanno riferimento ad altre entità, con cui la riga ha relazioni 1:1. Default to False
             not_in (bool, optional): additional filter
-
         Returns: list
         """
 
@@ -264,7 +249,6 @@ class Sites(ApiManager):
     
     def sites_coordinates_delete(self, uuid_site : str, kwargs: dict = None):
         """
-
         delete coordinate.
 
         Args:
@@ -318,7 +302,7 @@ class Sites(ApiManager):
     def sites_read_bulk(self, sites: list, single_page: bool = False,
                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
-        legge le metriche in bulk
+        legge i sites in bulk
 
         Args:
             sites (list[dict], optional): List dict to create.
@@ -337,7 +321,7 @@ class Sites(ApiManager):
     def sites_read_by_bulk(self, sites: list, single_page: bool = False,
                         page_size: int = 5000, warm_start: bool = False, kwargs: dict = None):
         """
-        legge le metriche in bulk
+        legge i sites in bulk
 
         Args:
             sites (list[dict], optional): List dict to create.
@@ -356,7 +340,7 @@ class Sites(ApiManager):
     def sites_create_bulk(self, uuids: list, single_page: bool = False,
                                page_size: int = 5000,  kwargs: dict = None, geocode: bool = False, **params):
         """
-        crea le bulk di groups
+        crea le bulk di sites
         Args:
             uuids (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -462,4 +446,3 @@ class Sites(ApiManager):
         response = self.execute('POST', path='/sites/coordinates/bulk/create/', single_page=single_page, page_size=page_size,
                                         payload=uuids, params=params, **kwargs)
         return response
-    #Ciao
