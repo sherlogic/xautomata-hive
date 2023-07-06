@@ -56,7 +56,7 @@ class Services(ApiManager):
         response = self.execute('GET', path=f'/services/{uuid}', warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def service_put(self, uuid: str, kwargs: dict = None, **payload):
+    def services_put(self, uuid: str, kwargs: dict = None, **payload):
         """
         update selected metric.
 
@@ -80,7 +80,7 @@ class Services(ApiManager):
         response = self.execute('PUT', path=f'/services/{uuid}', payload=payload, **kwargs)
         return response
 
-    def service_post(self, kwargs: dict = None, **payload):
+    def services_post(self, kwargs: dict = None, **payload):
         """
         update selected metric.
 
@@ -105,7 +105,7 @@ class Services(ApiManager):
         response = self.execute('POST', path=f'/services/', payload=payload, **kwargs)
         return response
 
-    def service_delete(self, uuid: str, kwargs: dict = None):
+    def services_delete(self, uuid: str, kwargs: dict = None):
         """
 
         delete single metric.
@@ -248,7 +248,7 @@ class Services(ApiManager):
         return response
 
     def services_metrics_bulk_create(self, payload: list, single_page: bool = False,
-                                     page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
+                                     page_size: int = 5000, kwargs: dict = None, **params):
         """
         metodo che permette di legare una metrica a un servizio, in modo bulk.
 
@@ -275,7 +275,38 @@ class Services(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('POST', path='/services/bulk/create/metrics', single_page=single_page, page_size=page_size,
-                                warm_start=warm_start, payload=payload, params=params, **kwargs)
+                                payload=payload, params=params, **kwargs)
+        return response
+
+    def services_metrics_bulk_delete(self, payload: list, single_page: bool = False,
+                                     page_size: int = 5000, kwargs: dict = None, **params):
+        """
+        metodo che permette di legare una metrica a un servizio, in modo bulk.
+
+        Args:
+            payload (list[dict], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Keyword Args:
+            best_effort (str, optional): Default to True.
+
+        Examples:
+            payload: [
+                    {
+                      "uuid_metric": "string",
+                      "uuid_service": "string"
+                    }, ...
+                  ]
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/services/bulk/delete/metrics', single_page=single_page, page_size=page_size,
+                                payload=payload, params=params, **kwargs)
         return response
 
     def services_metrics(self, uuid: str, single_page: bool = False, page_size: int = 5000, warm_start: bool = False, kwargs: dict = None, **params):
