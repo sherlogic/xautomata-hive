@@ -438,6 +438,7 @@ def handling_single_page_methods(kwargs, params):
 from hive.cookbook.customers import Customers
 from hive.cookbook.groups import Groups
 from hive.cookbook.last_status import LastStatus
+from hive.cookbook.tree_hierarchy import TreeHierarchy
 from hive.cookbook.profile_topics import ProfileTopics
 from hive.cookbook.metrics import Metrics
 from hive.cookbook.ts_metric import TsMetric
@@ -463,7 +464,8 @@ class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
                    VirtualDomains, TsCostManagement, TsMetric,
                    ProfileTopics, LastStatus, ExternalTickets,
                    MetricTypes, Sites, Probes, Services, TsService,
-                   Webhooks, Ingest, Users, WidgetGroups, Anomalies):
+                   Webhooks, Ingest, Users, WidgetGroups, Anomalies,
+                   TreeHierarchy):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
@@ -535,7 +537,7 @@ class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
         response = []
         pbar_uuids = tqdm(multi_uuid, position=position, leave=True, ascii=True, unit=' uuids')
         for uuid in pbar_uuids:
-            temp_response = method(uuid=uuid, warm_start=False, kwargs=kwargs, **payload)
+            temp_response = method(uuid=uuid, kwargs=kwargs, **payload)
             response += temp_response
             del temp_response
             gc.collect()
