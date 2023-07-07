@@ -60,3 +60,5 @@ I **services** possono essere legati a serie temporali a loro volta, e , a diffe
 
 Le ralazioni non finiscono con l'asset, esistono una miriade di informazioni aggiuntive esplorabili, come gli **user**, le **dashboard** e cosi via.
 Il modo di navigare questi legami e' pero lo stesso con cui si naviga l'albero.
+
+![schema](https://github.com/sherlogic/xautomata-hive/assets/83450531/343aa123-2201-4063-bcab-fee9fd803f18)
