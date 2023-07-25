@@ -287,7 +287,6 @@ class Services(ApiManager):
             payload (list[dict], optional): additional filter
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Keyword Args:
@@ -348,4 +347,34 @@ class Services(ApiManager):
         """
         if kwargs is None: kwargs = dict()
         response = self.execute('DELETE', path=f'/services/{uuid}/metrics/{uuid_metric}', **kwargs)
+        return response
+
+    def services_metrics_bulk_read_by(self, payload: list, single_page: bool = False,
+                                      page_size: int = 5000, warm_start: bool = False,
+                                      kwargs: dict = None):
+        """
+        metodo fetch di un servizio tramite i suoi valori univoci, in modo bulk.
+
+        Args:
+            payload (list[dict], optional): additional filter
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload: [
+                      {
+                        "uuid_customer": "string",
+                        "profile": "string",
+                        "name": "string"
+                      }
+                    ]
+
+        Returns: list
+
+        """
+        if kwargs is None: kwargs = dict()
+        response = self.execute('POST', path='/services/bulk/read_by/', single_page=single_page, page_size=page_size,
+                                warm_start=warm_start, payload=payload, **kwargs)
         return response
