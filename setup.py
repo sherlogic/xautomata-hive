@@ -1,6 +1,12 @@
 from setuptools import find_packages, setup
 
-version = '1.0'
+
+version = []
+with open("hive/version.py", "r") as f:
+    for line in f:
+        version.append(str(line.strip()))
+
+version = version[0].split("'")[1]
 
 # version go
 urllib3 = 'urllib3==1.26.13'
@@ -43,7 +49,7 @@ setup(
     name='hive',
     version=version,
     packages=find_packages(include=['hive']),
-    license='',
+    license='MIT',
     author='Enrico Ferro - Andrea Jacassi',
     author_email='',
     description='',
