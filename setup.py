@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+
 
 def read_file(filename):
     with open(os.path.join(os.path.dirname(__file__), filename)) as file:
