@@ -21,7 +21,7 @@ def get_session():
     Add retry logic and policies about methods and statuses for requests
     """
     ss = requests.Session()
-    retry_strategy = Retry(connect=3, total=3, status_forcelist=FORCE_STATUS, method_whitelist=METHODS)
+    retry_strategy = Retry(connect=3, total=3, status_forcelist=FORCE_STATUS, allowed_methods=METHODS)
     ss.mount('https://', HTTPAdapter(max_retries=retry_strategy))
     ss.mount('http://', HTTPAdapter(max_retries=retry_strategy))
     return ss
