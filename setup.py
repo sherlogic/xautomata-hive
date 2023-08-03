@@ -20,6 +20,8 @@ setup(
     packages=find_packages(include=['hive']),
     license='MIT',
     author='Enrico Ferro - Andrea Jacassi',
+    long_description=read_file('README.md'),
+    long_description_content_type='text/markdown',
     author_email='',
     description='',
     url="https://github.com/sherlogic/xautomata-hive.git",
