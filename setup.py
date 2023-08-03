@@ -1,5 +1,8 @@
 from setuptools import find_packages, setup
 
+def read_file(filename):
+    with open(os.path.join(os.path.dirname(__file__), filename)) as file:
+        return file.read()
 
 version = []
 with open("hive/version.py", "r") as f:
