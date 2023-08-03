@@ -1,6 +1,8 @@
 # Xautomata API
 Pacchetto che fornisca una interfaccia semplice per usare le API di Xautomata in python
 
+The full documentation can be fount at https://sherlogic.github.io/xautomata-hive/
+
 # Installazione
 
 Il pacchetto si installa come un qualsiasi pacchetto python
