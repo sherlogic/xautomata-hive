@@ -1,0 +1,1 @@
+::: hive.cookbook.last_status

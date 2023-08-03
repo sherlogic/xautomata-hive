@@ -1,0 +1,94 @@
+site_name: Hive
+site_description: python wrapper for the XAUTOMATA API
+site_url: https://www.xautomata.com/
+
+theme:
+  name: material
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.tooltips
+    - navigation.sections
+    - navigation.top
+    - navigation.expand
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - toc.follow
+    - header.autohide
+
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: orange
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: orange
+      accent: lime
+
+repo_name: xautomata-hive
+repo_url: https://github.com/sherlogic/xautomata-hive.git
+
+plugins:
+  - mkdocstrings
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+
+nav:
+  - index.md
+  - Installation: installation.md
+  - User Guide: user_guide.md
+  - XA information: info.md
+  - API:
+      - hive:
+        - api: hive.api
+        - decorators: hive.decorators
+        - exceptions: hive.exceptions
+        - infrastrucure_keys: hive.infrastrucure_keys
+        - version: hive.version
+        - cookbook:
+          - analytics: hive.cookbook.analytics
+          - anomalies: hive.cookbook.anomalies
+          - customers: hive.cookbook.customers
+          - external_tickets: hive.cookbook.external_tickets
+          - groups: hive.cookbook.groups
+          - ingest: hive.cookbook.ingest
+          - last_status: hive.cookbook.last_status
+          - metrics: hive.cookbook.metrics
+          - metric_types: hive.cookbook.metric_types
+          - objects: hive.cookbook.objects
+          - probes: hive.cookbook.probes
+          - profile_topics: hive.cookbook.profile_topics
+          - services: hive.cookbook.services
+          - sites: hive.cookbook.sites
+          - tree_hierarchy: hive.cookbook.tree_hierarchy
+          - ts_cost_management: hive.cookbook.ts_cost_management
+          - ts_metric: hive.cookbook.ts_metric
+          - ts_service: hive.cookbook.ts_service
+          - users: hive.cookbook.users
+          - virtual_domains: hive.cookbook.virtual_domains
+          - webhooks: hive.cookbook.webhooks
+          - widget_groups: hive.cookbook.widget_groups
+
+copyright:
+  MIT
