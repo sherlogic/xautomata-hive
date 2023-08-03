@@ -20,7 +20,8 @@ requests = 'requests==2.28.1'
 # version end
 
 setup(
-    name='hive',
+    name='xautomata-hive',
+    python_requires='>=3.8.0',
     version=version,
     packages=find_packages(include=['hive']),
     license='MIT',
