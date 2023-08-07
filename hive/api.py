@@ -126,8 +126,8 @@ class ApiManager:
                 warm_start = False
                 _params_.pop('count')
 
-            # le bulk o query post/delete non devono poter fare warm_start mai, se viene impostato a True è per errore e qui viene forzato a False
-            if bulk or query: warm_start = False
+            # le bulk post/delete non devono poter fare warm_start mai, se viene impostato a True è per errore e qui viene forzato a False
+            if bulk and not read: warm_start = False
 
         url = f'{self.root}{path}'
 
