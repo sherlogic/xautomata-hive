@@ -436,36 +436,56 @@ def handling_single_page_methods(kwargs, params):
 
 
 # gli import vengono messi qui per evitare una parziale import di api.py
+# hive imports start
+from hive.cookbook.acl_docs import AclDocs
+from hive.cookbook.acl_overrides import AclOverrides
+from hive.cookbook.analytics import Analytics
+from hive.cookbook.anomalies import Anomalies
+from hive.cookbook.calendars import Calendars
+from hive.cookbook.contacts import Contacts
 from hive.cookbook.customers import Customers
+from hive.cookbook.dashboards import Dashboards
+from hive.cookbook.dispatchers import Dispatchers
+from hive.cookbook.downtimes import Downtimes
+from hive.cookbook.external_tickets import ExternalTickets
+from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
+from hive.cookbook.metric_ingest import MetricIngest
 from hive.cookbook.last_status import LastStatus
 from hive.cookbook.tree_hierarchy import TreeHierarchy
-from hive.cookbook.profile_topics import ProfileTopics
+from hive.cookbook.login import Login
+from hive.cookbook.messages import Messages
 from hive.cookbook.metrics import Metrics
-from hive.cookbook.ts_metric import TsMetric
-from hive.cookbook.objects import Objects
-from hive.cookbook.analytics import Analytics
-from hive.cookbook.ts_cost_management import TsCostManagement
-from hive.cookbook.virtual_domains import VirtualDomains
-from hive.cookbook.external_tickets import ExternalTickets
+from hive.cookbook.probes_log_ingest import ProbesLogIngest
 from hive.cookbook.metric_types import MetricTypes
-from hive.cookbook.sites import Sites
+from hive.cookbook.notification_providers import NotificationProviders
+from hive.cookbook.notification_provider_types import NotificationProviderTypes
+from hive.cookbook.objects import Objects
+from hive.cookbook.opening_reasons import OpeningReasons
 from hive.cookbook.probes import Probes
+from hive.cookbook.probe_types import ProbeTypes
+from hive.cookbook.profile_topics import ProfileTopics
+from hive.cookbook.reason_for_closure import ReasonForClosure
+from hive.cookbook.retention_rules import RetentionRules
+from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
-from hive.cookbook.ts_service import TsService
-from hive.cookbook.webhooks import Webhooks
-from hive.cookbook.ingest import Ingest
+from hive.cookbook.sites import Sites
+from hive.cookbook.ts_cost_azure_raw import TsCostAzureRaw
+from hive.cookbook.ts_cost_management import TsCostManagement
+from hive.cookbook.ts_metric_status import TsMetricStatus
+from hive.cookbook.ts_metric_value import TsMetricValue
+from hive.cookbook.ts_ntop_flows import TsNtopFlows
+from hive.cookbook.ts_service_status import TsServiceStatus
+from hive.cookbook.ts_service_value import TsServiceValue
 from hive.cookbook.users import Users
+from hive.cookbook.virtual_domains import VirtualDomains
+from hive.cookbook.widgets import Widgets
+from hive.cookbook.webhooks import Webhooks
 from hive.cookbook.widget_groups import WidgetGroups
-from hive.cookbook.anomalies import Anomalies
+# hive imports stop
 
 
-class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
-                   VirtualDomains, TsCostManagement, TsMetric,
-                   ProfileTopics, LastStatus, ExternalTickets,
-                   MetricTypes, Sites, Probes, Services, TsService,
-                   Webhooks, Ingest, Users, WidgetGroups, Anomalies,
-                   TreeHierarchy):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, LastStatus, TreeHierarchy, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

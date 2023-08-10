@@ -1,13 +1,13 @@
 from hive.api import ApiManager, handling_single_page_methods
 
 
-class ProfileTopics(ApiManager):
-    """Class that handles all the XAutomata profile_topics APIs"""
+class NotificationProviders(ApiManager):
+    """Class that handles all the XAutomata notification_providers APIs"""
 
-    def profile_topics(self, warm_start: bool = False,
+    def notification_providers(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Read Profile Topic
+        """Read Notification Providers
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -16,8 +16,8 @@ class ProfileTopics(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            profile (string optional): additional filter - parameter
-            topic (string optional): additional filter - parameter
+            null_fields (string optional): additional filter - parameter
+            app_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -26,29 +26,31 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('GET', path=f'/profile_topics/',
+        response = self.execute('GET', path=f'/notification_providers/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def profile_topics_create(self, kwargs: dict = None, **payload) -> list:
-        """Create Profile Topic
+    def notification_providers_create(self, kwargs: dict = None, **payload
+        ) -> list:
+        """Create Notification Provider
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
         Keyword Args:
-            profile (string required): additional filter - payload
-            topic (string required): additional filter - payload
+            uuid_notification_provider_type (string required): additional filter - payload
+            app_name (string required): additional filter - payload
+            endpoint (array object optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/profile_topics/', payload=
-            payload, **kwargs)
+        response = self.execute('POST', path=f'/notification_providers/',
+            payload=payload, **kwargs)
         return response
 
-    def profile_topic(self, uuid: str, warm_start: bool = False,
+    def notification_provider(self, uuid: str, warm_start: bool = False,
         kwargs: dict = None) -> list:
-        """Read Profile Topic
+        """Read Notification Provider
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -56,43 +58,45 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('GET', path=f'/profile_topics/{uuid}',
-            warm_start=warm_start, **kwargs)
+        response = self.execute('GET', path=
+            f'/notification_providers/{uuid}', warm_start=warm_start, **kwargs)
         return response
 
-    def profile_topics_put(self, uuid: str, kwargs: dict = None, **payload
-        ) -> list:
-        """Update Profile Topic
+    def notification_providers_put(self, uuid: str, kwargs: dict = None, **
+        payload) -> list:
+        """Update Notification Provider
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
         Keyword Args:
-            profile (string optional): additional filter - payload
-            topic (string optional): additional filter - payload
+            uuid_notification_provider_type (string optional): additional filter - payload
+            app_name (string optional): additional filter - payload
+            endpoint (array object optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('PUT', path=f'/profile_topics/{uuid}',
-            payload=payload, **kwargs)
+        response = self.execute('PUT', path=
+            f'/notification_providers/{uuid}', payload=payload, **kwargs)
         return response
 
-    def profile_topics_delete(self, uuid: str, kwargs: dict = None) -> list:
-        """Delete Profile Topic
+    def notification_providers_delete(self, uuid: str, kwargs: dict = None
+        ) -> list:
+        """Delete Notification Provider
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('DELETE', path=f'/profile_topics/{uuid}',
-            **kwargs)
+        response = self.execute('DELETE', path=
+            f'/notification_providers/{uuid}', **kwargs)
         return response
 
-    def profile_topics_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
-        """Bulk Read Main Profile Topic
+    def notification_providers_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Bulk Read Notification Providers
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -113,15 +117,16 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/profile_topics/bulk/read/',
-            single_page=single_page, page_size=page_size, warm_start=
-            warm_start, params=params, payload=payload, **kwargs)
+        response = self.execute('POST', path=
+            f'/notification_providers/bulk/read/', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
         return response
 
-    def profile_topics_create_bulk(self, payload: list,
+    def notification_providers_create_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Bulk Create Profile Topics
+        """Bulk Create Notification Providers
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -136,22 +141,24 @@ class ProfileTopics(ApiManager):
             payload = 
           [
            {
-            "profile": "string", required
-            "topic": "string", required
+            "uuid_notification_provider_type": "string", required
+            "app_name": "string", required
+            "endpoint": "array object", optional
            }
           ]
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         response = self.execute('POST', path=
-            f'/profile_topics/bulk/create/', single_page=single_page,
-            page_size=page_size, params=params, payload=payload, **kwargs)
+            f'/notification_providers/bulk/create/', single_page=
+            single_page, page_size=page_size, params=params, payload=
+            payload, **kwargs)
         return response
 
-    def profile_topics_delete_bulk(self, payload: list,
+    def notification_providers_delete_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
-        """Bulk Delete Profile Topics
+        """Bulk Delete Notification Providers
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -168,6 +175,6 @@ class ProfileTopics(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('POST', path=
-            f'/profile_topics/bulk/delete/', single_page=single_page,
-            page_size=page_size, payload=payload, **kwargs)
+            f'/notification_providers/bulk/delete/', single_page=
+            single_page, page_size=page_size, payload=payload, **kwargs)
         return response

@@ -1,13 +1,13 @@
 from hive.api import ApiManager, handling_single_page_methods
 
 
-class ProfileTopics(ApiManager):
-    """Class that handles all the XAutomata profile_topics APIs"""
+class ReasonForClosure(ApiManager):
+    """Class that handles all the XAutomata reason_for_closure APIs"""
 
-    def profile_topics(self, warm_start: bool = False,
+    def reason_for_closure(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Read Profile Topic
+        """Read Reason For Closure
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -16,8 +16,10 @@ class ProfileTopics(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            profile (string optional): additional filter - parameter
-            topic (string optional): additional filter - parameter
+            null_fields (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
+            description (string optional): additional filter - parameter
+            jurisdiction (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -26,79 +28,81 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('GET', path=f'/profile_topics/',
+        response = self.execute('GET', path=f'/reason_for_closure/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def profile_topics_create(self, kwargs: dict = None, **payload) -> list:
-        """Create Profile Topic
-        Args:
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-        Keyword Args:
-            profile (string required): additional filter - payload
-            topic (string required): additional filter - payload
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        response = self.execute('POST', path=f'/profile_topics/', payload=
-            payload, **kwargs)
-        return response
-
-    def profile_topic(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None) -> list:
-        """Read Profile Topic
-        Args:
-            uuid (str, required): uuid
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        response = self.execute('GET', path=f'/profile_topics/{uuid}',
-            warm_start=warm_start, **kwargs)
-        return response
-
-    def profile_topics_put(self, uuid: str, kwargs: dict = None, **payload
+    def reason_for_closure_create(self, kwargs: dict = None, **payload
         ) -> list:
-        """Update Profile Topic
+        """Create Reason For Closure
         Args:
-            uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
         Keyword Args:
-            profile (string optional): additional filter - payload
-            topic (string optional): additional filter - payload
+            code (string required): additional filter - payload
+            description (string optional): additional filter - payload
+            jurisdiction (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('PUT', path=f'/profile_topics/{uuid}',
+        response = self.execute('POST', path=f'/reason_for_closure/',
             payload=payload, **kwargs)
         return response
 
-    def profile_topics_delete(self, uuid: str, kwargs: dict = None) -> list:
-        """Delete Profile Topic
+    def reason_for_closure_uuid(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None) -> list:
+        """Read Reason For Closure
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('GET', path=f'/reason_for_closure/{uuid}',
+            warm_start=warm_start, **kwargs)
+        return response
+
+    def reason_for_closure_put(self, uuid: str, kwargs: dict = None, **payload
+        ) -> list:
+        """Update Reason For Closure
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+        Keyword Args:
+            code (string required): additional filter - payload
+            description (string optional): additional filter - payload
+            jurisdiction (string optional): additional filter - payload
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('PUT', path=f'/reason_for_closure/{uuid}',
+            payload=payload, **kwargs)
+        return response
+
+    def reason_for_closure_delete(self, uuid: str, kwargs: dict = None
+        ) -> list:
+        """Delete Reason For Closure
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('DELETE', path=f'/profile_topics/{uuid}',
-            **kwargs)
+        response = self.execute('DELETE', path=
+            f'/reason_for_closure/{uuid}', **kwargs)
         return response
 
-    def profile_topics_bulk(self, payload: list, warm_start: bool = False,
+    def reason_for_closure_bulk_read_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Bulk Read Main Profile Topic
+        """Bulk Read Reasons For Closure
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -113,15 +117,15 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/profile_topics/bulk/read/',
-            single_page=single_page, page_size=page_size, warm_start=
-            warm_start, params=params, payload=payload, **kwargs)
+        response = self.execute('POST', path=
+            f'/reason_for_closure/bulk_read', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
         return response
 
-    def profile_topics_create_bulk(self, payload: list,
+    def reason_for_closure_create_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Bulk Create Profile Topics
+        """Bulk Create Reasons For Closure
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -136,22 +140,23 @@ class ProfileTopics(ApiManager):
             payload = 
           [
            {
-            "profile": "string", required
-            "topic": "string", required
+            "code": "string", required
+            "description": "string", optional
+            "jurisdiction": "string", optional
            }
           ]
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         response = self.execute('POST', path=
-            f'/profile_topics/bulk/create/', single_page=single_page,
+            f'/reason_for_closure/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
         return response
 
-    def profile_topics_delete_bulk(self, payload: list,
+    def reason_for_closure_delete_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
-        """Bulk Delete Profile Topics
+        """Bulk Delete Reasons For Closure
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -168,6 +173,6 @@ class ProfileTopics(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('POST', path=
-            f'/profile_topics/bulk/delete/', single_page=single_page,
+            f'/reason_for_closure/bulk/delete/', single_page=single_page,
             page_size=page_size, payload=payload, **kwargs)
         return response

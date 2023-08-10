@@ -5,6 +5,7 @@ __pycache__/
 /.idea
 *.xlsx
 *test*
+API_*
 
 # C extensions
 *.so

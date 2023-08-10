@@ -76,6 +76,74 @@ uuid_objects_w_probes = xa.multi_method(method=xa.metric, name_to_cicle='uuid',
 In questo esempio vengono chiesti gli uuid di piu metriche in un ciclo che chiama l'API **metric** per ciascun uuid.
 In casi dove il risultato puo essere ottenuto anche con un metodo bulk, il metodo bulk e' preferibile sia per performance che rapidita di esecuzione.
 
+### chiamate in modalita get_post
+Questo metodo permette di chiamare un endpoint in forma di GET, se si riceve una risposta ma il contenuto e' parzialmente diverso da quello usato viene fatta automaticamente una PUT, mentre se non e' presente viene eseguita automaticamente una POST.
+Esistono due versioni di questo metodo, una versione singola **get_post** ed una versione bulk **get_post_bulk**.
+La versione bulk permette di fornire una lista di elementi da verificare tutti assieme.
+
+L'uso e' mostrato nell'esempio sottostante
+
+```python
+from hive.api import XautomataApi
+xa = XautomataApi(root='root', user='user', password='passw')
+
+newgroup = {
+    "uuid_site": '000',
+    "uuid_virtual_domain": '000',
+    "type": 'IT',
+    "name": 'name',
+    "description": "description group",
+    "status": "A"
+}
+
+getgroup = {
+    "uuid_site": '000',
+    "uuid_virtual_domain": '000',
+    "name": 'name'
+}
+
+uuid, get_count, post_count, put_count = xa.get_post(url_get='/groups/', get_params=getgroup, post_params=newgroup)
+```
+
+Il modo migliore di usare i parametri della get e' usando solo quelli obligatori lasciando quelli optionali nella post, cosi se avviene un cambiamento dei parametri optionali l'oggetto viene ugualmente trovato.
+Se la post avviene su un url diverso, puo essere usata la chiave *url_post*. Se l'api in scrittura chiede dei parametri aggiuntivi (come il site per la geolocalizzazione), questi possono essere aggiunti con la chiave **add_post_params**.
+
+Nella risposta del metodo viene dato l'uuid dell'elemento e un valore intero che dice se l'uuid e' stato ottenuto con una GET, PUT o POST.
+
+La versione bulk deve essere scritta come segue:
+
+```python
+from hive.api import XautomataApi
+xa = XautomataApi(root='root', user='user', password='passw')
+
+groups = [
+    {
+        "uuid_site": '000',
+        "uuid_virtual_domain": '000',
+        "type": 'IT',
+        "name": 'name0',
+        "description": "description group0",
+        "status": "A"
+    },
+    {
+        "uuid_site": '111',
+        "uuid_virtual_domain": '111',
+        "type": 'TLC',
+        "name": 'name1',
+        "description": "description group1",
+        "status": "A"
+    }
+]
+
+uuid, get_count, post_count, put_count = xa.spell.get_post_bulk(url_get="groups", post_params=groups)
+```
+
+La versione bulk e' piu diretta e semplica da usare. Puo essere dato il solo url della get se la post usa lo stesso nome.
+Si usano solo i parametri della post, e' il metodo internamente che nella get opera con i soli parametri obligatori.
+Se necessario possono essere aggiunti parametri alle API con le chiavi **add_get_params** e **add_post_params**.
+La risposta e' una lista di uuid restituita nello stesso ordine degli elementi dati in ingresso.
+I conteggi di get, put e post sono il numero totale di quanti ne sono avvenuti.
+
 ## Uso della documentazione delle API
 
 Su questo sito di documentazione e' anche presente la documentazione dettagliata di ogni metodo creato.

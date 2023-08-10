@@ -1,12 +1,12 @@
 from hive.api import ApiManager, handling_single_page_methods
 
 
-class Webhooks(ApiManager):
-    """Class that handles all the XAutomata webhooks APIs"""
+class Schedules(ApiManager):
+    """Class that handles all the XAutomata schedules APIs"""
 
-    def webhooks(self, warm_start: bool = False, single_page: bool = False,
+    def schedules(self, warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
-        """Read Webhooks
+        """Read Tracking Schedules
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -15,9 +15,9 @@ class Webhooks(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            null_fields (string optional): additional filter - parameter
-            webhook_type (string optional): additional filter - parameter
-            uuid_probe (string optional): additional filter - parameter
+            uuid_customer (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
+            ical (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -26,69 +26,70 @@ class Webhooks(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('GET', path=f'/webhooks/', single_page=
+        response = self.execute('GET', path=f'/schedules/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
         return response
 
-    def webhooks_create(self, kwargs: dict = None, **payload) -> list:
-        """Create Webhook
+    def schedules_create(self, kwargs: dict = None, **payload) -> list:
+        """Create Tracking Schedule
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
         Keyword Args:
-            data_profile (array object optional): additional filter - payload
-            webhook_type (string required): additional filter - payload
-            auth_token (string required): additional filter - payload
-            uuid_probe (string required): additional filter - payload
+            uuid_customer (string required): additional filter - payload
+            code (string required): additional filter - payload
+            ical (string required): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/webhooks/', payload=payload,
-            **kwargs)
+        response = self.execute('POST', path=f'/schedules/', payload=
+            payload, **kwargs)
         return response
 
-    def webhook(self, uuid: str, warm_start: bool = False, kwargs: dict = None
-        ) -> list:
-        """Read Webhook
+    def schedule(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """Read Tracking Schedule
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('GET', path=f'/webhooks/{uuid}', warm_start
-            =warm_start, **kwargs)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        response = self.execute('GET', path=f'/schedules/{uuid}',
+            warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def webhooks_put(self, uuid: str, kwargs: dict = None, **payload) -> list:
-        """Update Webhook
+    def schedules_put(self, uuid: str, kwargs: dict = None, **payload) -> list:
+        """Update Tracking Schedule
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
         Keyword Args:
-            data_profile (array object optional): additional filter - payload
-            webhook_type (string optional): additional filter - payload
-            auth_token (string optional): additional filter - payload
-            uuid_probe (string optional): additional filter - payload
+            uuid_customer (string optional): additional filter - payload
+            code (string optional): additional filter - payload
+            ical (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('PUT', path=f'/webhooks/{uuid}', payload=
+        response = self.execute('PUT', path=f'/schedules/{uuid}', payload=
             payload, **kwargs)
         return response
 
-    def webhooks_create_webhook_type(self, webhook_type: str,
-        kwargs: dict = None) -> list:
-        """Post Webhook
+    def schedules_delete(self, uuid: str, kwargs: dict = None) -> list:
+        """Delete Tracking Schedule
         Args:
-            webhook_type (str, required): webhook_type
+            uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/webhooks/{webhook_type}',
-            **kwargs)
+        response = self.execute('DELETE', path=f'/schedules/{uuid}', **kwargs)
         return response
