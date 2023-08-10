@@ -59,6 +59,35 @@ lista_uuid = ['uuid1', 'uuid2', 'uuid3']
 customers = xa.sites_bulk(payload=lista_uuid)
 ```
 
+### chiamate in modalita multi
+E' anche possibile iterare un metodo sopra una lista di chiavi con il metodo multi built-in.
+Questo metodo esegue un semplice for su ogni chiave della lista che si vuole investigare, ma a differenza di un ciclo normale, gestisce l'eventuale paginazione e warm_start come fosse un unica chiamata, rendendo il tutto piu efficiente.
+Un esempio di uso e' il seguente:
+
+```python
+from hive.api import XautomataApi
+xa = XautomataApi(root='root', user='user', password='passw')
+
+lista_uuid = ['uuid1', 'uuid2', 'uuid3']
+
+uuid_objects_w_probes = xa.multi_method(method=xa.metric, name_to_cicle='uuid',
+                                        multi_uuid=lista_uuid, warm_start=True)
+```
+In questo esempio vengono chiesti gli uuid di piu metriche in un ciclo che chiama l'API **metric** per ciascun uuid.
+In casi dove il risultato puo essere ottenuto anche con un metodo bulk, il metodo bulk e' preferibile sia per performance che rapidita di esecuzione.
+
+## Uso della documentazione delle API
+
+Su questo sito di documentazione e' anche presente la documentazione dettagliata di ogni metodo creato.
+La documentazione e' stata scritta con delle linee guida:
+- le chiavi **payload** e **params** sono usate come contenitori di piu parametri. I parametri usabili tramite queste due chiavi sono descritti nella sezione **Kyeword Args**. Ciascun parametro porta alla fine della sua descrizione la parola **payload** o **params** per aiutare a distinguere a quale chiave appartiene.
+- se un metodo e' di write, delete o update, sara esplicitato nel nome del metodo stesso. Mentre se il metodo e' di sola lettura, non sara espicitato nulla nel nome.
+- tutti i metodi bulk richiedono la costruzione di una lista con dei dizionari dentro e in tutti i casi questo oggetto va dentro a **payload** indipendetemente se e' GET, POST, DELETE
+- Non esistono metodi bulk PUT
+- Gli schema dei dati che si possono mettere dentro al **payload** viene riportato negli **Examples**
+- Se un metodo ha piu di uno schema dei dati che si possono inviare, le chiavi appartenenti ai diversi schema hanno un postilla numerica che rappresenta lo schema di appartenenza: *uuid_1, name_1, uuid_2, status_2* - in questo esempio lo schema 1 contiene uuid e name, mentre lo schema 2 contiene uuid e status
+- Se sono presenti sia **payload** che **params** solo uno dei due sara nella versione kwargs (esempio **params), l'altro dovra essere scritto come oggetto unico non scomponibile, con la tipologia indicata nella documentazione, tipicamente o *dizionario* o *lista*
+
 ## API come url
 
 In alternativa e' possibile usare XautomataApi tramite l'url dell'endpoint. La differenza chiave sul passare tramite

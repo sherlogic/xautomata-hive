@@ -10,6 +10,7 @@ from hive.decorators import ratelimiter, refresh, paginate, warmstart
 from hive.exceptions import UnauthorizedException
 from hive.infrastrucure_keys import Keys
 import warnings
+import gc
 
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
@@ -457,7 +458,6 @@ from hive.cookbook.ingest import Ingest
 from hive.cookbook.users import Users
 from hive.cookbook.widget_groups import WidgetGroups
 from hive.cookbook.anomalies import Anomalies
-import gc
 
 
 class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
@@ -477,6 +477,15 @@ class XautomataApi(Customers, Groups, Analytics, Objects, Metrics,
         "object_status": "A",
         "metric_type_status": "A",
         "metric_status": "A"
+    }
+
+    active_items_bulk = {
+        "customer_status": ["A"],
+        "site_status": ["A"],
+        "group_status": ["A"],
+        "object_status": ["A"],
+        "metric_type_status": ["A"],
+        "metric_status": ["A"]
     }
 
     @staticmethod
