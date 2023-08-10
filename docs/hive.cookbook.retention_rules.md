@@ -1,0 +1,1 @@
+::: hive.cookbook.retention_rules

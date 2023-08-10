@@ -1,0 +1,1 @@
+::: hive.cookbook.metric_ingest

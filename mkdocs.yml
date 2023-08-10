@@ -67,27 +67,50 @@ nav:
         - infrastrucure_keys: hive.infrastrucure_keys
         - version: hive.version
         - cookbook:
+          - acl_docs: hive.cookbook.acl_docs
+          - acl_overrides: hive.cookbook.acl_overrides
           - analytics: hive.cookbook.analytics
           - anomalies: hive.cookbook.anomalies
+          - calendars: hive.cookbook.calendars
+          - contacts: hive.cookbook.contacts
           - customers: hive.cookbook.customers
+          - dashboards: hive.cookbook.dashboards
+          - dispatchers: hive.cookbook.dispatchers
+          - downtimes: hive.cookbook.downtimes
           - external_tickets: hive.cookbook.external_tickets
+          - firmware_updates: hive.cookbook.firmware_updates
           - groups: hive.cookbook.groups
-          - ingest: hive.cookbook.ingest
           - last_status: hive.cookbook.last_status
+          - login: hive.cookbook.login
+          - messages: hive.cookbook.messages
           - metrics: hive.cookbook.metrics
+          - metric_ingest: hive.cookbook.metric_ingest
           - metric_types: hive.cookbook.metric_types
+          - notification_providers: hive.cookbook.notification_providers
+          - notification_provider_types: hive.cookbook.notification_provider_types
           - objects: hive.cookbook.objects
+          - opening_reasons: hive.cookbook.opening_reasons
           - probes: hive.cookbook.probes
+          - probes_log_ingest: hive.cookbook.probes_log_ingest
+          - probe_types: hive.cookbook.probe_types
           - profile_topics: hive.cookbook.profile_topics
+          - reason_for_closure: hive.cookbook.reason_for_closure
+          - retention_rules: hive.cookbook.retention_rules
+          - schedules: hive.cookbook.schedules
           - services: hive.cookbook.services
           - sites: hive.cookbook.sites
           - tree_hierarchy: hive.cookbook.tree_hierarchy
+          - ts_cost_azure_raw: hive.cookbook.ts_cost_azure_raw
           - ts_cost_management: hive.cookbook.ts_cost_management
-          - ts_metric: hive.cookbook.ts_metric
-          - ts_service: hive.cookbook.ts_service
+          - ts_metric_status: hive.cookbook.ts_metric_status
+          - ts_metric_value: hive.cookbook.ts_metric_value
+          - ts_ntop_flows: hive.cookbook.ts_ntop_flows
+          - ts_service_status: hive.cookbook.ts_service_status
+          - ts_service_value: hive.cookbook.ts_service_value
           - users: hive.cookbook.users
           - virtual_domains: hive.cookbook.virtual_domains
           - webhooks: hive.cookbook.webhooks
+          - widgets: hive.cookbook.widgets
           - widget_groups: hive.cookbook.widget_groups
 
 copyright:

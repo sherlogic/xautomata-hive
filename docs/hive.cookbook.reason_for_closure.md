@@ -1,0 +1,1 @@
+::: hive.cookbook.reason_for_closure
