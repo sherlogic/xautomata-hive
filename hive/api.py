@@ -61,6 +61,13 @@ class ApiManager:
         response.raise_for_status()
         self.token = json.loads(response.content.decode('utf-8'))['access_token']
 
+    def openapi(self):
+        """metodo che restituisce gli schema degli end point"""
+        response = get_session().request('GET', url=f'{self.root}/openapi.js',
+                                         headers={'Authorization': f'Bearer {self.token}'})
+        data = json.loads(response.content[15:].decode('utf-8'))
+        return data
+
     @refresh
     def execute(self, mode: Literal['GET', 'POST', 'DELETE', 'PUT'], path, headers: Dict = None, single_page: bool = False,
                 page_size: int = 5000, payload: Dict or List[dict] = None, warm_start: bool = False,
@@ -287,9 +294,6 @@ class ApiManager:
 
         # se uno passa lo stesso dizionario sia per get che per post, con la seguente riga impedisce di applicare le modifiche fatte alla get anche alla post
         post_params = post_params.copy()
-
-        # ottiene le chiavi usate per la get, usa il primo elemento come campione per tutti gli elementi successivi
-        # chiavi = [k for k in list(get_params[0].keys()) if k != 'like']
 
         # ottengo le chiavi univoche da un dizionario
         chiavi_dict = {'customers': Keys.customer_keys, 'virtual_domains': Keys.virtual_domain_keys, 'sites': Keys.site_keys,
