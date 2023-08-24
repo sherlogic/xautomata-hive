@@ -173,7 +173,7 @@ def main(**kwargs):
 def api_interpreter(mode, name, description, params, payload, api_dict):
 
     imports = []
-    from_imports = [('hive.api', 'ApiManager, handling_single_page_methods')]
+    from_imports = [('hive.api', 'ApiManager, handling_single_page_methods, warning_wrong_parameters')]
 
     file_name = name.split('/')[1]
 
@@ -285,9 +285,11 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
 
     # corpo della funzione
     kwargs_converter = 'if kwargs is None: kwargs = dict()'
+
     non_paginabili = ''
     if not skip_limit and mode == 'GET' and ('params' in function_kwarg or 'params' in function_arg):
         non_paginabili = 'kwargs, params = handling_single_page_methods(kwargs=kwargs, params=params)'
+
     execute = f"response = self.execute('{mode}', path=f'{name}',{key_single_page}{key_page_size}{key_warm_start}{key_params}{key_payload} **kwargs)"
     response = 'return response'
 
@@ -300,6 +302,13 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     for param in params:
         text_doc = dict_doc[param] if param in dict_doc else 'additional filter'
         full_params_doc.append(f"            {param} ({params[param]['type']} {required_dict[params[param]['required']]}): {text_doc} - parameter")
+
+    payload_list_line = "' ,'".join(payload)
+    payload_list_line = payload_list_line.lstrip("' ,")
+    payload_list_line = "official_params_list = ['"+payload_list_line+"']"
+    payload_suggestion_line = "'), params.get('".join(payload)
+    payload_suggestion_line = payload_suggestion_line.lstrip("'), ")
+    payload_suggestion_line = "params.get('"+payload_suggestion_line+"')"
 
     if bulk:
         for param in payload:
@@ -335,7 +344,42 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
 
     description = "\n".join(description)
 
-    funcion_body = [kwargs_converter, non_paginabili, execute, response]  # list
+    # if function_kwarg != 'params':
+    #     params_list_line = ''
+    #     params_suggestion_line = ''
+    #     warning_wrong_parameters = ''
+    # else:
+    #     warning_wrong_parameters = f'warning_wrong_parameters(self.{function_name}.__name__, params, official_params_list)'
+
+    if function_kwarg == 'params':
+
+        params_list_line = "' ,'".join(params)
+        params_list_line = params_list_line.lstrip("' ,")
+        params_list_line = "official_params_list = ['" + params_list_line + "']"
+
+        params_suggestion_line = "'), params.get('".join(params)
+        params_suggestion_line = params_suggestion_line.lstrip("'), ")
+        params_suggestion_line = "params.get('" + params_suggestion_line + "')"
+
+        warning_wrong_parameters = f'warning_wrong_parameters(self.{function_name}.__name__, params, official_params_list)'
+
+    elif function_kwarg == 'payload':
+        params_list_line = "' ,'".join(payload)
+        params_list_line = params_list_line.lstrip("' ,")
+        params_list_line = "official_payload_list = ['" + params_list_line + "']"
+
+        params_suggestion_line = "'), payload.get('".join(payload)
+        params_suggestion_line = params_suggestion_line.lstrip("'), ")
+        params_suggestion_line = "payload.get('" + params_suggestion_line + "')"
+
+        warning_wrong_parameters = f'warning_wrong_parameters(self.{function_name}.__name__, payload, official_payload_list)'
+    else:
+        params_list_line = ''
+        params_suggestion_line = ''
+        warning_wrong_parameters = ''
+
+    funcion_body = [kwargs_converter, non_paginabili, params_list_line, params_suggestion_line, warning_wrong_parameters, execute, response]  # list
+    # funcion_body = [kwargs_converter, non_paginabili, execute, response]  # list
     function_docstring = description  # str, docstring delle funzioni
     function_return = ' list'  # str
 

@@ -439,6 +439,13 @@ def handling_single_page_methods(kwargs, params):
     return kwargs, params
 
 
+def warning_wrong_parameters(func_name: str, params_from_user: dict, ufficial_params_list: list = None):
+    if ufficial_params_list is None: ufficial_params_list = []
+    for par in params_from_user:
+        if par not in ufficial_params_list:
+            print(f'WARNING: from {func_name}, {par} is not in the official list of params.')
+
+
 # gli import vengono messi qui per evitare una parziale import di api.py
 # hive imports start
 from hive.cookbook.acl_docs import AclDocs
@@ -577,59 +584,130 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
 
         return response
 
-####
-    def dispatecher(self, uuids, types='metric'):
-        code = ''
-        app_name = ''
-        name_caledar = ''
+    def dispatecher(self, uuids: list, types: Literal['services', 'metrics', 'metric_types', 'objects', 'groups'], notification_provider_types: dict,
+                    notification_providers: dict, messages: dict, calendar: dict, dispatcher: dict):
+        """
+        create a dispatcher with the entire chain of elements to be used on a specific metric
+
+        Args:
+            uuids (list): list of uuid for the element to be linked with a dispatcher
+            types (Literal['services', 'metrics', 'metric_types', 'objects', 'groups']): type of uuids in the uuid list
+            notification_provider_types (dict): set of parameters to get or create a notification_provider_types
+            notification_providers (dict): set of parameters to get or create a notification_providers
+            messages (dict): set of parameters to get or create a messages
+            calendar (dict): set of parameters to get or create a calendar
+            dispatcher (dict): set of parameters to get or create a dispatcher
+
+        Examples:
+            notification_provider_types = {
+                "code": code,
+                "json_schema": {}
+            }
+
+            notification_providers = {
+                "uuid_notification_provider_type": uuid_npt,
+                "app_name": app_name,
+                "endpoint": {}
+            }
+
+            messages = {
+                "code": "string",
+                "description": "string",
+                "mask": "string",
+                "mask_mime_type": "string",
+                "additional_mask": "string",
+                "additional_mask_mime_type": "string"
+            }
+
+            calendar = {
+                "name": name_caledar,
+                "local_public_holidays": True,
+                "mon_int1_start": "string",
+                "mon_int1_end": "string",
+                "mon_int2_start": "string",
+                "mon_int2_end": "string",
+                "tue_int1_start": "string",
+                "tue_int1_end": "string",
+                "tue_int2_start": "string",
+                "tue_int2_end": "string",
+                "wed_int1_start": "string",
+                "wed_int1_end": "string",
+                "wed_int2_start": "string",
+                "wed_int2_end": "string",
+                "thu_int1_start": "string",
+                "thu_int1_end": "string",
+                "thu_int2_start": "string",
+                "thu_int2_end": "string",
+                "fri_int1_start": "string",
+                "fri_int1_end": "string",
+                "fri_int2_start": "string",
+                "fri_int2_end": "string",
+                "sat_int1_start": "string",
+                "sat_int1_end": "string",
+                "sat_int2_start": "string",
+                "sat_int2_end": "string",
+                "sun_int1_start": "string",
+                "sun_int1_end": "string",
+                "sun_int2_start": "string",
+                "sun_int2_end": "string",
+            }
+
+            dispatcher = {
+              "uuid_notification_provider": uuid_np,
+              "uuid_calendar": uuid_calendar,
+              "uuid_message": uuid_m,
+              "uuid_opening_reason": "string",
+              "uuid_reason_for_closure": "string",
+              "code": "string",
+              "description": "string",
+              "delay": 0,
+              "status": "s",
+              "country": "st",
+              "state_province": "string",
+              "data_profile": [
+                "string"
+              ],
+                "remember_it": True
+            }
+        """
+
+        def select_get_params(_params: dict, get_keys: tuple):
+            return dict((k, _params[k]) for k in get_keys)
 
         # notification provider types
-        params = {'code': code, 'json_schema': {}}
-        uuid_npt, _, _, _ = self.get_post(url_get='/notification_provider_types/', get_params=params, post_params=params)
+        uuid_npt, _, _, _ = self.get_post(url_get='/notification_provider_types/',
+                                          get_params=select_get_params(notification_provider_types, ('code',)),
+                                          post_params=notification_provider_types)
+        print(f'notification provider type has been set ({uuid_npt})')
 
         # notification providers
-        params = {
-            "uuid_notification_provider_type": uuid_npt,
-            "app_name": app_name,
-            "endpoint": {}
-        }
-        uuid_np, _, _, _ = self.get_post(url_get='/notification_providers/', get_params=params, post_params=params)
+        uuid_np, _, _, _ = self.get_post(url_get='/notification_providers/',
+                                         get_params=select_get_params(notification_providers, ('uuid_notification_provider_type', 'app_name')),
+                                         post_params=notification_providers)
+        print(f'notification provider has been set ({uuid_np})')
 
         # messages
-        params = {
-            "code": "string",
-            "description": "string",
-            "mask": "string",
-            "mask_mime_type": "string"
-        }
-        uuid_m, _, _, _ = self.get_post(url_get='/messages/', get_params=params, post_params=params)
+        uuid_m, _, _, _ = self.get_post(url_get='/messages/',
+                                        get_params=select_get_params(messages, ('code', 'description', 'mask')),
+                                        post_params=messages)
+        print(f'message has been set ({uuid_m})')
 
         # calendar
         # chiedi un calendar per nome
         # se passi un json post_put del calender in json
-        uuid_calendar = self.execute(mode='GET', path='/calendar/', params={'name': name_caledar, 'limit': 1})[0]
+        uuid_calendar, _, _, _ = self.get_post(url_get='/calendar/',
+                                        get_params=select_get_params(calendar, ('name', 'local_public_holidays')),
+                                        post_params=calendar)
+        print(f'calendar has been set ({uuid_calendar})')
 
         # dispatcher
-        params = {
-          "uuid_notification_provider": uuid_npt,
-          "uuid_calendar": uuid_calendar,
-          "uuid_message": uuid_m,
-          "code": "string",
-          "description": "string",
-          "delay": 0,
-          "status": "s",
-          "country": "st",
-          "state_province": "string",
-          "data_profile": [
-            "string"
-          ]
-        }
-        uuid_d, _, _, _ = self.get_post(url_get='/dispatcehrs/', get_params=params, post_params=params)
+        uuid_d, _, _, _ = self.get_post(url_get='/dispatcher/',
+                                        get_params=select_get_params(dispatcher, ('tuple_required', 'uuid_message', 'code', 'status',)),
+                                        post_params=dispatcher)
+        print(f'dispatcher has been set ({uuid_d})')
 
         # COLLEGAMENTO
         # lista degli uuid degli oggetti da legare a questo dispacter
         for uuid in uuids:
-            if types == 'metric':
-                self.execute(mode='POST', path=f'/dispatcehrs/{uuid_d}/metrics{uuid}')
-            else:
-                raise NotImplementedError
+            self.execute(mode='POST', path=f'/dispatcher/{uuid_d}/{types}/{uuid}')
+        print(f'all the {types} have been linked with the selected dispatcher')
