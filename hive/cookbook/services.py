@@ -106,7 +106,7 @@ class Services(ApiManager):
         Keyword Args:
             uuid_parent (string optional): additional filter - payload
             uuid_customer (string optional): additional filter - payload
-            profile (string required): additional filter - payload
+            profile (string optional): additional filter - payload
             name (string optional): additional filter - payload
             description (string optional): additional filter - payload
             automata_domain (array object optional): additional filter - payload
@@ -151,6 +151,7 @@ class Services(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -159,10 +160,11 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.services_metrics.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/metrics',
@@ -211,6 +213,7 @@ class Services(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             fetch_all (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -221,11 +224,12 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'fetch_all',
+        official_params_list = ['not_in', 'code', 'fetch_all',
             'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('fetch_all'), params.get(
-            'active_at_timestamp'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        params.get('not_in'), params.get('code'), params.get('fetch_all'
+            ), params.get('active_at_timestamp'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.services_downtimes.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/downtimes',
@@ -274,6 +278,7 @@ class Services(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             fetch_all (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -284,11 +289,12 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'fetch_all',
+        official_params_list = ['not_in', 'code', 'fetch_all',
             'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('fetch_all'), params.get(
-            'active_at_timestamp'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        params.get('not_in'), params.get('code'), params.get('fetch_all'
+            ), params.get('active_at_timestamp'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.services_dispatchers.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/dispatchers',

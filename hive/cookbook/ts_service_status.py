@@ -242,7 +242,7 @@ class TsServiceStatus(ApiManager):
         params.get('ts_start'), params.get('ts_end')
         warning_wrong_parameters(self.ts_service_status_delete_bulk.
             __name__, params, official_params_list)
-        response = self.execute('DELETE', path=
+        response = self.execute('POST', path=
             f'/ts_service_status/bulk/delete/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
         return response

@@ -178,6 +178,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             send_email (boolean optional): additional filter - parameter
             role_email (None optional): additional filter - parameter
             send_sms (boolean optional): additional filter - parameter
@@ -189,11 +190,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'send_email', 'role_email',
-            'send_sms', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('send_email'), params.get('role_email'
-            ), params.get('send_sms'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'send_email',
+            'role_email', 'send_sms', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('send_email'
+            ), params.get('role_email'), params.get('send_sms'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_contacts.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/contacts',
@@ -282,6 +284,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -290,10 +293,11 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_groups.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/groups',
@@ -342,6 +346,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -350,10 +355,11 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_objects.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/objects',
@@ -402,6 +408,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -410,10 +417,11 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_metrics.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/metrics',
@@ -462,6 +470,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -470,10 +479,11 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_metric_types.__name__,
             params, official_params_list)
         response = self.execute('GET', path=
@@ -523,6 +533,7 @@ class Dispatchers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -531,10 +542,11 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dispatchers_services.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/services',

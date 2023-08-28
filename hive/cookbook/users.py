@@ -16,7 +16,7 @@ class Users(ApiManager):
             name (string required): additional filter - payload
             email (string required): additional filter - payload
             password (string required): additional filter - payload
-            phone (string required): additional filter - payload
+            phone (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -25,8 +25,74 @@ class Users(ApiManager):
             ), payload.get('phone')
         warning_wrong_parameters(self.users_register_create.__name__,
             payload, official_payload_list)
-        response = self.execute('POST', path=f'/users/register/', params=
+        response = self.execute('POST', path=f'/users/register', params=
             params, payload=payload, **kwargs)
+        return response
+
+    def users_verify_email(self, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """Verify Me
+        Args:
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+        Keyword Args:
+            verification_code (string required): additional filter - parameter
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['verification_code']
+        params.get('verification_code')
+        warning_wrong_parameters(self.users_verify_email.__name__, params,
+            official_params_list)
+        response = self.execute('GET', path=f'/users/verify_email',
+            warm_start=warm_start, params=params, **kwargs)
+        return response
+
+    def users_password_reset_put(self, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
+        """Reset Password
+        Args:
+            params (dict, optional): additional parameters for the API.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+        Keyword Args:
+            app_id (string optional): additional filter - parameter
+            verification_code (string required): additional filter - payload
+            new_password (string required): additional filter - payload
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['verification_code', 'new_password']
+        payload.get('verification_code'), payload.get('new_password')
+        warning_wrong_parameters(self.users_password_reset_put.__name__,
+            payload, official_payload_list)
+        response = self.execute('PUT', path=f'/users/password_reset',
+            params=params, payload=payload, **kwargs)
+        return response
+
+    def users_password_reset_create(self, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
+        """Send Mail Password Reset
+        Args:
+            params (dict, optional): additional parameters for the API.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+        Keyword Args:
+            app_id (string optional): additional filter - parameter
+            username (string optional): additional filter - payload
+            email (string optional): additional filter - payload
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['username', 'email']
+        payload.get('username'), payload.get('email')
+        warning_wrong_parameters(self.users_password_reset_create.__name__,
+            payload, official_payload_list)
+        response = self.execute('POST', path=f'/users/password_reset',
+            params=params, payload=payload, **kwargs)
         return response
 
     def users(self, warm_start: bool = False, single_page: bool = False,
@@ -45,6 +111,7 @@ class Users(ApiManager):
             active (boolean optional): additional filter - parameter
             email (string optional): additional filter - parameter
             phone (string optional): additional filter - parameter
+            profile (string optional): additional filter - parameter
             uuid_acl_override (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -55,13 +122,13 @@ class Users(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'name', 'active',
-            'email', 'phone', 'uuid_acl_override', 'skip', 'limit', 'like',
-            'join', 'count']
+            'email', 'phone', 'profile', 'uuid_acl_override', 'skip',
+            'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('name'
             ), params.get('active'), params.get('email'), params.get('phone'
-            ), params.get('uuid_acl_override'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            ), params.get('profile'), params.get('uuid_acl_override'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         warning_wrong_parameters(self.users.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/users/', single_page=
@@ -76,6 +143,8 @@ class Users(ApiManager):
             **payload: additional parameters for the API.
         Keyword Args:
             phone (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
+            profile (string optional): additional filter - payload
             name (string required): additional filter - payload
             password (string required): additional filter - payload
             email (string required): additional filter - payload
@@ -85,9 +154,10 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'name', 'password', 'email',
-            'active', 'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('name'), payload.get('password'
+        official_payload_list = ['phone', 'verified_email', 'profile',
+            'name', 'password', 'email', 'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('verified_email'), payload.get(
+            'profile'), payload.get('name'), payload.get('password'
             ), payload.get('email'), payload.get('active'), payload.get('acl'
             ), payload.get('uuid_acl_override')
         warning_wrong_parameters(self.users_create.__name__, payload,
@@ -105,6 +175,8 @@ class Users(ApiManager):
             **payload: additional parameters for the API.
         Keyword Args:
             phone (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
+            profile (string optional): additional filter - payload
             name (string required): additional filter - payload
             password (string required): additional filter - payload
             email (string required): additional filter - payload
@@ -114,9 +186,10 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'name', 'password', 'email',
-            'active', 'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('name'), payload.get('password'
+        official_payload_list = ['phone', 'verified_email', 'profile',
+            'name', 'password', 'email', 'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('verified_email'), payload.get(
+            'profile'), payload.get('name'), payload.get('password'
             ), payload.get('email'), payload.get('active'), payload.get('acl'
             ), payload.get('uuid_acl_override')
         warning_wrong_parameters(self.users_create.__name__, payload,
@@ -147,19 +220,23 @@ class Users(ApiManager):
             **payload: additional parameters for the API.
         Keyword Args:
             phone (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
+            profile (string optional): additional filter - payload
             password (string optional): additional filter - payload
             email (string optional): additional filter - payload
+            stage (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'password', 'email', 'active',
-            'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('password'), payload.get('email'
-            ), payload.get('active'), payload.get('acl'), payload.get(
-            'uuid_acl_override')
+        official_payload_list = ['phone', 'verified_email', 'profile',
+            'password', 'email', 'stage', 'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('verified_email'), payload.get(
+            'profile'), payload.get('password'), payload.get('email'
+            ), payload.get('stage'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override')
         warning_wrong_parameters(self.users_put.__name__, payload,
             official_payload_list)
         response = self.execute('PUT', path=f'/users/{name}', payload=
@@ -190,6 +267,7 @@ class Users(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            dashboard_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -198,10 +276,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'dashboard_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('dashboard_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.users_dashboards.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/users/{name}/dashboards',
@@ -250,6 +329,7 @@ class Users(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            group_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -258,10 +338,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'group_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('group_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.users_groups.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/users/{name}/groups',
@@ -310,6 +391,7 @@ class Users(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            domain_code (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -318,10 +400,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'domain_code', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('domain_code'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.users_virtual_domains.__name__,
             params, official_params_list)
         response = self.execute('GET', path=
@@ -371,6 +454,7 @@ class Users(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            company_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -379,10 +463,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'company_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('company_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.users_customers.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/users/{name}/customers',
@@ -492,6 +577,7 @@ class Users(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            group_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -500,10 +586,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'group_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('group_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.users_widget_groups.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/users/{name}/widget_groups',

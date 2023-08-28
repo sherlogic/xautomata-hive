@@ -158,6 +158,7 @@ class Groups(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -168,12 +169,12 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'not_in', 'profile',
+        official_params_list = ['sort_by', 'not_in', 'name', 'profile',
             'extract_severity', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('not_in'), params.get('profile'
-            ), params.get('extract_severity'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+        params.get('sort_by'), params.get('not_in'), params.get('name'
+            ), params.get('profile'), params.get('extract_severity'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         warning_wrong_parameters(self.groups_objects.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/objects',
@@ -222,6 +223,7 @@ class Groups(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -230,10 +232,11 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.groups_users.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/users',
@@ -282,6 +285,7 @@ class Groups(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -291,11 +295,11 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
-            'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('active_at_timestamp'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'code', 'active_at_timestamp',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.groups_downtimes.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/downtimes',
@@ -344,6 +348,7 @@ class Groups(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -353,11 +358,11 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
-            'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('active_at_timestamp'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'code', 'active_at_timestamp',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.groups_dispatchers.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/dispatchers',

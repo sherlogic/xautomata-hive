@@ -159,6 +159,7 @@ class MetricTypes(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -167,10 +168,11 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.metric_types_metrics.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/metric_types/{uuid}/metrics',
@@ -191,6 +193,7 @@ class MetricTypes(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -200,11 +203,11 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
-            'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('active_at_timestamp'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'code', 'active_at_timestamp',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.metric_types_downtimes.__name__,
             params, official_params_list)
         response = self.execute('GET', path=
@@ -254,6 +257,7 @@ class MetricTypes(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -263,11 +267,11 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
-            'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('active_at_timestamp'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'code', 'active_at_timestamp',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.metric_types_dispatchers.__name__,
             params, official_params_list)
         response = self.execute('GET', path=

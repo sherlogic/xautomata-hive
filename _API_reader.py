@@ -303,13 +303,6 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
         text_doc = dict_doc[param] if param in dict_doc else 'additional filter'
         full_params_doc.append(f"            {param} ({params[param]['type']} {required_dict[params[param]['required']]}): {text_doc} - parameter")
 
-    payload_list_line = "' ,'".join(payload)
-    payload_list_line = payload_list_line.lstrip("' ,")
-    payload_list_line = "official_params_list = ['"+payload_list_line+"']"
-    payload_suggestion_line = "'), params.get('".join(payload)
-    payload_suggestion_line = payload_suggestion_line.lstrip("'), ")
-    payload_suggestion_line = "params.get('"+payload_suggestion_line+"')"
-
     if bulk:
         for param in payload:
             type_doc = " ".join(payload[param]['type']) if isinstance(payload[param]['type'], list) else payload[param]['type']

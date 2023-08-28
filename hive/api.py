@@ -464,8 +464,6 @@ from hive.cookbook.external_tickets import ExternalTickets
 from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
 from hive.cookbook.metric_ingest import MetricIngest
-from hive.cookbook.last_status import LastStatus
-from hive.cookbook.tree_hierarchy import TreeHierarchy
 from hive.cookbook.login import Login
 from hive.cookbook.messages import Messages
 from hive.cookbook.metrics import Metrics
@@ -483,6 +481,8 @@ from hive.cookbook.retention_rules import RetentionRules
 from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
+from hive.cookbook.last_status import LastStatus
+from hive.cookbook.tree_hierarchy import TreeHierarchy
 from hive.cookbook.ts_cost_azure_raw import TsCostAzureRaw
 from hive.cookbook.ts_cost_management import TsCostManagement
 from hive.cookbook.ts_metric_status import TsMetricStatus
@@ -491,6 +491,7 @@ from hive.cookbook.ts_ntop_flows import TsNtopFlows
 from hive.cookbook.ts_service_status import TsServiceStatus
 from hive.cookbook.ts_service_value import TsServiceValue
 from hive.cookbook.users import Users
+from hive.cookbook.users_notifications import UsersNotifications
 from hive.cookbook.virtual_domains import VirtualDomains
 from hive.cookbook.widgets import Widgets
 from hive.cookbook.webhooks import Webhooks
@@ -498,7 +499,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, LastStatus, TreeHierarchy, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

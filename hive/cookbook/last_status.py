@@ -55,7 +55,7 @@ class LastStatus(ApiManager):
             last_value_unit (string optional): additional filter - parameter
             last_value_description (string optional): additional filter - parameter
             last_value_status (None optional): additional filter - parameter
-            last_value_ranking (string optional): additional filter - parameter
+            last_value_ranking (integer optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter

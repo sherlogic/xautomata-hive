@@ -10,7 +10,7 @@ def function_gen(function_name: str, funcion_body: list, function_docstring: str
     body.insert(0, docstring)
 
     return ast.FunctionDef(name=function_name,
-                           args=ast.arguments(args=arg, kwarg=kwarg, defaults=[]),
+                           args=ast.arguments(args=arg, kwarg=kwarg, vararg=None, defaults=[]),
                            decorator_list=[],
                            body=body,
                            returns=returns)

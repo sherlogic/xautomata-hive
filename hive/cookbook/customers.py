@@ -61,7 +61,7 @@ class Customers(ApiManager):
             **payload: additional parameters for the API.
         Keyword Args:
             type (string optional): additional filter - payload
-            code (string required): additional filter - payload
+            code (string optional): additional filter - payload
             company_name (string required): additional filter - payload
             address (string required): additional filter - payload
             zip_code (string required): additional filter - payload
@@ -72,17 +72,18 @@ class Customers(ApiManager):
             currency (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
             status (string required): additional filter - payload
+            profile (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['type', 'code', 'company_name', 'address',
             'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
-            'state_province', 'status']
+            'state_province', 'status', 'profile']
         payload.get('type'), payload.get('code'), payload.get('company_name'
             ), payload.get('address'), payload.get('zip_code'), payload.get(
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
-            ), payload.get('status')
+            ), payload.get('status'), payload.get('profile')
         warning_wrong_parameters(self.customers_create.__name__, payload,
             official_payload_list)
         response = self.execute('POST', path=f'/customers/', payload=
@@ -122,17 +123,18 @@ class Customers(ApiManager):
             currency (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
             status (string optional): additional filter - payload
+            profile (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['type', 'code', 'company_name', 'address',
             'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
-            'state_province', 'status']
+            'state_province', 'status', 'profile']
         payload.get('type'), payload.get('code'), payload.get('company_name'
             ), payload.get('address'), payload.get('zip_code'), payload.get(
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
-            ), payload.get('status')
+            ), payload.get('status'), payload.get('profile')
         warning_wrong_parameters(self.customers_put.__name__, payload,
             official_payload_list)
         response = self.execute('PUT', path=f'/customers/{uuid}', payload=
@@ -148,6 +150,73 @@ class Customers(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('DELETE', path=f'/customers/{uuid}', **kwargs)
+        return response
+
+    def customers_register_create(self, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
+        """Registration Form
+        Args:
+            params (dict, optional): additional parameters for the API.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+        Keyword Args:
+            app_id (string optional): additional filter - parameter
+            company_name (string required): additional filter - payload
+            address (string required): additional filter - payload
+            zip_code (string required): additional filter - payload
+            city (string required): additional filter - payload
+            country (string required): additional filter - payload
+            vat_id (string required): additional filter - payload
+            state_province (string optional): additional filter - payload
+            currency (string optional): additional filter - payload
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['company_name', 'address', 'zip_code',
+            'city', 'country', 'vat_id', 'state_province', 'currency']
+        payload.get('company_name'), payload.get('address'), payload.get(
+            'zip_code'), payload.get('city'), payload.get('country'
+            ), payload.get('vat_id'), payload.get('state_province'
+            ), payload.get('currency')
+        warning_wrong_parameters(self.customers_register_create.__name__,
+            payload, official_payload_list)
+        response = self.execute('POST', path=f'/customers/register/',
+            params=params, payload=payload, **kwargs)
+        return response
+
+    def customers_relation_request_create(self, uuid_customer: str,
+        kwargs: dict = None, **params) -> list:
+        """Create Relation Request
+        Args:
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+        Keyword Args:
+            app_id (string optional): additional filter - parameter
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['app_id']
+        params.get('app_id')
+        warning_wrong_parameters(self.customers_relation_request_create.
+            __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/customers/relation_request/{uuid_customer}', params=params,
+            **kwargs)
+        return response
+
+    def customers_relation_request_verify_create(self,
+        verification_code: str, kwargs: dict = None) -> list:
+        """Verify Relation Request
+        Args:
+            verification_code (str, required): verification_code
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/customers/relation_request/verify/{verification_code}', **kwargs
+            )
         return response
 
     def customers_groups(self, uuid: str, warm_start: bool = False,
@@ -363,6 +432,7 @@ class Customers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -372,11 +442,11 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'type', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('type'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'type', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('type'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         warning_wrong_parameters(self.customers_contacts.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/contacts',
@@ -455,6 +525,7 @@ class Customers(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -463,10 +534,11 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.customers_users.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/users',
@@ -631,7 +703,7 @@ class Customers(ApiManager):
           [
            {
             "type": "string", optional
-            "code": "string", required
+            "code": "string", optional
             "company_name": "string", required
             "address": "string", required
             "zip_code": "string", required
@@ -642,6 +714,7 @@ class Customers(ApiManager):
             "currency": "string", optional
             "state_province": "string", optional
             "status": "string", required
+            "profile": "string", optional
            }
           ]
         Returns: list"""
@@ -878,8 +951,8 @@ class Customers(ApiManager):
             city (string optional): additional filter - payload
             country (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
-            base_margin (integer required): additional filter - payload
-            reserved_margin (integer required): additional filter - payload
+            base_margin (number required): additional filter - payload
+            reserved_margin (number required): additional filter - payload
             azure_customer_id (string required): additional filter - payload
             virtual_domain_code (string required): additional filter - payload
         Returns: list"""
@@ -955,8 +1028,8 @@ class Customers(ApiManager):
             city (string optional): additional filter - payload
             country (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
-            base_margin (integer required): additional filter - payload
-            reserved_margin (integer required): additional filter - payload
+            base_margin (number required): additional filter - payload
+            reserved_margin (number required): additional filter - payload
             azure_customer_id (string required): additional filter - payload
             uuid_probe_type (string optional): additional filter - payload
             uuid_object (string optional): additional filter - payload
@@ -1052,6 +1125,7 @@ class Customers(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - parameter
+            only_active_objects (boolean optional): additional filter - parameter
             country (string optional): additional filter - parameter
             city (string optional): additional filter - parameter
             address (string optional): additional filter - parameter
@@ -1068,14 +1142,15 @@ class Customers(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_object',
-            'country', 'city', 'address', 'zip_code', 'status',
-            'description', 'name', 'skip', 'limit', 'like', 'join', 'count']
+            'only_active_objects', 'country', 'city', 'address', 'zip_code',
+            'status', 'description', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_object'), params.get('country'), params.get('city'
-            ), params.get('address'), params.get('zip_code'), params.get(
-            'status'), params.get('description'), params.get('name'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            'uuid_object'), params.get('only_active_objects'), params.get(
+            'country'), params.get('city'), params.get('address'), params.get(
+            'zip_code'), params.get('status'), params.get('description'
+            ), params.get('name'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.customers_networks.__name__, params,
             official_params_list)
         response = self.execute('GET', path=
@@ -1098,6 +1173,7 @@ class Customers(ApiManager):
         Keyword Args:
             timestamp_start (string required): additional filter - parameter
             timestamp_end (string required): additional filter - parameter
+            active_objects_only (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -1106,11 +1182,11 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['timestamp_start', 'timestamp_end', 'skip',
-            'limit', 'like', 'join', 'count']
+        official_params_list = ['timestamp_start', 'timestamp_end',
+            'active_objects_only', 'skip', 'limit', 'like', 'join', 'count']
         params.get('timestamp_start'), params.get('timestamp_end'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            'active_objects_only'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.customers_it_availability.__name__,
             params, official_params_list)
         response = self.execute('GET', path=

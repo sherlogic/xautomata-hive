@@ -154,19 +154,23 @@ class Probes(ApiManager):
             **payload: additional parameters for the API.
         Keyword Args:
             phone (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
+            profile (string optional): additional filter - payload
             password (string optional): additional filter - payload
             email (string optional): additional filter - payload
+            stage (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'password', 'email', 'active',
-            'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('password'), payload.get('email'
-            ), payload.get('active'), payload.get('acl'), payload.get(
-            'uuid_acl_override')
+        official_payload_list = ['phone', 'verified_email', 'profile',
+            'password', 'email', 'stage', 'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('verified_email'), payload.get(
+            'profile'), payload.get('password'), payload.get('email'
+            ), payload.get('stage'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override')
         warning_wrong_parameters(self.probes_agent_put.__name__, payload,
             official_payload_list)
         response = self.execute('PUT', path=f'/probes/agent/{uuid}',
@@ -186,6 +190,7 @@ class Probes(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -194,10 +199,11 @@ class Probes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.probes_objects.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/probes/{uuid}/objects',

@@ -114,14 +114,16 @@ class ReasonForClosure(ApiManager):
             f'/reason_for_closure/{uuid}', **kwargs)
         return response
 
-    def reason_for_closure_bulk_read_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+    def reason_for_closure_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Bulk Read Reasons For Closure
         Args:
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -138,11 +140,12 @@ class ReasonForClosure(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.reason_for_closure_bulk_read_bulk.
-            __name__, params, official_params_list)
+        warning_wrong_parameters(self.reason_for_closure_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
-            f'/reason_for_closure/bulk_read', single_page=single_page,
-            page_size=page_size, params=params, payload=payload, **kwargs)
+            f'/reason_for_closure/bulk/read/', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
         return response
 
     def reason_for_closure_create_bulk(self, payload: list,

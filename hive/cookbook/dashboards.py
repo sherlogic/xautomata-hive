@@ -193,6 +193,7 @@ class Dashboards(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -201,10 +202,11 @@ class Dashboards(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('not_in'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.dashboards_users.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dashboards/{uuid}/users',
@@ -253,6 +255,7 @@ class Dashboards(ApiManager):
             **params: additional parameters for the API.
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
             index (integer optional): additional filter - parameter
             width (integer optional): additional filter - parameter
             height (integer optional): additional filter - parameter
@@ -266,12 +269,13 @@ class Dashboards(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'index', 'width', 'height',
-            'grid_x', 'grid_y', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('index'), params.get('width'
-            ), params.get('height'), params.get('grid_x'), params.get('grid_y'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'name', 'index', 'width',
+            'height', 'grid_x', 'grid_y', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('name'), params.get('index'
+            ), params.get('width'), params.get('height'), params.get('grid_x'
+            ), params.get('grid_y'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.dashboards_widgets.__name__, params,
             official_params_list)
         response = self.execute('GET', path=f'/dashboards/{uuid}/widgets',
