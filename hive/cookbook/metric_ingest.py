@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class MetricIngest(ApiManager):

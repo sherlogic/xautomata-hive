@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Dispatchers(ApiManager):
@@ -32,6 +32,19 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields',
+            'uuid_notification_provider', 'uuid_calendar', 'uuid_message',
+            'uuid_opening_reason', 'uuid_reason_for_closure', 'code',
+            'description', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_notification_provider'), params.get('uuid_calendar'
+            ), params.get('uuid_message'), params.get('uuid_opening_reason'
+            ), params.get('uuid_reason_for_closure'), params.get('code'
+            ), params.get('description'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.dispatchers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -59,6 +72,19 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_notification_provider',
+            'uuid_calendar', 'uuid_message', 'uuid_opening_reason',
+            'uuid_reason_for_closure', 'code', 'description', 'delay',
+            'status', 'country', 'state_province', 'data_profile',
+            'remember_it']
+        payload.get('uuid_notification_provider'), payload.get('uuid_calendar'
+            ), payload.get('uuid_message'), payload.get('uuid_opening_reason'
+            ), payload.get('uuid_reason_for_closure'), payload.get('code'
+            ), payload.get('description'), payload.get('delay'), payload.get(
+            'status'), payload.get('country'), payload.get('state_province'
+            ), payload.get('data_profile'), payload.get('remember_it')
+        warning_wrong_parameters(self.dispatchers_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/dispatchers/', payload=
             payload, **kwargs)
         return response
@@ -78,6 +104,10 @@ class Dispatchers(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.dispatcher.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -106,6 +136,19 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_notification_provider',
+            'uuid_calendar', 'uuid_message', 'uuid_opening_reason',
+            'uuid_reason_for_closure', 'code', 'description', 'delay',
+            'status', 'country', 'state_province', 'data_profile',
+            'remember_it']
+        payload.get('uuid_notification_provider'), payload.get('uuid_calendar'
+            ), payload.get('uuid_message'), payload.get('uuid_opening_reason'
+            ), payload.get('uuid_reason_for_closure'), payload.get('code'
+            ), payload.get('description'), payload.get('delay'), payload.get(
+            'status'), payload.get('country'), payload.get('state_province'
+            ), payload.get('data_profile'), payload.get('remember_it')
+        warning_wrong_parameters(self.dispatchers_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/dispatchers/{uuid}', payload
             =payload, **kwargs)
         return response
@@ -146,6 +189,13 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'send_email', 'role_email',
+            'send_sms', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('send_email'), params.get('role_email'
+            ), params.get('send_sms'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_contacts.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/contacts',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -167,6 +217,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        warning_wrong_parameters(self.dispatchers_contacts_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/dispatchers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -188,6 +244,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        warning_wrong_parameters(self.dispatchers_contacts_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/dispatchers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -228,6 +290,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -282,6 +350,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_objects.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/objects',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -336,6 +410,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_metrics.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/metrics',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -390,6 +470,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_metric_types.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/dispatchers/{uuid}/metric_types', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -445,6 +531,12 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.dispatchers_services.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/dispatchers/{uuid}/services',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -502,6 +594,10 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.dispatchers_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/dispatchers/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -543,6 +639,10 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.dispatchers_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/dispatchers/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -601,6 +701,10 @@ class Dispatchers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.dispatchers_contacts_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/dispatchers/bulk/create/contacts', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class FirmwareUpdates(ApiManager):
@@ -33,6 +33,17 @@ class FirmwareUpdates(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'code', 'uuid_customer',
+            'uuid_metric', 'model', 'type', 'firmware', 'status',
+            'date_start', 'date_end', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('code'), params.get('uuid_customer'
+            ), params.get('uuid_metric'), params.get('model'), params.get(
+            'type'), params.get('firmware'), params.get('status'), params.get(
+            'date_start'), params.get('date_end'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.firmware_updates.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/firmware_updates/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -61,6 +72,14 @@ class FirmwareUpdates(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['column', 'code', 'uuid_metric', 'model',
+            'type', 'firmware', 'status', 'date_start', 'date_end']
+        params.get('column'), params.get('code'), params.get('uuid_metric'
+            ), params.get('model'), params.get('type'), params.get('firmware'
+            ), params.get('status'), params.get('date_start'), params.get(
+            'date_end')
+        warning_wrong_parameters(self.firmware_updates_grouped.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/firmware_updates/{uuid_customer}/grouped/', warm_start=
             warm_start, params=params, **kwargs)

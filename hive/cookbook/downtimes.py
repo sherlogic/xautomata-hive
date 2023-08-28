@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Downtimes(ApiManager):
@@ -32,6 +32,17 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'uuid_calendar', 'start', 'end',
+            'status', 'code', 'description', 'country', 'state_province',
+            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('uuid_calendar'), params.get('start'
+            ), params.get('end'), params.get('status'), params.get('code'
+            ), params.get('description'), params.get('country'), params.get(
+            'state_province'), params.get('null_fields'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.downtimes.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -54,6 +65,14 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_calendar', 'start', 'end', 'status',
+            'code', 'description', 'country', 'state_province']
+        payload.get('uuid_calendar'), payload.get('start'), payload.get('end'
+            ), payload.get('status'), payload.get('code'), payload.get(
+            'description'), payload.get('country'), payload.get(
+            'state_province')
+        warning_wrong_parameters(self.downtimes_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/downtimes/', payload=
             payload, **kwargs)
         return response
@@ -73,6 +92,10 @@ class Downtimes(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.downtime.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -95,6 +118,14 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_calendar', 'start', 'end', 'status',
+            'code', 'description', 'country', 'state_province']
+        payload.get('uuid_calendar'), payload.get('start'), payload.get('end'
+            ), payload.get('status'), payload.get('code'), payload.get(
+            'description'), payload.get('country'), payload.get(
+            'state_province')
+        warning_wrong_parameters(self.downtimes_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/downtimes/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -131,6 +162,12 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.downtimes_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -185,6 +222,12 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.downtimes_objects.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/{uuid}/objects',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -239,6 +282,12 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.downtimes_metrics.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/{uuid}/metrics',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -293,6 +342,12 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.downtimes_metric_types.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/downtimes/{uuid}/metric_types', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -348,6 +403,12 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.downtimes_services.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/downtimes/{uuid}/services',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -405,6 +466,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.downtimes_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/downtimes/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -441,6 +506,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/downtimes/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -495,6 +564,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_groups_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/downtimes/bulk/create/groups', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -552,6 +625,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_objects_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/downtimes/bulk/create/objects', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -609,6 +686,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_metric_types_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/downtimes/bulk/create/metric_types', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -666,6 +747,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_metrics_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/downtimes/bulk/create/metrics', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -723,6 +808,10 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.downtimes_services_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/downtimes/bulk/create/services', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

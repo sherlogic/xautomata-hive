@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class OpeningReasons(ApiManager):
@@ -31,6 +31,16 @@ class OpeningReasons(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'code',
+            'description', 'severity', 'sla_l1', 'sla_l2', 'sla_l3', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('code'
+            ), params.get('description'), params.get('severity'), params.get(
+            'sla_l1'), params.get('sla_l2'), params.get('sla_l3'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.opening_reasons.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/opening_reasons/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -51,6 +61,13 @@ class OpeningReasons(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'description', 'severity',
+            'sla_l1', 'sla_l2', 'sla_l3']
+        payload.get('code'), payload.get('description'), payload.get('severity'
+            ), payload.get('sla_l1'), payload.get('sla_l2'), payload.get(
+            'sla_l3')
+        warning_wrong_parameters(self.opening_reasons_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/opening_reasons/', payload=
             payload, **kwargs)
         return response
@@ -86,6 +103,13 @@ class OpeningReasons(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'description', 'severity',
+            'sla_l1', 'sla_l2', 'sla_l3']
+        payload.get('code'), payload.get('description'), payload.get('severity'
+            ), payload.get('sla_l1'), payload.get('sla_l2'), payload.get(
+            'sla_l3')
+        warning_wrong_parameters(self.opening_reasons_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/opening_reasons/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -126,6 +150,10 @@ class OpeningReasons(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.opening_reasons_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/opening_reasons/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -160,6 +188,10 @@ class OpeningReasons(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.opening_reasons_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/opening_reasons/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

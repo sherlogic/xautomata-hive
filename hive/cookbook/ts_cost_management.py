@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsCostManagement(ApiManager):
@@ -45,6 +45,27 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_metric',
+            'date_start', 'date_end', 'cloud_provider', 'resource_location',
+            'subscription_type', 'subscription_id', 'subscription_name',
+            'family', 'category', 'subcategory', 'object', 'metric', 'unit',
+            'resource_group', 'reservation_name', 'publisher_name',
+            'local_currency', 'provider_currency', 'uuid_customer', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_metric'), params.get('date_start'), params.get('date_end'
+            ), params.get('cloud_provider'), params.get('resource_location'
+            ), params.get('subscription_type'), params.get('subscription_id'
+            ), params.get('subscription_name'), params.get('family'
+            ), params.get('category'), params.get('subcategory'), params.get(
+            'object'), params.get('metric'), params.get('unit'), params.get(
+            'resource_group'), params.get('reservation_name'), params.get(
+            'publisher_name'), params.get('local_currency'), params.get(
+            'provider_currency'), params.get('uuid_customer'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.ts_cost_management.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_cost_management/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -93,6 +114,35 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_metric', 'date', 'cloud_provider',
+            'resource_location', 'subscription_type', 'subscription_id',
+            'subscription_name', 'family', 'category', 'subcategory',
+            'object', 'metric', 'unit', 'qnt', 'local_currency',
+            'unit_cost', 'total_cost', 'unit_revenue', 'total_revenue',
+            'provider_currency', 'unit_cost_pc', 'total_cost_pc',
+            'unit_revenue_pc', 'total_revenue_pc', 'cumulative_qnt',
+            'cumulative_unit_cost', 'cumulative_total_cost',
+            'cumulative_unit_revenue', 'cumulative_total_revenue',
+            'resource_group', 'reservation_name', 'publisher_name', 'tenant_id'
+            ]
+        payload.get('uuid_metric'), payload.get('date'), payload.get(
+            'cloud_provider'), payload.get('resource_location'), payload.get(
+            'subscription_type'), payload.get('subscription_id'), payload.get(
+            'subscription_name'), payload.get('family'), payload.get('category'
+            ), payload.get('subcategory'), payload.get('object'), payload.get(
+            'metric'), payload.get('unit'), payload.get('qnt'), payload.get(
+            'local_currency'), payload.get('unit_cost'), payload.get(
+            'total_cost'), payload.get('unit_revenue'), payload.get(
+            'total_revenue'), payload.get('provider_currency'), payload.get(
+            'unit_cost_pc'), payload.get('total_cost_pc'), payload.get(
+            'unit_revenue_pc'), payload.get('total_revenue_pc'), payload.get(
+            'cumulative_qnt'), payload.get('cumulative_unit_cost'
+            ), payload.get('cumulative_total_cost'), payload.get(
+            'cumulative_unit_revenue'), payload.get('cumulative_total_revenue'
+            ), payload.get('resource_group'), payload.get('reservation_name'
+            ), payload.get('publisher_name'), payload.get('tenant_id')
+        warning_wrong_parameters(self.ts_cost_management_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_cost_management/',
             payload=payload, **kwargs)
         return response
@@ -127,6 +177,18 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'date_start', 'date_end',
+            'cloud_provider', 'resource_group', 'resource_location',
+            'category', 'subscription', 'subscription_type', 'interval',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('date_start'), params.get('date_end'
+            ), params.get('cloud_provider'), params.get('resource_group'
+            ), params.get('resource_location'), params.get('category'
+            ), params.get('subscription'), params.get('subscription_type'
+            ), params.get('interval'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_cost_management_grouped.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/grouped/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -148,6 +210,10 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date']
+        params.get('date')
+        warning_wrong_parameters(self.ts_cost_management.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/{uuid_metric}', warm_start=warm_start,
             params=params, **kwargs)
@@ -171,6 +237,11 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end', 'interval']
+        params.get('count'), params.get('date_start'), params.get('date_end'
+            ), params.get('interval')
+        warning_wrong_parameters(self.ts_cost_management_ccm_by_date.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_date/{uuid_customer}', warm_start=
             warm_start, params=params, **kwargs)
@@ -194,6 +265,11 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_management_ccm_by_subscription_type.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_subscription_type/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -216,6 +292,10 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.ts_cost_management_ccm_by_category.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_category/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -239,6 +319,11 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_management_ccm_by_resource_location.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_resource_location/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -261,6 +346,11 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_management_ccm_by_resource_group.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_resource_group/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -283,6 +373,11 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_management_ccm_by_subscription.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_subscription/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -309,6 +404,13 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['date_start', 'date_end', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('date_start'), params.get('date_end'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.ts_cost_management_anomalies.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomalies/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -337,6 +439,15 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end',
+            'sampling', 'uuid_customer', 'cloud_provider', 'description',
+            'family', 'category']
+        params.get('count'), params.get('date_start'), params.get('date_end'
+            ), params.get('sampling'), params.get('uuid_customer'), params.get(
+            'cloud_provider'), params.get('description'), params.get('family'
+            ), params.get('category')
+        warning_wrong_parameters(self.ts_cost_management_anomaly_selector.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomaly_selector/', warm_start=warm_start,
             params=params, **kwargs)
@@ -363,6 +474,16 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end',
+            'sampling', 'uuid_customer', 'cloud_provider', 'description',
+            'resource_location']
+        params.get('count'), params.get('date_start'), params.get('date_end'
+            ), params.get('sampling'), params.get('uuid_customer'), params.get(
+            'cloud_provider'), params.get('description'), params.get(
+            'resource_location')
+        warning_wrong_parameters(self.
+            ts_cost_management_anomaly_selector_geo.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomaly_selector_geo/', warm_start=
             warm_start, params=params, **kwargs)
@@ -389,6 +510,13 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['date_start', 'date_end', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('date_start'), params.get('date_end'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.ts_cost_management_anomalies_geo.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomalies_geo/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -411,6 +539,10 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.ts_cost_management_billing.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=f'/ts_cost_management/billing/',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -431,6 +563,10 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.ts_cost_management_az_customer_data.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/az_customer_data/', warm_start=warm_start,
             params=params, **kwargs)
@@ -454,6 +590,10 @@ class TsCostManagement(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['count', 'date_start', 'date_end']
+        params.get('count'), params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.ts_cost_management_az_customer_data.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/az_customer_data/{probe_uuid}',
             warm_start=warm_start, params=params, **kwargs)
@@ -472,6 +612,11 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_management_az_customer_data_delete.__name__, params,
+            official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_management/az_customer_data/{probe_uuid}', params=
             params, **kwargs)
@@ -502,6 +647,14 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['until', 'category', 'subcategory',
+            'metric', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('until'), params.get('category'), params.get('subcategory'
+            ), params.get('metric'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.
+            ts_cost_management_last_cumulative_values.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/last_cumulative_values/{subscription_id}',
             single_page=single_page, page_size=page_size, warm_start=
@@ -522,6 +675,11 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['tenant_id', 'date_start', 'date_end']
+        params.get('tenant_id'), params.get('date_start'), params.get(
+            'date_end')
+        warning_wrong_parameters(self.ts_cost_management_probe_delete.
+            __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_management/probe/{uuid_probe}/', params=params, **kwargs
             )

@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class RetentionRules(ApiManager):
@@ -30,6 +30,17 @@ class RetentionRules(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'metric_profile',
+            'priority', 'average_after_days', 'average_over_minutes',
+            'deletion_after_days', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'metric_profile'), params.get('priority'), params.get(
+            'average_after_days'), params.get('average_over_minutes'
+            ), params.get('deletion_after_days'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.retention_rules.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/retention_rules/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -50,6 +61,15 @@ class RetentionRules(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'metric_profile',
+            'priority', 'average_after_days', 'average_over_minutes',
+            'deletion_after_days']
+        payload.get('uuid_customer'), payload.get('metric_profile'
+            ), payload.get('priority'), payload.get('average_after_days'
+            ), payload.get('average_over_minutes'), payload.get(
+            'deletion_after_days')
+        warning_wrong_parameters(self.retention_rules_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/retention_rules/', payload=
             payload, **kwargs)
         return response
@@ -85,6 +105,15 @@ class RetentionRules(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'metric_profile',
+            'priority', 'average_after_days', 'average_over_minutes',
+            'deletion_after_days']
+        payload.get('uuid_customer'), payload.get('metric_profile'
+            ), payload.get('priority'), payload.get('average_after_days'
+            ), payload.get('average_over_minutes'), payload.get(
+            'deletion_after_days')
+        warning_wrong_parameters(self.retention_rules_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/retention_rules/{uuid}',
             payload=payload, **kwargs)
         return response

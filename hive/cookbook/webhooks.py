@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Webhooks(ApiManager):
@@ -26,6 +26,14 @@ class Webhooks(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'webhook_type',
+            'uuid_probe', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'webhook_type'), params.get('uuid_probe'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.webhooks.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/webhooks/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -44,6 +52,12 @@ class Webhooks(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['data_profile', 'webhook_type',
+            'auth_token', 'uuid_probe']
+        payload.get('data_profile'), payload.get('webhook_type'), payload.get(
+            'auth_token'), payload.get('uuid_probe')
+        warning_wrong_parameters(self.webhooks_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/webhooks/', payload=payload,
             **kwargs)
         return response
@@ -76,6 +90,12 @@ class Webhooks(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['data_profile', 'webhook_type',
+            'auth_token', 'uuid_probe']
+        payload.get('data_profile'), payload.get('webhook_type'), payload.get(
+            'auth_token'), payload.get('uuid_probe')
+        warning_wrong_parameters(self.webhooks_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/webhooks/{uuid}', payload=
             payload, **kwargs)
         return response

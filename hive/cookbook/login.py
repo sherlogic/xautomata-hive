@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Login(ApiManager):
@@ -23,6 +23,13 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['grant_type', 'username', 'password',
+            'scope', 'client_id', 'client_secret']
+        payload.get('grant_type'), payload.get('username'), payload.get(
+            'password'), payload.get('scope'), payload.get('client_id'
+            ), payload.get('client_secret')
+        warning_wrong_parameters(self.login_access_token_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/login/access-token', params
             =params, payload=payload, **kwargs)
         return response
@@ -37,6 +44,10 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['refresh']
+        params.get('refresh')
+        warning_wrong_parameters(self.login_refresh_create.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/login/refresh', params=
             params, **kwargs)
         return response
@@ -52,6 +63,10 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['refresh']
+        params.get('refresh')
+        warning_wrong_parameters(self.login_refresh_invalidate_create.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=f'/login/refresh/invalidate',
             params=params, **kwargs)
         return response
@@ -67,6 +82,10 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['username']
+        params.get('username')
+        warning_wrong_parameters(self.login_refresh_invalidate_user_create.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/login/refresh/invalidate_user', params=params, **kwargs)
         return response
@@ -108,6 +127,10 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['phone', 'password', 'email']
+        payload.get('phone'), payload.get('password'), payload.get('email')
+        warning_wrong_parameters(self.login_current_user_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=f'/login/current_user', payload
             =payload, **kwargs)
         return response
@@ -136,6 +159,10 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['image']
+        payload.get('image')
+        warning_wrong_parameters(self.login_current_user_image_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=f'/login/current_user/image',
             payload=payload, **kwargs)
         return response

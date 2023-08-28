@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Sites(ApiManager):
@@ -37,6 +37,21 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
+            'type', 'code', 'description', 'address', 'zip_code', 'city',
+            'country', 'notes', 'state_province', 'status',
+            'filter_group_types', 'extract_severity', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_customer'), params.get('type'), params.get('code'
+            ), params.get('description'), params.get('address'), params.get(
+            'zip_code'), params.get('city'), params.get('country'), params.get(
+            'notes'), params.get('state_province'), params.get('status'
+            ), params.get('filter_group_types'), params.get('extract_severity'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.sites.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/sites/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -65,6 +80,16 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'type', 'code',
+            'description', 'address', 'zip_code', 'city', 'country',
+            'notes', 'state_province', 'status']
+        payload.get('uuid_customer'), payload.get('type'), payload.get('code'
+            ), payload.get('description'), payload.get('address'), payload.get(
+            'zip_code'), payload.get('city'), payload.get('country'
+            ), payload.get('notes'), payload.get('state_province'
+            ), payload.get('status')
+        warning_wrong_parameters(self.sites_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/sites/', params=params,
             payload=payload, **kwargs)
         return response
@@ -84,6 +109,10 @@ class Sites(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.site.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/sites/{uuid}', warm_start=
             warm_start, params=params, **kwargs)
         return response
@@ -113,6 +142,16 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'type', 'code',
+            'description', 'address', 'zip_code', 'city', 'country',
+            'notes', 'state_province', 'status']
+        payload.get('uuid_customer'), payload.get('type'), payload.get('code'
+            ), payload.get('description'), payload.get('address'), payload.get(
+            'zip_code'), payload.get('city'), payload.get('country'
+            ), payload.get('notes'), payload.get('state_province'
+            ), payload.get('status')
+        warning_wrong_parameters(self.sites_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/sites/{uuid}', params=params,
             payload=payload, **kwargs)
         return response
@@ -148,6 +187,11 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
+        params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.sites_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/sites/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -175,6 +219,13 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'type', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('type'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.sites_contacts.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/sites/{uuid}/contacts',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -193,6 +244,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.sites_contacts_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=
             f'/sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs
             )
@@ -211,6 +266,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.sites_contacts_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs
             )
@@ -251,6 +310,13 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'uuid_site', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('uuid_site'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.sites_coordinates.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/sites/coordinates/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -268,6 +334,11 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['longitude', 'latitude', 'uuid_site']
+        payload.get('longitude'), payload.get('latitude'), payload.get(
+            'uuid_site')
+        warning_wrong_parameters(self.sites_coordinates_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/sites/coordinates/',
             payload=payload, **kwargs)
         return response
@@ -285,6 +356,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['longitude', 'latitude']
+        payload.get('longitude'), payload.get('latitude')
+        warning_wrong_parameters(self.sites_coordinates_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/sites/coordinates/{uuid_site}', payload=payload, **kwargs)
         return response
@@ -326,6 +401,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.sites_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/sites/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -394,6 +473,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['geocode', 'best_effort']
+        params.get('geocode'), params.get('best_effort')
+        warning_wrong_parameters(self.sites_create_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/sites/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -448,6 +531,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.sites_contacts_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/sites/bulk/create/contacts',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -506,6 +593,10 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.sites_coordinates_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/sites/coordinates/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

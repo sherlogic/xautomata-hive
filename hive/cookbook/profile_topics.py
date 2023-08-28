@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class ProfileTopics(ApiManager):
@@ -26,6 +26,13 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'profile', 'topic', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('profile'), params.get('topic'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.profile_topics.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/profile_topics/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -42,6 +49,10 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['profile', 'topic']
+        payload.get('profile'), payload.get('topic')
+        warning_wrong_parameters(self.profile_topics_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/profile_topics/', payload=
             payload, **kwargs)
         return response
@@ -73,6 +84,10 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['profile', 'topic']
+        payload.get('profile'), payload.get('topic')
+        warning_wrong_parameters(self.profile_topics_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/profile_topics/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -113,6 +128,10 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.profile_topics_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/profile_topics/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -143,6 +162,10 @@ class ProfileTopics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.profile_topics_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/profile_topics/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

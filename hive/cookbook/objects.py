@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Objects(ApiManager):
@@ -30,6 +30,16 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'name',
+            'description', 'feedback_for_operator', 'profile', 'status',
+            'extract_severity', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('name'
+            ), params.get('description'), params.get('feedback_for_operator'
+            ), params.get('profile'), params.get('status'), params.get(
+            'extract_severity'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.objects.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -52,6 +62,15 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['name', 'description',
+            'feedback_for_operator', 'ip_cidr', 'profile', 'data_profile',
+            'automata_domain', 'status']
+        payload.get('name'), payload.get('description'), payload.get(
+            'feedback_for_operator'), payload.get('ip_cidr'), payload.get(
+            'profile'), payload.get('data_profile'), payload.get(
+            'automata_domain'), payload.get('status')
+        warning_wrong_parameters(self.objects_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/objects/', payload=payload,
             **kwargs)
         return response
@@ -92,6 +111,15 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['name', 'description',
+            'feedback_for_operator', 'ip_cidr', 'profile', 'data_profile',
+            'automata_domain', 'status']
+        payload.get('name'), payload.get('description'), payload.get(
+            'feedback_for_operator'), payload.get('ip_cidr'), payload.get(
+            'profile'), payload.get('data_profile'), payload.get(
+            'automata_domain'), payload.get('status')
+        warning_wrong_parameters(self.objects_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/objects/{uuid}', params=
             params, payload=payload, **kwargs)
         return response
@@ -128,6 +156,12 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.objects_metric_types.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/metric_types',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -154,6 +188,12 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.objects_hosted.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/hosted',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -180,6 +220,12 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.objects_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -234,6 +280,12 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.objects_probes.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/probes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -289,6 +341,13 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('active_at_timestamp'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.objects_downtimes.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/downtimes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -344,6 +403,13 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('active_at_timestamp'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.objects_dispatchers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/objects/{uuid}/dispatchers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -401,6 +467,10 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.objects_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/objects/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -462,6 +532,10 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.objects_create_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/objects/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -515,6 +589,10 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.objects_groups_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/objects/bulk/create/groups',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -572,6 +650,10 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.objects_downtimes_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/objects/bulk/create/downtimes', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -629,6 +711,10 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.objects_probes_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/objects/bulk/create/probes',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsServiceStatus(ApiManager):
@@ -33,6 +33,19 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'uuid_service',
+            'timestamp_start', 'timestamp_end', 'database_timestamp_start',
+            'database_timestamp_end', 'status', 'ranking', 'description',
+            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('uuid_service'), params.get(
+            'timestamp_start'), params.get('timestamp_end'), params.get(
+            'database_timestamp_start'), params.get('database_timestamp_end'
+            ), params.get('status'), params.get('ranking'), params.get(
+            'description'), params.get('null_fields'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.ts_service_status.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_service_status/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -53,6 +66,13 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_service', 'timestamp', 'status',
+            'ranking', 'description', 'extended_attributes']
+        payload.get('uuid_service'), payload.get('timestamp'), payload.get(
+            'status'), payload.get('ranking'), payload.get('description'
+            ), payload.get('extended_attributes')
+        warning_wrong_parameters(self.ts_service_status_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_service_status/',
             payload=payload, **kwargs)
         return response
@@ -70,6 +90,10 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_status_delete.__name__,
+            params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_status/{uuid_service}/', params=params, **kwargs)
         return response
@@ -106,6 +130,20 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
+            'uuid_customer', 'profile', 'name', 'description', 'status',
+            'ts_description', 'ts_status', 'ts_timestamp_start',
+            'ts_timestamp_end', 'ts_ranking', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_parent'), params.get('uuid_customer'), params.get('profile'
+            ), params.get('name'), params.get('description'), params.get(
+            'status'), params.get('ts_description'), params.get('ts_status'
+            ), params.get('ts_timestamp_start'), params.get('ts_timestamp_end'
+            ), params.get('ts_ranking'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_service_status_query.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=f'/ts_service_status/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -136,6 +174,10 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_status_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_service_status/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -196,6 +238,10 @@ class TsServiceStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_status_delete_bulk.
+            __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_status/bulk/delete/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

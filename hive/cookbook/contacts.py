@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Contacts(ApiManager):
@@ -37,6 +37,22 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'type', 'name',
+            'surname', 'qualification', 'company', 'department',
+            'principal_email', 'secondary_email', 'principal_mobile_number',
+            'secondary_mobile_number', 'phone_number', 'birthday', 'notes',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('type'
+            ), params.get('name'), params.get('surname'), params.get(
+            'qualification'), params.get('company'), params.get('department'
+            ), params.get('principal_email'), params.get('secondary_email'
+            ), params.get('principal_mobile_number'), params.get(
+            'secondary_mobile_number'), params.get('phone_number'), params.get(
+            'birthday'), params.get('notes'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.contacts.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/contacts/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -64,6 +80,19 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type', 'name', 'surname', 'qualification',
+            'company', 'department', 'principal_email', 'secondary_email',
+            'principal_mobile_number', 'secondary_mobile_number',
+            'phone_number', 'birthday', 'notes']
+        payload.get('type'), payload.get('name'), payload.get('surname'
+            ), payload.get('qualification'), payload.get('company'
+            ), payload.get('department'), payload.get('principal_email'
+            ), payload.get('secondary_email'), payload.get(
+            'principal_mobile_number'), payload.get('secondary_mobile_number'
+            ), payload.get('phone_number'), payload.get('birthday'
+            ), payload.get('notes')
+        warning_wrong_parameters(self.contacts_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/contacts/', payload=payload,
             **kwargs)
         return response
@@ -105,6 +134,19 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type', 'name', 'surname', 'qualification',
+            'company', 'department', 'principal_email', 'secondary_email',
+            'principal_mobile_number', 'secondary_mobile_number',
+            'phone_number', 'birthday', 'notes']
+        payload.get('type'), payload.get('name'), payload.get('surname'
+            ), payload.get('qualification'), payload.get('company'
+            ), payload.get('department'), payload.get('principal_email'
+            ), payload.get('secondary_email'), payload.get(
+            'principal_mobile_number'), payload.get('secondary_mobile_number'
+            ), payload.get('phone_number'), payload.get('birthday'
+            ), payload.get('notes')
+        warning_wrong_parameters(self.contacts_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/contacts/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -142,6 +184,13 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'type', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('type'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.contacts_sites.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/contacts/{uuid}/sites',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -160,6 +209,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.contacts_sites_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=
             f'/contacts/{uuid}/sites/{uuid_site}', payload=payload, **kwargs)
         return response
@@ -177,6 +230,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.contacts_sites_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/contacts/{uuid}/sites/{uuid_site}', payload=payload, **kwargs)
         return response
@@ -217,6 +274,13 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'type', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('type'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.contacts_customers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/contacts/{uuid}/customers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -235,6 +299,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.contacts_customers_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/contacts/{uuid}/customers/{uuid_customer}', payload=payload,
             **kwargs)
@@ -253,6 +321,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.contacts_customers_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/contacts/{uuid}/customers/{uuid_customer}', payload=payload,
             **kwargs)
@@ -297,6 +369,15 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'send_email', 'role_email',
+            'send_sms', 'active_at_timestamp', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('send_email'), params.get('role_email'
+            ), params.get('send_sms'), params.get('active_at_timestamp'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.contacts_dispatchers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/contacts/{uuid}/dispatchers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -318,6 +399,12 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        warning_wrong_parameters(self.contacts_dispatchers_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/contacts/{uuid}/dispatchers/{uuid_dispatcher}', payload=
             payload, **kwargs)
@@ -339,6 +426,12 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        warning_wrong_parameters(self.contacts_dispatchers_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/contacts/{uuid}/dispatchers/{uuid_dispatcher}', payload=
             payload, **kwargs)
@@ -382,6 +475,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.contacts_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/contacts/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -422,6 +519,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.contacts_create_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/contacts/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -476,6 +577,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.contacts_customers_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/contacts/bulk/create/customers', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -537,6 +642,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.contacts_dispatchers_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/contacts/bulk/create/dispatchers', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -595,6 +704,10 @@ class Contacts(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.contacts_sites_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/contacts/bulk/create/sites',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

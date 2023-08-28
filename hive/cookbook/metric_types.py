@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class MetricTypes(ApiManager):
@@ -32,6 +32,18 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_object',
+            'name', 'description', 'feedback_for_operator', 'profile',
+            'status', 'extract_severity', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_object'), params.get('name'), params.get('description'
+            ), params.get('feedback_for_operator'), params.get('profile'
+            ), params.get('status'), params.get('extract_severity'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.metric_types.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/metric_types/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -54,6 +66,15 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_object', 'name', 'description',
+            'feedback_for_operator', 'profile', 'data_profile',
+            'automata_domain', 'status']
+        payload.get('uuid_object'), payload.get('name'), payload.get(
+            'description'), payload.get('feedback_for_operator'), payload.get(
+            'profile'), payload.get('data_profile'), payload.get(
+            'automata_domain'), payload.get('status')
+        warning_wrong_parameters(self.metric_types_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/metric_types/', payload=
             payload, **kwargs)
         return response
@@ -73,6 +94,10 @@ class MetricTypes(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.metric_type.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/metric_types/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -96,6 +121,15 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_object', 'name', 'description',
+            'feedback_for_operator', 'profile', 'data_profile',
+            'automata_domain', 'status']
+        payload.get('uuid_object'), payload.get('name'), payload.get(
+            'description'), payload.get('feedback_for_operator'), payload.get(
+            'profile'), payload.get('data_profile'), payload.get(
+            'automata_domain'), payload.get('status')
+        warning_wrong_parameters(self.metric_types_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/metric_types/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -133,6 +167,12 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.metric_types_metrics.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/metric_types/{uuid}/metrics',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -160,6 +200,13 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('active_at_timestamp'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.metric_types_downtimes.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/metric_types/{uuid}/downtimes', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -216,6 +263,13 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'active_at_timestamp', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('active_at_timestamp'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.metric_types_dispatchers.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/metric_types/{uuid}/dispatchers', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -274,6 +328,10 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.metric_types_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/metric_types/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -339,6 +397,10 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.metric_types_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/metric_types/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -393,6 +455,10 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.metric_types_downtimes_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/metric_types/bulk/create/downtimes', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

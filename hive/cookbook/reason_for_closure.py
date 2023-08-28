@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class ReasonForClosure(ApiManager):
@@ -28,6 +28,15 @@ class ReasonForClosure(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'code',
+            'description', 'jurisdiction', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('code'
+            ), params.get('description'), params.get('jurisdiction'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.reason_for_closure.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/reason_for_closure/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -46,6 +55,11 @@ class ReasonForClosure(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'description', 'jurisdiction']
+        payload.get('code'), payload.get('description'), payload.get(
+            'jurisdiction')
+        warning_wrong_parameters(self.reason_for_closure_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/reason_for_closure/',
             payload=payload, **kwargs)
         return response
@@ -78,6 +92,11 @@ class ReasonForClosure(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'description', 'jurisdiction']
+        payload.get('code'), payload.get('description'), payload.get(
+            'jurisdiction')
+        warning_wrong_parameters(self.reason_for_closure_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=f'/reason_for_closure/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -117,6 +136,10 @@ class ReasonForClosure(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.reason_for_closure_bulk_read_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/reason_for_closure/bulk_read', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -148,6 +171,10 @@ class ReasonForClosure(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.reason_for_closure_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/reason_for_closure/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

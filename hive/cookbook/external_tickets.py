@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class ExternalTickets(ApiManager):
@@ -52,6 +52,35 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'in_sla', 'uuid_customer',
+            'uuid_virtual_domain', 'uuid_object', 'object', 'metric_type',
+            'metric', 'external_itsm', 'external_ticket',
+            'opening_date_start', 'opening_date_end', 'closing_date_start',
+            'closing_date_end', 'ticket_type', 'mode', 'severity',
+            'organization', 'responsibility', 'stage_start_sla_l1',
+            'working_period_l1', 'target_stage_start_sla_l1',
+            'stage_start_sla_l2', 'working_period_l2',
+            'target_stage_start_sla_l2', 'resolution_sla',
+            'working_period_resolution', 'target_period_resolution',
+            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('in_sla'), params.get('uuid_customer'
+            ), params.get('uuid_virtual_domain'), params.get('uuid_object'
+            ), params.get('object'), params.get('metric_type'), params.get(
+            'metric'), params.get('external_itsm'), params.get(
+            'external_ticket'), params.get('opening_date_start'), params.get(
+            'opening_date_end'), params.get('closing_date_start'), params.get(
+            'closing_date_end'), params.get('ticket_type'), params.get('mode'
+            ), params.get('severity'), params.get('organization'), params.get(
+            'responsibility'), params.get('stage_start_sla_l1'), params.get(
+            'working_period_l1'), params.get('target_stage_start_sla_l1'
+            ), params.get('stage_start_sla_l2'), params.get('working_period_l2'
+            ), params.get('target_stage_start_sla_l2'), params.get(
+            'resolution_sla'), params.get('working_period_resolution'
+            ), params.get('target_period_resolution'), params.get('null_fields'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.external_tickets.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/external_tickets/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -90,6 +119,30 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'uuid_virtual_domain',
+            'uuid_object', 'object', 'metric_type', 'metric',
+            'external_itsm', 'external_ticket', 'opening_date',
+            'closing_date', 'ticket_type', 'mode', 'severity',
+            'organization', 'responsibility', 'stage_start_sla_l1',
+            'working_period_l1', 'target_stage_start_sla_l1',
+            'stage_start_sla_l2', 'working_period_l2',
+            'target_stage_start_sla_l2', 'resolution_sla',
+            'working_period_resolution', 'target_period_resolution']
+        payload.get('uuid_customer'), payload.get('uuid_virtual_domain'
+            ), payload.get('uuid_object'), payload.get('object'), payload.get(
+            'metric_type'), payload.get('metric'), payload.get('external_itsm'
+            ), payload.get('external_ticket'), payload.get('opening_date'
+            ), payload.get('closing_date'), payload.get('ticket_type'
+            ), payload.get('mode'), payload.get('severity'), payload.get(
+            'organization'), payload.get('responsibility'), payload.get(
+            'stage_start_sla_l1'), payload.get('working_period_l1'
+            ), payload.get('target_stage_start_sla_l1'), payload.get(
+            'stage_start_sla_l2'), payload.get('working_period_l2'
+            ), payload.get('target_stage_start_sla_l2'), payload.get(
+            'resolution_sla'), payload.get('working_period_resolution'
+            ), payload.get('target_period_resolution')
+        warning_wrong_parameters(self.external_tickets_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/external_tickets/', payload
             =payload, **kwargs)
         return response
@@ -109,6 +162,10 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.external_ticket.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/external_tickets/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -148,6 +205,30 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_customer', 'uuid_virtual_domain',
+            'uuid_object', 'object', 'metric_type', 'metric',
+            'external_itsm', 'external_ticket', 'opening_date',
+            'closing_date', 'ticket_type', 'mode', 'severity',
+            'organization', 'responsibility', 'stage_start_sla_l1',
+            'working_period_l1', 'target_stage_start_sla_l1',
+            'stage_start_sla_l2', 'working_period_l2',
+            'target_stage_start_sla_l2', 'resolution_sla',
+            'working_period_resolution', 'target_period_resolution']
+        payload.get('uuid_customer'), payload.get('uuid_virtual_domain'
+            ), payload.get('uuid_object'), payload.get('object'), payload.get(
+            'metric_type'), payload.get('metric'), payload.get('external_itsm'
+            ), payload.get('external_ticket'), payload.get('opening_date'
+            ), payload.get('closing_date'), payload.get('ticket_type'
+            ), payload.get('mode'), payload.get('severity'), payload.get(
+            'organization'), payload.get('responsibility'), payload.get(
+            'stage_start_sla_l1'), payload.get('working_period_l1'
+            ), payload.get('target_stage_start_sla_l1'), payload.get(
+            'stage_start_sla_l2'), payload.get('working_period_l2'
+            ), payload.get('target_stage_start_sla_l2'), payload.get(
+            'resolution_sla'), payload.get('working_period_resolution'
+            ), payload.get('target_period_resolution')
+        warning_wrong_parameters(self.external_tickets_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=f'/external_tickets/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -182,6 +263,10 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.external_tickets_ticket_by_params.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_params/{ticket_type}/{uuid_customer}'
             , warm_start=warm_start, params=params, **kwargs)
@@ -205,6 +290,10 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.external_tickets_ticket_by_sla.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_sla/{ticket_type}/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -226,6 +315,10 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.external_tickets_ticket_by_date.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_date/{uuid_customer}', warm_start
             =warm_start, params=params, **kwargs)
@@ -248,6 +341,11 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            external_tickets_ticket_by_params_customers_filtering.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_params/customers_filtering/{ticket_type}/'
             , warm_start=warm_start, params=params, **kwargs)
@@ -270,6 +368,11 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            external_tickets_ticket_by_sla_customers_filtering.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_sla/customers_filtering/{ticket_type}/'
             , warm_start=warm_start, params=params, **kwargs)
@@ -290,6 +393,11 @@ class ExternalTickets(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            external_tickets_ticket_by_date_customers_filtering.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/external_tickets/ticket_by_date/customers_filtering/',
             warm_start=warm_start, params=params, **kwargs)
@@ -319,6 +427,10 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.external_tickets_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/external_tickets/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -372,6 +484,10 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.external_tickets_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/external_tickets/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

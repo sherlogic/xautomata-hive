@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Services(ApiManager):
@@ -30,6 +30,16 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
+            'uuid_customer', 'profile', 'name', 'description', 'status',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_parent'), params.get('uuid_customer'), params.get('profile'
+            ), params.get('name'), params.get('description'), params.get(
+            'status'), params.get('skip'), params.get('limit'), params.get(
+            'like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.services.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -52,6 +62,14 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_parent', 'uuid_customer', 'profile',
+            'name', 'description', 'automata_domain', 'rule', 'status']
+        payload.get('uuid_parent'), payload.get('uuid_customer'), payload.get(
+            'profile'), payload.get('name'), payload.get('description'
+            ), payload.get('automata_domain'), payload.get('rule'
+            ), payload.get('status')
+        warning_wrong_parameters(self.services_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/services/', payload=payload,
             **kwargs)
         return response
@@ -71,6 +89,10 @@ class Services(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.service.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}', warm_start
             =warm_start, params=params, **kwargs)
         return response
@@ -93,6 +115,14 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_parent', 'uuid_customer', 'profile',
+            'name', 'description', 'automata_domain', 'rule', 'status']
+        payload.get('uuid_parent'), payload.get('uuid_customer'), payload.get(
+            'profile'), payload.get('name'), payload.get('description'
+            ), payload.get('automata_domain'), payload.get('rule'
+            ), payload.get('status')
+        warning_wrong_parameters(self.services_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/services/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -129,6 +159,12 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.services_metrics.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/metrics',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -185,6 +221,13 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'fetch_all',
+            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('fetch_all'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.services_downtimes.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/downtimes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -241,6 +284,13 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'fetch_all',
+            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('fetch_all'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.services_dispatchers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/{uuid}/dispatchers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -328,6 +378,39 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
+            'customer_code', 'customer_status', 'uuid_site', 'site_code',
+            'site_description', 'site_address', 'site_zip_code',
+            'site_city', 'site_country', 'site_state_province',
+            'site_status', 'uuid_group', 'group_name', 'group_status',
+            'group_type', 'uuid_object', 'object_name', 'object_status',
+            'object_profile', 'uuid_metric_type', 'metric_type_name',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'service_uuid_parent',
+            'uuid_service', 'service_profile', 'service_name',
+            'service_description', 'service_status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_customer'), params.get('customer_code'), params.get(
+            'customer_status'), params.get('uuid_site'), params.get('site_code'
+            ), params.get('site_description'), params.get('site_address'
+            ), params.get('site_zip_code'), params.get('site_city'
+            ), params.get('site_country'), params.get('site_state_province'
+            ), params.get('site_status'), params.get('uuid_group'), params.get(
+            'group_name'), params.get('group_status'), params.get('group_type'
+            ), params.get('uuid_object'), params.get('object_name'
+            ), params.get('object_status'), params.get('object_profile'
+            ), params.get('uuid_metric_type'), params.get('metric_type_name'
+            ), params.get('metric_type_status'), params.get('uuid_metric'
+            ), params.get('metric_name'), params.get('metric_status'
+            ), params.get('metric_profile'), params.get('service_uuid_parent'
+            ), params.get('uuid_service'), params.get('service_profile'
+            ), params.get('service_name'), params.get('service_description'
+            ), params.get('service_status'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.services_query.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/services/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -395,6 +478,13 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.services_query_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/services/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -424,6 +514,10 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.services_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/services/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -489,6 +583,10 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.services_create_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/services/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -542,6 +640,10 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.services_metrics_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/services/bulk/create/metrics', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -599,6 +701,10 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.services_downtimes_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/services/bulk/create/downtimes', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

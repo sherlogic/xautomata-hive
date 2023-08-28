@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsCostAzureRaw(ApiManager):
@@ -28,6 +28,14 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_metric',
+            'date_start', 'date_end', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_metric'), params.get('date_start'), params.get('date_end'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_cost_azure_raw.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_cost_azure_raw/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -114,6 +122,69 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['tags', 'term', 'meterid', 'location',
+            'provider', 'quantity', 'paygprice', 'productid', 'benefitid',
+            'costinusd', 'frequency', 'invoiceid', 'metername', 'unitprice',
+            'resourceid', 'chargetype', 'costcenter', 'productname',
+            'benefitname', 'meterregion', 'partnername', 'publisherid',
+            'customername', 'pricingmodel', 'resellername', 'serviceinfo1',
+            'serviceinfo2', 'metercategory', 'paygcostinusd',
+            'publishername', 'publishertype', 'resellermpnid',
+            'reservationid', 'servicefamily', 'unitofmeasure',
+            'subscriptionid', 'additionalinfo', 'effectiveprice',
+            'productorderid', 'billingcurrency', 'consumedservice',
+            'partnertenantid', 'pricingcurrency', 'reservationname',
+            'billingaccountid', 'billingprofileid', 'customertenantid',
+            'exchangeratedate', 'invoicesectionid', 'metersubcategory',
+            'productordername', 'resourcelocation', 'subscriptionname',
+            'previousinvoiceid', 'resourcegroupname', 'billingaccountname',
+            'billingprofilename', 'invoicesectionname',
+            'billingperiodenddate', 'serviceperiodenddate',
+            'costinbillingcurrency', 'costinpricingcurrency',
+            'isazurecrediteligible', 'billingperiodstartdate',
+            'serviceperiodstartdate', 'partnerearnedcreditrate',
+            'paygcostinbillingcurrency', 'partnerearnedcreditapplied',
+            'exchangeratepricingtobilling', 'uuid', 'uuid_metric', 'date']
+        payload.get('tags'), payload.get('term'), payload.get('meterid'
+            ), payload.get('location'), payload.get('provider'), payload.get(
+            'quantity'), payload.get('paygprice'), payload.get('productid'
+            ), payload.get('benefitid'), payload.get('costinusd'), payload.get(
+            'frequency'), payload.get('invoiceid'), payload.get('metername'
+            ), payload.get('unitprice'), payload.get('resourceid'
+            ), payload.get('chargetype'), payload.get('costcenter'
+            ), payload.get('productname'), payload.get('benefitname'
+            ), payload.get('meterregion'), payload.get('partnername'
+            ), payload.get('publisherid'), payload.get('customername'
+            ), payload.get('pricingmodel'), payload.get('resellername'
+            ), payload.get('serviceinfo1'), payload.get('serviceinfo2'
+            ), payload.get('metercategory'), payload.get('paygcostinusd'
+            ), payload.get('publishername'), payload.get('publishertype'
+            ), payload.get('resellermpnid'), payload.get('reservationid'
+            ), payload.get('servicefamily'), payload.get('unitofmeasure'
+            ), payload.get('subscriptionid'), payload.get('additionalinfo'
+            ), payload.get('effectiveprice'), payload.get('productorderid'
+            ), payload.get('billingcurrency'), payload.get('consumedservice'
+            ), payload.get('partnertenantid'), payload.get('pricingcurrency'
+            ), payload.get('reservationname'), payload.get('billingaccountid'
+            ), payload.get('billingprofileid'), payload.get('customertenantid'
+            ), payload.get('exchangeratedate'), payload.get('invoicesectionid'
+            ), payload.get('metersubcategory'), payload.get('productordername'
+            ), payload.get('resourcelocation'), payload.get('subscriptionname'
+            ), payload.get('previousinvoiceid'), payload.get(
+            'resourcegroupname'), payload.get('billingaccountname'
+            ), payload.get('billingprofilename'), payload.get(
+            'invoicesectionname'), payload.get('billingperiodenddate'
+            ), payload.get('serviceperiodenddate'), payload.get(
+            'costinbillingcurrency'), payload.get('costinpricingcurrency'
+            ), payload.get('isazurecrediteligible'), payload.get(
+            'billingperiodstartdate'), payload.get('serviceperiodstartdate'
+            ), payload.get('partnerearnedcreditrate'), payload.get(
+            'paygcostinbillingcurrency'), payload.get(
+            'partnerearnedcreditapplied'), payload.get(
+            'exchangeratepricingtobilling'), payload.get('uuid'), payload.get(
+            'uuid_metric'), payload.get('date')
+        warning_wrong_parameters(self.ts_cost_azure_raw_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_cost_azure_raw/',
             payload=payload, **kwargs)
         return response
@@ -198,6 +269,68 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['tags', 'term', 'meterid', 'location',
+            'provider', 'quantity', 'paygprice', 'productid', 'benefitid',
+            'costinusd', 'frequency', 'invoiceid', 'metername', 'unitprice',
+            'resourceid', 'chargetype', 'costcenter', 'productname',
+            'benefitname', 'meterregion', 'partnername', 'publisherid',
+            'customername', 'pricingmodel', 'resellername', 'serviceinfo1',
+            'serviceinfo2', 'metercategory', 'paygcostinusd',
+            'publishername', 'publishertype', 'resellermpnid',
+            'reservationid', 'servicefamily', 'unitofmeasure',
+            'subscriptionid', 'additionalinfo', 'effectiveprice',
+            'productorderid', 'billingcurrency', 'consumedservice',
+            'partnertenantid', 'pricingcurrency', 'reservationname',
+            'billingaccountid', 'billingprofileid', 'customertenantid',
+            'exchangeratedate', 'invoicesectionid', 'metersubcategory',
+            'productordername', 'resourcelocation', 'subscriptionname',
+            'previousinvoiceid', 'resourcegroupname', 'billingaccountname',
+            'billingprofilename', 'invoicesectionname',
+            'billingperiodenddate', 'serviceperiodenddate',
+            'costinbillingcurrency', 'costinpricingcurrency',
+            'isazurecrediteligible', 'billingperiodstartdate',
+            'serviceperiodstartdate', 'partnerearnedcreditrate',
+            'paygcostinbillingcurrency', 'partnerearnedcreditapplied',
+            'exchangeratepricingtobilling']
+        payload.get('tags'), payload.get('term'), payload.get('meterid'
+            ), payload.get('location'), payload.get('provider'), payload.get(
+            'quantity'), payload.get('paygprice'), payload.get('productid'
+            ), payload.get('benefitid'), payload.get('costinusd'), payload.get(
+            'frequency'), payload.get('invoiceid'), payload.get('metername'
+            ), payload.get('unitprice'), payload.get('resourceid'
+            ), payload.get('chargetype'), payload.get('costcenter'
+            ), payload.get('productname'), payload.get('benefitname'
+            ), payload.get('meterregion'), payload.get('partnername'
+            ), payload.get('publisherid'), payload.get('customername'
+            ), payload.get('pricingmodel'), payload.get('resellername'
+            ), payload.get('serviceinfo1'), payload.get('serviceinfo2'
+            ), payload.get('metercategory'), payload.get('paygcostinusd'
+            ), payload.get('publishername'), payload.get('publishertype'
+            ), payload.get('resellermpnid'), payload.get('reservationid'
+            ), payload.get('servicefamily'), payload.get('unitofmeasure'
+            ), payload.get('subscriptionid'), payload.get('additionalinfo'
+            ), payload.get('effectiveprice'), payload.get('productorderid'
+            ), payload.get('billingcurrency'), payload.get('consumedservice'
+            ), payload.get('partnertenantid'), payload.get('pricingcurrency'
+            ), payload.get('reservationname'), payload.get('billingaccountid'
+            ), payload.get('billingprofileid'), payload.get('customertenantid'
+            ), payload.get('exchangeratedate'), payload.get('invoicesectionid'
+            ), payload.get('metersubcategory'), payload.get('productordername'
+            ), payload.get('resourcelocation'), payload.get('subscriptionname'
+            ), payload.get('previousinvoiceid'), payload.get(
+            'resourcegroupname'), payload.get('billingaccountname'
+            ), payload.get('billingprofilename'), payload.get(
+            'invoicesectionname'), payload.get('billingperiodenddate'
+            ), payload.get('serviceperiodenddate'), payload.get(
+            'costinbillingcurrency'), payload.get('costinpricingcurrency'
+            ), payload.get('isazurecrediteligible'), payload.get(
+            'billingperiodstartdate'), payload.get('serviceperiodstartdate'
+            ), payload.get('partnerearnedcreditrate'), payload.get(
+            'paygcostinbillingcurrency'), payload.get(
+            'partnerearnedcreditapplied'), payload.get(
+            'exchangeratepricingtobilling')
+        warning_wrong_parameters(self.ts_cost_azure_raw_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=f'/ts_cost_azure_raw/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -227,6 +360,10 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.ts_cost_azure_raw_metric_delete.
+            __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_azure_raw/metric/{uuid_metric}/', params=params, **
             kwargs)
@@ -246,6 +383,11 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['tenant_id', 'date_start', 'date_end']
+        params.get('tenant_id'), params.get('date_start'), params.get(
+            'date_end')
+        warning_wrong_parameters(self.ts_cost_azure_raw_probe_delete.
+            __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_azure_raw/probe/{uuid_probe}/', params=params, **kwargs)
         return response
@@ -385,6 +527,12 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['tenant_id', 'date_start', 'date_end']
+        params.get('tenant_id'), params.get('date_start'), params.get(
+            'date_end')
+        warning_wrong_parameters(self.
+            ts_cost_azure_raw_compute_probe_create.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=
             f'/ts_cost_azure_raw/compute/probe/{uuid_probe}/', params=
             params, **kwargs)
@@ -403,6 +551,11 @@ class TsCostAzureRaw(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        warning_wrong_parameters(self.
+            ts_cost_azure_raw_compute_tenant_create.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=
             f'/ts_cost_azure_raw/compute/tenant/{uuid_tenant}/', params=
             params, **kwargs)

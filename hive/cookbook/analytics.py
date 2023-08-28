@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Analytics(ApiManager):
@@ -30,6 +30,16 @@ class Analytics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'date_start',
+            'date_end', 'metric_profile', 'metric_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'date_start'), params.get('date_end'), params.get('metric_profile'
+            ), params.get('metric_name'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.analytic.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/analytics/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)

@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Widgets(ApiManager):
@@ -27,6 +27,14 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'code', 'name',
+            'description', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('code'
+            ), params.get('name'), params.get('description'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.widgets.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/widgets/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -44,6 +52,10 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'name', 'description']
+        payload.get('code'), payload.get('name'), payload.get('description')
+        warning_wrong_parameters(self.widgets_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/widgets/', payload=payload,
             **kwargs)
         return response
@@ -75,6 +87,10 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['code', 'name', 'description']
+        payload.get('code'), payload.get('name'), payload.get('description')
+        warning_wrong_parameters(self.widgets_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/widgets/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -114,6 +130,13 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'index', 'width', 'height',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('index'), params.get('width'
+            ), params.get('height'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.widgets_dashboards.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/widgets/{uuid}/dashboards',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -137,6 +160,13 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['index', 'width', 'height', 'grid_x',
+            'grid_y', 'settings']
+        payload.get('index'), payload.get('width'), payload.get('height'
+            ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
+            'settings')
+        warning_wrong_parameters(self.widgets_dashboards_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/widgets/{uuid}/dashboards/{uuid_dashboard}', payload=payload,
             **kwargs)
@@ -159,6 +189,13 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['index', 'width', 'height', 'grid_x',
+            'grid_y', 'settings']
+        payload.get('index'), payload.get('width'), payload.get('height'
+            ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
+            'settings')
+        warning_wrong_parameters(self.widgets_dashboard_widget_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/widgets/dashboard_widget/{uuid}', payload=payload, **kwargs)
         return response
@@ -197,6 +234,12 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.widgets_widget_groups.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/widgets/{uuid}/widget_groups', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -255,6 +298,10 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.widgets_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/widgets/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -285,6 +332,10 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.widgets_create_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/widgets/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -344,6 +395,10 @@ class Widgets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.widgets_dashboards_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/widgets/bulk/create/dashboards', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

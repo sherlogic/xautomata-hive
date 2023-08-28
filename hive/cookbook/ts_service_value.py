@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsServiceValue(ApiManager):
@@ -32,6 +32,18 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_service',
+            'timestamp_start', 'timestamp_end', 'database_timestamp_start',
+            'database_timestamp_end', 'unit', 'value', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_service'), params.get('timestamp_start'), params.get(
+            'timestamp_end'), params.get('database_timestamp_start'
+            ), params.get('database_timestamp_end'), params.get('unit'
+            ), params.get('value'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_service_value.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_service_value/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -50,6 +62,11 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_service', 'timestamp', 'unit', 'value']
+        payload.get('uuid_service'), payload.get('timestamp'), payload.get(
+            'unit'), payload.get('value')
+        warning_wrong_parameters(self.ts_service_value_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_service_value/', payload
             =payload, **kwargs)
         return response
@@ -67,6 +84,10 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_value_delete.__name__,
+            params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_value/{uuid_service}/', params=params, **kwargs)
         return response
@@ -102,6 +123,19 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
+            'uuid_customer', 'profile', 'name', 'description', 'status',
+            'ts_timestamp_start', 'ts_timestamp_end', 'ts_unit', 'ts_value',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_parent'), params.get('uuid_customer'), params.get('profile'
+            ), params.get('name'), params.get('description'), params.get(
+            'status'), params.get('ts_timestamp_start'), params.get(
+            'ts_timestamp_end'), params.get('ts_unit'), params.get('ts_value'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_service_value_query.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=f'/ts_service_value/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -132,6 +166,10 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_value_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_service_value/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -190,6 +228,10 @@ class TsServiceValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_service_value_delete_bulk.__name__,
+            params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_value/bulk/delete/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

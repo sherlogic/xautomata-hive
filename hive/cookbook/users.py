@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Users(ApiManager):
@@ -20,6 +20,11 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['name', 'email', 'password', 'phone']
+        payload.get('name'), payload.get('email'), payload.get('password'
+            ), payload.get('phone')
+        warning_wrong_parameters(self.users_register_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/users/register/', params=
             params, payload=payload, **kwargs)
         return response
@@ -49,6 +54,16 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'name', 'active',
+            'email', 'phone', 'uuid_acl_override', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('name'
+            ), params.get('active'), params.get('email'), params.get('phone'
+            ), params.get('uuid_acl_override'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.users.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/users/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -70,6 +85,13 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['phone', 'name', 'password', 'email',
+            'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('name'), payload.get('password'
+            ), payload.get('email'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override')
+        warning_wrong_parameters(self.users_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/users/', payload=payload,
             **kwargs)
         return response
@@ -92,6 +114,13 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['phone', 'name', 'password', 'email',
+            'active', 'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('name'), payload.get('password'
+            ), payload.get('email'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override')
+        warning_wrong_parameters(self.users_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/users/{uuid_customer}',
             payload=payload, **kwargs)
         return response
@@ -126,6 +155,13 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['phone', 'password', 'email', 'active',
+            'acl', 'uuid_acl_override']
+        payload.get('phone'), payload.get('password'), payload.get('email'
+            ), payload.get('active'), payload.get('acl'), payload.get(
+            'uuid_acl_override')
+        warning_wrong_parameters(self.users_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/users/{name}', payload=
             payload, **kwargs)
         return response
@@ -162,6 +198,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_dashboards.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/users/{name}/dashboards',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -216,6 +258,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/users/{name}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -270,6 +318,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_virtual_domains.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/users/{name}/virtual_domains', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -325,6 +379,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_customers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/users/{name}/customers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -379,6 +439,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_starred_customers.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/users/{name}/starred_customers', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -434,6 +500,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.users_widget_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/users/{name}/widget_groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -492,6 +564,10 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.users_customers_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/users/bulk/create/customers', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -549,6 +625,10 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.users_groups_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/users/bulk/create/groups',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -606,6 +686,10 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.users_virtual_domains_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/users/bulk/create/virtual_domains', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

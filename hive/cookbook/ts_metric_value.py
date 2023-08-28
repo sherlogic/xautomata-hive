@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsMetricValue(ApiManager):
@@ -33,6 +33,20 @@ class TsMetricValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_metric',
+            'timestamp_start', 'timestamp_end', 'ingest_timestamp_start',
+            'ingest_timestamp_end', 'database_timestamp_start',
+            'database_timestamp_end', 'value', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_metric'), params.get('timestamp_start'), params.get(
+            'timestamp_end'), params.get('ingest_timestamp_start'), params.get(
+            'ingest_timestamp_end'), params.get('database_timestamp_start'
+            ), params.get('database_timestamp_end'), params.get('value'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_metric_value.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_metric_value/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -63,6 +77,10 @@ class TsMetricValue(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['ts_start', 'ts_end']
+        params.get('ts_start'), params.get('ts_end')
+        warning_wrong_parameters(self.ts_metric_value_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/ts_metric_value/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)

@@ -289,6 +289,8 @@ class ApiManager:
         url_put = '/' + url_put.lstrip('/').rstrip('/') + '/'
 
         method = url_get.split('/')[1]
+        if method not in ['customers', 'virtual_domains', 'sites', 'groups', 'objects', 'metric_types', 'metrics', 'services']:
+            raise NotImplementedError(f'the {method} has not been implemented')
 
         get_count, post_count, put_count = 0, 0, 0
 

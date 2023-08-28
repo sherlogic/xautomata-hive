@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class ProbeTypes(ApiManager):
@@ -27,6 +27,13 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'app_code',
+            'app_name', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('app_code'
+            ), params.get('app_name'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.probe_types.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/probe_types/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -44,6 +51,11 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['app_code', 'app_name', 'endpoint']
+        payload.get('app_code'), payload.get('app_name'), payload.get(
+            'endpoint')
+        warning_wrong_parameters(self.probe_types_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/probe_types/', payload=
             payload, **kwargs)
         return response
@@ -76,6 +88,11 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['app_code', 'app_name', 'endpoint']
+        payload.get('app_code'), payload.get('app_name'), payload.get(
+            'endpoint')
+        warning_wrong_parameters(self.probe_types_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/probe_types/{uuid}', payload
             =payload, **kwargs)
         return response
@@ -112,6 +129,11 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
+        params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.probe_types_probes.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/probe_types/{uuid}/probes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -141,6 +163,10 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.probe_types_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/probe_types/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -172,6 +198,10 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.probe_types_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/probe_types/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

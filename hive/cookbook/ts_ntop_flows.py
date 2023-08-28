@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class TsNtopFlows(ApiManager):
@@ -35,6 +35,21 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_service',
+            'l7_proto', 'ip_src_addr', 'ip_dst_addr', 'l4_dst_port',
+            'in_bytes', 'out_bytes', 'last_switched_start',
+            'last_switched_end', 'interface_id', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_service'), params.get('l7_proto'), params.get('ip_src_addr'
+            ), params.get('ip_dst_addr'), params.get('l4_dst_port'
+            ), params.get('in_bytes'), params.get('out_bytes'), params.get(
+            'last_switched_start'), params.get('last_switched_end'
+            ), params.get('interface_id'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        warning_wrong_parameters(self.ts_ntop_flows.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/ts_ntop_flows/', single_page
             =single_page, page_size=page_size, warm_start=warm_start,
             params=params, **kwargs)
@@ -58,6 +73,15 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['uuid_service', 'l7_proto', 'ip_src_addr',
+            'ip_dst_addr', 'l4_dst_port', 'in_bytes', 'out_bytes',
+            'last_switched', 'interface_id']
+        payload.get('uuid_service'), payload.get('l7_proto'), payload.get(
+            'ip_src_addr'), payload.get('ip_dst_addr'), payload.get(
+            'l4_dst_port'), payload.get('in_bytes'), payload.get('out_bytes'
+            ), payload.get('last_switched'), payload.get('interface_id')
+        warning_wrong_parameters(self.ts_ntop_flows_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_ntop_flows/', payload=
             payload, **kwargs)
         return response

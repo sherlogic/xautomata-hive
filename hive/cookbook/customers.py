@@ -1,4 +1,4 @@
-from hive.api import ApiManager, handling_single_page_methods
+from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
 class Customers(ApiManager):
@@ -36,6 +36,19 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'type', 'code',
+            'company_name', 'address', 'zip_code', 'city', 'country',
+            'notes', 'vat_id', 'currency', 'state_province', 'status',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('type'
+            ), params.get('code'), params.get('company_name'), params.get(
+            'address'), params.get('zip_code'), params.get('city'), params.get(
+            'country'), params.get('notes'), params.get('vat_id'), params.get(
+            'currency'), params.get('state_province'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -62,6 +75,16 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type', 'code', 'company_name', 'address',
+            'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
+            'state_province', 'status']
+        payload.get('type'), payload.get('code'), payload.get('company_name'
+            ), payload.get('address'), payload.get('zip_code'), payload.get(
+            'city'), payload.get('country'), payload.get('notes'), payload.get(
+            'vat_id'), payload.get('currency'), payload.get('state_province'
+            ), payload.get('status')
+        warning_wrong_parameters(self.customers_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=f'/customers/', payload=
             payload, **kwargs)
         return response
@@ -102,6 +125,16 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type', 'code', 'company_name', 'address',
+            'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
+            'state_province', 'status']
+        payload.get('type'), payload.get('code'), payload.get('company_name'
+            ), payload.get('address'), payload.get('zip_code'), payload.get(
+            'city'), payload.get('country'), payload.get('notes'), payload.get(
+            'vat_id'), payload.get('currency'), payload.get('state_province'
+            ), payload.get('status')
+        warning_wrong_parameters(self.customers_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/customers/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -146,6 +179,17 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
+            'uuid_site', 'uuid_virtual_domain', 'type', 'name',
+            'description', 'status', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_parent'), params.get('uuid_site'), params.get(
+            'uuid_virtual_domain'), params.get('type'), params.get('name'
+            ), params.get('description'), params.get('status'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.customers_groups.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -177,6 +221,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['image']
+        payload.get('image')
+        warning_wrong_parameters(self.customers_image_put.__name__, payload,
+            official_payload_list)
         response = self.execute('PUT', path=f'/customers/{uuid}/image',
             payload=payload, **kwargs)
         return response
@@ -202,6 +250,12 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_services.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/services',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -222,6 +276,10 @@ class Customers(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
+        official_params_list = ['not_in']
+        params.get('not_in')
+        warning_wrong_parameters(self.customers_service_profiles.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/{uuid}/service_profiles', warm_start=warm_start,
             params=params, **kwargs)
@@ -248,6 +306,12 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_retention_rules.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/{uuid}/retention_rules', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -275,6 +339,12 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_sites.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/sites',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -302,6 +372,13 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'type', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('not_in'), params.get('type'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.customers_contacts.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/contacts',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -320,6 +397,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.customers_contacts_put.__name__,
+            payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -338,6 +419,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        warning_wrong_parameters(self.customers_contacts_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=
             f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -378,6 +463,12 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['not_in', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_users.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/users',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -444,6 +535,19 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'type', 'code', 'company_name',
+            'address', 'zip_code', 'city', 'country', 'notes', 'vat_id',
+            'currency', 'state_province', 'status', 'starred', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('type'), params.get('code'
+            ), params.get('company_name'), params.get('address'), params.get(
+            'zip_code'), params.get('city'), params.get('country'), params.get(
+            'notes'), params.get('vat_id'), params.get('currency'), params.get(
+            'state_province'), params.get('status'), params.get('starred'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_with_dashboard.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=f'/customers/with_dashboard/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -473,6 +577,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.customers_bulk.__name__, params,
+            official_params_list)
         response = self.execute('POST', path=f'/customers/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -539,6 +647,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.customers_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=f'/customers/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -594,6 +706,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.customers_contacts_create_bulk.
+            __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/customers/bulk/create/contacts', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -651,6 +767,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        warning_wrong_parameters(self.customers_users_create_bulk.__name__,
+            params, official_params_list)
         response = self.execute('POST', path=
             f'/customers/bulk/create/users', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -694,6 +814,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['customer', 'azure_customer']
+        payload.get('customer'), payload.get('azure_customer')
+        warning_wrong_parameters(self.customers_azure_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/', payload=
             payload, **kwargs)
         return response
@@ -710,6 +834,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['customer', 'azure_customer']
+        payload.get('customer'), payload.get('azure_customer')
+        warning_wrong_parameters(self.customers_azure_v2_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/',
             payload=payload, **kwargs)
         return response
@@ -726,6 +854,11 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['customer', 'azure_customer']
+        payload.get('customer'), payload.get('azure_customer')
+        warning_wrong_parameters(self.
+            customers_azure_v2_subscription_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/', payload=payload, **kwargs)
         return response
@@ -752,6 +885,17 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['target_company', 'target_code', 'address',
+            'zip_code', 'city', 'country', 'state_province', 'base_margin',
+            'reserved_margin', 'azure_customer_id', 'virtual_domain_code']
+        payload.get('target_company'), payload.get('target_code'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
+            ), payload.get('base_margin'), payload.get('reserved_margin'
+            ), payload.get('azure_customer_id'), payload.get(
+            'virtual_domain_code')
+        warning_wrong_parameters(self.customers_azure_v2_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -778,6 +922,19 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['target_company', 'target_code', 'address',
+            'zip_code', 'city', 'country', 'state_province',
+            'virtual_domain_code', 'uuid_probe_type', 'uuid_object',
+            'subscriptions']
+        payload.get('target_company'), payload.get('target_code'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
+            ), payload.get('virtual_domain_code'), payload.get(
+            'uuid_probe_type'), payload.get('uuid_object'), payload.get(
+            'subscriptions')
+        warning_wrong_parameters(self.
+            customers_azure_v2_subscription_create.__name__, payload,
+            official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/{uuid}', payload=payload, **
             kwargs)
@@ -806,6 +963,18 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['target_company', 'target_code', 'address',
+            'zip_code', 'city', 'country', 'state_province', 'base_margin',
+            'reserved_margin', 'azure_customer_id', 'uuid_probe_type',
+            'uuid_object']
+        payload.get('target_company'), payload.get('target_code'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
+            ), payload.get('base_margin'), payload.get('reserved_margin'
+            ), payload.get('azure_customer_id'), payload.get('uuid_probe_type'
+            ), payload.get('uuid_object')
+        warning_wrong_parameters(self.customers_azure_create.__name__,
+            payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -822,6 +991,10 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['customer', 'aws_customer']
+        payload.get('customer'), payload.get('aws_customer')
+        warning_wrong_parameters(self.customers_aws_v2_subscription_create.
+            __name__, payload, official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/', payload=payload, **kwargs)
         return response
@@ -848,6 +1021,18 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_payload_list = ['target_company', 'target_code', 'address',
+            'zip_code', 'city', 'country', 'state_province',
+            'virtual_domain_code', 'uuid_probe_type', 'uuid_object',
+            'subscriptions']
+        payload.get('target_company'), payload.get('target_code'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
+            ), payload.get('virtual_domain_code'), payload.get(
+            'uuid_probe_type'), payload.get('uuid_object'), payload.get(
+            'subscriptions')
+        warning_wrong_parameters(self.customers_aws_subscription_create.
+            __name__, payload, official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/subscription/{uuid}', payload=payload, **kwargs)
         return response
@@ -882,6 +1067,17 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['sort_by', 'null_fields', 'uuid_object',
+            'country', 'city', 'address', 'zip_code', 'status',
+            'description', 'name', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_object'), params.get('country'), params.get('city'
+            ), params.get('address'), params.get('zip_code'), params.get(
+            'status'), params.get('description'), params.get('name'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.customers_networks.__name__, params,
+            official_params_list)
         response = self.execute('GET', path=
             f'/customers/networks/{uuid_customer}', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -910,6 +1106,13 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['timestamp_start', 'timestamp_end', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('timestamp_start'), params.get('timestamp_end'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.customers_it_availability.__name__,
+            params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/it_availability/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -938,6 +1141,13 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['timestamp_start', 'timestamp_end', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('timestamp_start'), params.get('timestamp_end'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        warning_wrong_parameters(self.customers_it_availability_history.
+            __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/it_availability_history/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
