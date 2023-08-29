@@ -8,12 +8,14 @@ class ExternalTickets(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read External Tickets
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             in_sla (boolean optional): additional filter - parameter
@@ -49,6 +51,7 @@ class ExternalTickets(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -88,9 +91,11 @@ class ExternalTickets(ApiManager):
 
     def external_tickets_create(self, kwargs: dict = None, **payload) -> list:
         """Create External Ticket
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             uuid_customer (string required): additional filter - payload
             uuid_virtual_domain (string optional): additional filter - payload
@@ -116,6 +121,7 @@ class ExternalTickets(ApiManager):
             resolution_sla (number required): additional filter - payload
             working_period_resolution (number required): additional filter - payload
             target_period_resolution (number required): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -150,13 +156,16 @@ class ExternalTickets(ApiManager):
     def external_ticket(self, uuid: str, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
         """Read External Ticket
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -173,10 +182,12 @@ class ExternalTickets(ApiManager):
     def external_tickets_put(self, uuid: str, kwargs: dict = None, **payload
         ) -> list:
         """Update External Ticket
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             uuid_customer (string optional): additional filter - payload
             uuid_virtual_domain (string optional): additional filter - payload
@@ -202,6 +213,7 @@ class ExternalTickets(ApiManager):
             resolution_sla (number optional): additional filter - payload
             working_period_resolution (number optional): additional filter - payload
             target_period_resolution (number optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -235,9 +247,11 @@ class ExternalTickets(ApiManager):
 
     def external_tickets_delete(self, uuid: str, kwargs: dict = None) -> list:
         """Delete External Ticket
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -249,15 +263,18 @@ class ExternalTickets(ApiManager):
         uuid_customer: str, warm_start: bool = False, kwargs: dict = None,
         **params) -> list:
         """Pie Charts
+
         Args:
             ticket_type (str, required): ticket_type
             uuid_customer (str, required): uuid_customer
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -276,15 +293,18 @@ class ExternalTickets(ApiManager):
         uuid_customer: str, warm_start: bool = False, kwargs: dict = None,
         **params) -> list:
         """Sla Charge And Resolution
+
         Args:
             ticket_type (str, required): ticket_type
             uuid_customer (str, required): uuid_customer
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -302,14 +322,17 @@ class ExternalTickets(ApiManager):
     def external_tickets_ticket_by_date(self, uuid_customer: str,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """History
+
         Args:
             uuid_customer (str, required): uuid_customer
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -328,14 +351,17 @@ class ExternalTickets(ApiManager):
         ticket_type: str, warm_start: bool = False, kwargs: dict = None, **
         params) -> list:
         """Customers Filtering Pie Charts
+
         Args:
             ticket_type (str, required): ticket_type
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -355,14 +381,17 @@ class ExternalTickets(ApiManager):
         ticket_type: str, warm_start: bool = False, kwargs: dict = None, **
         params) -> list:
         """Customers Filtering Sla Charge And Resolution
+
         Args:
             ticket_type (str, required): ticket_type
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -381,13 +410,16 @@ class ExternalTickets(ApiManager):
     def external_tickets_ticket_by_date_customers_filtering(self,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Customers Filtering History
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -407,6 +439,7 @@ class ExternalTickets(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Read External Tickets
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -417,13 +450,16 @@ class ExternalTickets(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -441,6 +477,7 @@ class ExternalTickets(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Create External Tickets
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -449,8 +486,10 @@ class ExternalTickets(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -481,6 +520,7 @@ class ExternalTickets(ApiManager):
             "target_period_resolution": "number", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

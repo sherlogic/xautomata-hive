@@ -7,16 +7,19 @@ class Users(ApiManager):
     def users_register_create(self, params: dict = False,
         kwargs: dict = None, **payload) -> list:
         """Registration Form
+
         Args:
             params (dict, optional): additional parameters for the API.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             app_id (string optional): additional filter - parameter
             name (string required): additional filter - payload
             email (string required): additional filter - payload
             password (string required): additional filter - payload
             phone (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -32,12 +35,15 @@ class Users(ApiManager):
     def users_verify_email(self, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
         """Verify Me
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             verification_code (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -54,14 +60,17 @@ class Users(ApiManager):
     def users_password_reset_put(self, params: dict = False,
         kwargs: dict = None, **payload) -> list:
         """Reset Password
+
         Args:
             params (dict, optional): additional parameters for the API.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             app_id (string optional): additional filter - parameter
             verification_code (string required): additional filter - payload
             new_password (string required): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -76,14 +85,17 @@ class Users(ApiManager):
     def users_password_reset_create(self, params: dict = False,
         kwargs: dict = None, **payload) -> list:
         """Send Mail Password Reset
+
         Args:
             params (dict, optional): additional parameters for the API.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             app_id (string optional): additional filter - parameter
             username (string optional): additional filter - payload
             email (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -98,12 +110,14 @@ class Users(ApiManager):
     def users(self, warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Read Users
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -118,6 +132,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -138,9 +153,11 @@ class Users(ApiManager):
 
     def users_create(self, kwargs: dict = None, **payload) -> list:
         """Create User
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             phone (string optional): additional filter - payload
             verified_email (boolean optional): additional filter - payload
@@ -151,6 +168,7 @@ class Users(ApiManager):
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -169,10 +187,12 @@ class Users(ApiManager):
     def users_create_uuid_customer(self, uuid_customer: str,
         kwargs: dict = None, **payload) -> list:
         """Create User Tenant
+
         Args:
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             phone (string optional): additional filter - payload
             verified_email (boolean optional): additional filter - payload
@@ -183,6 +203,7 @@ class Users(ApiManager):
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -201,10 +222,12 @@ class Users(ApiManager):
     def user(self, name: str, warm_start: bool = False, kwargs: dict = None
         ) -> list:
         """Read User
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -214,10 +237,12 @@ class Users(ApiManager):
 
     def users_put(self, name: str, kwargs: dict = None, **payload) -> list:
         """Update User
+
         Args:
             name (str, required): name
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             phone (string optional): additional filter - payload
             verified_email (boolean optional): additional filter - payload
@@ -228,6 +253,7 @@ class Users(ApiManager):
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -245,9 +271,11 @@ class Users(ApiManager):
 
     def users_delete(self, name: str, kwargs: dict = None) -> list:
         """Delete User
+
         Args:
             name (str, required): name
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -258,6 +286,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Dashboards
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -265,6 +294,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             dashboard_name (string optional): additional filter - parameter
@@ -273,6 +303,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -291,10 +322,12 @@ class Users(ApiManager):
     def users_dashboards_create(self, name: str, uuid_dashboard: str,
         kwargs: dict = None) -> list:
         """Add Dashboard
+
         Args:
             name (str, required): name
             uuid_dashboard (str, required): uuid_dashboard
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -305,10 +338,12 @@ class Users(ApiManager):
     def users_dashboards_delete(self, name: str, uuid_dashboard: str,
         kwargs: dict = None) -> list:
         """Remove Dashboard
+
         Args:
             name (str, required): name
             uuid_dashboard (str, required): uuid_dashboard
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -320,6 +355,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Groups
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -327,6 +363,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
@@ -335,6 +372,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -353,10 +391,12 @@ class Users(ApiManager):
     def users_groups_create(self, name: str, uuid_group: str,
         kwargs: dict = None) -> list:
         """Add Group
+
         Args:
             name (str, required): name
             uuid_group (str, required): uuid_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -367,10 +407,12 @@ class Users(ApiManager):
     def users_groups_delete(self, name: str, uuid_group: str,
         kwargs: dict = None) -> list:
         """Remove Group
+
         Args:
             name (str, required): name
             uuid_group (str, required): uuid_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -382,6 +424,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Virtual Domains
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -389,6 +432,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             domain_code (string optional): additional filter - parameter
@@ -397,6 +441,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -416,10 +461,12 @@ class Users(ApiManager):
     def users_virtual_domains_create(self, name: str,
         uuid_virtual_domain: str, kwargs: dict = None) -> list:
         """Add Virtual Domain
+
         Args:
             name (str, required): name
             uuid_virtual_domain (str, required): uuid_virtual_domain
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -430,10 +477,12 @@ class Users(ApiManager):
     def users_virtual_domains_delete(self, name: str,
         uuid_virtual_domain: str, kwargs: dict = None) -> list:
         """Remove Virtual Domain
+
         Args:
             name (str, required): name
             uuid_virtual_domain (str, required): uuid_virtual_domain
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -445,6 +494,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Customers
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -452,6 +502,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             company_name (string optional): additional filter - parameter
@@ -460,6 +511,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -478,10 +530,12 @@ class Users(ApiManager):
     def users_customers_create(self, name: str, uuid_customer: str,
         kwargs: dict = None) -> list:
         """Add Customer
+
         Args:
             name (str, required): name
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -492,10 +546,12 @@ class Users(ApiManager):
     def users_customers_delete(self, name: str, uuid_customer: str,
         kwargs: dict = None) -> list:
         """Remove Customer
+
         Args:
             name (str, required): name
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -507,6 +563,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Starred Customers
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -514,6 +571,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -521,6 +579,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -539,10 +598,12 @@ class Users(ApiManager):
     def users_starred_customers_create(self, name: str, uuid_customer: str,
         kwargs: dict = None) -> list:
         """Mark Customer As Starred
+
         Args:
             name (str, required): name
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -553,10 +614,12 @@ class Users(ApiManager):
     def users_starred_customers_delete(self, name: str, uuid_customer: str,
         kwargs: dict = None) -> list:
         """Mark Customer As Not Starred
+
         Args:
             name (str, required): name
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -568,6 +631,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Widget Groups
+
         Args:
             name (str, required): name
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -575,6 +639,7 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
@@ -583,6 +648,7 @@ class Users(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -601,10 +667,12 @@ class Users(ApiManager):
     def users_widget_groups_create(self, name: str, uuid_widget_group: str,
         kwargs: dict = None) -> list:
         """Create Wg Relation
+
         Args:
             name (str, required): name
             uuid_widget_group (str, required): uuid_widget_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -615,10 +683,12 @@ class Users(ApiManager):
     def users_widget_groups_delete(self, name: str, uuid_widget_group: str,
         kwargs: dict = None) -> list:
         """Mark Customer As Not Starred
+
         Args:
             name (str, required): name
             uuid_widget_group (str, required): uuid_widget_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -630,6 +700,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Customers
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -638,8 +709,10 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -648,6 +721,7 @@ class Users(ApiManager):
             "uuid_customer": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -664,6 +738,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Customers
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -671,6 +746,7 @@ class Users(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -679,6 +755,7 @@ class Users(ApiManager):
             "uuid_customer": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -691,6 +768,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Groups
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -699,8 +777,10 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -709,6 +789,7 @@ class Users(ApiManager):
             "uuid_group": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -725,6 +806,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Groups
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -732,6 +814,7 @@ class Users(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -740,6 +823,7 @@ class Users(ApiManager):
             "uuid_group": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -752,6 +836,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Virtual Domains
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -760,8 +845,10 @@ class Users(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -770,6 +857,7 @@ class Users(ApiManager):
             "uuid_virtual_domain": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -786,6 +874,7 @@ class Users(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Virtual Domains
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -793,6 +882,7 @@ class Users(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -801,6 +891,7 @@ class Users(ApiManager):
             "uuid_virtual_domain": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

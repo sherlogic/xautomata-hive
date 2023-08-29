@@ -8,12 +8,14 @@ class UsersNotifications(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Notifications
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -27,6 +29,7 @@ class UsersNotifications(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -47,9 +50,11 @@ class UsersNotifications(ApiManager):
     def users_notifications_create(self, kwargs: dict = None, **payload
         ) -> list:
         """Create Notification
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             username (string required): additional filter - payload
             title (string required): additional filter - payload
@@ -57,6 +62,7 @@ class UsersNotifications(ApiManager):
             read (boolean optional): additional filter - payload
             sent (boolean optional): additional filter - payload
             timestamp (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -74,15 +80,18 @@ class UsersNotifications(ApiManager):
     def users_notifications_put(self, uuid: str, kwargs: dict = None, **payload
         ) -> list:
         """Update Notification
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             title (string optional): additional filter - payload
             body (array object optional): additional filter - payload
             read (boolean optional): additional filter - payload
             sent (boolean optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -98,9 +107,11 @@ class UsersNotifications(ApiManager):
     def users_notifications_delete(self, uuid: str, kwargs: dict = None
         ) -> list:
         """Delete Notifcation
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

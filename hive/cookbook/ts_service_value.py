@@ -8,12 +8,14 @@ class TsServiceValue(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Value Services
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -29,6 +31,7 @@ class TsServiceValue(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -51,14 +54,17 @@ class TsServiceValue(ApiManager):
 
     def ts_service_value_create(self, kwargs: dict = None, **payload) -> list:
         """Create Timeseries Service Value
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             uuid_service (string required): additional filter - payload
             timestamp (string required): additional filter - payload
             unit (string required): additional filter - payload
             value (number required): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -74,13 +80,16 @@ class TsServiceValue(ApiManager):
     def ts_service_value_delete(self, uuid_service: str,
         kwargs: dict = None, **params) -> list:
         """Delete Timeseries Service Value
+
         Args:
             uuid_service (str, required): uuid_service
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             ts_start (string required): additional filter - parameter
             ts_end (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -96,12 +105,14 @@ class TsServiceValue(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Services
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -120,6 +131,7 @@ class TsServiceValue(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -145,6 +157,7 @@ class TsServiceValue(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Status Metrics
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -155,14 +168,17 @@ class TsServiceValue(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             ts_start (string required): additional filter - parameter
             ts_end (string required): additional filter - parameter
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -180,6 +196,7 @@ class TsServiceValue(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Create Ts Service Value
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -187,6 +204,7 @@ class TsServiceValue(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -197,6 +215,7 @@ class TsServiceValue(ApiManager):
             "value": "number", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -209,6 +228,7 @@ class TsServiceValue(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Delete Ts Service Value
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -217,14 +237,17 @@ class TsServiceValue(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             ts_start (string required): additional filter - parameter
             ts_end (string required): additional filter - parameter
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

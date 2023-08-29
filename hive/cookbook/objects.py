@@ -7,12 +7,14 @@ class Objects(ApiManager):
     def objects(self, warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Read Objects
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -27,6 +29,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -47,9 +50,11 @@ class Objects(ApiManager):
 
     def objects_create(self, kwargs: dict = None, **payload) -> list:
         """Create Object
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             name (string required): additional filter - payload
             description (string optional): additional filter - payload
@@ -59,6 +64,7 @@ class Objects(ApiManager):
             data_profile (array object optional): additional filter - payload
             automata_domain (array object optional): additional filter - payload
             status (string required): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -78,10 +84,12 @@ class Objects(ApiManager):
     def object(self, uuid: str, warm_start: bool = False, kwargs: dict = None
         ) -> list:
         """Read Object
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -92,12 +100,14 @@ class Objects(ApiManager):
     def objects_put(self, uuid: str, params: dict = False,
         kwargs: dict = None, **payload) -> list:
         """Update Object
+
         Args:
             uuid (str, required): uuid
             params (dict, optional): additional parameters for the API.
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             uuid_probe (string optional): additional filter - parameter
             name (string optional): additional filter - payload
@@ -108,6 +118,7 @@ class Objects(ApiManager):
             data_profile (array object optional): additional filter - payload
             automata_domain (array object optional): additional filter - payload
             status (string optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -126,9 +137,11 @@ class Objects(ApiManager):
 
     def objects_delete(self, uuid: str, kwargs: dict = None) -> list:
         """Delete Object
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -139,6 +152,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Metric Types
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -146,6 +160,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
@@ -154,6 +169,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -173,6 +189,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Hosteds
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -180,6 +197,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -187,6 +205,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -205,6 +224,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Groups
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -212,6 +232,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
@@ -220,6 +241,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -238,10 +260,12 @@ class Objects(ApiManager):
     def objects_groups_create(self, uuid: str, uuid_group: str,
         kwargs: dict = None) -> list:
         """Add Group
+
         Args:
             uuid (str, required): uuid
             uuid_group (str, required): uuid_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -252,10 +276,12 @@ class Objects(ApiManager):
     def objects_groups_delete(self, uuid: str, uuid_group: str,
         kwargs: dict = None) -> list:
         """Remove Group
+
         Args:
             uuid (str, required): uuid
             uuid_group (str, required): uuid_group
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -267,6 +293,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Probes
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -274,6 +301,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
@@ -282,6 +310,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -300,10 +329,12 @@ class Objects(ApiManager):
     def objects_probes_create(self, uuid: str, uuid_probe: str,
         kwargs: dict = None) -> list:
         """Add Probe
+
         Args:
             uuid (str, required): uuid
             uuid_probe (str, required): uuid_probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -314,10 +345,12 @@ class Objects(ApiManager):
     def objects_probes_delete(self, uuid: str, uuid_probe: str,
         kwargs: dict = None) -> list:
         """Remove Probe
+
         Args:
             uuid (str, required): uuid
             uuid_probe (str, required): uuid_probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -329,6 +362,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Downtimes
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -336,6 +370,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
@@ -345,6 +380,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -363,10 +399,12 @@ class Objects(ApiManager):
     def objects_downtimes_create(self, uuid: str, uuid_downtime: str,
         kwargs: dict = None) -> list:
         """Add Downtime
+
         Args:
             uuid (str, required): uuid
             uuid_downtime (str, required): uuid_downtime
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -377,10 +415,12 @@ class Objects(ApiManager):
     def objects_downtimes_delete(self, uuid: str, uuid_downtime: str,
         kwargs: dict = None) -> list:
         """Remove Downtime
+
         Args:
             uuid (str, required): uuid
             uuid_downtime (str, required): uuid_downtime
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -392,6 +432,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """List Dispatchers
+
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -399,6 +440,7 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
@@ -408,6 +450,7 @@ class Objects(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -426,10 +469,12 @@ class Objects(ApiManager):
     def objects_dispatchers_create(self, uuid: str, uuid_dispatcher: str,
         kwargs: dict = None) -> list:
         """Add Dispatcher
+
         Args:
             uuid (str, required): uuid
             uuid_dispatcher (str, required): uuid_dispatcher
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -440,10 +485,12 @@ class Objects(ApiManager):
     def objects_dispatchers_delete(self, uuid: str, uuid_dispatcher: str,
         kwargs: dict = None) -> list:
         """Remove Dispatcher
+
         Args:
             uuid (str, required): uuid
             uuid_dispatcher (str, required): uuid_dispatcher
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -455,6 +502,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Objects
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -465,13 +513,16 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -488,6 +539,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Read By Code
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -497,11 +549,13 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
             "name": "string", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -513,6 +567,7 @@ class Objects(ApiManager):
     def objects_create_bulk(self, payload: list, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Bulk Create Objects
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -521,8 +576,10 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -537,6 +594,7 @@ class Objects(ApiManager):
             "status": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -552,6 +610,7 @@ class Objects(ApiManager):
     def objects_delete_bulk(self, payload: list, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None) -> list:
         """Bulk Delete Objects
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -559,11 +618,13 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -576,6 +637,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Groups
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -584,8 +646,10 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -594,6 +658,7 @@ class Objects(ApiManager):
             "uuid_object": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -610,6 +675,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Groups
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -617,6 +683,7 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -625,6 +692,7 @@ class Objects(ApiManager):
             "uuid_object": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -637,6 +705,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Downtimes
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -645,8 +714,10 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -655,6 +726,7 @@ class Objects(ApiManager):
             "uuid_object": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -671,6 +743,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Downtimes
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -678,6 +751,7 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -686,6 +760,7 @@ class Objects(ApiManager):
             "uuid_object": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -698,6 +773,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Bulk Link Probes
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -706,8 +782,10 @@ class Objects(ApiManager):
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             best_effort (boolean optional): additional filter - parameter
+
         Examples:
             payload = 
           [
@@ -716,6 +794,7 @@ class Objects(ApiManager):
             "uuid_probe": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -732,6 +811,7 @@ class Objects(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Probes
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -739,6 +819,7 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -747,6 +828,7 @@ class Objects(ApiManager):
             "uuid_probe": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

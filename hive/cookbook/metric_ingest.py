@@ -7,6 +7,7 @@ class MetricIngest(ApiManager):
     def metric_ingest_create(self, payload: list, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None) -> list:
         """Insert Metric
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -14,6 +15,7 @@ class MetricIngest(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -50,6 +52,7 @@ class MetricIngest(ApiManager):
             "value_3": "number", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

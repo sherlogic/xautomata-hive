@@ -8,12 +8,14 @@ class TsCostAzureRaw(ApiManager):
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Costs
+
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
@@ -25,6 +27,7 @@ class TsCostAzureRaw(ApiManager):
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -43,9 +46,11 @@ class TsCostAzureRaw(ApiManager):
 
     def ts_cost_azure_raw_create(self, kwargs: dict = None, **payload) -> list:
         """Create Cost
+
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             tags (array object optional): additional filter - payload
             term (string optional): additional filter - payload
@@ -119,6 +124,7 @@ class TsCostAzureRaw(ApiManager):
             uuid (string required): additional filter - payload
             uuid_metric (string required): additional filter - payload
             date (string required): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -192,10 +198,12 @@ class TsCostAzureRaw(ApiManager):
     def ts_cost_azure_raw_put(self, uuid: str, kwargs: dict = None, **payload
         ) -> list:
         """Update Message
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
+
         Keyword Args:
             tags (array object optional): additional filter - payload
             term (string optional): additional filter - payload
@@ -266,6 +274,7 @@ class TsCostAzureRaw(ApiManager):
             paygcostinbillingcurrency (number optional): additional filter - payload
             partnerearnedcreditapplied (boolean optional): additional filter - payload
             exchangeratepricingtobilling (number optional): additional filter - payload
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -337,9 +346,11 @@ class TsCostAzureRaw(ApiManager):
 
     def ts_cost_azure_raw_delete(self, uuid: str, kwargs: dict = None) -> list:
         """Delete Cost
+
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -350,13 +361,16 @@ class TsCostAzureRaw(ApiManager):
     def ts_cost_azure_raw_metric_delete(self, uuid_metric: str,
         kwargs: dict = None, **params) -> list:
         """Delete For Uuid Metric
+
         Args:
             uuid_metric (str, required): uuid_metric
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -372,14 +386,17 @@ class TsCostAzureRaw(ApiManager):
     def ts_cost_azure_raw_probe_delete(self, uuid_probe: str,
         kwargs: dict = None, **params) -> list:
         """Delete For Uuid Probe And Date Range
+
         Args:
             uuid_probe (str, required): uuid_probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             tenant_id (string optional): additional filter - parameter
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -396,6 +413,7 @@ class TsCostAzureRaw(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Create Ts Service Value
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -403,6 +421,7 @@ class TsCostAzureRaw(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
@@ -481,6 +500,7 @@ class TsCostAzureRaw(ApiManager):
             "date": "string", required
            }
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -493,6 +513,7 @@ class TsCostAzureRaw(ApiManager):
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:
         """Bulk Delete Anomalies
+
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -500,11 +521,13 @@ class TsCostAzureRaw(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+
         Examples:
             payload = 
           [
             "uuid": "str", required
           ]
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -516,14 +539,17 @@ class TsCostAzureRaw(ApiManager):
     def ts_cost_azure_raw_compute_probe_create(self, uuid_probe: str,
         kwargs: dict = None, **params) -> list:
         """Bulk Transform Cost
+
         Args:
             uuid_probe (str, required): uuid_probe
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             tenant_id (string optional): additional filter - parameter
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
@@ -541,13 +567,16 @@ class TsCostAzureRaw(ApiManager):
     def ts_cost_azure_raw_compute_tenant_create(self, uuid_tenant: str,
         kwargs: dict = None, **params) -> list:
         """Bulk Transform Cost Tenant
+
         Args:
             uuid_tenant (str, required): uuid_tenant
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
+
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+
         Returns: list"""
         if kwargs is None:
             kwargs = dict()

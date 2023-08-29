@@ -313,10 +313,10 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
             type_doc = " ".join(payload[param]['type']) if isinstance(payload[param]['type'], list) else payload[param]['type']
             full_params_doc.append(f"            {param} ({type_doc} {required_dict[payload[param]['required']]}): {text_doc} - payload")
 
-    args_doc = '        Args:'
-    kwargs_title_doc = '        Keyword Args:'
-    examples_doc = '        Examples:'
-    return_doc = '        Returns: list'
+    args_doc = '\n        Args:'
+    kwargs_title_doc = '\n        Keyword Args:'
+    examples_doc = '\n        Examples:'
+    return_doc = '\n        Returns: list'
     description = [description, args_doc]
     description += function_doc
 
