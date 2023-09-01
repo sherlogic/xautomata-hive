@@ -11,10 +11,11 @@ from hive.exceptions import UnauthorizedException
 from hive.infrastrucure_keys import Keys
 import warnings
 import gc
+import functools
 
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
-METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
+# METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
 
 
 def get_session():
@@ -22,7 +23,8 @@ def get_session():
     Add retry logic and policies about methods and statuses for requests
     """
     ss = requests.Session()
-    retry_strategy = Retry(connect=3, total=3, status_forcelist=FORCE_STATUS, allowed_methods=METHODS)
+    retry_strategy = Retry(total=5, status_forcelist=FORCE_STATUS, backoff_factor=5)
+    ss.request = functools.partial(ss.request, timeout=120, verify=True)
     ss.mount('https://', HTTPAdapter(max_retries=retry_strategy))
     ss.mount('http://', HTTPAdapter(max_retries=retry_strategy))
     return ss
@@ -587,8 +589,8 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
 
         return response
 
-    def dispatecher(self, uuids: list, types: Literal['services', 'metrics', 'metric_types', 'objects', 'groups'], notification_provider_types: dict,
-                    notification_providers: dict, messages: dict, calendar: dict, dispatcher: dict):
+    def dispatcher_linker(self, uuids: list, types: Literal['services', 'metrics', 'metric_types', 'objects', 'groups'],
+                          messages: dict, calendar: dict, dispatcher: dict, notification_provider_types: dict = None, notification_providers: dict = None):
         """
         create a dispatcher with the entire chain of elements to be used on a specific metric
 
@@ -608,7 +610,6 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
             }
 
             notification_providers = {
-                "uuid_notification_provider_type": uuid_npt,
                 "app_name": app_name,
                 "endpoint": {}
             }
@@ -656,9 +657,6 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
             }
 
             dispatcher = {
-              "uuid_notification_provider": uuid_np,
-              "uuid_calendar": uuid_calendar,
-              "uuid_message": uuid_m,
               "uuid_opening_reason": "string",
               "uuid_reason_for_closure": "string",
               "code": "string",
@@ -677,17 +675,20 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
         def select_get_params(_params: dict, get_keys: tuple):
             return dict((k, _params[k]) for k in get_keys)
 
-        # notification provider types
-        uuid_npt, _, _, _ = self.get_post(url_get='/notification_provider_types/',
-                                          get_params=select_get_params(notification_provider_types, ('code',)),
-                                          post_params=notification_provider_types)
-        print(f'notification provider type has been set ({uuid_npt})')
+        uuid_np = 0
+        if notification_provider_types is not None:
+            # notification provider types
+            uuid_npt, _, _, _ = self.get_post(url_get='/notification_provider_types/',
+                                              get_params=select_get_params(notification_provider_types, ('code',)),
+                                              post_params=notification_provider_types)
+            print(f'notification provider type has been set ({uuid_npt})')
 
-        # notification providers
-        uuid_np, _, _, _ = self.get_post(url_get='/notification_providers/',
-                                         get_params=select_get_params(notification_providers, ('uuid_notification_provider_type', 'app_name')),
-                                         post_params=notification_providers)
-        print(f'notification provider has been set ({uuid_np})')
+            notification_providers['uuid_notification_provider_type'] = uuid_npt
+            # notification providers
+            uuid_np, _, _, _ = self.get_post(url_get='/notification_providers/',
+                                             get_params=select_get_params(notification_providers, ('uuid_notification_provider_type', 'app_name')),
+                                             post_params=notification_providers)
+            print(f'notification provider has been set ({uuid_np})')
 
         # messages
         uuid_m, _, _, _ = self.get_post(url_get='/messages/',
@@ -703,6 +704,10 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
                                         post_params=calendar)
         print(f'calendar has been set ({uuid_calendar})')
 
+        if notification_provider_types is not None: dispatcher['uuid_notification_provider'] = uuid_np
+        dispatcher["uuid_calendar"] = uuid_calendar
+        dispatcher["uuid_message"] = uuid_m
+
         # dispatcher
         uuid_d, _, _, _ = self.get_post(url_get='/dispatcher/',
                                         get_params=select_get_params(dispatcher, ('tuple_required', 'uuid_message', 'code', 'status',)),
@@ -712,5 +717,5 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
         # COLLEGAMENTO
         # lista degli uuid degli oggetti da legare a questo dispacter
         for uuid in uuids:
-            self.execute(mode='POST', path=f'/dispatcher/{uuid_d}/{types}/{uuid}')
+            self.execute(mode='POST', path=f'/dispatchers/{uuid_d}/{types}/{uuid}')
         print(f'all the {types} have been linked with the selected dispatcher')
