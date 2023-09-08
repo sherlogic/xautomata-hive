@@ -367,8 +367,13 @@ class ApiManager:
             else:
                 response_content_post_raw = self.execute('POST', url_post, payload=element_to_post, params=add_post_params,
                                                          page_size=page_size)
-                response_content_post = [response_content_post_ele['uuids'] for response_content_post_ele in response_content_post_raw]
-                response_content_post = [item for sublist in response_content_post for item in sublist]
+                # la risposta di una post e' costituita da [{success: num, failed: num, uuids: [uuid1, uuid2]} , {}, ...]
+                # per mettere assieme tutti gli uuid presenti su piu pagine va aperto ogni json e messi gli uuid in un vettore
+                response_content_post = []
+                for item in response_content_post_raw:
+                    response_content_post += item["uuids"]
+
+                del response_content_post_raw
 
             post_to_key_res_dict = dict()
             for i, id_key in enumerate(key_post):
