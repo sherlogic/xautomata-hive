@@ -423,6 +423,44 @@ class Metrics(ApiManager):
             warm_start, params=params, payload=payload, **kwargs)
         return response
 
+    def metrics_services_bulk(self, payload: list, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """Read Metrics
+
+        Args:
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        warning_wrong_parameters(self.metrics_services_bulk.__name__,
+            params, official_params_list)
+        response = self.execute('POST', path=
+            f'/metrics/bulk/read/services/', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
+        return response
+
     def metrics_read_by_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000, kwargs: dict = None
         ) -> list:

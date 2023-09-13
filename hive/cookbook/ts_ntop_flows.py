@@ -58,36 +58,38 @@ class TsNtopFlows(ApiManager):
             params=params, **kwargs)
         return response
 
-    def ts_ntop_flows_create(self, kwargs: dict = None, **payload) -> list:
+    def ts_ntop_flows_create(self, payload: list, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None) -> list:
         """Create Ts Ntop Flow
 
         Args:
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
 
-        Keyword Args:
-            uuid_service (string optional): additional filter - payload
-            l7_proto (string optional): additional filter - payload
-            ip_src_addr (integer string string optional): additional filter - payload
-            ip_dst_addr (integer string string optional): additional filter - payload
-            l4_dst_port (integer optional): additional filter - payload
-            in_bytes (integer optional): additional filter - payload
-            out_bytes (integer optional): additional filter - payload
-            last_switched (string optional): additional filter - payload
-            interface_id (integer optional): additional filter - payload
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_service": "string", optional
+            "l7_proto": "string", optional
+            "ip_src_addr": "integer string string", optional
+            "ip_dst_addr": "integer string string", optional
+            "l4_dst_port": "integer", optional
+            "in_bytes": "integer", optional
+            "out_bytes": "integer", optional
+            "last_switched": "string", optional
+            "interface_id": "integer", optional
+           }
+          ]
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['uuid_service', 'l7_proto', 'ip_src_addr',
-            'ip_dst_addr', 'l4_dst_port', 'in_bytes', 'out_bytes',
-            'last_switched', 'interface_id']
-        payload.get('uuid_service'), payload.get('l7_proto'), payload.get(
-            'ip_src_addr'), payload.get('ip_dst_addr'), payload.get(
-            'l4_dst_port'), payload.get('in_bytes'), payload.get('out_bytes'
-            ), payload.get('last_switched'), payload.get('interface_id')
-        warning_wrong_parameters(self.ts_ntop_flows_create.__name__,
-            payload, official_payload_list)
-        response = self.execute('POST', path=f'/ts_ntop_flows/', payload=
-            payload, **kwargs)
+        response = self.execute('POST', path=f'/ts_ntop_flows/',
+            single_page=single_page, page_size=page_size, payload=payload,
+            **kwargs)
         return response

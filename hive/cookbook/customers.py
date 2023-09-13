@@ -66,7 +66,7 @@ class Customers(ApiManager):
 
         Keyword Args:
             type (string optional): additional filter - payload
-            code (string optional): additional filter - payload
+            code (string required): additional filter - payload
             company_name (string required): additional filter - payload
             address (string required): additional filter - payload
             zip_code (string required): additional filter - payload
@@ -775,7 +775,7 @@ class Customers(ApiManager):
           [
            {
             "type": "string", optional
-            "code": "string", optional
+            "code": "string", required
             "company_name": "string", required
             "address": "string", required
             "zip_code": "string", required
