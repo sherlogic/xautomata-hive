@@ -108,6 +108,7 @@ nav:
           - ts_service_status: hive.cookbook.ts_service_status
           - ts_service_value: hive.cookbook.ts_service_value
           - users: hive.cookbook.users
+          - users_notifications: hive.cookbook.users_notifications
           - virtual_domains: hive.cookbook.virtual_domains
           - webhooks: hive.cookbook.webhooks
           - widgets: hive.cookbook.widgets
