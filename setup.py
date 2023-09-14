@@ -22,7 +22,7 @@ requests = 'requests==2.31.0'
 
 setup(
     name='xautomata-hive',
-    python_requires='>=3.8.0',
+    python_requires='>=3.6.0',
     version=version,
     packages=find_packages(include=['hive*']),
     license='MIT',
