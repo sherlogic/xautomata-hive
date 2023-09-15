@@ -518,7 +518,8 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
         "group_status": "A",
         "object_status": "A",
         "metric_type_status": "A",
-        "metric_status": "A"
+        "metric_status": "A",
+        "service_status": "A"
     }
 
     active_items_bulk = {
@@ -527,7 +528,8 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
         "group_status": ["A"],
         "object_status": ["A"],
         "metric_type_status": ["A"],
-        "metric_status": ["A"]
+        "metric_status": ["A"],
+        "service_status": ["A"]
     }
 
     @staticmethod
