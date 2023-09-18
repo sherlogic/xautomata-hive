@@ -148,17 +148,13 @@ class ApiManager:
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
             response = get_session().request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
             if response.status_code == 401: raise UnauthorizedException
-            if response.status_code != 200:
+            if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
+                print()
                 print('-' * 50)
                 print('error message:')
-                # if 'message' in list(response.json().keys()):
-                #     print(response.json()['message'])
-                # elif 'detail' in list(response.json().keys()):
-                #     print(response.json()['detail'][0])
-                # else:
-                #     print(response.json())
                 print(response.json())
                 print('-' * 50)
+                print()
             response.raise_for_status()
 
             if response.status_code == 200 and _params.get('count', False):
