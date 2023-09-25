@@ -18,13 +18,13 @@ FORCE_STATUS = [429, 500, 502, 503, 504]
 # METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
 
 
-def get_session():
+def get_session(timeout=120):
     """
     Add retry logic and policies about methods and statuses for requests
     """
     ss = requests.Session()
     retry_strategy = Retry(total=5, status_forcelist=FORCE_STATUS, backoff_factor=5)
-    ss.request = functools.partial(ss.request, timeout=120, verify=True)
+    ss.request = functools.partial(ss.request, timeout=timeout, verify=True)
     ss.mount('https://', HTTPAdapter(max_retries=retry_strategy))
     ss.mount('http://', HTTPAdapter(max_retries=retry_strategy))
     return ss
@@ -48,6 +48,7 @@ class ApiManager:
         self.root = root.rstrip('/')
         self.credentials = (user, password)
         self.token = 'UNDEFINED'
+        self._timeout = 120
         self.authenticate()
         self._get_only = False
 
@@ -59,13 +60,13 @@ class ApiManager:
         """
         user, password = self.credentials
         auth_date = {"grant_type": "password", "username": user, "password": password}
-        response = get_session().post(f'{self.root}/login/access-token', auth_date)
+        response = get_session(self._timeout).post(f'{self.root}/login/access-token', auth_date)
         response.raise_for_status()
         self.token = json.loads(response.content.decode('utf-8'))['access_token']
 
     def openapi(self):
         """metodo che restituisce gli schema degli end point"""
-        response = get_session().request('GET', url=f'{self.root}/openapi.js',
+        response = get_session(self._timeout).request('GET', url=f'{self.root}/openapi.js',
                                          headers={'Authorization': f'Bearer {self.token}'})
         data = json.loads(response.content[15:].decode('utf-8'))
         return data
@@ -146,7 +147,7 @@ class ApiManager:
         @paginate(single_page=single_page, page_size=page_size, skip=_params_['skip'], limit=_params_['limit'], bulk=bulk)
         @ratelimiter
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
-            response = get_session().request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
+            response = get_session(self._timeout).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
             if response.status_code == 401: raise UnauthorizedException
             if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
                 print()
