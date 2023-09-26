@@ -20,10 +20,12 @@ class TsNtopFlows(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_service (string optional): additional filter - parameter
-            l7_proto (integer optional): additional filter - parameter
+            l7_proto (string optional): additional filter - parameter
             ip_src_addr (None optional): additional filter - parameter
             ip_dst_addr (None optional): additional filter - parameter
             l4_dst_port (integer optional): additional filter - parameter
+            fqdn_src_addr (string optional): additional filter - parameter
+            fqdn_dst_addr (string optional): additional filter - parameter
             in_bytes (integer optional): additional filter - parameter
             out_bytes (integer optional): additional filter - parameter
             last_switched_start (string optional): additional filter - parameter
@@ -40,12 +42,13 @@ class TsNtopFlows(ApiManager):
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_service',
             'l7_proto', 'ip_src_addr', 'ip_dst_addr', 'l4_dst_port',
-            'in_bytes', 'out_bytes', 'last_switched_start',
-            'last_switched_end', 'interface_id', 'skip', 'limit', 'like',
-            'join', 'count']
+            'fqdn_src_addr', 'fqdn_dst_addr', 'in_bytes', 'out_bytes',
+            'last_switched_start', 'last_switched_end', 'interface_id',
+            'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_service'), params.get('l7_proto'), params.get('ip_src_addr'
             ), params.get('ip_dst_addr'), params.get('l4_dst_port'
+            ), params.get('fqdn_src_addr'), params.get('fqdn_dst_addr'
             ), params.get('in_bytes'), params.get('out_bytes'), params.get(
             'last_switched_start'), params.get('last_switched_end'
             ), params.get('interface_id'), params.get('skip'), params.get(
@@ -79,6 +82,8 @@ class TsNtopFlows(ApiManager):
             "ip_src_addr": "integer string string", optional
             "ip_dst_addr": "integer string string", optional
             "l4_dst_port": "integer", optional
+            "fqdn_src_addr": "string", optional
+            "fqdn_dst_addr": "string", optional
             "in_bytes": "integer", optional
             "out_bytes": "integer", optional
             "last_switched": "string", optional

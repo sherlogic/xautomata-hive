@@ -17,6 +17,7 @@ class TreeHierarchy(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
@@ -35,6 +36,8 @@ class TreeHierarchy(ApiManager):
             group_name (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
             group_type (string optional): additional filter - parameter
+            uuid_virtual_domain (string optional): additional filter - parameter
+            virtual_domain_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -44,22 +47,26 @@ class TreeHierarchy(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
-            'customer_code', 'customer_status', 'uuid_site', 'site_code',
-            'site_description', 'site_address', 'site_zip_code',
-            'site_city', 'site_country', 'site_state_province',
-            'site_status', 'uuid_group', 'group_name', 'group_status',
-            'group_type', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
-            'customer_status'), params.get('uuid_site'), params.get('site_code'
-            ), params.get('site_description'), params.get('site_address'
-            ), params.get('site_zip_code'), params.get('site_city'
-            ), params.get('site_country'), params.get('site_state_province'
-            ), params.get('site_status'), params.get('uuid_group'), params.get(
-            'group_name'), params.get('group_status'), params.get('group_type'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['extract_severity', 'sort_by',
+            'null_fields', 'uuid_customer', 'customer_code',
+            'customer_status', 'uuid_site', 'site_code', 'site_description',
+            'site_address', 'site_zip_code', 'site_city', 'site_country',
+            'site_state_province', 'site_status', 'uuid_group',
+            'group_name', 'group_status', 'group_type',
+            'uuid_virtual_domain', 'virtual_domain_name', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('extract_severity'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('uuid_customer'), params.get(
+            'customer_code'), params.get('customer_status'), params.get(
+            'uuid_site'), params.get('site_code'), params.get(
+            'site_description'), params.get('site_address'), params.get(
+            'site_zip_code'), params.get('site_city'), params.get(
+            'site_country'), params.get('site_state_province'), params.get(
+            'site_status'), params.get('uuid_group'), params.get('group_name'
+            ), params.get('group_status'), params.get('group_type'
+            ), params.get('uuid_virtual_domain'), params.get(
+            'virtual_domain_name'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.tree_hierarchy_groups.__name__,
             params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/groups',
@@ -82,6 +89,8 @@ class TreeHierarchy(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
+            extract_data_profile (boolean optional): additional filter - parameter
+            extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             uuid_customer (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
@@ -102,6 +111,8 @@ class TreeHierarchy(ApiManager):
             object_name (string optional): additional filter - parameter
             object_status (string optional): additional filter - parameter
             object_profile (string optional): additional filter - parameter
+            uuid_virtual_domain (string optional): additional filter - parameter
+            virtual_domain_name (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -111,25 +122,29 @@ class TreeHierarchy(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
+        official_params_list = ['sort_by', 'null_fields',
+            'extract_data_profile', 'extract_severity', 'uuid_customer',
             'customer_code', 'customer_status', 'uuid_site', 'site_code',
             'site_description', 'site_address', 'site_zip_code',
             'site_city', 'site_country', 'site_state_province',
             'site_status', 'uuid_group', 'group_name', 'group_status',
             'group_type', 'uuid_object', 'object_name', 'object_status',
-            'object_profile', 'skip', 'limit', 'like', 'join', 'count']
+            'object_profile', 'uuid_virtual_domain', 'virtual_domain_name',
+            'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
-            'customer_status'), params.get('uuid_site'), params.get('site_code'
-            ), params.get('site_description'), params.get('site_address'
-            ), params.get('site_zip_code'), params.get('site_city'
-            ), params.get('site_country'), params.get('site_state_province'
-            ), params.get('site_status'), params.get('uuid_group'), params.get(
-            'group_name'), params.get('group_status'), params.get('group_type'
-            ), params.get('uuid_object'), params.get('object_name'
-            ), params.get('object_status'), params.get('object_profile'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            'extract_data_profile'), params.get('extract_severity'
+            ), params.get('uuid_customer'), params.get('customer_code'
+            ), params.get('customer_status'), params.get('uuid_site'
+            ), params.get('site_code'), params.get('site_description'
+            ), params.get('site_address'), params.get('site_zip_code'
+            ), params.get('site_city'), params.get('site_country'), params.get(
+            'site_state_province'), params.get('site_status'), params.get(
+            'uuid_group'), params.get('group_name'), params.get('group_status'
+            ), params.get('group_type'), params.get('uuid_object'), params.get(
+            'object_name'), params.get('object_status'), params.get(
+            'object_profile'), params.get('uuid_virtual_domain'), params.get(
+            'virtual_domain_name'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         warning_wrong_parameters(self.tree_hierarchy_objects.__name__,
             params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/objects',
@@ -174,6 +189,7 @@ class TreeHierarchy(ApiManager):
             object_profile (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -190,7 +206,7 @@ class TreeHierarchy(ApiManager):
             'site_status', 'uuid_group', 'group_name', 'group_status',
             'group_type', 'uuid_object', 'object_name', 'object_status',
             'object_profile', 'metric_type_name', 'metric_type_status',
-            'skip', 'limit', 'like', 'join', 'count']
+            'metric_type_profile', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_customer'), params.get('customer_code'), params.get(
             'customer_status'), params.get('uuid_site'), params.get('site_code'
@@ -202,8 +218,9 @@ class TreeHierarchy(ApiManager):
             ), params.get('uuid_object'), params.get('object_name'
             ), params.get('object_status'), params.get('object_profile'
             ), params.get('metric_type_name'), params.get('metric_type_status'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            ), params.get('metric_type_profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         warning_wrong_parameters(self.tree_hierarchy_metric_types.__name__,
             params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/metric_types',

@@ -94,13 +94,12 @@ class Users(ApiManager):
         Keyword Args:
             app_id (string optional): additional filter - parameter
             username (string optional): additional filter - payload
-            email (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['username', 'email']
-        payload.get('username'), payload.get('email')
+        official_payload_list = ['username']
+        payload.get('username')
         warning_wrong_parameters(self.users_password_reset_create.__name__,
             payload, official_payload_list)
         response = self.execute('POST', path=f'/users/password_reset',

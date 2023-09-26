@@ -966,28 +966,6 @@ class Customers(ApiManager):
             page_size=page_size, payload=payload, **kwargs)
         return response
 
-    def customers_azure_create(self, kwargs: dict = None, **payload) -> list:
-        """Create Azure Customer
-
-        Args:
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            customer (None required): additional filter - payload
-            azure_customer (None required): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['customer', 'azure_customer']
-        payload.get('customer'), payload.get('azure_customer')
-        warning_wrong_parameters(self.customers_azure_create.__name__,
-            payload, official_payload_list)
-        response = self.execute('POST', path=f'/customers/azure/', payload=
-            payload, **kwargs)
-        return response
-
     def customers_azure_v2_create(self, kwargs: dict = None, **payload
         ) -> list:
         """Create Azure Customer V2
@@ -1118,48 +1096,6 @@ class Customers(ApiManager):
             kwargs)
         return response
 
-    def customers_azure_create_uuid(self, uuid: str, kwargs: dict = None,
-        **payload) -> list:
-        """Create Azure Customer From
-
-        Args:
-            uuid (str, required): uuid
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            target_company (string required): additional filter - payload
-            target_code (string required): additional filter - payload
-            address (string optional): additional filter - payload
-            zip_code (string optional): additional filter - payload
-            city (string optional): additional filter - payload
-            country (string optional): additional filter - payload
-            state_province (string optional): additional filter - payload
-            base_margin (number required): additional filter - payload
-            reserved_margin (number required): additional filter - payload
-            azure_customer_id (string required): additional filter - payload
-            uuid_probe_type (string optional): additional filter - payload
-            uuid_object (string optional): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['target_company', 'target_code', 'address',
-            'zip_code', 'city', 'country', 'state_province', 'base_margin',
-            'reserved_margin', 'azure_customer_id', 'uuid_probe_type',
-            'uuid_object']
-        payload.get('target_company'), payload.get('target_code'), payload.get(
-            'address'), payload.get('zip_code'), payload.get('city'
-            ), payload.get('country'), payload.get('state_province'
-            ), payload.get('base_margin'), payload.get('reserved_margin'
-            ), payload.get('azure_customer_id'), payload.get('uuid_probe_type'
-            ), payload.get('uuid_object')
-        warning_wrong_parameters(self.customers_azure_create.__name__,
-            payload, official_payload_list)
-        response = self.execute('POST', path=f'/customers/azure/{uuid}',
-            payload=payload, **kwargs)
-        return response
-
     def customers_aws_v2_subscription_create(self, kwargs: dict = None, **
         payload) -> list:
         """Create Aws Customer Sub
@@ -1183,7 +1119,7 @@ class Customers(ApiManager):
             f'/customers/aws/v2/subscription/', payload=payload, **kwargs)
         return response
 
-    def customers_aws_subscription_create(self, uuid: str,
+    def customers_aws_v2_subscription_create_uuid(self, uuid: str,
         kwargs: dict = None, **payload) -> list:
         """Create Aws Customer From V2 Sub
 
@@ -1218,10 +1154,11 @@ class Customers(ApiManager):
             ), payload.get('virtual_domain_code'), payload.get(
             'uuid_probe_type'), payload.get('uuid_object'), payload.get(
             'subscriptions')
-        warning_wrong_parameters(self.customers_aws_subscription_create.
+        warning_wrong_parameters(self.customers_aws_v2_subscription_create.
             __name__, payload, official_payload_list)
         response = self.execute('POST', path=
-            f'/customers/aws/subscription/{uuid}', payload=payload, **kwargs)
+            f'/customers/aws/v2/subscription/{uuid}', payload=payload, **kwargs
+            )
         return response
 
     def customers_networks(self, uuid_customer: str,
