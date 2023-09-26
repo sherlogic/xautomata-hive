@@ -44,11 +44,12 @@ class ApiManager:
         token (str): token di autenticazione delle api
     """
 
+    _timeout = 120
+
     def __init__(self, root, user, password):
         self.root = root.rstrip('/')
         self.credentials = (user, password)
         self.token = 'UNDEFINED'
-        self._timeout = 120
         self.authenticate()
         self._get_only = False
 
