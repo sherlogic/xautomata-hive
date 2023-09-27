@@ -212,7 +212,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     query = True if 'query' in name else False
 
     hidden_query = ['last_status']
-    hidden_bulk_post = ['metric_ingest', 'probes_log_ingest', 'ts_ntop_flows']
+    hidden_bulk_post = ['metric_ingest', 'probes_log_ingest']
 
     if mode == 'POST':
         for hidden in hidden_query:

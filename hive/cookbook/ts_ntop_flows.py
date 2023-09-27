@@ -61,9 +61,10 @@ class TsNtopFlows(ApiManager):
             params=params, **kwargs)
         return response
 
-    def ts_ntop_flows_create(self, payload: list, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None) -> list:
-        """Create Ts Ntop Flow
+    def ts_ntop_flows_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        ) -> list:
+        """Bulk Create Ts Ntop Flow
 
         Args:
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -94,7 +95,7 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/ts_ntop_flows/',
+        response = self.execute('POST', path=f'/ts_ntop_flows/bulk/create/',
             single_page=single_page, page_size=page_size, payload=payload,
             **kwargs)
         return response
