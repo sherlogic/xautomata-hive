@@ -189,3 +189,6 @@ from hive.api import XautomataApi
 xa = XautomataApi(root='root', user='user', password='passw')
 xa._get_only = True
 ```
+
+con il parametro privato *_timeout_retry* si possono impostare un numero di retry per le situazioni in cui si fallisca le
+request in caso di timeout, e il tempo tra un retry e quello successivo e' impostabile con *_timeout_sleep_time*.

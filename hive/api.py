@@ -6,7 +6,7 @@ from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 from tqdm import tqdm
 from requests import HTTPError
-from hive.decorators import ratelimiter, refresh, paginate, warmstart
+from hive.decorators import ratelimiter, refresh, paginate, warmstart, timeout_retry
 from hive.exceptions import UnauthorizedException
 from hive.infrastrucure_keys import Keys
 import warnings
@@ -18,7 +18,7 @@ FORCE_STATUS = [429, 500, 502, 503, 504]
 # METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
 
 
-def get_session(timeout=120):
+def get_session(timeout=150):
     """
     Add retry logic and policies about methods and statuses for requests
     """
@@ -44,7 +44,9 @@ class ApiManager:
         token (str): token di autenticazione delle api
     """
 
-    _timeout = 120
+    _timeout = 150
+    _timeout_retry = 0  # di default non si fanno retry sui timeout
+    _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
 
     def __init__(self, root, user, password):
         self.root = root.rstrip('/')
@@ -68,7 +70,7 @@ class ApiManager:
     def openapi(self):
         """metodo che restituisce gli schema degli end point"""
         response = get_session(self._timeout).request('GET', url=f'{self.root}/openapi.js',
-                                         headers={'Authorization': f'Bearer {self.token}'})
+                                                      headers={'Authorization': f'Bearer {self.token}'})
         data = json.loads(response.content[15:].decode('utf-8'))
         return data
 
@@ -145,6 +147,7 @@ class ApiManager:
 
         @warmstart(active=warm_start, args_ex=[2], verbose=False)
         @paginate(single_page=single_page, page_size=page_size, skip=_params_['skip'], limit=_params_['limit'], bulk=bulk)
+        @timeout_retry(max_tries=self._timeout_retry, sleep_time=self._timeout_sleep_time)
         @ratelimiter
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
             response = get_session(self._timeout).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
@@ -469,6 +472,8 @@ from hive.cookbook.external_tickets import ExternalTickets
 from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
 from hive.cookbook.metric_ingest import MetricIngest
+from hive.cookbook.microsoft import Microsoft
+from hive.cookbook.google import Google
 from hive.cookbook.login import Login
 from hive.cookbook.messages import Messages
 from hive.cookbook.metrics import Metrics
@@ -504,7 +509,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
@@ -705,8 +710,8 @@ class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Conta
         # chiedi un calendar per nome
         # se passi un json post_put del calender in json
         uuid_calendar, _, _, _ = self.get_post(url_get='/calendar/',
-                                        get_params=select_get_params(calendar, ('name', 'local_public_holidays')),
-                                        post_params=calendar)
+                                               get_params=select_get_params(calendar, ('name', 'local_public_holidays')),
+                                               post_params=calendar)
         print(f'calendar has been set ({uuid_calendar})')
 
         if notification_provider_types is not None: dispatcher['uuid_notification_provider'] = uuid_np

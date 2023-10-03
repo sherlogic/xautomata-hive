@@ -99,3 +99,147 @@ class TsNtopFlows(ApiManager):
             single_page=single_page, page_size=page_size, payload=payload,
             **kwargs)
         return response
+
+    def ts_ntop_flows_top_protocols(self, uuid_customer: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Top Protocols
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            profile (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('profile'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_ntop_flows_top_protocols.__name__,
+            params, official_params_list)
+        response = self.execute('GET', path=
+            f'/ts_ntop_flows/top_protocols/{uuid_customer}', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
+        return response
+
+    def ts_ntop_flows_top_talkers(self, uuid_customer: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Top Talkers
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            profile (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('profile'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_ntop_flows_top_talkers.__name__,
+            params, official_params_list)
+        response = self.execute('GET', path=
+            f'/ts_ntop_flows/top_talkers/{uuid_customer}', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
+        return response
+
+    def ts_ntop_flows_top_receivers(self, uuid_customer: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Top Receivers
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            profile (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('profile'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_ntop_flows_top_receivers.__name__,
+            params, official_params_list)
+        response = self.execute('GET', path=
+            f'/ts_ntop_flows/top_receivers/{uuid_customer}', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
+        return response
+
+    def ts_ntop_flows_top_protocols_history(self, uuid_customer: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Top Used Protocols
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            profile (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('profile'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        warning_wrong_parameters(self.ts_ntop_flows_top_protocols_history.
+            __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/ts_ntop_flows/top_protocols_history/{uuid_customer}',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
+        return response

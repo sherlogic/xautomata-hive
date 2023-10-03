@@ -7,7 +7,7 @@ import time
 import warnings
 from datetime import datetime
 from typing import Any, List
-
+import requests.exceptions
 from hive.exceptions import UnauthorizedException
 
 ratelimiter_count_glob = 1
@@ -93,6 +93,26 @@ def refresh(func):
             self = args[0]
             self.authenticate()
             return func(*args, **kwargs)
+
+    return behaviour
+
+
+def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
+
+    if func is None:
+        return lambda f: timeout_retry(func=f, max_tries=max_tries, sleep_time=sleep_time)
+
+    @functools.wraps(func)
+    def behaviour(*args, **kwargs):
+        for i in range(max_tries):
+            try:
+                return func(*args, **kwargs)
+            except requests.exceptions.ReadTimeout:
+                print(f'WARNING: timeout reached on get_session, sleep set to {sleep_time}, on retry num {i}')
+                time.sleep(sleep_time)
+
+        if max_tries > 0: print(f'WARNING: max retry excided')
+        raise requests.exceptions.ReadTimeout
 
     return behaviour
 

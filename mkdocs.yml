@@ -79,6 +79,7 @@ nav:
           - downtimes: hive.cookbook.downtimes
           - external_tickets: hive.cookbook.external_tickets
           - firmware_updates: hive.cookbook.firmware_updates
+          - google: hive.cookbook.google
           - groups: hive.cookbook.groups
           - last_status: hive.cookbook.last_status
           - login: hive.cookbook.login
@@ -86,6 +87,7 @@ nav:
           - metrics: hive.cookbook.metrics
           - metric_ingest: hive.cookbook.metric_ingest
           - metric_types: hive.cookbook.metric_types
+          - microsoft: hive.cookbook.microsoft
           - notification_providers: hive.cookbook.notification_providers
           - notification_provider_types: hive.cookbook.notification_provider_types
           - objects: hive.cookbook.objects
