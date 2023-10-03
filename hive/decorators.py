@@ -111,7 +111,7 @@ def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
                 print(f'WARNING: timeout reached on get_session, sleep set to {sleep_time}, on retry num {i}')
                 time.sleep(sleep_time)
 
-        if max_tries > 0: print(f'WARNING: max retry excided')
+        if max_tries > 1: print(f'WARNING: max retry excided')
         raise requests.exceptions.ReadTimeout
 
     return behaviour

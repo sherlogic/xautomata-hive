@@ -45,7 +45,7 @@ class ApiManager:
     """
 
     _timeout = 150
-    _timeout_retry = 0  # di default non si fanno retry sui timeout
+    _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
 
     def __init__(self, root, user, password):
