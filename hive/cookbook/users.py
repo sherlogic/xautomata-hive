@@ -162,21 +162,21 @@ class Users(ApiManager):
             verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
             name (string required): additional filter - payload
-            password (string required): additional filter - payload
             email (string required): additional filter - payload
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+            password (string required): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['phone', 'verified_email', 'profile',
-            'name', 'password', 'email', 'active', 'acl', 'uuid_acl_override']
+            'name', 'email', 'active', 'acl', 'uuid_acl_override', 'password']
         payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('name'), payload.get('password'
-            ), payload.get('email'), payload.get('active'), payload.get('acl'
-            ), payload.get('uuid_acl_override')
+            'profile'), payload.get('name'), payload.get('email'), payload.get(
+            'active'), payload.get('acl'), payload.get('uuid_acl_override'
+            ), payload.get('password')
         warning_wrong_parameters(self.users_create.__name__, payload,
             official_payload_list)
         response = self.execute('POST', path=f'/users/', payload=payload,
@@ -184,20 +184,21 @@ class Users(ApiManager):
         return response
 
     def users_create_uuid_customer(self, uuid_customer: str,
-        kwargs: dict = None, **payload) -> list:
+        params: dict = False, kwargs: dict = None, **payload) -> list:
         """Create User Tenant
 
         Args:
+            params (dict, optional): additional parameters for the API.
             uuid_customer (str, required): uuid_customer
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
+            send_mail (boolean optional): additional filter - parameter
             phone (string optional): additional filter - payload
             verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
             name (string required): additional filter - payload
-            password (string required): additional filter - payload
             email (string required): additional filter - payload
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
@@ -207,15 +208,14 @@ class Users(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['phone', 'verified_email', 'profile',
-            'name', 'password', 'email', 'active', 'acl', 'uuid_acl_override']
+            'name', 'email', 'active', 'acl', 'uuid_acl_override']
         payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('name'), payload.get('password'
-            ), payload.get('email'), payload.get('active'), payload.get('acl'
-            ), payload.get('uuid_acl_override')
+            'profile'), payload.get('name'), payload.get('email'), payload.get(
+            'active'), payload.get('acl'), payload.get('uuid_acl_override')
         warning_wrong_parameters(self.users_create.__name__, payload,
             official_payload_list)
         response = self.execute('POST', path=f'/users/{uuid_customer}',
-            payload=payload, **kwargs)
+            params=params, payload=payload, **kwargs)
         return response
 
     def user(self, name: str, warm_start: bool = False, kwargs: dict = None
@@ -696,16 +696,14 @@ class Users(ApiManager):
         return response
 
     def users_customers_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Customers
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -734,16 +732,14 @@ class Users(ApiManager):
         return response
 
     def users_customers_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Customers
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -764,16 +760,14 @@ class Users(ApiManager):
         return response
 
     def users_groups_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Groups
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -802,16 +796,14 @@ class Users(ApiManager):
         return response
 
     def users_groups_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Groups
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -832,16 +824,14 @@ class Users(ApiManager):
         return response
 
     def users_virtual_domains_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Virtual Domains
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -870,16 +860,14 @@ class Users(ApiManager):
         return response
 
     def users_virtual_domains_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Virtual Domains
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:

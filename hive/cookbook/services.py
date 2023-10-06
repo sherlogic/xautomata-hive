@@ -466,9 +466,6 @@ class Services(ApiManager):
         """Read Last Admin Status Lists
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (dict, optional): additional parameters for the API.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
@@ -539,18 +536,15 @@ class Services(ApiManager):
         return response
 
     def services_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Read Services
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -576,18 +570,15 @@ class Services(ApiManager):
         return response
 
     def services_metrics_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Read Metrics
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -614,18 +605,15 @@ class Services(ApiManager):
         return response
 
     def services_read_by_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Read Services By Uuid Customer And Name And Profile
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -647,15 +635,13 @@ class Services(ApiManager):
         return response
 
     def services_create_bulk(self, payload: list, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
         """Bulk Create Services
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -690,15 +676,13 @@ class Services(ApiManager):
         return response
 
     def services_delete_bulk(self, payload: list, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None) -> list:
+        page_size: int = 50, kwargs: dict = None) -> list:
         """Bulk Delete Services
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -716,16 +700,14 @@ class Services(ApiManager):
         return response
 
     def services_metrics_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Metrics
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -754,16 +736,14 @@ class Services(ApiManager):
         return response
 
     def services_metrics_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Metrics
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -784,16 +764,14 @@ class Services(ApiManager):
         return response
 
     def services_downtimes_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Downtimes
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -822,16 +800,14 @@ class Services(ApiManager):
         return response
 
     def services_downtimes_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Downtimes
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:

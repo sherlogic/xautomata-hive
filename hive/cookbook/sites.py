@@ -131,7 +131,6 @@ class Sites(ApiManager):
         """Update Site
 
         Args:
-            uuid (str, required): uuid
             params (dict, optional): additional parameters for the API.
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -418,18 +417,15 @@ class Sites(ApiManager):
         return response
 
     def sites_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Read Sites
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -455,18 +451,15 @@ class Sites(ApiManager):
         return response
 
     def sites_read_by_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Read Sites By Uuid Customer And Code
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -487,15 +480,13 @@ class Sites(ApiManager):
         return response
 
     def sites_create_bulk(self, payload: list, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
         """Bulk Create Sites
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -534,15 +525,13 @@ class Sites(ApiManager):
         return response
 
     def sites_delete_bulk(self, payload: list, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None) -> list:
+        page_size: int = 50, kwargs: dict = None) -> list:
         """Bulk Delete Sites
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -560,16 +549,14 @@ class Sites(ApiManager):
         return response
 
     def sites_contacts_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Contacts
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -599,16 +586,14 @@ class Sites(ApiManager):
         return response
 
     def sites_contacts_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Contacts
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -629,16 +614,14 @@ class Sites(ApiManager):
         return response
 
     def sites_coordinates_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Create Coordinates
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 

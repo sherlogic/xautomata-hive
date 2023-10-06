@@ -9,6 +9,7 @@ METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
 
 single_page_doc = "            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False."
 page_size_doc = "            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000."
+page_size_doc_bulk = "            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50."
 kwargs_doc = "            kwargs (dict, optional): additional parameters for execute. Default to None."
 warm_start_doc = "            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False."
 params_doc = "            **params: additional parameters for the API."
@@ -238,8 +239,13 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
             key_params = ' params=params, '
 
         if skip_limit or bulk:
-            function_arg += [single_page, page_size]
-            function_doc += [single_page_doc, page_size_doc]
+            if bulk and not query:
+                function_arg += [single_page, 'page_size: int = 50']
+                function_doc += [single_page_doc, page_size_doc_bulk]
+            else:
+                function_arg += [single_page, page_size]
+                function_doc += [single_page_doc, page_size_doc]
+
             key_single_page = ' single_page=single_page, '
             key_page_size = ' page_size=page_size, '
         key_warm_start = '' if bulk and not bulk_read else ' warm_start=warm_start, '
@@ -251,11 +257,11 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
                 key_params = ' params=params, '
             elif len(payload) > 0 and len(params) == 0:
                 function_arg = [payload_body_query if query else payload_body] + function_arg
-                function_doc += [payload_doc_query if query else payload_doc_bulk] + function_doc
+                function_doc = [payload_doc_query if query else payload_doc_bulk] + function_doc
                 key_payload = ' payload=payload, '
             elif len(payload) > 0 and len(params) > 0:
                 function_arg = [payload_body_query if query else payload_body] + function_arg
-                function_doc += [payload_doc_query if query else payload_doc_bulk] + function_doc
+                function_doc = [payload_doc_query if query else payload_doc_bulk] + function_doc
                 function_kwarg = 'params'
                 key_params = ' params=params, '
                 key_payload = ' payload=payload, '
@@ -268,7 +274,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
                 key_payload = ' payload=payload, '
             elif len(payload) > 0 and len(params) > 0:
                 function_arg += [params_body]
-                function_doc += [params_doc2] + function_doc
+                function_doc = [params_doc2] + function_doc
                 function_kwarg = 'payload'
                 key_params = ' params=params, '
                 key_payload = ' payload=payload, '

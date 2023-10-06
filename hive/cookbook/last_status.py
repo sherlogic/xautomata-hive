@@ -117,9 +117,6 @@ class LastStatus(ApiManager):
         """Read Last Admin Status Lists
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (dict, optional): additional parameters for the API.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.

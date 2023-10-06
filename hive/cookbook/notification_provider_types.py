@@ -160,17 +160,14 @@ class NotificationProviderTypes(ApiManager):
 
     def notification_provider_types_bulk(self, payload: list,
         warm_start: bool = False, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
         """Bulk Read Notification Provider Types
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -197,16 +194,14 @@ class NotificationProviderTypes(ApiManager):
         return response
 
     def notification_provider_types_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Create Notification Provider Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -237,16 +232,14 @@ class NotificationProviderTypes(ApiManager):
         return response
 
     def notification_provider_types_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Delete Notification Provider Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:

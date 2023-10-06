@@ -340,18 +340,15 @@ class MetricTypes(ApiManager):
         return response
 
     def metric_types_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Read Metric Types
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -378,17 +375,14 @@ class MetricTypes(ApiManager):
 
     def metric_types_read_by_bulk(self, payload: list,
         warm_start: bool = False, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None) -> list:
+        page_size: int = 50, kwargs: dict = None) -> list:
         """Read Metric Types By Uuid Object And Name
 
         Args:
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -409,16 +403,14 @@ class MetricTypes(ApiManager):
         return response
 
     def metric_types_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Create Metric Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -453,16 +445,14 @@ class MetricTypes(ApiManager):
         return response
 
     def metric_types_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Delete Metric Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
@@ -480,16 +470,14 @@ class MetricTypes(ApiManager):
         return response
 
     def metric_types_downtimes_create_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
         """Bulk Link Metric Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
@@ -518,16 +506,14 @@ class MetricTypes(ApiManager):
         return response
 
     def metric_types_downtimes_delete_bulk(self, payload: list,
-        single_page: bool = False, page_size: int = 5000, kwargs: dict = None
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Bulk Unlink Metric Types
 
         Args:
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             payload (list[dict], optional): List dict to create.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Examples:
