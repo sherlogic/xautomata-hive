@@ -87,8 +87,9 @@ class Calendars(ApiManager):
             ), params.get('sun_int2_end'), params.get('skip'), params.get(
             'limit'), params.get('like'), params.get('join'), params.get(
             'count')
-        warning_wrong_parameters(self.calendars.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/calendars/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -161,8 +162,9 @@ class Calendars(ApiManager):
             'sat_int2_start'), payload.get('sat_int2_end'), payload.get(
             'sun_int1_start'), payload.get('sun_int1_end'), payload.get(
             'sun_int2_start'), payload.get('sun_int2_end')
-        warning_wrong_parameters(self.calendars_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/calendars/', payload=
             payload, **kwargs)
         return response
@@ -251,8 +253,9 @@ class Calendars(ApiManager):
             'sat_int2_start'), payload.get('sat_int2_end'), payload.get(
             'sun_int1_start'), payload.get('sun_int1_end'), payload.get(
             'sun_int2_start'), payload.get('sun_int2_end')
-        warning_wrong_parameters(self.calendars_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/calendars/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -297,8 +300,9 @@ class Calendars(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.calendars_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/calendars/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -361,8 +365,9 @@ class Calendars(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.calendars_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/calendars/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

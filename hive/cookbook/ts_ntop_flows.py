@@ -54,8 +54,9 @@ class TsNtopFlows(ApiManager):
             ), params.get('interface_id'), params.get('skip'), params.get(
             'limit'), params.get('like'), params.get('join'), params.get(
             'count')
-        warning_wrong_parameters(self.ts_ntop_flows.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_ntop_flows.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/ts_ntop_flows/', single_page
             =single_page, page_size=page_size, warm_start=warm_start,
             params=params, **kwargs)
@@ -126,8 +127,9 @@ class TsNtopFlows(ApiManager):
             'count']
         params.get('profile'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_ntop_flows_top_protocols.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_ntop_flows_top_protocols.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_ntop_flows/top_protocols/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -162,8 +164,9 @@ class TsNtopFlows(ApiManager):
             'count']
         params.get('profile'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_ntop_flows_top_talkers.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_ntop_flows_top_talkers.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_ntop_flows/top_talkers/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -198,8 +201,9 @@ class TsNtopFlows(ApiManager):
             'count']
         params.get('profile'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_ntop_flows_top_receivers.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_ntop_flows_top_receivers.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_ntop_flows/top_receivers/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -234,8 +238,10 @@ class TsNtopFlows(ApiManager):
             'count']
         params.get('profile'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_ntop_flows_top_protocols_history.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_ntop_flows_top_protocols_history.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_ntop_flows/top_protocols_history/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=

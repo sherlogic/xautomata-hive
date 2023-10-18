@@ -40,8 +40,9 @@ class UsersNotifications(ApiManager):
             ), params.get('title'), params.get('body'), params.get('read'
             ), params.get('sent'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.users_notifications.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_notifications.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/users_notifications/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -71,8 +72,9 @@ class UsersNotifications(ApiManager):
         payload.get('username'), payload.get('title'), payload.get('body'
             ), payload.get('read'), payload.get('sent'), payload.get(
             'timestamp')
-        warning_wrong_parameters(self.users_notifications_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_notifications_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/users_notifications/',
             payload=payload, **kwargs)
         return response
@@ -98,8 +100,9 @@ class UsersNotifications(ApiManager):
         official_payload_list = ['title', 'body', 'read', 'sent']
         payload.get('title'), payload.get('body'), payload.get('read'
             ), payload.get('sent')
-        warning_wrong_parameters(self.users_notifications_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_notifications_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/users_notifications/{uuid}',
             payload=payload, **kwargs)
         return response

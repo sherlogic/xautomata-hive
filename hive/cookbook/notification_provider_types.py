@@ -36,8 +36,9 @@ class NotificationProviderTypes(ApiManager):
             ), params.get('json_schema'), params.get('skip'), params.get(
             'limit'), params.get('like'), params.get('join'), params.get(
             'count')
-        warning_wrong_parameters(self.notification_provider_types.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.notification_provider_types.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/notification_provider_types/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -61,8 +62,10 @@ class NotificationProviderTypes(ApiManager):
             kwargs = dict()
         official_payload_list = ['code', 'json_schema']
         payload.get('code'), payload.get('json_schema')
-        warning_wrong_parameters(self.notification_provider_types_create.
-            __name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                notification_provider_types_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/notification_provider_types/', payload=payload, **kwargs)
         return response
@@ -102,8 +105,9 @@ class NotificationProviderTypes(ApiManager):
             kwargs = dict()
         official_payload_list = ['code', 'json_schema']
         payload.get('code'), payload.get('json_schema')
-        warning_wrong_parameters(self.notification_provider_types_put.
-            __name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.notification_provider_types_put.
+                __name__, payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/notification_provider_types/{uuid}', payload=payload, **kwargs)
         return response
@@ -149,9 +153,10 @@ class NotificationProviderTypes(ApiManager):
         official_params_list = ['skip', 'limit', 'like', 'join', 'count']
         params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.
-            notification_provider_types_notification_providers.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                notification_provider_types_notification_providers.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/notification_provider_types/{uuid}/notification_providers',
             single_page=single_page, page_size=page_size, warm_start=
@@ -185,8 +190,9 @@ class NotificationProviderTypes(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.notification_provider_types_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.notification_provider_types_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/notification_provider_types/bulk/read/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -222,9 +228,10 @@ class NotificationProviderTypes(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.
-            notification_provider_types_create_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                notification_provider_types_create_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=
             f'/notification_provider_types/bulk/create/', single_page=
             single_page, page_size=page_size, params=params, payload=

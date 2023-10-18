@@ -45,8 +45,9 @@ class Groups(ApiManager):
             ), params.get('description'), params.get('status'), params.get(
             'extract_severity'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.groups.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/groups/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -79,8 +80,9 @@ class Groups(ApiManager):
             'uuid_virtual_domain'), payload.get('type'), payload.get('name'
             ), payload.get('description'), payload.get('automata_domain'
             ), payload.get('status')
-        warning_wrong_parameters(self.groups_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=f'/groups/', payload=payload,
             **kwargs)
         return response
@@ -105,8 +107,9 @@ class Groups(ApiManager):
             =params)
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.group.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.group.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}', warm_start=
             warm_start, params=params, **kwargs)
         return response
@@ -139,8 +142,9 @@ class Groups(ApiManager):
             'uuid_virtual_domain'), payload.get('type'), payload.get('name'
             ), payload.get('description'), payload.get('automata_domain'
             ), payload.get('status')
-        warning_wrong_parameters(self.groups_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/groups/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -192,8 +196,9 @@ class Groups(ApiManager):
             ), params.get('profile'), params.get('extract_severity'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.groups_objects.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_objects.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/objects',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -261,8 +266,9 @@ class Groups(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.groups_users.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_users.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/users',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -331,8 +337,9 @@ class Groups(ApiManager):
         params.get('not_in'), params.get('code'), params.get(
             'active_at_timestamp'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.groups_downtimes.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_downtimes.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/downtimes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -401,8 +408,9 @@ class Groups(ApiManager):
         params.get('not_in'), params.get('code'), params.get(
             'active_at_timestamp'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.groups_dispatchers.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_dispatchers.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/groups/{uuid}/dispatchers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -467,8 +475,9 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.groups_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/groups/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -538,8 +547,9 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.groups_create_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/groups/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -598,8 +608,9 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.groups_objects_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_objects_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=f'/groups/bulk/create/objects',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -662,8 +673,9 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.groups_downtimes_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_downtimes_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/groups/bulk/create/downtimes', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -726,8 +738,9 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.groups_users_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.groups_users_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/groups/bulk/create/users',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

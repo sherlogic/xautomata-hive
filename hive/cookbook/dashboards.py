@@ -46,8 +46,9 @@ class Dashboards(ApiManager):
             ), params.get('profile'), params.get('priority'), params.get(
             'refresh_interval'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.dashboards.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/dashboards/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -81,8 +82,9 @@ class Dashboards(ApiManager):
             ), payload.get('description'), payload.get('profile'), payload.get(
             'priority'), payload.get('refresh_interval'), payload.get(
             'image_name'), payload.get('uuid_origin_dashboard')
-        warning_wrong_parameters(self.dashboards_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/dashboards/', payload=
             payload, **kwargs)
         return response
@@ -107,8 +109,9 @@ class Dashboards(ApiManager):
             =params)
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.dashboard.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboard.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/dashboards/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -141,8 +144,9 @@ class Dashboards(ApiManager):
             ), payload.get('description'), payload.get('profile'), payload.get(
             'priority'), payload.get('refresh_interval'), payload.get(
             'image_name')
-        warning_wrong_parameters(self.dashboards_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/dashboards/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -193,8 +197,9 @@ class Dashboards(ApiManager):
             kwargs = dict()
         official_payload_list = ['image']
         payload.get('image')
-        warning_wrong_parameters(self.dashboards_image_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_image_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/dashboards/{uuid}/image',
             payload=payload, **kwargs)
         return response
@@ -229,8 +234,9 @@ class Dashboards(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.dashboards_users.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_users.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/dashboards/{uuid}/users',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -305,8 +311,9 @@ class Dashboards(ApiManager):
             ), params.get('width'), params.get('height'), params.get('grid_x'
             ), params.get('grid_y'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.dashboards_widgets.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_widgets.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/dashboards/{uuid}/widgets',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -338,8 +345,9 @@ class Dashboards(ApiManager):
         payload.get('index'), payload.get('width'), payload.get('height'
             ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
             'settings')
-        warning_wrong_parameters(self.dashboards_widgets_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_widgets_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=
             f'/dashboards/{uuid}/widgets/{uuid_widget}', payload=payload,
             **kwargs)
@@ -370,8 +378,9 @@ class Dashboards(ApiManager):
         payload.get('index'), payload.get('width'), payload.get('height'
             ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
             'settings')
-        warning_wrong_parameters(self.dashboards_dashboard_widget_put.
-            __name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_dashboard_widget_put.
+                __name__, payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/dashboards/dashboard_widget/{uuid}', payload=payload, **kwargs)
         return response
@@ -418,8 +427,9 @@ class Dashboards(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.dashboards_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/dashboards/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -461,8 +471,9 @@ class Dashboards(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.dashboards_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/dashboards/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -528,8 +539,9 @@ class Dashboards(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.dashboards_widgets_create_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_widgets_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/dashboards/bulk/create/widgets', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

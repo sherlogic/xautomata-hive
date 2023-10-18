@@ -50,8 +50,9 @@ class Customers(ApiManager):
             'currency'), params.get('state_province'), params.get('status'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/customers/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -90,8 +91,9 @@ class Customers(ApiManager):
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
             ), payload.get('status'), payload.get('profile')
-        warning_wrong_parameters(self.customers_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/', payload=
             payload, **kwargs)
         return response
@@ -146,8 +148,9 @@ class Customers(ApiManager):
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
             ), payload.get('status'), payload.get('profile')
-        warning_wrong_parameters(self.customers_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/customers/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -194,8 +197,9 @@ class Customers(ApiManager):
             'zip_code'), payload.get('city'), payload.get('country'
             ), payload.get('vat_id'), payload.get('state_province'
             ), payload.get('currency')
-        warning_wrong_parameters(self.customers_register_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_register_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/register/',
             params=params, payload=payload, **kwargs)
         return response
@@ -217,8 +221,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['app_id']
         params.get('app_id')
-        warning_wrong_parameters(self.customers_relation_request_create.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_relation_request_create
+                .__name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/customers/relation_request/{uuid_customer}', params=params,
             **kwargs)
@@ -281,8 +286,9 @@ class Customers(ApiManager):
             ), params.get('description'), params.get('status'), params.get(
             'skip'), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.customers_groups.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_groups.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -321,8 +327,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['image']
         payload.get('image')
-        warning_wrong_parameters(self.customers_image_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_image_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/customers/{uuid}/image',
             payload=payload, **kwargs)
         return response
@@ -355,8 +362,9 @@ class Customers(ApiManager):
             'count']
         params.get('not_in'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_services.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_services.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/services',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -382,8 +390,9 @@ class Customers(ApiManager):
             =params)
         official_params_list = ['not_in']
         params.get('not_in')
-        warning_wrong_parameters(self.customers_service_profiles.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_service_profiles.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/{uuid}/service_profiles', warm_start=warm_start,
             params=params, **kwargs)
@@ -417,8 +426,9 @@ class Customers(ApiManager):
             'count']
         params.get('not_in'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_retention_rules.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_retention_rules.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/{uuid}/retention_rules', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -453,8 +463,9 @@ class Customers(ApiManager):
             'count']
         params.get('not_in'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_sites.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_sites.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/sites',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -491,8 +502,9 @@ class Customers(ApiManager):
         params.get('not_in'), params.get('name'), params.get('type'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_contacts.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_contacts.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/contacts',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -516,8 +528,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['type']
         payload.get('type')
-        warning_wrong_parameters(self.customers_contacts_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_contacts_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -541,8 +554,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['type']
         payload.get('type')
-        warning_wrong_parameters(self.customers_contacts_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_contacts_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=
             f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
@@ -594,8 +608,9 @@ class Customers(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.customers_users.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_users.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/customers/{uuid}/users',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -680,8 +695,9 @@ class Customers(ApiManager):
             'state_province'), params.get('status'), params.get('starred'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_with_dashboard.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_with_dashboard.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/customers/with_dashboard/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -714,8 +730,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.customers_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/customers/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -787,8 +804,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.customers_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/customers/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -849,8 +867,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.customers_contacts_create_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_contacts_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/customers/bulk/create/contacts', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -913,8 +932,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.customers_users_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_users_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/customers/bulk/create/users', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -965,8 +985,9 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['customer', 'azure_customer']
         payload.get('customer'), payload.get('azure_customer')
-        warning_wrong_parameters(self.customers_azure_v2_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_azure_v2_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/',
             payload=payload, **kwargs)
         return response
@@ -988,9 +1009,10 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['customer', 'azure_customer']
         payload.get('customer'), payload.get('azure_customer')
-        warning_wrong_parameters(self.
-            customers_azure_v2_subscription_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_azure_v2_subscription_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/', payload=payload, **kwargs)
         return response
@@ -1029,8 +1051,9 @@ class Customers(ApiManager):
             ), payload.get('base_margin'), payload.get('reserved_margin'
             ), payload.get('azure_customer_id'), payload.get(
             'virtual_domain_code')
-        warning_wrong_parameters(self.customers_azure_v2_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_azure_v2_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -1070,9 +1093,10 @@ class Customers(ApiManager):
             ), payload.get('virtual_domain_code'), payload.get(
             'uuid_probe_type'), payload.get('uuid_object'), payload.get(
             'subscriptions')
-        warning_wrong_parameters(self.
-            customers_azure_v2_subscription_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_azure_v2_subscription_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/{uuid}', payload=payload, **
             kwargs)
@@ -1095,8 +1119,10 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['customer', 'aws_customer']
         payload.get('customer'), payload.get('aws_customer')
-        warning_wrong_parameters(self.customers_aws_v2_subscription_create.
-            __name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_aws_v2_subscription_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/', payload=payload, **kwargs)
         return response
@@ -1136,8 +1162,10 @@ class Customers(ApiManager):
             ), payload.get('virtual_domain_code'), payload.get(
             'uuid_probe_type'), payload.get('uuid_object'), payload.get(
             'subscriptions')
-        warning_wrong_parameters(self.customers_aws_v2_subscription_create.
-            __name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_aws_v2_subscription_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/{uuid}', payload=payload, **kwargs
             )
@@ -1160,7 +1188,6 @@ class Customers(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - parameter
-            only_active_objects (boolean optional): additional filter - parameter
             country (string optional): additional filter - parameter
             city (string optional): additional filter - parameter
             address (string optional): additional filter - parameter
@@ -1178,17 +1205,17 @@ class Customers(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_object',
-            'only_active_objects', 'country', 'city', 'address', 'zip_code',
-            'status', 'description', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
+            'country', 'city', 'address', 'zip_code', 'status',
+            'description', 'name', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_object'), params.get('only_active_objects'), params.get(
-            'country'), params.get('city'), params.get('address'), params.get(
-            'zip_code'), params.get('status'), params.get('description'
-            ), params.get('name'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_networks.__name__, params,
-            official_params_list)
+            'uuid_object'), params.get('country'), params.get('city'
+            ), params.get('address'), params.get('zip_code'), params.get(
+            'status'), params.get('description'), params.get('name'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_networks.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/networks/{uuid_customer}', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -1226,8 +1253,9 @@ class Customers(ApiManager):
         params.get('timestamp_start'), params.get('timestamp_end'), params.get(
             'active_objects_only'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.customers_it_availability.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_it_availability.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/it_availability/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -1264,8 +1292,9 @@ class Customers(ApiManager):
         params.get('timestamp_start'), params.get('timestamp_end'), params.get(
             'skip'), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.customers_it_availability_history.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_it_availability_history
+                .__name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/customers/it_availability_history/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=

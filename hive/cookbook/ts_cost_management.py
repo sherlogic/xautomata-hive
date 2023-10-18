@@ -67,8 +67,9 @@ class TsCostManagement(ApiManager):
             'provider_currency'), params.get('uuid_customer'), params.get(
             'skip'), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.ts_cost_management.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/ts_cost_management/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -147,8 +148,9 @@ class TsCostManagement(ApiManager):
             'cumulative_unit_revenue'), payload.get('cumulative_total_revenue'
             ), payload.get('resource_group'), payload.get('reservation_name'
             ), payload.get('publisher_name'), payload.get('tenant_id')
-        warning_wrong_parameters(self.ts_cost_management_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_cost_management/',
             payload=payload, **kwargs)
         return response
@@ -196,8 +198,9 @@ class TsCostManagement(ApiManager):
             ), params.get('subscription'), params.get('subscription_type'
             ), params.get('interval'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_cost_management_grouped.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_grouped.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/grouped/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
@@ -224,8 +227,9 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['date']
         params.get('date')
-        warning_wrong_parameters(self.ts_cost_management.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/{uuid_metric}', warm_start=warm_start,
             params=params, **kwargs)
@@ -255,8 +259,9 @@ class TsCostManagement(ApiManager):
         official_params_list = ['count', 'date_start', 'date_end', 'interval']
         params.get('count'), params.get('date_start'), params.get('date_end'
             ), params.get('interval')
-        warning_wrong_parameters(self.ts_cost_management_ccm_by_date.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_ccm_by_date.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_date/{uuid_customer}', warm_start=
             warm_start, params=params, **kwargs)
@@ -285,9 +290,10 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['count', 'date_start', 'date_end']
         params.get('count'), params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.
-            ts_cost_management_ccm_by_subscription_type.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_ccm_by_subscription_type.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_subscription_type/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -315,8 +321,10 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['count', 'date_start', 'date_end']
         params.get('count'), params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.ts_cost_management_ccm_by_category.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_ccm_by_category.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_category/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -345,9 +353,10 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['count', 'date_start', 'date_end']
         params.get('count'), params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.
-            ts_cost_management_ccm_by_resource_location.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_ccm_by_resource_location.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_resource_location/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -375,9 +384,10 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['count', 'date_start', 'date_end']
         params.get('count'), params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.
-            ts_cost_management_ccm_by_resource_group.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_ccm_by_resource_group.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_resource_group/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -405,9 +415,10 @@ class TsCostManagement(ApiManager):
             =params)
         official_params_list = ['count', 'date_start', 'date_end']
         params.get('count'), params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.
-            ts_cost_management_ccm_by_subscription.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_ccm_by_subscription.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/ccm_by_subscription/{uuid_customer}',
             warm_start=warm_start, params=params, **kwargs)
@@ -442,8 +453,9 @@ class TsCostManagement(ApiManager):
         params.get('date_start'), params.get('date_end'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.ts_cost_management_anomalies.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_anomalies.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomalies/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -482,8 +494,10 @@ class TsCostManagement(ApiManager):
             ), params.get('sampling'), params.get('uuid_customer'), params.get(
             'cloud_provider'), params.get('description'), params.get('family'
             ), params.get('category')
-        warning_wrong_parameters(self.ts_cost_management_anomaly_selector.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_anomaly_selector.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomaly_selector/', warm_start=warm_start,
             params=params, **kwargs)
@@ -520,9 +534,10 @@ class TsCostManagement(ApiManager):
             ), params.get('sampling'), params.get('uuid_customer'), params.get(
             'cloud_provider'), params.get('description'), params.get(
             'resource_location')
-        warning_wrong_parameters(self.
-            ts_cost_management_anomaly_selector_geo.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_management_anomaly_selector_geo.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomaly_selector_geo/', warm_start=
             warm_start, params=params, **kwargs)
@@ -557,8 +572,9 @@ class TsCostManagement(ApiManager):
         params.get('date_start'), params.get('date_end'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.ts_cost_management_anomalies_geo.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_anomalies_geo.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/ts_cost_management/anomalies_geo/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -587,8 +603,9 @@ class TsCostManagement(ApiManager):
             'profile']
         params.get('tenant_id'), params.get('date_start'), params.get(
             'date_end'), params.get('profile')
-        warning_wrong_parameters(self.ts_cost_management_probe_delete.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_management_probe_delete.
+                __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_management/probe/{uuid_probe}/', params=params, **kwargs
             )

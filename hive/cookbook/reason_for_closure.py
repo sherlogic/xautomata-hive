@@ -38,8 +38,9 @@ class ReasonForClosure(ApiManager):
             ), params.get('description'), params.get('jurisdiction'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.reason_for_closure.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.reason_for_closure.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/reason_for_closure/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -64,8 +65,9 @@ class ReasonForClosure(ApiManager):
         official_payload_list = ['code', 'description', 'jurisdiction']
         payload.get('code'), payload.get('description'), payload.get(
             'jurisdiction')
-        warning_wrong_parameters(self.reason_for_closure_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.reason_for_closure_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/reason_for_closure/',
             payload=payload, **kwargs)
         return response
@@ -106,8 +108,9 @@ class ReasonForClosure(ApiManager):
         official_payload_list = ['code', 'description', 'jurisdiction']
         payload.get('code'), payload.get('description'), payload.get(
             'jurisdiction')
-        warning_wrong_parameters(self.reason_for_closure_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.reason_for_closure_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/reason_for_closure/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -154,8 +157,9 @@ class ReasonForClosure(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.reason_for_closure_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.reason_for_closure_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=
             f'/reason_for_closure/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -192,8 +196,9 @@ class ReasonForClosure(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.reason_for_closure_create_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.reason_for_closure_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/reason_for_closure/bulk/create/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

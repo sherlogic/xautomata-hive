@@ -45,8 +45,9 @@ class TsServiceValue(ApiManager):
             ), params.get('database_timestamp_end'), params.get('unit'
             ), params.get('value'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_service_value.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/ts_service_value/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -71,8 +72,9 @@ class TsServiceValue(ApiManager):
         official_payload_list = ['uuid_service', 'timestamp', 'unit', 'value']
         payload.get('uuid_service'), payload.get('timestamp'), payload.get(
             'unit'), payload.get('value')
-        warning_wrong_parameters(self.ts_service_value_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_service_value/', payload
             =payload, **kwargs)
         return response
@@ -95,8 +97,9 @@ class TsServiceValue(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_value_delete.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value_delete.__name__,
+                params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_value/{uuid_service}/', params=params, **kwargs)
         return response
@@ -146,8 +149,9 @@ class TsServiceValue(ApiManager):
             'ts_timestamp_end'), params.get('ts_unit'), params.get('ts_value'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_service_value_query.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value_query.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/ts_service_value/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -181,8 +185,9 @@ class TsServiceValue(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_value_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_service_value/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -246,8 +251,9 @@ class TsServiceValue(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_value_delete_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_value_delete_bulk.
+                __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_value/bulk/delete/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

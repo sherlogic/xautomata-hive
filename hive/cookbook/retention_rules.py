@@ -42,8 +42,9 @@ class RetentionRules(ApiManager):
             ), params.get('deletion_after_days'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.retention_rules.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.retention_rules.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/retention_rules/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -74,8 +75,9 @@ class RetentionRules(ApiManager):
             ), payload.get('priority'), payload.get('average_after_days'
             ), payload.get('average_over_minutes'), payload.get(
             'deletion_after_days')
-        warning_wrong_parameters(self.retention_rules_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.retention_rules_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/retention_rules/', payload=
             payload, **kwargs)
         return response
@@ -123,8 +125,9 @@ class RetentionRules(ApiManager):
             ), payload.get('priority'), payload.get('average_after_days'
             ), payload.get('average_over_minutes'), payload.get(
             'deletion_after_days')
-        warning_wrong_parameters(self.retention_rules_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.retention_rules_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/retention_rules/{uuid}',
             payload=payload, **kwargs)
         return response

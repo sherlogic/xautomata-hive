@@ -47,6 +47,7 @@ class ApiManager:
     _timeout = 150
     _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
+    _silence_warning = False
 
     def __init__(self, root, user, password):
 
@@ -478,6 +479,7 @@ from hive.cookbook.metric_ingest import MetricIngest
 from hive.cookbook.microsoft import Microsoft
 from hive.cookbook.google import Google
 from hive.cookbook.login import Login
+from hive.cookbook.jobs import Jobs
 from hive.cookbook.messages import Messages
 from hive.cookbook.metrics import Metrics
 from hive.cookbook.probes_log_ingest import ProbesLogIngest
@@ -512,7 +514,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

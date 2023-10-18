@@ -67,8 +67,9 @@ class TreeHierarchy(ApiManager):
             ), params.get('uuid_virtual_domain'), params.get(
             'virtual_domain_name'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.tree_hierarchy_groups.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.tree_hierarchy_groups.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/groups',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -145,8 +146,9 @@ class TreeHierarchy(ApiManager):
             'object_profile'), params.get('uuid_virtual_domain'), params.get(
             'virtual_domain_name'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.tree_hierarchy_objects.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.tree_hierarchy_objects.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/objects',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -221,8 +223,9 @@ class TreeHierarchy(ApiManager):
             ), params.get('metric_type_profile'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.tree_hierarchy_metric_types.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.tree_hierarchy_metric_types.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/metric_types',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -302,8 +305,9 @@ class TreeHierarchy(ApiManager):
             ), params.get('metric_status'), params.get('metric_profile'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.tree_hierarchy_metrics.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.tree_hierarchy_metrics.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/tree_hierarchy/metrics',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)

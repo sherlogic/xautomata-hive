@@ -31,8 +31,9 @@ class Login(ApiManager):
         payload.get('grant_type'), payload.get('username'), payload.get(
             'password'), payload.get('scope'), payload.get('client_id'
             ), payload.get('client_secret')
-        warning_wrong_parameters(self.login_access_token_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_access_token_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/login/access-token', params
             =params, payload=payload, **kwargs)
         return response
@@ -52,8 +53,9 @@ class Login(ApiManager):
             kwargs = dict()
         official_params_list = ['refresh']
         params.get('refresh')
-        warning_wrong_parameters(self.login_refresh_create.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_refresh_create.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/login/refresh', params=
             params, **kwargs)
         return response
@@ -74,8 +76,9 @@ class Login(ApiManager):
             kwargs = dict()
         official_params_list = ['refresh']
         params.get('refresh')
-        warning_wrong_parameters(self.login_refresh_invalidate_create.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_refresh_invalidate_create.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=f'/login/refresh/invalidate',
             params=params, **kwargs)
         return response
@@ -96,8 +99,10 @@ class Login(ApiManager):
             kwargs = dict()
         official_params_list = ['username']
         params.get('username')
-        warning_wrong_parameters(self.login_refresh_invalidate_user_create.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                login_refresh_invalidate_user_create.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=
             f'/login/refresh/invalidate_user', params=params, **kwargs)
         return response
@@ -154,8 +159,9 @@ class Login(ApiManager):
         payload.get('phone'), payload.get('verified_email'), payload.get(
             'profile'), payload.get('password'), payload.get('email'
             ), payload.get('stage')
-        warning_wrong_parameters(self.login_current_user_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_current_user_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/login/current_user', payload
             =payload, **kwargs)
         return response
@@ -191,8 +197,9 @@ class Login(ApiManager):
             kwargs = dict()
         official_payload_list = ['image']
         payload.get('image')
-        warning_wrong_parameters(self.login_current_user_image_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_current_user_image_put.
+                __name__, payload, official_payload_list)
         response = self.execute('PUT', path=f'/login/current_user/image',
             payload=payload, **kwargs)
         return response
@@ -226,8 +233,9 @@ class Login(ApiManager):
         params.get('token'), params.get('sort_by'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.login_current_user_push_tokens.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_current_user_push_tokens.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/login/current_user/push_tokens', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -250,8 +258,10 @@ class Login(ApiManager):
             kwargs = dict()
         official_payload_list = ['token']
         payload.get('token')
-        warning_wrong_parameters(self.login_current_user_push_tokens_create
-            .__name__, payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                login_current_user_push_tokens_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=
             f'/login/current_user/push_tokens', payload=payload, **kwargs)
         return response
@@ -290,8 +300,9 @@ class Login(ApiManager):
             ), params.get('body'), params.get('read'), params.get('sent'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.login_current_user_notifications.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.login_current_user_notifications.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/login/current_user/notifications', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs

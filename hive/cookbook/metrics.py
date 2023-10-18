@@ -44,8 +44,9 @@ class Metrics(ApiManager):
             ), params.get('status'), params.get('extract_severity'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.metrics.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/metrics/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -78,8 +79,9 @@ class Metrics(ApiManager):
             'description'), payload.get('feedback_for_operator'), payload.get(
             'profile'), payload.get('data_profile'), payload.get(
             'automata_domain'), payload.get('status')
-        warning_wrong_parameters(self.metrics_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=f'/metrics/', payload=payload,
             **kwargs)
         return response
@@ -104,8 +106,9 @@ class Metrics(ApiManager):
             =params)
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.metric.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metric.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/metrics/{uuid}', warm_start=
             warm_start, params=params, **kwargs)
         return response
@@ -138,8 +141,9 @@ class Metrics(ApiManager):
             'description'), payload.get('feedback_for_operator'), payload.get(
             'profile'), payload.get('data_profile'), payload.get(
             'automata_domain'), payload.get('status')
-        warning_wrong_parameters(self.metrics_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/metrics/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -203,8 +207,9 @@ class Metrics(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.metrics_services.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_services.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/metrics/{uuid}/services',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -275,8 +280,9 @@ class Metrics(ApiManager):
             ), params.get('active_at_timestamp'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.metrics_downtimes.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_downtimes.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/metrics/{uuid}/downtimes',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -347,8 +353,9 @@ class Metrics(ApiManager):
             ), params.get('active_at_timestamp'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.metrics_dispatchers.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_dispatchers.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/metrics/{uuid}/dispatchers',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -413,8 +420,9 @@ class Metrics(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.metrics_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/metrics/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -447,8 +455,9 @@ class Metrics(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.metrics_services_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_services_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=
             f'/metrics/bulk/read/services/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -518,8 +527,9 @@ class Metrics(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.metrics_create_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/metrics/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -578,8 +588,9 @@ class Metrics(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.metrics_downtimes_create_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_downtimes_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/metrics/bulk/create/downtimes', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)
@@ -642,8 +653,9 @@ class Metrics(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.metrics_services_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_services_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/metrics/bulk/create/services', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

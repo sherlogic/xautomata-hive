@@ -37,8 +37,9 @@ class TsCostAzureRaw(ApiManager):
             'uuid_metric'), params.get('date_start'), params.get('date_end'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_cost_azure_raw.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_azure_raw.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/ts_cost_azure_raw/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -189,8 +190,9 @@ class TsCostAzureRaw(ApiManager):
             'partnerearnedcreditapplied'), payload.get(
             'exchangeratepricingtobilling'), payload.get('uuid'), payload.get(
             'uuid_metric'), payload.get('date')
-        warning_wrong_parameters(self.ts_cost_azure_raw_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_azure_raw_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_cost_azure_raw/',
             payload=payload, **kwargs)
         return response
@@ -338,8 +340,9 @@ class TsCostAzureRaw(ApiManager):
             'paygcostinbillingcurrency'), payload.get(
             'partnerearnedcreditapplied'), payload.get(
             'exchangeratepricingtobilling')
-        warning_wrong_parameters(self.ts_cost_azure_raw_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_azure_raw_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/ts_cost_azure_raw/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -376,8 +379,9 @@ class TsCostAzureRaw(ApiManager):
             kwargs = dict()
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.ts_cost_azure_raw_metric_delete.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_azure_raw_metric_delete.
+                __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_azure_raw/metric/{uuid_metric}/', params=params, **
             kwargs)
@@ -403,8 +407,9 @@ class TsCostAzureRaw(ApiManager):
         official_params_list = ['tenant_id', 'date_start', 'date_end']
         params.get('tenant_id'), params.get('date_start'), params.get(
             'date_end')
-        warning_wrong_parameters(self.ts_cost_azure_raw_probe_delete.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_cost_azure_raw_probe_delete.
+                __name__, params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_cost_azure_raw/probe/{uuid_probe}/', params=params, **kwargs)
         return response
@@ -552,9 +557,10 @@ class TsCostAzureRaw(ApiManager):
         official_params_list = ['tenant_id', 'date_start', 'date_end']
         params.get('tenant_id'), params.get('date_start'), params.get(
             'date_end')
-        warning_wrong_parameters(self.
-            ts_cost_azure_raw_compute_probe_create.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_azure_raw_compute_probe_create.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=
             f'/ts_cost_azure_raw/compute/probe/{uuid_probe}/', params=
             params, **kwargs)
@@ -578,9 +584,10 @@ class TsCostAzureRaw(ApiManager):
             kwargs = dict()
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
-        warning_wrong_parameters(self.
-            ts_cost_azure_raw_compute_tenant_create.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_azure_raw_compute_tenant_create.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=
             f'/ts_cost_azure_raw/compute/tenant/{uuid_tenant}/', params=
             params, **kwargs)

@@ -45,8 +45,9 @@ class FirmwareUpdates(ApiManager):
             'date_start'), params.get('date_end'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.firmware_updates.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.firmware_updates.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/firmware_updates/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -84,8 +85,9 @@ class FirmwareUpdates(ApiManager):
             ), params.get('model'), params.get('type'), params.get('firmware'
             ), params.get('status'), params.get('date_start'), params.get(
             'date_end')
-        warning_wrong_parameters(self.firmware_updates_grouped.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.firmware_updates_grouped.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/firmware_updates/{uuid_customer}/grouped/', warm_start=
             warm_start, params=params, **kwargs)

@@ -30,8 +30,9 @@ class ProbesLogIngest(ApiManager):
             kwargs = dict()
         official_params_list = ['uuid_probe']
         params.get('uuid_probe')
-        warning_wrong_parameters(self.probes_log_ingest_create.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_log_ingest_create.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/probes_log_ingest/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)

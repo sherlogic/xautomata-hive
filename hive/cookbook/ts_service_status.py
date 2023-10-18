@@ -47,8 +47,9 @@ class TsServiceStatus(ApiManager):
             'description'), params.get('null_fields'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.ts_service_status.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/ts_service_status/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -77,8 +78,9 @@ class TsServiceStatus(ApiManager):
         payload.get('uuid_service'), payload.get('timestamp'), payload.get(
             'status'), payload.get('ranking'), payload.get('description'
             ), payload.get('extended_attributes')
-        warning_wrong_parameters(self.ts_service_status_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_service_status/',
             payload=payload, **kwargs)
         return response
@@ -101,8 +103,9 @@ class TsServiceStatus(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_status_delete.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status_delete.__name__,
+                params, official_params_list)
         response = self.execute('DELETE', path=
             f'/ts_service_status/{uuid_service}/', params=params, **kwargs)
         return response
@@ -154,8 +157,9 @@ class TsServiceStatus(ApiManager):
             ), params.get('ts_timestamp_start'), params.get('ts_timestamp_end'
             ), params.get('ts_ranking'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_service_status_query.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status_query.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/ts_service_status/query/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -189,8 +193,9 @@ class TsServiceStatus(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_status_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_service_status/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
@@ -256,8 +261,9 @@ class TsServiceStatus(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_service_status_delete_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_service_status_delete_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_service_status/bulk/delete/', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

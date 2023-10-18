@@ -104,8 +104,9 @@ class LastStatus(ApiManager):
             'last_value_status'), params.get('last_value_ranking'), params.get(
             'skip'), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.last_status.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.last_status.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/last_status/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -183,8 +184,9 @@ class LastStatus(ApiManager):
         params.get('sort_by'), params.get('null_fields'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.last_status_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.last_status_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/last_status/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, payload=payload, **kwargs)

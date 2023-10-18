@@ -34,8 +34,9 @@ class Schedules(ApiManager):
         params.get('sort_by'), params.get('uuid_customer'), params.get('code'
             ), params.get('ical'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.schedules.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.schedules.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/schedules/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -58,8 +59,9 @@ class Schedules(ApiManager):
             kwargs = dict()
         official_payload_list = ['uuid_customer', 'code', 'ical']
         payload.get('uuid_customer'), payload.get('code'), payload.get('ical')
-        warning_wrong_parameters(self.schedules_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.schedules_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/schedules/', payload=
             payload, **kwargs)
         return response
@@ -84,8 +86,9 @@ class Schedules(ApiManager):
             =params)
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.schedule.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.schedule.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/schedules/{uuid}',
             warm_start=warm_start, params=params, **kwargs)
         return response
@@ -108,8 +111,9 @@ class Schedules(ApiManager):
             kwargs = dict()
         official_payload_list = ['uuid_customer', 'code', 'ical']
         payload.get('uuid_customer'), payload.get('code'), payload.get('ical')
-        warning_wrong_parameters(self.schedules_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.schedules_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/schedules/{uuid}', payload=
             payload, **kwargs)
         return response

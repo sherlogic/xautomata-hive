@@ -45,8 +45,9 @@ class Probes(ApiManager):
             ), params.get('notes'), params.get('status'), params.get(
             'extract_severity'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.probes.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/probes/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -79,8 +80,9 @@ class Probes(ApiManager):
             ), payload.get('uuid_host'), payload.get('name'), payload.get(
             'description'), payload.get('data_profile'), payload.get('notes'
             ), payload.get('status')
-        warning_wrong_parameters(self.probes_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=f'/probes/', payload=payload,
             **kwargs)
         return response
@@ -105,8 +107,9 @@ class Probes(ApiManager):
             =params)
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.probe.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probe.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/probes/{uuid}', warm_start=
             warm_start, params=params, **kwargs)
         return response
@@ -140,8 +143,9 @@ class Probes(ApiManager):
             ), payload.get('uuid_host'), payload.get('name'), payload.get(
             'description'), payload.get('data_profile'), payload.get('notes'
             ), payload.get('status'), payload.get('last_seen')
-        warning_wrong_parameters(self.probes_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/probes/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -188,8 +192,9 @@ class Probes(ApiManager):
             'profile'), payload.get('password'), payload.get('email'
             ), payload.get('stage'), payload.get('active'), payload.get('acl'
             ), payload.get('uuid_acl_override')
-        warning_wrong_parameters(self.probes_agent_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_agent_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/probes/agent/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -224,8 +229,9 @@ class Probes(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.probes_objects.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_objects.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/probes/{uuid}/objects',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -290,8 +296,9 @@ class Probes(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.probes_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/probes/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -331,8 +338,9 @@ class Probes(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.probes_create_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/probes/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -391,8 +399,9 @@ class Probes(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.probes_objects_create_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_objects_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=f'/probes/bulk/create/objects',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -448,8 +457,9 @@ class Probes(ApiManager):
             kwargs = dict()
         official_params_list = ['skip', 'limit']
         params.get('skip'), params.get('limit')
-        warning_wrong_parameters(self.probes_logs.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_logs.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/probes/{uuid}/logs',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)

@@ -37,8 +37,9 @@ class WidgetGroups(ApiManager):
             ), params.get('description'), params.get('active'), params.get(
             'skip'), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widget_groups.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/widget_groups/', single_page
             =single_page, page_size=page_size, warm_start=warm_start,
             params=params, **kwargs)
@@ -63,8 +64,9 @@ class WidgetGroups(ApiManager):
         official_payload_list = ['name', 'description', 'active', 'code']
         payload.get('name'), payload.get('description'), payload.get('active'
             ), payload.get('code')
-        warning_wrong_parameters(self.widget_groups_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups_create.__name__,
+                payload, official_payload_list)
         response = self.execute('POST', path=f'/widget_groups/', payload=
             payload, **kwargs)
         return response
@@ -106,8 +108,9 @@ class WidgetGroups(ApiManager):
         official_payload_list = ['name', 'description', 'active', 'code']
         payload.get('name'), payload.get('description'), payload.get('active'
             ), payload.get('code')
-        warning_wrong_parameters(self.widget_groups_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups_put.__name__,
+                payload, official_payload_list)
         response = self.execute('PUT', path=f'/widget_groups/{uuid}',
             payload=payload, **kwargs)
         return response
@@ -156,8 +159,9 @@ class WidgetGroups(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widget_groups_widgets.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups_widgets.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/widget_groups/{uuid}/widgets', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -226,8 +230,9 @@ class WidgetGroups(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widget_groups_users.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups_users.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/widget_groups/{uuid}/users',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -292,8 +297,9 @@ class WidgetGroups(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.widget_groups_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widget_groups_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/widget_groups/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)

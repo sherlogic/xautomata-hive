@@ -15,9 +15,9 @@ with open("hive/version.py", "r") as f:
 version = version[0].split("'")[1]
 
 # version go
-tqdm = 'tqdm==4.64.1'
-requests = 'requests==2.31.0'
 urllib3 = 'urllib3==1.26.17'
+requests = 'requests==2.31.0'
+tqdm = 'tqdm==4.64.1'
 # version end
 
 setup(
@@ -32,5 +32,5 @@ setup(
     author_email='',
     description='',
     url="https://github.com/sherlogic/xautomata-hive.git",
-    install_requires=[urllib3, tqdm, requests],
+install_requires=[urllib3, requests, tqdm],
 )

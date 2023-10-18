@@ -360,7 +360,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
         params_suggestion_line = params_suggestion_line.lstrip("'), ")
         params_suggestion_line = "params.get('" + params_suggestion_line + "')"
 
-        warning_wrong_parameters = f'warning_wrong_parameters(self.{function_name}.__name__, params, official_params_list)'
+        warning_wrong_parameters = f'if not self._silence_warning: warning_wrong_parameters(self.{function_name}.__name__, params, official_params_list)'
 
     elif function_kwarg == 'payload':
         params_list_line = "' ,'".join(payload)
@@ -371,7 +371,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
         params_suggestion_line = params_suggestion_line.lstrip("'), ")
         params_suggestion_line = "payload.get('" + params_suggestion_line + "')"
 
-        warning_wrong_parameters = f'warning_wrong_parameters(self.{function_name}.__name__, payload, official_payload_list)'
+        warning_wrong_parameters = f'if not self._silence_warning: warning_wrong_parameters(self.{function_name}.__name__, payload, official_payload_list)'
     else:
         params_list_line = ''
         params_suggestion_line = ''

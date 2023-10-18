@@ -81,6 +81,7 @@ nav:
           - firmware_updates: hive.cookbook.firmware_updates
           - google: hive.cookbook.google
           - groups: hive.cookbook.groups
+          - jobs: hive.cookbook.jobs
           - last_status: hive.cookbook.last_status
           - login: hive.cookbook.login
           - messages: hive.cookbook.messages

@@ -51,8 +51,9 @@ class TsMetricStatus(ApiManager):
             'ranking'), params.get('description'), params.get('null_fields'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
-        warning_wrong_parameters(self.ts_metric_status.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_metric_status.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/ts_metric_status/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -86,8 +87,9 @@ class TsMetricStatus(ApiManager):
             kwargs = dict()
         official_params_list = ['ts_start', 'ts_end']
         params.get('ts_start'), params.get('ts_end')
-        warning_wrong_parameters(self.ts_metric_status_bulk.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_metric_status_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=
             f'/ts_metric_status/bulk/read/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,

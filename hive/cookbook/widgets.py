@@ -36,8 +36,9 @@ class Widgets(ApiManager):
             ), params.get('name'), params.get('description'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widgets.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/widgets/', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
@@ -60,8 +61,9 @@ class Widgets(ApiManager):
             kwargs = dict()
         official_payload_list = ['code', 'name', 'description']
         payload.get('code'), payload.get('name'), payload.get('description')
-        warning_wrong_parameters(self.widgets_create.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_create.__name__, payload,
+                official_payload_list)
         response = self.execute('POST', path=f'/widgets/', payload=payload,
             **kwargs)
         return response
@@ -100,8 +102,9 @@ class Widgets(ApiManager):
             kwargs = dict()
         official_payload_list = ['code', 'name', 'description']
         payload.get('code'), payload.get('name'), payload.get('description')
-        warning_wrong_parameters(self.widgets_put.__name__, payload,
-            official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_put.__name__, payload,
+                official_payload_list)
         response = self.execute('PUT', path=f'/widgets/{uuid}', payload=
             payload, **kwargs)
         return response
@@ -153,8 +156,9 @@ class Widgets(ApiManager):
             ), params.get('width'), params.get('height'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widgets_dashboards.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_dashboards.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/widgets/{uuid}/dashboards',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
@@ -186,8 +190,9 @@ class Widgets(ApiManager):
         payload.get('index'), payload.get('width'), payload.get('height'
             ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
             'settings')
-        warning_wrong_parameters(self.widgets_dashboards_create.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_dashboards_create.
+                __name__, payload, official_payload_list)
         response = self.execute('POST', path=
             f'/widgets/{uuid}/dashboards/{uuid_dashboard}', payload=payload,
             **kwargs)
@@ -218,8 +223,9 @@ class Widgets(ApiManager):
         payload.get('index'), payload.get('width'), payload.get('height'
             ), payload.get('grid_x'), payload.get('grid_y'), payload.get(
             'settings')
-        warning_wrong_parameters(self.widgets_dashboard_widget_put.__name__,
-            payload, official_payload_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_dashboard_widget_put.
+                __name__, payload, official_payload_list)
         response = self.execute('PUT', path=
             f'/widgets/dashboard_widget/{uuid}', payload=payload, **kwargs)
         return response
@@ -269,8 +275,9 @@ class Widgets(ApiManager):
         params.get('not_in'), params.get('name'), params.get('skip'
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
-        warning_wrong_parameters(self.widgets_widget_groups.__name__,
-            params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_widget_groups.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
             f'/widgets/{uuid}/widget_groups', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
@@ -336,8 +343,9 @@ class Widgets(ApiManager):
             kwargs = dict()
         official_params_list = ['join']
         params.get('join')
-        warning_wrong_parameters(self.widgets_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=f'/widgets/bulk/read/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
@@ -372,8 +380,9 @@ class Widgets(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.widgets_create_bulk.__name__, params,
-            official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_create_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/widgets/bulk/create/',
             single_page=single_page, page_size=page_size, params=params,
             payload=payload, **kwargs)
@@ -438,8 +447,9 @@ class Widgets(ApiManager):
             kwargs = dict()
         official_params_list = ['best_effort']
         params.get('best_effort')
-        warning_wrong_parameters(self.widgets_dashboards_create_bulk.
-            __name__, params, official_params_list)
+        if not self._silence_warning:
+            warning_wrong_parameters(self.widgets_dashboards_create_bulk.
+                __name__, params, official_params_list)
         response = self.execute('POST', path=
             f'/widgets/bulk/create/dashboards', single_page=single_page,
             page_size=page_size, params=params, payload=payload, **kwargs)

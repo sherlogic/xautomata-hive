@@ -192,3 +192,6 @@ xa._get_only = True
 
 con il parametro privato *_timeout_retry* si possono impostare un numero di retry per le situazioni in cui si fallisca le
 request in caso di timeout, e il tempo tra un retry e quello successivo e' impostabile con *_timeout_sleep_time*.
+
+con il parametro privato *_silence_warning* si puo silenziare il messaggio di warning di quando viene inserito un parametro
+non presente tra i parametri noti di utilizzo di un metodo.
