@@ -49,6 +49,9 @@ class ApiManager:
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
 
     def __init__(self, root, user, password):
+
+        if 'api/v' not in root: raise ValueError(f'{root} does not have the api/v* in the root, mandatory to point at the API')
+
         self.root = root.rstrip('/')
         self.credentials = (user, password)
         self.token = 'UNDEFINED'
