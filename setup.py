@@ -32,5 +32,5 @@ setup(
     author_email='',
     description='',
     url="https://github.com/sherlogic/xautomata-hive.git",
-install_requires=[urllib3, requests, tqdm],
+install_requires=[requests, urllib3, tqdm],
 )

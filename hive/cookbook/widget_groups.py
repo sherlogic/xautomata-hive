@@ -20,6 +20,7 @@ class WidgetGroups(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
             active (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -31,12 +32,12 @@ class WidgetGroups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'name',
+        official_params_list = ['sort_by', 'null_fields', 'name', 'code',
             'description', 'active', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('name'
-            ), params.get('description'), params.get('active'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            ), params.get('code'), params.get('description'), params.get(
+            'active'), params.get('skip'), params.get('limit'), params.get(
+            'like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.widget_groups.__name__, params,
                 official_params_list)

@@ -63,7 +63,7 @@ class TsServiceValue(ApiManager):
         Keyword Args:
             uuid_service (string required): additional filter - payload
             timestamp (string required): additional filter - payload
-            unit (string required): additional filter - payload
+            unit (string optional): additional filter - payload
             value (number required): additional filter - payload
 
         Returns: list"""
@@ -211,7 +211,7 @@ class TsServiceValue(ApiManager):
            {
             "uuid_service": "string", required
             "timestamp": "string", required
-            "unit": "string", required
+            "unit": "string", optional
             "value": "number", required
            }
           ]

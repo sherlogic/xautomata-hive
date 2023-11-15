@@ -179,6 +179,7 @@ class TsCostManagement(ApiManager):
             subscription (string optional): additional filter - parameter
             subscription_type (string optional): additional filter - parameter
             interval (None optional): additional filter - parameter
+            detailed (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -191,13 +192,14 @@ class TsCostManagement(ApiManager):
         official_params_list = ['sort_by', 'date_start', 'date_end',
             'cloud_provider', 'resource_group', 'resource_location',
             'category', 'subscription', 'subscription_type', 'interval',
-            'skip', 'limit', 'like', 'join', 'count']
+            'detailed', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('date_start'), params.get('date_end'
             ), params.get('cloud_provider'), params.get('resource_group'
             ), params.get('resource_location'), params.get('category'
             ), params.get('subscription'), params.get('subscription_type'
-            ), params.get('interval'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            ), params.get('interval'), params.get('detailed'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_cost_management_grouped.
                 __name__, params, official_params_list)

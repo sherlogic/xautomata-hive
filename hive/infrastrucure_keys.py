@@ -12,7 +12,9 @@ class Keys:
                      "notes": {"len": 255},
                      "vat_id": {"len": 32},
                      "currency": {"len": 3},
-                     "state_province": {"len": 32}}
+                     "state_province": {"len": 32},
+                     "registration_date": {"type": "date"},
+                     "paying_customer": {"type": "bool"}}
     }
 
     virtual_domain_keys = {

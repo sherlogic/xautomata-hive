@@ -30,6 +30,8 @@ class Customers(ApiManager):
             currency (string optional): additional filter - parameter
             state_province (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
+            registration_date (string optional): additional filter - parameter
+            paying_customer (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -42,12 +44,14 @@ class Customers(ApiManager):
         official_params_list = ['sort_by', 'null_fields', 'type', 'code',
             'company_name', 'address', 'zip_code', 'city', 'country',
             'notes', 'vat_id', 'currency', 'state_province', 'status',
-            'skip', 'limit', 'like', 'join', 'count']
+            'registration_date', 'paying_customer', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('type'
             ), params.get('code'), params.get('company_name'), params.get(
             'address'), params.get('zip_code'), params.get('city'), params.get(
             'country'), params.get('notes'), params.get('vat_id'), params.get(
             'currency'), params.get('state_province'), params.get('status'
+            ), params.get('registration_date'), params.get('paying_customer'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
@@ -79,18 +83,22 @@ class Customers(ApiManager):
             state_province (string optional): additional filter - payload
             status (string required): additional filter - payload
             profile (string optional): additional filter - payload
+            registration_date (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['type', 'code', 'company_name', 'address',
             'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
-            'state_province', 'status', 'profile']
+            'state_province', 'status', 'profile', 'registration_date',
+            'paying_customer']
         payload.get('type'), payload.get('code'), payload.get('company_name'
             ), payload.get('address'), payload.get('zip_code'), payload.get(
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
-            ), payload.get('status'), payload.get('profile')
+            ), payload.get('status'), payload.get('profile'), payload.get(
+            'registration_date'), payload.get('paying_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_create.__name__,
                 payload, official_payload_list)
@@ -136,18 +144,22 @@ class Customers(ApiManager):
             state_province (string optional): additional filter - payload
             status (string optional): additional filter - payload
             profile (string optional): additional filter - payload
+            registration_date (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['type', 'code', 'company_name', 'address',
             'zip_code', 'city', 'country', 'notes', 'vat_id', 'currency',
-            'state_province', 'status', 'profile']
+            'state_province', 'status', 'profile', 'registration_date',
+            'paying_customer']
         payload.get('type'), payload.get('code'), payload.get('company_name'
             ), payload.get('address'), payload.get('zip_code'), payload.get(
             'city'), payload.get('country'), payload.get('notes'), payload.get(
             'vat_id'), payload.get('currency'), payload.get('state_province'
-            ), payload.get('status'), payload.get('profile')
+            ), payload.get('status'), payload.get('profile'), payload.get(
+            'registration_date'), payload.get('paying_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_put.__name__, payload,
                 official_payload_list)
@@ -264,6 +276,7 @@ class Customers(ApiManager):
             uuid_parent (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
             uuid_virtual_domain (string optional): additional filter - parameter
+            object_profile (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
@@ -278,14 +291,15 @@ class Customers(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
-            'uuid_site', 'uuid_virtual_domain', 'type', 'name',
-            'description', 'status', 'skip', 'limit', 'like', 'join', 'count']
+            'uuid_site', 'uuid_virtual_domain', 'object_profile', 'type',
+            'name', 'description', 'status', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_parent'), params.get('uuid_site'), params.get(
-            'uuid_virtual_domain'), params.get('type'), params.get('name'
-            ), params.get('description'), params.get('status'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            'uuid_virtual_domain'), params.get('object_profile'), params.get(
+            'type'), params.get('name'), params.get('description'), params.get(
+            'status'), params.get('skip'), params.get('limit'), params.get(
+            'like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_groups.__name__, params,
                 official_params_list)
@@ -796,6 +810,8 @@ class Customers(ApiManager):
             "state_province": "string", optional
             "status": "string", required
             "profile": "string", optional
+            "registration_date": "string", optional
+            "paying_customer": "boolean", optional
            }
           ]
 
