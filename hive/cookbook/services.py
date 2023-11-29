@@ -243,6 +243,7 @@ class Services(ApiManager):
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
             fetch_all (boolean optional): additional filter - parameter
+            only_actives (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -254,11 +255,12 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['not_in', 'code', 'fetch_all',
-            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
+            'only_actives', 'active_at_timestamp', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('not_in'), params.get('code'), params.get('fetch_all'
-            ), params.get('active_at_timestamp'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            ), params.get('only_actives'), params.get('active_at_timestamp'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_downtimes.__name__,
                 params, official_params_list)
@@ -316,6 +318,7 @@ class Services(ApiManager):
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
             fetch_all (boolean optional): additional filter - parameter
+            only_actives (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -327,11 +330,12 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['not_in', 'code', 'fetch_all',
-            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
+            'only_actives', 'active_at_timestamp', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('not_in'), params.get('code'), params.get('fetch_all'
-            ), params.get('active_at_timestamp'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            ), params.get('only_actives'), params.get('active_at_timestamp'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_dispatchers.__name__,
                 params, official_params_list)

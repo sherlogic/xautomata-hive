@@ -73,11 +73,15 @@ nav:
           - anomalies: hive.cookbook.anomalies
           - calendars: hive.cookbook.calendars
           - contacts: hive.cookbook.contacts
+          - cost_tagging: hive.cookbook.cost_tagging
+          - cost_tags: hive.cookbook.cost_tags
+          - cost_views: hive.cookbook.cost_views
           - customers: hive.cookbook.customers
           - dashboards: hive.cookbook.dashboards
           - dispatchers: hive.cookbook.dispatchers
           - downtimes: hive.cookbook.downtimes
           - external_tickets: hive.cookbook.external_tickets
+          - features: hive.cookbook.features
           - firmware_updates: hive.cookbook.firmware_updates
           - google: hive.cookbook.google
           - groups: hive.cookbook.groups

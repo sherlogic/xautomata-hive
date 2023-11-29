@@ -170,6 +170,7 @@ class TsCostManagement(ApiManager):
 
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+            null_fields (string optional): additional filter - parameter
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
             cloud_provider (string optional): additional filter - parameter
@@ -189,17 +190,18 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'date_start', 'date_end',
-            'cloud_provider', 'resource_group', 'resource_location',
-            'category', 'subscription', 'subscription_type', 'interval',
-            'detailed', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('date_start'), params.get('date_end'
-            ), params.get('cloud_provider'), params.get('resource_group'
-            ), params.get('resource_location'), params.get('category'
-            ), params.get('subscription'), params.get('subscription_type'
-            ), params.get('interval'), params.get('detailed'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['sort_by', 'null_fields', 'date_start',
+            'date_end', 'cloud_provider', 'resource_group',
+            'resource_location', 'category', 'subscription',
+            'subscription_type', 'interval', 'detailed', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'date_start'), params.get('date_end'), params.get('cloud_provider'
+            ), params.get('resource_group'), params.get('resource_location'
+            ), params.get('category'), params.get('subscription'), params.get(
+            'subscription_type'), params.get('interval'), params.get('detailed'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_cost_management_grouped.
                 __name__, params, official_params_list)

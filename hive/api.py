@@ -467,12 +467,16 @@ from hive.cookbook.acl_overrides import AclOverrides
 from hive.cookbook.analytics import Analytics
 from hive.cookbook.anomalies import Anomalies
 from hive.cookbook.calendars import Calendars
+from hive.cookbook.cost_tagging import CostTagging
+from hive.cookbook.cost_tags import CostTags
+from hive.cookbook.cost_views import CostViews
 from hive.cookbook.contacts import Contacts
 from hive.cookbook.customers import Customers
 from hive.cookbook.dashboards import Dashboards
 from hive.cookbook.dispatchers import Dispatchers
 from hive.cookbook.downtimes import Downtimes
 from hive.cookbook.external_tickets import ExternalTickets
+from hive.cookbook.features import Features
 from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
 from hive.cookbook.metric_ingest import MetricIngest
@@ -514,7 +518,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
