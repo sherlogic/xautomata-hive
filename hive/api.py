@@ -18,12 +18,12 @@ FORCE_STATUS = [429, 500, 502, 503, 504]
 # METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
 
 
-def get_session(timeout=150):
+def get_session(timeout=150, total=5, backoff_factor=5):
     """
     Add retry logic and policies about methods and statuses for requests
     """
     ss = requests.Session()
-    retry_strategy = Retry(total=5, status_forcelist=FORCE_STATUS, backoff_factor=5)
+    retry_strategy = Retry(total=total, status_forcelist=FORCE_STATUS, backoff_factor=backoff_factor)
     ss.request = functools.partial(ss.request, timeout=timeout, verify=True)
     ss.mount('https://', HTTPAdapter(max_retries=retry_strategy))
     ss.mount('http://', HTTPAdapter(max_retries=retry_strategy))
@@ -45,9 +45,11 @@ class ApiManager:
     """
 
     _timeout = 150
+    _timeout_get_session_retry = 5
+    _timeout_get_session_backoff_factor = 5
     _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
-    _silence_warning = False
+    _silence_warning = False  # da implementare
 
     def __init__(self, root, user, password):
 
@@ -67,13 +69,13 @@ class ApiManager:
         """
         user, password = self.credentials
         auth_date = {"grant_type": "password", "username": user, "password": password}
-        response = get_session(self._timeout).post(f'{self.root}/login/access-token', auth_date)
+        response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).post(f'{self.root}/login/access-token', auth_date)
         response.raise_for_status()
         self.token = json.loads(response.content.decode('utf-8'))['access_token']
 
     def openapi(self):
         """metodo che restituisce gli schema degli end point"""
-        response = get_session(self._timeout).request('GET', url=f'{self.root}/openapi.js',
+        response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request('GET', url=f'{self.root}/openapi.js',
                                                       headers={'Authorization': f'Bearer {self.token}'})
         data = json.loads(response.content[15:].decode('utf-8'))
         return data
@@ -154,7 +156,7 @@ class ApiManager:
         @timeout_retry(max_tries=self._timeout_retry, sleep_time=self._timeout_sleep_time)
         @ratelimiter
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
-            response = get_session(self._timeout).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
+            response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, **_kwargs)
             if response.status_code == 401: raise UnauthorizedException
             if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
                 print()
