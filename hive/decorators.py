@@ -105,6 +105,9 @@ def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
     @functools.wraps(func)
     def behaviour(*args, **kwargs):
         count_timeout, count_json = 0, 0
+
+        if max_tries < 2: return func(*args, **kwargs)
+
         for i in range(max_tries):
             try:
                 return func(*args, **kwargs)
@@ -123,7 +126,6 @@ def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
             raise requests.exceptions.ReadTimeout
         else:
             raise requests.exceptions.JSONDecodeError
-
 
     return behaviour
 
