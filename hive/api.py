@@ -50,12 +50,12 @@ class ApiManager:
     _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
     _silence_warning = False  # da implementare
-    _SSL_verify = True
 
-    def __init__(self, root, user, password):
+    def __init__(self, root, user, password, ssl_verify: bool = True):
 
         if 'api/v' not in root: warnings.warn(f'{root} does not have the api/v* in the root, mandatory to point at the API')
 
+        self._SSL_verify = ssl_verify
         self.root = root.rstrip('/')
         self.credentials = (user, password)
         self.token = 'UNDEFINED'
