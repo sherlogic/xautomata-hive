@@ -19,7 +19,6 @@ class Dashboards(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
-            uuid_origin_dashboard (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
@@ -36,16 +35,15 @@ class Dashboards(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields',
-            'uuid_origin_dashboard', 'name', 'description', 'type',
-            'username', 'profile', 'priority', 'refresh_interval', 'skip',
-            'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_origin_dashboard'), params.get('name'), params.get(
-            'description'), params.get('type'), params.get('username'
-            ), params.get('profile'), params.get('priority'), params.get(
-            'refresh_interval'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['sort_by', 'null_fields', 'name',
+            'description', 'type', 'username', 'profile', 'priority',
+            'refresh_interval', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('name'
+            ), params.get('description'), params.get('type'), params.get(
+            'username'), params.get('profile'), params.get('priority'
+            ), params.get('refresh_interval'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards.__name__, params,
                 official_params_list)
@@ -70,18 +68,16 @@ class Dashboards(ApiManager):
             priority (integer optional): additional filter - payload
             refresh_interval (integer optional): additional filter - payload
             image_name (string optional): additional filter - payload
-            uuid_origin_dashboard (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['name', 'type', 'username', 'description',
-            'profile', 'priority', 'refresh_interval', 'image_name',
-            'uuid_origin_dashboard']
+            'profile', 'priority', 'refresh_interval', 'image_name']
         payload.get('name'), payload.get('type'), payload.get('username'
             ), payload.get('description'), payload.get('profile'), payload.get(
             'priority'), payload.get('refresh_interval'), payload.get(
-            'image_name'), payload.get('uuid_origin_dashboard')
+            'image_name')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards_create.__name__,
                 payload, official_payload_list)
@@ -462,7 +458,6 @@ class Dashboards(ApiManager):
             "priority": "integer", optional
             "refresh_interval": "integer", optional
             "image_name": "string", optional
-            "uuid_origin_dashboard": "string", optional
            }
           ]
 

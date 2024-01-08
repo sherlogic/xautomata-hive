@@ -121,3 +121,44 @@ class UsersNotifications(ApiManager):
         response = self.execute('DELETE', path=
             f'/users_notifications/{uuid}', **kwargs)
         return response
+
+    def users_notifications_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Create Bulk Notification
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "username": "string", required
+            "title": "string", required
+            "body": "array object", optional
+            "read": "boolean", optional
+            "sent": "boolean", optional
+            "timestamp": "string", optional
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_notifications_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/users_notifications/bulk/create/', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response

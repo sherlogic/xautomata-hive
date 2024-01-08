@@ -325,6 +325,7 @@ class Groups(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -336,12 +337,13 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'code', 'active_at_timestamp',
-            'active_after_timestamp', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('code'), params.get(
-            'active_at_timestamp'), params.get('active_after_timestamp'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'code', 'status',
+            'active_at_timestamp', 'active_after_timestamp', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get('status'
+            ), params.get('active_at_timestamp'), params.get(
+            'active_after_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.groups_downtimes.__name__, params,
                 official_params_list)
@@ -398,6 +400,7 @@ class Groups(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -408,11 +411,12 @@ class Groups(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'code', 'active_at_timestamp',
-            'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('code'), params.get(
-            'active_at_timestamp'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['not_in', 'code', 'status',
+            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('code'), params.get('status'
+            ), params.get('active_at_timestamp'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.groups_dispatchers.__name__,
                 params, official_params_list)

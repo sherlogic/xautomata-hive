@@ -106,6 +106,7 @@ nav:
           - schedules: hive.cookbook.schedules
           - services: hive.cookbook.services
           - sites: hive.cookbook.sites
+          - terms_and_conditions: hive.cookbook.terms_and_conditions
           - tree_hierarchy: hive.cookbook.tree_hierarchy
           - ts_cost_azure_raw: hive.cookbook.ts_cost_azure_raw
           - ts_cost_management: hive.cookbook.ts_cost_management

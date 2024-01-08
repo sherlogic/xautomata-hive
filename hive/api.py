@@ -53,7 +53,7 @@ class ApiManager:
 
     def __init__(self, root, user, password):
 
-        if 'api/v' not in root: raise ValueError(f'{root} does not have the api/v* in the root, mandatory to point at the API')
+        if 'api/v' not in root: warnings.warn(f'{root} does not have the api/v* in the root, mandatory to point at the API')
 
         self.root = root.rstrip('/')
         self.credentials = (user, password)
@@ -503,6 +503,7 @@ from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
 from hive.cookbook.last_status import LastStatus
+from hive.cookbook.terms_and_conditions import TermsAndConditions
 from hive.cookbook.tree_hierarchy import TreeHierarchy
 from hive.cookbook.ts_cost_azure_raw import TsCostAzureRaw
 from hive.cookbook.ts_cost_management import TsCostManagement
@@ -520,7 +521,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, FirmwareUpdates, Groups, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TermsAndConditions, TreeHierarchy, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

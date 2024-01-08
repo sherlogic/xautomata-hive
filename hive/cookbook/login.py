@@ -266,6 +266,21 @@ class Login(ApiManager):
             f'/login/current_user/push_tokens', payload=payload, **kwargs)
         return response
 
+    def login_current_user_push_tokens_delete(self, token: str,
+        kwargs: dict = None) -> list:
+        """Delete Downtime
+
+        Args:
+            token (str, required): token
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/login/current_user/push_tokens/{token}', **kwargs)
+        return response
+
     def login_current_user_notifications(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
@@ -324,6 +339,21 @@ class Login(ApiManager):
             f'/login/current_user/notifications/{uuid}', **kwargs)
         return response
 
+    def login_current_user_notifications_delete(self, uuid: str,
+        kwargs: dict = None) -> list:
+        """Delete Notification
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/login/current_user/notifications/{uuid}', **kwargs)
+        return response
+
     def login_current_user_notifications_put_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
@@ -349,7 +379,7 @@ class Login(ApiManager):
             single_page, page_size=page_size, payload=payload, **kwargs)
         return response
 
-    def login_current_user_terms_and_notifications(self,
+    def login_current_user_terms_and_conditions(self,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Check If User Approved Tc
@@ -362,7 +392,7 @@ class Login(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            tc_version (string optional): additional filter - parameter
+            tc_version (integer optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -380,15 +410,15 @@ class Login(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                login_current_user_terms_and_notifications.__name__, params,
+                login_current_user_terms_and_conditions.__name__, params,
                 official_params_list)
         response = self.execute('GET', path=
-            f'/login/current_user/terms_and_notifications', single_page=
+            f'/login/current_user/terms_and_conditions', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
         return response
 
-    def login_current_user_terms_and_notifications_create(self,
+    def login_current_user_terms_and_conditions_create(self,
         kwargs: dict = None, **payload) -> list:
         """User Approved Or Declined Tc
 
@@ -397,7 +427,7 @@ class Login(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            tc_version (string required): additional filter - payload
+            tc_version (integer required): additional filter - payload
             accepted (boolean required): additional filter - payload
 
         Returns: list"""
@@ -407,36 +437,9 @@ class Login(ApiManager):
         payload.get('tc_version'), payload.get('accepted')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                login_current_user_terms_and_notifications_create.__name__,
+                login_current_user_terms_and_conditions_create.__name__,
                 payload, official_payload_list)
         response = self.execute('POST', path=
-            f'/login/current_user/terms_and_notifications', payload=payload,
+            f'/login/current_user/terms_and_conditions', payload=payload,
             **kwargs)
-        return response
-
-    def login_current_user_terms_and_notifications_put(self, uuid: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update User Tc
-
-        Args:
-            uuid (str, required): uuid
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            tc_version (string optional): additional filter - payload
-            accepted (boolean optional): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['tc_version', 'accepted']
-        payload.get('tc_version'), payload.get('accepted')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.
-                login_current_user_terms_and_notifications_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/login/current_user/terms_and_notifications/{uuid}', payload=
-            payload, **kwargs)
         return response

@@ -317,6 +317,7 @@ class Services(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             fetch_all (boolean optional): additional filter - parameter
             only_actives (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
@@ -329,13 +330,13 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'code', 'fetch_all',
+        official_params_list = ['not_in', 'code', 'status', 'fetch_all',
             'only_actives', 'active_at_timestamp', 'skip', 'limit', 'like',
             'join', 'count']
-        params.get('not_in'), params.get('code'), params.get('fetch_all'
-            ), params.get('only_actives'), params.get('active_at_timestamp'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        params.get('not_in'), params.get('code'), params.get('status'
+            ), params.get('fetch_all'), params.get('only_actives'), params.get(
+            'active_at_timestamp'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_dispatchers.__name__,
                 params, official_params_list)

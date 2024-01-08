@@ -175,6 +175,7 @@ class Downtimes(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -184,11 +185,11 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('name'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.downtimes_groups.__name__, params,
                 official_params_list)
@@ -245,6 +246,7 @@ class Downtimes(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -254,11 +256,11 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('name'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.downtimes_objects.__name__,
                 params, official_params_list)
@@ -315,6 +317,7 @@ class Downtimes(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -324,11 +327,11 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('name'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.downtimes_metrics.__name__,
                 params, official_params_list)
@@ -385,6 +388,7 @@ class Downtimes(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -394,11 +398,11 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('name'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.downtimes_metric_types.__name__,
                 params, official_params_list)
@@ -456,6 +460,7 @@ class Downtimes(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -465,11 +470,11 @@ class Downtimes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['not_in', 'name', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('not_in'), params.get('name'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.downtimes_services.__name__,
                 params, official_params_list)
