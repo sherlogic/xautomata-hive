@@ -266,7 +266,8 @@ class ApiManager:
                       page_size: int = 5000) -> Tuple[List[str], int, int, int]:
         """
         metodo che prova a fare una get con i parametri selezionati, se la get fallisce perche mancavano i dati
-        richiesti allora viene fatta una post per creare il dato cercato
+        richiesti allora viene fatta una post per creare il dato cercato. La risposta ha lo stesso ordine della lista
+        post_params
 
         Args:
             post_params (list[dict], optional): parametri della api di post. Default to None.
@@ -280,7 +281,7 @@ class ApiManager:
             page_size (int, optional): numero di elementi che vengono caricati in un unica chiamata
 
         Returns:
-            uuid (list[str]): lista di tutti gli uuid degli oggetti richiesti
+            uuid (list[str]): lista di tutti gli uuid degli oggetti richiesti, ordinati come il vettore post_params
             get_count (int): 1 se il metodo e' risultato in una get e 0 se e' risultato in una post
             post_count (int): 1 se il metodo e' risutltato in una post e 0 se e' risultato in una get
         """
