@@ -20,6 +20,8 @@ class TsNtopFlows(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_service (string optional): additional filter - parameter
+            uuid_site_src (string optional): additional filter - parameter
+            uuid_site_dst (string optional): additional filter - parameter
             l7_proto (string optional): additional filter - parameter
             ip_src_addr (None optional): additional filter - parameter
             ip_dst_addr (None optional): additional filter - parameter
@@ -41,12 +43,14 @@ class TsNtopFlows(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_service',
-            'l7_proto', 'ip_src_addr', 'ip_dst_addr', 'l4_dst_port',
-            'fqdn_src_addr', 'fqdn_dst_addr', 'in_bytes', 'out_bytes',
-            'last_switched_start', 'last_switched_end', 'interface_id',
-            'skip', 'limit', 'like', 'join', 'count']
+            'uuid_site_src', 'uuid_site_dst', 'l7_proto', 'ip_src_addr',
+            'ip_dst_addr', 'l4_dst_port', 'fqdn_src_addr', 'fqdn_dst_addr',
+            'in_bytes', 'out_bytes', 'last_switched_start',
+            'last_switched_end', 'interface_id', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_service'), params.get('l7_proto'), params.get('ip_src_addr'
+            'uuid_service'), params.get('uuid_site_src'), params.get(
+            'uuid_site_dst'), params.get('l7_proto'), params.get('ip_src_addr'
             ), params.get('ip_dst_addr'), params.get('l4_dst_port'
             ), params.get('fqdn_src_addr'), params.get('fqdn_dst_addr'
             ), params.get('in_bytes'), params.get('out_bytes'), params.get(
@@ -78,6 +82,8 @@ class TsNtopFlows(ApiManager):
           [
            {
             "uuid_service": "string", optional
+            "uuid_site_src": "string", optional
+            "uuid_site_dst": "string", optional
             "l7_proto": "string", optional
             "ip_src_addr": "integer string string", optional
             "ip_dst_addr": "integer string string", optional
@@ -113,6 +119,7 @@ class TsNtopFlows(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            uuid_site (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -123,10 +130,11 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('profile'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'profile', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('uuid_site'), params.get('profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_ntop_flows_top_protocols.
                 __name__, params, official_params_list)
@@ -150,6 +158,7 @@ class TsNtopFlows(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            uuid_site (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -160,10 +169,11 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('profile'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'profile', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('uuid_site'), params.get('profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_ntop_flows_top_talkers.
                 __name__, params, official_params_list)
@@ -187,6 +197,7 @@ class TsNtopFlows(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            uuid_site (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -197,10 +208,11 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('profile'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'profile', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('uuid_site'), params.get('profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_ntop_flows_top_receivers.
                 __name__, params, official_params_list)
@@ -224,6 +236,7 @@ class TsNtopFlows(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            uuid_site (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -234,10 +247,11 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['profile', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('profile'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'profile', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('uuid_site'), params.get('profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 ts_ntop_flows_top_protocols_history.__name__, params,

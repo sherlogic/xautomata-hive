@@ -92,6 +92,7 @@ class TreeHierarchy(ApiManager):
             null_fields (string optional): additional filter - parameter
             extract_data_profile (boolean optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
+            extract_ip_cidr (boolean optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
@@ -124,26 +125,28 @@ class TreeHierarchy(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields',
-            'extract_data_profile', 'extract_severity', 'uuid_customer',
-            'customer_code', 'customer_status', 'uuid_site', 'site_code',
-            'site_description', 'site_address', 'site_zip_code',
-            'site_city', 'site_country', 'site_state_province',
-            'site_status', 'uuid_group', 'group_name', 'group_status',
-            'group_type', 'uuid_object', 'object_name', 'object_status',
-            'object_profile', 'uuid_virtual_domain', 'virtual_domain_name',
-            'skip', 'limit', 'like', 'join', 'count']
+            'extract_data_profile', 'extract_severity', 'extract_ip_cidr',
+            'uuid_customer', 'customer_code', 'customer_status',
+            'uuid_site', 'site_code', 'site_description', 'site_address',
+            'site_zip_code', 'site_city', 'site_country',
+            'site_state_province', 'site_status', 'uuid_group',
+            'group_name', 'group_status', 'group_type', 'uuid_object',
+            'object_name', 'object_status', 'object_profile',
+            'uuid_virtual_domain', 'virtual_domain_name', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'extract_data_profile'), params.get('extract_severity'
-            ), params.get('uuid_customer'), params.get('customer_code'
-            ), params.get('customer_status'), params.get('uuid_site'
-            ), params.get('site_code'), params.get('site_description'
-            ), params.get('site_address'), params.get('site_zip_code'
-            ), params.get('site_city'), params.get('site_country'), params.get(
-            'site_state_province'), params.get('site_status'), params.get(
-            'uuid_group'), params.get('group_name'), params.get('group_status'
-            ), params.get('group_type'), params.get('uuid_object'), params.get(
-            'object_name'), params.get('object_status'), params.get(
-            'object_profile'), params.get('uuid_virtual_domain'), params.get(
+            ), params.get('extract_ip_cidr'), params.get('uuid_customer'
+            ), params.get('customer_code'), params.get('customer_status'
+            ), params.get('uuid_site'), params.get('site_code'), params.get(
+            'site_description'), params.get('site_address'), params.get(
+            'site_zip_code'), params.get('site_city'), params.get(
+            'site_country'), params.get('site_state_province'), params.get(
+            'site_status'), params.get('uuid_group'), params.get('group_name'
+            ), params.get('group_status'), params.get('group_type'
+            ), params.get('uuid_object'), params.get('object_name'
+            ), params.get('object_status'), params.get('object_profile'
+            ), params.get('uuid_virtual_domain'), params.get(
             'virtual_domain_name'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
