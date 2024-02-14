@@ -20,6 +20,7 @@ class CostViews(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             name (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
+            type (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -30,12 +31,12 @@ class CostViews(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'name', 'description',
+        official_params_list = ['sort_by', 'name', 'description', 'type',
             'null_fields', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('name'), params.get('description'
-            ), params.get('null_fields'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            ), params.get('type'), params.get('null_fields'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views.__name__, params,
                 official_params_list)
@@ -53,13 +54,14 @@ class CostViews(ApiManager):
 
         Keyword Args:
             name (string required): additional filter - payload
-            description (string required): additional filter - payload
+            description (string optional): additional filter - payload
+            type (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'description']
-        payload.get('name'), payload.get('description')
+        official_payload_list = ['name', 'description', 'type']
+        payload.get('name'), payload.get('description'), payload.get('type')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views_create.__name__,
                 payload, official_payload_list)
@@ -106,12 +108,13 @@ class CostViews(ApiManager):
         Keyword Args:
             name (string optional): additional filter - payload
             description (string optional): additional filter - payload
+            type (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'description']
-        payload.get('name'), payload.get('description')
+        official_payload_list = ['name', 'description', 'type']
+        payload.get('name'), payload.get('description'), payload.get('type')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views_put.__name__, payload,
                 official_payload_list)

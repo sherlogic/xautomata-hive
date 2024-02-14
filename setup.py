@@ -16,7 +16,7 @@ version = version[0].split("'")[1]
 
 # version go
 tqdm = 'tqdm==4.64.1'
-urllib3 = 'urllib3==1.26.17'
+urllib3 = 'urllib3==2.0.4'
 requests = 'requests==2.31.0'
 # version end
 

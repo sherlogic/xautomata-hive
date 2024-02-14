@@ -287,7 +287,7 @@ class Downtimes(ApiManager):
 
     def downtimes_objects_delete(self, uuid: str, uuid_object: str,
         kwargs: dict = None) -> list:
-        """Removeect
+        """Remove Object
 
         Args:
             uuid (str, required): uuid

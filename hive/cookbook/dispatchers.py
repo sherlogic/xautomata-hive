@@ -432,7 +432,7 @@ class Dispatchers(ApiManager):
 
     def dispatchers_objects_delete(self, uuid: str, uuid_object: str,
         kwargs: dict = None) -> list:
-        """Removeect
+        """Remove Object
 
         Args:
             uuid (str, required): uuid

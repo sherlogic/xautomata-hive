@@ -1,13 +1,13 @@
 from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
-class CostTagging(ApiManager):
-    """Class that handles all the XAutomata cost_tagging APIs"""
+class CostTreeResources(ApiManager):
+    """Class that handles all the XAutomata cost_tree_resources APIs"""
 
-    def cost_tagging(self, warm_start: bool = False,
+    def cost_tree_resources(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Read Cost Taggings
+        """Read Cost Tree Resources
 
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -18,11 +18,11 @@ class CostTagging(ApiManager):
 
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            uuid_view (string optional): additional filter - parameter
+            uuid_tree_node (string optional): additional filter - parameter
             uuid_tag (string optional): additional filter - parameter
-            tag_code (string optional): additional filter - parameter
             cost_category (string optional): additional filter - parameter
             cost_category_value (string optional): additional filter - parameter
+            percentage (integer optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -33,55 +33,58 @@ class CostTagging(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'uuid_view', 'uuid_tag',
-            'tag_code', 'cost_category', 'cost_category_value',
+        official_params_list = ['sort_by', 'uuid_tree_node', 'uuid_tag',
+            'cost_category', 'cost_category_value', 'percentage',
             'null_fields', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('uuid_view'), params.get('uuid_tag'
-            ), params.get('tag_code'), params.get('cost_category'), params.get(
-            'cost_category_value'), params.get('null_fields'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        params.get('sort_by'), params.get('uuid_tree_node'), params.get(
+            'uuid_tag'), params.get('cost_category'), params.get(
+            'cost_category_value'), params.get('percentage'), params.get(
+            'null_fields'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tagging.__name__, params,
-                official_params_list)
-        response = self.execute('GET', path=f'/cost_tagging/', single_page=
-            single_page, page_size=page_size, warm_start=warm_start, params
-            =params, **kwargs)
+            warning_wrong_parameters(self.cost_tree_resources.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=f'/cost_tree_resources/',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
         return response
 
-    def cost_tagging_create(self, kwargs: dict = None, **payload) -> list:
-        """Create Cost Tagging
+    def cost_tree_resources_create(self, kwargs: dict = None, **payload
+        ) -> list:
+        """Create Cost Tree Resource
 
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
-            cost_category_value (string required): additional filter - payload
+            uuid_tree_node (string required): additional filter - payload
             cost_category (string required): additional filter - payload
-            uuid_view (string required): additional filter - payload
-            uuid_tag (string required): additional filter - payload
+            cost_category_value (string required): additional filter - payload
+            percentage (integer optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['cost_category_value', 'cost_category',
-            'uuid_view', 'uuid_tag']
-        payload.get('cost_category_value'), payload.get('cost_category'
-            ), payload.get('uuid_view'), payload.get('uuid_tag')
+        official_payload_list = ['uuid_tree_node', 'cost_category',
+            'cost_category_value', 'percentage']
+        payload.get('uuid_tree_node'), payload.get('cost_category'
+            ), payload.get('cost_category_value'), payload.get('percentage')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tagging_create.__name__,
-                payload, official_payload_list)
-        response = self.execute('POST', path=f'/cost_tagging/', payload=
-            payload, **kwargs)
+            warning_wrong_parameters(self.cost_tree_resources_create.
+                __name__, payload, official_payload_list)
+        response = self.execute('POST', path=f'/cost_tree_resources/',
+            payload=payload, **kwargs)
         return response
 
-    def cost_tagging_uuid(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None, **params) -> list:
-        """Read Cost Tagging
+    def cost_tree_resources_uuid_tree_node(self, uuid_tree_node: str,
+        uuid_tag: str, warm_start: bool = False, kwargs: dict = None, **params
+        ) -> list:
+        """Read Cost Tree Resources
 
         Args:
-            uuid (str, required): uuid
+            uuid_tree_node (str, required): uuid_tree_node
+            uuid_tag (str, required): uuid_tag
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
@@ -97,51 +100,56 @@ class CostTagging(ApiManager):
         official_params_list = ['join']
         params.get('join')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tagging.__name__, params,
-                official_params_list)
-        response = self.execute('GET', path=f'/cost_tagging/{uuid}',
-            warm_start=warm_start, params=params, **kwargs)
+            warning_wrong_parameters(self.cost_tree_resources.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', warm_start
+            =warm_start, params=params, **kwargs)
         return response
 
-    def cost_tagging_put(self, uuid: str, kwargs: dict = None, **payload
-        ) -> list:
-        """Update Cost Tagging
+    def cost_tree_resources_put(self, uuid_tree_node: str, uuid_tag: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Cost Tree Resources
 
         Args:
-            uuid (str, required): uuid
+            uuid_tree_node (str, required): uuid_tree_node
+            uuid_tag (str, required): uuid_tag
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
-            cost_category_value (string optional): additional filter - payload
+            uuid_tree_node (string optional): additional filter - payload
             cost_category (string optional): additional filter - payload
-            uuid_view (string optional): additional filter - payload
-            uuid_tag (string optional): additional filter - payload
+            cost_category_value (string optional): additional filter - payload
+            percentage (integer optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['cost_category_value', 'cost_category',
-            'uuid_view', 'uuid_tag']
-        payload.get('cost_category_value'), payload.get('cost_category'
-            ), payload.get('uuid_view'), payload.get('uuid_tag')
+        official_payload_list = ['uuid_tree_node', 'cost_category',
+            'cost_category_value', 'percentage']
+        payload.get('uuid_tree_node'), payload.get('cost_category'
+            ), payload.get('cost_category_value'), payload.get('percentage')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tagging_put.__name__,
+            warning_wrong_parameters(self.cost_tree_resources_put.__name__,
                 payload, official_payload_list)
-        response = self.execute('PUT', path=f'/cost_tagging/{uuid}',
-            payload=payload, **kwargs)
+        response = self.execute('PUT', path=
+            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', payload=
+            payload, **kwargs)
         return response
 
-    def cost_tagging_delete(self, uuid: str, kwargs: dict = None) -> list:
-        """Delete Cost Tagging
+    def cost_tree_resources_delete(self, uuid_tree_node: str, uuid_tag: str,
+        kwargs: dict = None) -> list:
+        """Delete Cost Tree Resources
 
         Args:
-            uuid (str, required): uuid
+            uuid_tree_node (str, required): uuid_tree_node
+            uuid_tag (str, required): uuid_tag
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('DELETE', path=f'/cost_tagging/{uuid}', **
-            kwargs)
+        response = self.execute('DELETE', path=
+            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', **kwargs)
         return response

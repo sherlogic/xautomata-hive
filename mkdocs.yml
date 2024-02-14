@@ -65,6 +65,7 @@ nav:
         - decorators: hive.decorators
         - exceptions: hive.exceptions
         - infrastrucure_keys: hive.infrastrucure_keys
+        - tools: hive.tools
         - version: hive.version
         - cookbook:
           - acl_docs: hive.cookbook.acl_docs
@@ -75,6 +76,8 @@ nav:
           - contacts: hive.cookbook.contacts
           - cost_tagging: hive.cookbook.cost_tagging
           - cost_tags: hive.cookbook.cost_tags
+          - cost_tree_nodes: hive.cookbook.cost_tree_nodes
+          - cost_tree_resources: hive.cookbook.cost_tree_resources
           - cost_views: hive.cookbook.cost_views
           - customers: hive.cookbook.customers
           - dashboards: hive.cookbook.dashboards

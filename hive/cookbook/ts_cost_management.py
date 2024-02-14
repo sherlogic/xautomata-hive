@@ -39,6 +39,7 @@ class TsCostManagement(ApiManager):
             local_currency (string optional): additional filter - parameter
             provider_currency (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -53,8 +54,8 @@ class TsCostManagement(ApiManager):
             'subscription_type', 'subscription_id', 'subscription_name',
             'family', 'category', 'subcategory', 'object', 'metric', 'unit',
             'resource_group', 'reservation_name', 'publisher_name',
-            'local_currency', 'provider_currency', 'uuid_customer', 'skip',
-            'limit', 'like', 'join', 'count']
+            'local_currency', 'provider_currency', 'uuid_customer',
+            'resource_id', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_metric'), params.get('date_start'), params.get('date_end'
             ), params.get('cloud_provider'), params.get('resource_location'
@@ -65,8 +66,8 @@ class TsCostManagement(ApiManager):
             'resource_group'), params.get('reservation_name'), params.get(
             'publisher_name'), params.get('local_currency'), params.get(
             'provider_currency'), params.get('uuid_customer'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            'resource_id'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_cost_management.__name__,
                 params, official_params_list)
@@ -116,6 +117,7 @@ class TsCostManagement(ApiManager):
             resource_group (string required): additional filter - payload
             reservation_name (string required): additional filter - payload
             publisher_name (string required): additional filter - payload
+            resource_id (string required): additional filter - payload
             tenant_id (string optional): additional filter - payload
 
         Returns: list"""
@@ -130,8 +132,8 @@ class TsCostManagement(ApiManager):
             'unit_revenue_pc', 'total_revenue_pc', 'cumulative_qnt',
             'cumulative_unit_cost', 'cumulative_total_cost',
             'cumulative_unit_revenue', 'cumulative_total_revenue',
-            'resource_group', 'reservation_name', 'publisher_name', 'tenant_id'
-            ]
+            'resource_group', 'reservation_name', 'publisher_name',
+            'resource_id', 'tenant_id']
         payload.get('uuid_metric'), payload.get('date'), payload.get(
             'cloud_provider'), payload.get('resource_location'), payload.get(
             'subscription_type'), payload.get('subscription_id'), payload.get(
@@ -147,7 +149,8 @@ class TsCostManagement(ApiManager):
             ), payload.get('cumulative_total_cost'), payload.get(
             'cumulative_unit_revenue'), payload.get('cumulative_total_revenue'
             ), payload.get('resource_group'), payload.get('reservation_name'
-            ), payload.get('publisher_name'), payload.get('tenant_id')
+            ), payload.get('publisher_name'), payload.get('resource_id'
+            ), payload.get('tenant_id')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_cost_management_create.
                 __name__, payload, official_payload_list)
