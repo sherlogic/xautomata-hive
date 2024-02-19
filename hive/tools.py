@@ -1,4 +1,4 @@
-def dict_by_request(responce_list: list, univocal_keys: list):
+def dict_by_request(responce_list: list, univocal_keys: list) -> dict:
     """
     Given a responce list it turn the List[Dict] into a Dict[Dict] where the keys are the univocal_keys given in the arguments.
 
@@ -15,7 +15,7 @@ def dict_by_request(responce_list: list, univocal_keys: list):
     return responce_dict
 
 
-def order_by_request(params_list, responce_list, univocal_keys):
+def order_by_request(params_list, responce_list, univocal_keys) -> list:
     """
     Given a API responce, its univocal keys and the params list used to get that responce, a new
     Args:
@@ -23,7 +23,7 @@ def order_by_request(params_list, responce_list, univocal_keys):
         responce_list: API responce
         univocal_keys: keys that represents the univocal field of the responce
 
-    Returns: Dict
+    Returns: List
 
     """
     responce_dict = dict_by_request(responce_list, univocal_keys)
