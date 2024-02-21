@@ -1,3 +1,5 @@
+# from types import MappingProxyType
+
 class Keys:
     customer_keys = {
         "univocal": ["code"],
@@ -25,6 +27,7 @@ class Keys:
 
     site_keys = {
         "univocal": ["uuid_customer", "code"],
+        "backtrace": {"uuid_customer": ["customer code"]},
         "mandatory": {"code": {"len": 16, "unique": True},  # unico
                       "description": {"len": 128},
                       "address": {"len": 64},
@@ -39,6 +42,7 @@ class Keys:
 
     group_keys = {
         "univocal": ["uuid_site", "uuid_virtual_domain", "name"],
+        "backtrace": {"uuid_site": ["customer code", "site code"], "uuid_virtual_domain": ["virtual_domain code"]},
         "mandatory": {"type": {"len": 8},
                       "name": {"len": 255, "unique": True},  # univo con la tripla uuid_stie, uuid_vd
                       "description": {"len": 255},
@@ -60,6 +64,7 @@ class Keys:
     metric_type_keys = {
         # uuid_object -> relazione NON univoca
         "univocal": ["uuid_object", "name"],
+        "backtrace": {"uuid_object": ["object name"]},
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
@@ -71,6 +76,7 @@ class Keys:
     metric_keys = {
         # uuid_metric_type -> relazione NON univoca
         "univocal": ["uuid_metric_type", "name"],
+        "backtrace": {"uuid_metric_type": ["object name", "metric_type name"]},
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
@@ -82,6 +88,7 @@ class Keys:
     service_keys = {
         # uuid_parend?
         "univocal": ['uuid_customer', 'name', 'profile'],
+        "backtrace": {"uuid_customer": ["customer code"]},
         "mandatory": {'profile': {'len': 64},
                       'name': {'len': 255},
                       'description': {'len': 255},
