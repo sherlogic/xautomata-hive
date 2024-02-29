@@ -76,86 +76,64 @@ class TsCostManagement(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_create(self, kwargs: dict = None, **payload
+    def ts_cost_management_create(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Create Cost Multi
 
         Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
 
-        Keyword Args:
-            uuid_metric (string required): additional filter - payload
-            date (string required): additional filter - payload
-            cloud_provider (string required): additional filter - payload
-            resource_location (string required): additional filter - payload
-            subscription_type (string optional): additional filter - payload
-            subscription_id (string required): additional filter - payload
-            subscription_name (string optional): additional filter - payload
-            family (string required): additional filter - payload
-            category (string required): additional filter - payload
-            subcategory (string required): additional filter - payload
-            object (string required): additional filter - payload
-            metric (string required): additional filter - payload
-            unit (string required): additional filter - payload
-            qnt (number optional): additional filter - payload
-            local_currency (string required): additional filter - payload
-            unit_cost (number required): additional filter - payload
-            total_cost (number required): additional filter - payload
-            unit_revenue (number required): additional filter - payload
-            total_revenue (number required): additional filter - payload
-            provider_currency (string required): additional filter - payload
-            unit_cost_pc (number required): additional filter - payload
-            total_cost_pc (number required): additional filter - payload
-            unit_revenue_pc (number required): additional filter - payload
-            total_revenue_pc (number required): additional filter - payload
-            cumulative_qnt (number required): additional filter - payload
-            cumulative_unit_cost (number required): additional filter - payload
-            cumulative_total_cost (number required): additional filter - payload
-            cumulative_unit_revenue (number required): additional filter - payload
-            cumulative_total_revenue (number required): additional filter - payload
-            resource_group (string required): additional filter - payload
-            reservation_name (string required): additional filter - payload
-            publisher_name (string required): additional filter - payload
-            resource_id (string required): additional filter - payload
-            tenant_id (string optional): additional filter - payload
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_metric": "string", required
+            "date": "string", required
+            "cloud_provider": "string", required
+            "resource_location": "string", required
+            "subscription_type": "string", optional
+            "subscription_id": "string", required
+            "subscription_name": "string", optional
+            "family": "string", required
+            "category": "string", required
+            "subcategory": "string", required
+            "object": "string", required
+            "metric": "string", required
+            "unit": "string", required
+            "qnt": "number", optional
+            "local_currency": "string", required
+            "unit_cost": "number", required
+            "total_cost": "number", required
+            "unit_revenue": "number", required
+            "total_revenue": "number", required
+            "provider_currency": "string", required
+            "unit_cost_pc": "number", required
+            "total_cost_pc": "number", required
+            "unit_revenue_pc": "number", required
+            "total_revenue_pc": "number", required
+            "cumulative_qnt": "number", required
+            "cumulative_unit_cost": "number", required
+            "cumulative_total_cost": "number", required
+            "cumulative_unit_revenue": "number", required
+            "cumulative_total_revenue": "number", required
+            "resource_group": "string", required
+            "reservation_name": "string", required
+            "publisher_name": "string", required
+            "resource_id": "string", required
+            "tenant_id": "string", optional
+           }
+          ]
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['uuid_metric', 'date', 'cloud_provider',
-            'resource_location', 'subscription_type', 'subscription_id',
-            'subscription_name', 'family', 'category', 'subcategory',
-            'object', 'metric', 'unit', 'qnt', 'local_currency',
-            'unit_cost', 'total_cost', 'unit_revenue', 'total_revenue',
-            'provider_currency', 'unit_cost_pc', 'total_cost_pc',
-            'unit_revenue_pc', 'total_revenue_pc', 'cumulative_qnt',
-            'cumulative_unit_cost', 'cumulative_total_cost',
-            'cumulative_unit_revenue', 'cumulative_total_revenue',
-            'resource_group', 'reservation_name', 'publisher_name',
-            'resource_id', 'tenant_id']
-        payload.get('uuid_metric'), payload.get('date'), payload.get(
-            'cloud_provider'), payload.get('resource_location'), payload.get(
-            'subscription_type'), payload.get('subscription_id'), payload.get(
-            'subscription_name'), payload.get('family'), payload.get('category'
-            ), payload.get('subcategory'), payload.get('object'), payload.get(
-            'metric'), payload.get('unit'), payload.get('qnt'), payload.get(
-            'local_currency'), payload.get('unit_cost'), payload.get(
-            'total_cost'), payload.get('unit_revenue'), payload.get(
-            'total_revenue'), payload.get('provider_currency'), payload.get(
-            'unit_cost_pc'), payload.get('total_cost_pc'), payload.get(
-            'unit_revenue_pc'), payload.get('total_revenue_pc'), payload.get(
-            'cumulative_qnt'), payload.get('cumulative_unit_cost'
-            ), payload.get('cumulative_total_cost'), payload.get(
-            'cumulative_unit_revenue'), payload.get('cumulative_total_revenue'
-            ), payload.get('resource_group'), payload.get('reservation_name'
-            ), payload.get('publisher_name'), payload.get('resource_id'
-            ), payload.get('tenant_id')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_create.
-                __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/ts_cost_management/',
-            payload=payload, **kwargs)
+            single_page=single_page, page_size=page_size, payload=payload,
+            **kwargs)
         return response
 
     def ts_cost_management_grouped(self, uuid_customer: str,

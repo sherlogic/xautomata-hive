@@ -18,6 +18,7 @@ class LastStatus(ApiManager):
 
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
+            extract_automata_domain (None optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
@@ -67,10 +68,11 @@ class LastStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['extract_valueless_metrics', 'sort_by',
-            'null_fields', 'uuid_customer', 'customer_code',
-            'customer_status', 'uuid_site', 'site_code', 'site_description',
-            'site_address', 'site_zip_code', 'site_city', 'site_country',
+        official_params_list = ['extract_valueless_metrics',
+            'extract_automata_domain', 'sort_by', 'null_fields',
+            'uuid_customer', 'customer_code', 'customer_status',
+            'uuid_site', 'site_code', 'site_description', 'site_address',
+            'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'uuid_group',
             'group_name', 'group_status', 'group_type', 'uuid_object',
             'object_name', 'object_status', 'object_profile',
@@ -81,10 +83,11 @@ class LastStatus(ApiManager):
             'last_value_name', 'last_value_value', 'last_value_unit',
             'last_value_description', 'last_value_status',
             'last_value_ranking', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('extract_valueless_metrics'), params.get('sort_by'
-            ), params.get('null_fields'), params.get('uuid_customer'
-            ), params.get('customer_code'), params.get('customer_status'
-            ), params.get('uuid_site'), params.get('site_code'), params.get(
+        params.get('extract_valueless_metrics'), params.get(
+            'extract_automata_domain'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('uuid_customer'), params.get(
+            'customer_code'), params.get('customer_status'), params.get(
+            'uuid_site'), params.get('site_code'), params.get(
             'site_description'), params.get('site_address'), params.get(
             'site_zip_code'), params.get('site_city'), params.get(
             'site_country'), params.get('site_state_province'), params.get(

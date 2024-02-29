@@ -18,6 +18,7 @@ class ProbesLogIngest(ApiManager):
 
         Keyword Args:
             uuid_probe (string required): additional filter - parameter
+            key (string optional): additional filter - parameter
 
         Examples:
             payload = 
@@ -28,8 +29,8 @@ class ProbesLogIngest(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['uuid_probe']
-        params.get('uuid_probe')
+        official_params_list = ['uuid_probe', 'key']
+        params.get('uuid_probe'), params.get('key')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_log_ingest_create.__name__,
                 params, official_params_list)

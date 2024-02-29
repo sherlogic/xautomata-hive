@@ -22,7 +22,7 @@ class CostTreeResources(ApiManager):
             uuid_tag (string optional): additional filter - parameter
             cost_category (string optional): additional filter - parameter
             cost_category_value (string optional): additional filter - parameter
-            percentage (integer optional): additional filter - parameter
+            percentage (number optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -61,7 +61,7 @@ class CostTreeResources(ApiManager):
             uuid_tree_node (string required): additional filter - payload
             cost_category (string required): additional filter - payload
             cost_category_value (string required): additional filter - payload
-            percentage (integer optional): additional filter - payload
+            percentage (number optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -121,7 +121,7 @@ class CostTreeResources(ApiManager):
             uuid_tree_node (string optional): additional filter - payload
             cost_category (string optional): additional filter - payload
             cost_category_value (string optional): additional filter - payload
-            percentage (integer optional): additional filter - payload
+            percentage (number optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:

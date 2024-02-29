@@ -1066,6 +1066,7 @@ class Customers(ApiManager):
             city (string optional): additional filter - payload
             country (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
             base_margin (number required): additional filter - payload
             reserved_margin (number required): additional filter - payload
             azure_customer_id (string required): additional filter - payload
@@ -1075,14 +1076,15 @@ class Customers(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['target_company', 'target_code', 'address',
-            'zip_code', 'city', 'country', 'state_province', 'base_margin',
-            'reserved_margin', 'azure_customer_id', 'uuid_virtual_domain']
+            'zip_code', 'city', 'country', 'state_province',
+            'paying_customer', 'base_margin', 'reserved_margin',
+            'azure_customer_id', 'uuid_virtual_domain']
         payload.get('target_company'), payload.get('target_code'), payload.get(
             'address'), payload.get('zip_code'), payload.get('city'
             ), payload.get('country'), payload.get('state_province'
-            ), payload.get('base_margin'), payload.get('reserved_margin'
-            ), payload.get('azure_customer_id'), payload.get(
-            'uuid_virtual_domain')
+            ), payload.get('paying_customer'), payload.get('base_margin'
+            ), payload.get('reserved_margin'), payload.get('azure_customer_id'
+            ), payload.get('uuid_virtual_domain')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_azure_v2_create.
                 __name__, payload, official_payload_list)
@@ -1107,6 +1109,7 @@ class Customers(ApiManager):
             city (string optional): additional filter - payload
             country (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
             uuid_virtual_domain (string optional): additional filter - payload
             uuid_probe_type (string optional): additional filter - payload
             uuid_object (string optional): additional filter - payload
@@ -1117,14 +1120,14 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['target_company', 'target_code', 'address',
             'zip_code', 'city', 'country', 'state_province',
-            'uuid_virtual_domain', 'uuid_probe_type', 'uuid_object',
-            'subscriptions']
+            'paying_customer', 'uuid_virtual_domain', 'uuid_probe_type',
+            'uuid_object', 'subscriptions']
         payload.get('target_company'), payload.get('target_code'), payload.get(
             'address'), payload.get('zip_code'), payload.get('city'
             ), payload.get('country'), payload.get('state_province'
-            ), payload.get('uuid_virtual_domain'), payload.get(
-            'uuid_probe_type'), payload.get('uuid_object'), payload.get(
-            'subscriptions')
+            ), payload.get('paying_customer'), payload.get(
+            'uuid_virtual_domain'), payload.get('uuid_probe_type'
+            ), payload.get('uuid_object'), payload.get('subscriptions')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 customers_azure_v2_subscription_create.__name__, payload,
@@ -1176,6 +1179,7 @@ class Customers(ApiManager):
             city (string optional): additional filter - payload
             country (string optional): additional filter - payload
             state_province (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
             uuid_virtual_domain (string optional): additional filter - payload
             uuid_probe_type (string optional): additional filter - payload
             uuid_object (string optional): additional filter - payload
@@ -1186,14 +1190,14 @@ class Customers(ApiManager):
             kwargs = dict()
         official_payload_list = ['target_company', 'target_code', 'address',
             'zip_code', 'city', 'country', 'state_province',
-            'uuid_virtual_domain', 'uuid_probe_type', 'uuid_object',
-            'subscriptions']
+            'paying_customer', 'uuid_virtual_domain', 'uuid_probe_type',
+            'uuid_object', 'subscriptions']
         payload.get('target_company'), payload.get('target_code'), payload.get(
             'address'), payload.get('zip_code'), payload.get('city'
             ), payload.get('country'), payload.get('state_province'
-            ), payload.get('uuid_virtual_domain'), payload.get(
-            'uuid_probe_type'), payload.get('uuid_object'), payload.get(
-            'subscriptions')
+            ), payload.get('paying_customer'), payload.get(
+            'uuid_virtual_domain'), payload.get('uuid_probe_type'
+            ), payload.get('uuid_object'), payload.get('subscriptions')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 customers_aws_v2_subscription_create.__name__, payload,

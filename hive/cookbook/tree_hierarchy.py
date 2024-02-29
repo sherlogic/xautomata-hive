@@ -32,6 +32,7 @@ class TreeHierarchy(ApiManager):
             site_country (string optional): additional filter - parameter
             site_state_province (string optional): additional filter - parameter
             site_status (string optional): additional filter - parameter
+            site_type (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -51,7 +52,7 @@ class TreeHierarchy(ApiManager):
             'null_fields', 'uuid_customer', 'customer_code',
             'customer_status', 'uuid_site', 'site_code', 'site_description',
             'site_address', 'site_zip_code', 'site_city', 'site_country',
-            'site_state_province', 'site_status', 'uuid_group',
+            'site_state_province', 'site_status', 'site_type', 'uuid_group',
             'group_name', 'group_status', 'group_type',
             'uuid_virtual_domain', 'virtual_domain_name', 'skip', 'limit',
             'like', 'join', 'count']
@@ -62,11 +63,12 @@ class TreeHierarchy(ApiManager):
             'site_description'), params.get('site_address'), params.get(
             'site_zip_code'), params.get('site_city'), params.get(
             'site_country'), params.get('site_state_province'), params.get(
-            'site_status'), params.get('uuid_group'), params.get('group_name'
-            ), params.get('group_status'), params.get('group_type'
-            ), params.get('uuid_virtual_domain'), params.get(
-            'virtual_domain_name'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'site_status'), params.get('site_type'), params.get('uuid_group'
+            ), params.get('group_name'), params.get('group_status'
+            ), params.get('group_type'), params.get('uuid_virtual_domain'
+            ), params.get('virtual_domain_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_groups.__name__,
                 params, official_params_list)

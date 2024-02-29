@@ -92,7 +92,7 @@ class TsNtopFlows(ApiManager):
             "fqdn_dst_addr": "string", optional
             "in_bytes": "integer", optional
             "out_bytes": "integer", optional
-            "last_switched": "string", optional
+            "last_switched": "string", required
             "interface_id": "integer", optional
            }
           ]

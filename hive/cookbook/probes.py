@@ -451,12 +451,13 @@ class Probes(ApiManager):
         Keyword Args:
             skip (None optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (None optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            key (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['skip', 'limit']
-        params.get('skip'), params.get('limit')
+        official_params_list = ['skip', 'limit', 'key']
+        params.get('skip'), params.get('limit'), params.get('key')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_logs.__name__, params,
                 official_params_list)
