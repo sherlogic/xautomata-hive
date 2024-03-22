@@ -53,6 +53,7 @@ class CostViews(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            uuid_customer (string required): additional filter - payload
             name (string required): additional filter - payload
             description (string optional): additional filter - payload
             type (string optional): additional filter - payload
@@ -60,8 +61,10 @@ class CostViews(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'description', 'type']
-        payload.get('name'), payload.get('description'), payload.get('type')
+        official_payload_list = ['uuid_customer', 'name', 'description', 'type'
+            ]
+        payload.get('uuid_customer'), payload.get('name'), payload.get(
+            'description'), payload.get('type')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views_create.__name__,
                 payload, official_payload_list)
@@ -106,6 +109,7 @@ class CostViews(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            uuid_customer (string required): additional filter - payload
             name (string optional): additional filter - payload
             description (string optional): additional filter - payload
             type (string optional): additional filter - payload
@@ -113,8 +117,10 @@ class CostViews(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'description', 'type']
-        payload.get('name'), payload.get('description'), payload.get('type')
+        official_payload_list = ['uuid_customer', 'name', 'description', 'type'
+            ]
+        payload.get('uuid_customer'), payload.get('name'), payload.get(
+            'description'), payload.get('type')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views_put.__name__, payload,
                 official_payload_list)

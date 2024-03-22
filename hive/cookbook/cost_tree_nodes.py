@@ -159,16 +159,16 @@ class CostTreeNodes(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            ts_start (string required): additional filter - parameter
-            ts_end (string required): additional filter - parameter
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['ts_start', 'ts_end']
-        params.get('ts_start'), params.get('ts_end')
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tree_nodes_navigate_tree.
                 __name__, params, official_params_list)

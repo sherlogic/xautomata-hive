@@ -472,6 +472,58 @@ class Metrics(ApiManager):
             payload=payload, **kwargs)
         return response
 
+    def metrics_downtimes_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
+        """Bulk Read Metrics
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            code (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            fetch_all (boolean optional): additional filter - parameter
+            only_actives (boolean optional): additional filter - parameter
+            active_at_timestamp (string optional): additional filter - parameter
+            active_after_timestamp (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['code', 'status', 'fetch_all',
+            'only_actives', 'active_at_timestamp', 'active_after_timestamp',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('code'), params.get('status'), params.get('fetch_all'
+            ), params.get('only_actives'), params.get('active_at_timestamp'
+            ), params.get('active_after_timestamp'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_downtimes_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=
+            f'/metrics/bulk/read/downtimes/', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
+        return response
+
     def metrics_read_by_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:

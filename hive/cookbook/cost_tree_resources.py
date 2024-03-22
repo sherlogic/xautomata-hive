@@ -19,7 +19,7 @@ class CostTreeResources(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             uuid_tree_node (string optional): additional filter - parameter
-            uuid_tag (string optional): additional filter - parameter
+            uuid_view (string optional): additional filter - parameter
             cost_category (string optional): additional filter - parameter
             cost_category_value (string optional): additional filter - parameter
             percentage (number optional): additional filter - parameter
@@ -33,11 +33,11 @@ class CostTreeResources(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'uuid_tree_node', 'uuid_tag',
+        official_params_list = ['sort_by', 'uuid_tree_node', 'uuid_view',
             'cost_category', 'cost_category_value', 'percentage',
             'null_fields', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('uuid_tree_node'), params.get(
-            'uuid_tag'), params.get('cost_category'), params.get(
+            'uuid_view'), params.get('cost_category'), params.get(
             'cost_category_value'), params.get('percentage'), params.get(
             'null_fields'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
@@ -77,79 +77,80 @@ class CostTreeResources(ApiManager):
             payload=payload, **kwargs)
         return response
 
-    def cost_tree_resources_uuid_tree_node(self, uuid_tree_node: str,
-        uuid_tag: str, warm_start: bool = False, kwargs: dict = None, **params
-        ) -> list:
-        """Read Cost Tree Resources
+    def cost_tree_resources_all_resource_ids(self, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """Get Resource Ids
 
         Args:
-            uuid_tree_node (str, required): uuid_tree_node
-            uuid_tag (str, required): uuid_tag
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
         Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+            uuid_customer (string optional): additional filter - parameter
+            uuid_view (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
-        official_params_list = ['join']
-        params.get('join')
+        official_params_list = ['date_start', 'date_end', 'uuid_customer',
+            'uuid_view', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'uuid_customer'), params.get('uuid_view'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tree_resources.__name__,
-                params, official_params_list)
+            warning_wrong_parameters(self.
+                cost_tree_resources_all_resource_ids.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
-            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', warm_start
-            =warm_start, params=params, **kwargs)
+            f'/cost_tree_resources/all_resource_ids/', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
         return response
 
-    def cost_tree_resources_put(self, uuid_tree_node: str, uuid_tag: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Cost Tree Resources
+    def cost_tree_resources_unfully_assigned_resource_ids(self,
+        uuid_view: str, warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Unfully Assigned Resource Ids
 
         Args:
-            uuid_tree_node (str, required): uuid_tree_node
-            uuid_tag (str, required): uuid_tag
+            uuid_view (str, required): uuid_view
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
+            **params: additional parameters for the API.
 
         Keyword Args:
-            uuid_tree_node (string optional): additional filter - payload
-            cost_category (string optional): additional filter - payload
-            cost_category_value (string optional): additional filter - payload
-            percentage (number optional): additional filter - payload
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['uuid_tree_node', 'cost_category',
-            'cost_category_value', 'percentage']
-        payload.get('uuid_tree_node'), payload.get('cost_category'
-            ), payload.get('cost_category_value'), payload.get('percentage')
+        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
+        params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tree_resources_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', payload=
-            payload, **kwargs)
-        return response
-
-    def cost_tree_resources_delete(self, uuid_tree_node: str, uuid_tag: str,
-        kwargs: dict = None) -> list:
-        """Delete Cost Tree Resources
-
-        Args:
-            uuid_tree_node (str, required): uuid_tree_node
-            uuid_tag (str, required): uuid_tag
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        response = self.execute('DELETE', path=
-            f'/cost_tree_resources/{uuid_tree_node}/{uuid_tag}', **kwargs)
+            warning_wrong_parameters(self.
+                cost_tree_resources_unfully_assigned_resource_ids.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_resources/{uuid_view}/unfully_assigned_resource_ids/',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
         return response

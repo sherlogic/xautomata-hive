@@ -1301,7 +1301,7 @@ class Customers(ApiManager):
     def customers_it_availability_history(self, uuid_customer: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
-        """Query It Availability By Customer
+        """Query It Availability History By Customer
 
         Args:
             uuid_customer (str, required): uuid_customer
@@ -1335,4 +1335,59 @@ class Customers(ApiManager):
             f'/customers/it_availability_history/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
+        return response
+
+    def customers_acknowledged(self, uuid_customer: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Consume Acknowledged Log
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            offset (integer optional): additional filter - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['offset', 'limit']
+        params.get('offset'), params.get('limit')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_acknowledged.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/customers/{uuid_customer}/acknowledged/', warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def customers_acknowledged_create(self, uuid_customer: str,
+        kwargs: dict = None, **payload) -> list:
+        """Produce Acknowledged Message
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            uuid_metric (string required): additional filter - payload
+            message (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['uuid_metric', 'message']
+        payload.get('uuid_metric'), payload.get('message')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_acknowledged_create.
+                __name__, payload, official_payload_list)
+        response = self.execute('POST', path=
+            f'/customers/{uuid_customer}/acknowledged/', payload=payload,
+            **kwargs)
         return response

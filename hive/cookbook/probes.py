@@ -449,8 +449,8 @@ class Probes(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            skip (None optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
-            limit (None optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             key (string optional): additional filter - parameter
 
         Returns: list"""
