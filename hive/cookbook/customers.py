@@ -1376,14 +1376,13 @@ class Customers(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            uuid_metric (string required): additional filter - payload
-            message (string required): additional filter - payload
+            uuid (str required): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['uuid_metric', 'message']
-        payload.get('uuid_metric'), payload.get('message')
+        official_payload_list = ['uuid']
+        payload.get('uuid')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_acknowledged_create.
                 __name__, payload, official_payload_list)
