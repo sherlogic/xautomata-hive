@@ -227,12 +227,13 @@ class Customers(ApiManager):
 
         Keyword Args:
             app_id (string optional): additional filter - parameter
+            refresh (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['app_id']
-        params.get('app_id')
+        official_params_list = ['app_id', 'refresh']
+        params.get('app_id'), params.get('refresh')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_relation_request_create
                 .__name__, params, official_params_list)
