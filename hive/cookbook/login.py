@@ -150,15 +150,16 @@ class Login(ApiManager):
             password (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
+            active (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['phone', 'verified_email', 'profile',
-            'password', 'email', 'stage']
+            'password', 'email', 'stage', 'active']
         payload.get('phone'), payload.get('verified_email'), payload.get(
             'profile'), payload.get('password'), payload.get('email'
-            ), payload.get('stage')
+            ), payload.get('stage'), payload.get('active')
         if not self._silence_warning:
             warning_wrong_parameters(self.login_current_user_put.__name__,
                 payload, official_payload_list)

@@ -23,7 +23,6 @@ class Dashboards(ApiManager):
             description (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             username (string optional): additional filter - parameter
-            profile (string optional): additional filter - parameter
             priority (integer optional): additional filter - parameter
             refresh_interval (integer optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -36,14 +35,13 @@ class Dashboards(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'name',
-            'description', 'type', 'username', 'profile', 'priority',
+            'description', 'type', 'username', 'priority',
             'refresh_interval', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('name'
             ), params.get('description'), params.get('type'), params.get(
-            'username'), params.get('profile'), params.get('priority'
-            ), params.get('refresh_interval'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            'username'), params.get('priority'), params.get('refresh_interval'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards.__name__, params,
                 official_params_list)
@@ -64,7 +62,6 @@ class Dashboards(ApiManager):
             type (string optional): additional filter - payload
             username (string optional): additional filter - payload
             description (string optional): additional filter - payload
-            profile (string required): additional filter - payload
             priority (integer optional): additional filter - payload
             refresh_interval (integer optional): additional filter - payload
             image_name (string optional): additional filter - payload
@@ -73,11 +70,10 @@ class Dashboards(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['name', 'type', 'username', 'description',
-            'profile', 'priority', 'refresh_interval', 'image_name']
+            'priority', 'refresh_interval', 'image_name']
         payload.get('name'), payload.get('type'), payload.get('username'
-            ), payload.get('description'), payload.get('profile'), payload.get(
-            'priority'), payload.get('refresh_interval'), payload.get(
-            'image_name')
+            ), payload.get('description'), payload.get('priority'
+            ), payload.get('refresh_interval'), payload.get('image_name')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards_create.__name__,
                 payload, official_payload_list)
@@ -126,7 +122,6 @@ class Dashboards(ApiManager):
             type (string optional): additional filter - payload
             username (string optional): additional filter - payload
             description (string optional): additional filter - payload
-            profile (string optional): additional filter - payload
             priority (integer optional): additional filter - payload
             refresh_interval (integer optional): additional filter - payload
             image_name (string optional): additional filter - payload
@@ -135,11 +130,10 @@ class Dashboards(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['name', 'type', 'username', 'description',
-            'profile', 'priority', 'refresh_interval', 'image_name']
+            'priority', 'refresh_interval', 'image_name']
         payload.get('name'), payload.get('type'), payload.get('username'
-            ), payload.get('description'), payload.get('profile'), payload.get(
-            'priority'), payload.get('refresh_interval'), payload.get(
-            'image_name')
+            ), payload.get('description'), payload.get('priority'
+            ), payload.get('refresh_interval'), payload.get('image_name')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards_put.__name__, payload,
                 official_payload_list)
@@ -396,6 +390,72 @@ class Dashboards(ApiManager):
             f'/dashboards/dashboard_widget/{uuid}', **kwargs)
         return response
 
+    def dashboards_customers(self, uuid: str, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """List Dashboard
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
+        params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dashboards_customers.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=f'/dashboards/{uuid}/customers',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def dashboards_customers_create(self, uuid: str, uuid_customer: str,
+        kwargs: dict = None) -> list:
+        """Create Customer Dashboard Association
+
+        Args:
+            uuid (str, required): uuid
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dashboards/{uuid}/customers/{uuid_customer}', **kwargs)
+        return response
+
+    def dashboards_dashboards_delete(self, uuid: str, uuid_customer: str,
+        kwargs: dict = None) -> list:
+        """Remove Customer Dashboard Association
+
+        Args:
+            uuid (str, required): uuid
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/dashboards/{uuid}/dashboards/{uuid_customer}', **kwargs)
+        return response
+
     def dashboards_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
@@ -454,7 +514,6 @@ class Dashboards(ApiManager):
             "type": "string", optional
             "username": "string", optional
             "description": "string", optional
-            "profile": "string", required
             "priority": "integer", optional
             "refresh_interval": "integer", optional
             "image_name": "string", optional

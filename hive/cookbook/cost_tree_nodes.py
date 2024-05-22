@@ -191,16 +191,16 @@ class CostTreeNodes(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            ts_start (string required): additional filter - parameter
-            ts_end (string required): additional filter - parameter
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['ts_start', 'ts_end', 'skip', 'limit']
-        params.get('ts_start'), params.get('ts_end'), params.get('skip'
+        official_params_list = ['date_start', 'date_end', 'skip', 'limit']
+        params.get('date_start'), params.get('date_end'), params.get('skip'
             ), params.get('limit')
         if not self._silence_warning:
             warning_wrong_parameters(self.

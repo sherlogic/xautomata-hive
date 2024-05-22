@@ -425,6 +425,7 @@ class Services(ApiManager):
             service_name (string optional): additional filter - parameter
             service_description (string optional): additional filter - parameter
             service_status (string optional): additional filter - parameter
+            service_automata_domain (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -444,8 +445,9 @@ class Services(ApiManager):
             'metric_type_status', 'uuid_metric', 'metric_name',
             'metric_status', 'metric_profile', 'service_uuid_parent',
             'uuid_service', 'service_profile', 'service_name',
-            'service_description', 'service_status', 'skip', 'limit',
-            'like', 'join', 'count']
+            'service_description', 'service_status',
+            'service_automata_domain', 'skip', 'limit', 'like', 'join', 'count'
+            ]
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_customer'), params.get('customer_code'), params.get(
             'customer_status'), params.get('uuid_site'), params.get('site_code'
@@ -462,9 +464,9 @@ class Services(ApiManager):
             ), params.get('metric_profile'), params.get('service_uuid_parent'
             ), params.get('uuid_service'), params.get('service_profile'
             ), params.get('service_name'), params.get('service_description'
-            ), params.get('service_status'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            ), params.get('service_status'), params.get(
+            'service_automata_domain'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_query.__name__, params,
                 official_params_list)
