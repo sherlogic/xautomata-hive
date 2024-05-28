@@ -12,10 +12,12 @@ from hive.infrastrucure_keys import Keys
 import warnings
 import gc
 import functools
-
+import logging
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
 # METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
+
+logger = logging.getLogger('hive')
 
 
 def get_session(timeout=150, total=5, backoff_factor=5):
@@ -50,6 +52,7 @@ class ApiManager:
     _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
     _silence_warning = False  # da implementare
+    num_items = None  # serve per quando si mette la count a True, di default vale 0
 
     def __init__(self, root, user, password, ssl_verify: bool = True):
 
@@ -73,6 +76,7 @@ class ApiManager:
         response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).post(f'{self.root}/login/access-token', auth_date, verify=self._SSL_verify)
         response.raise_for_status()
         self.token = json.loads(response.content.decode('utf-8'))['access_token']
+        logger.debug('authenticated')
 
     def openapi(self):
         """metodo che restituisce gli schema degli end point"""
@@ -157,20 +161,23 @@ class ApiManager:
         @timeout_retry(max_tries=self._timeout_retry, sleep_time=self._timeout_sleep_time)
         @ratelimiter
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
+            self.num_items = None  # inizializzo a 0 il valore della count, cosi che non possa leggere il numero sbagliato dopo una richiesta non corretta
+
+            logger.debug(f'request url: {_url}')
+            logger.debug(f'request params (skip and limit may differ from your setting due pagination): {_params}')
+            logger.debug(f'request payload: {_payload}')
+
             response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, verify=self._SSL_verify, **_kwargs)
             if response.status_code == 401: raise UnauthorizedException
             if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
-                print()
-                print('-' * 50)
-                print('error message:')
-                print(response.json())
-                print('-' * 50)
-                print()
+                logger.error(response.json())
             response.raise_for_status()
 
             if response.status_code == 200 and _params.get('count', False):
-                num_items = response.headers.get('x-num-items', 'count not found')
-                return response.json(), num_items
+                self.num_items = response.headers.get('x-num-items', None)
+
+            logger.debug(f'responce: {response.json()}')
+            logger.debug(f'header: {response.headers}')
 
             return response.json()
 
