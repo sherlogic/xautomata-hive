@@ -256,7 +256,7 @@ class Messages(ApiManager):
         return response
 
     def messages_compile(self, uuid_metric: str, uuid: str,
-        warm_start: bool = False, kwargs: dict = None) -> list:
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Compile Mask
 
         Args:
@@ -264,17 +264,28 @@ class Messages(ApiManager):
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            service_profile (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['service_profile']
+        params.get('service_profile')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.messages_compile.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
             f'/messages/{uuid_metric}/compile/{uuid}', warm_start=
-            warm_start, **kwargs)
+            warm_start, params=params, **kwargs)
         return response
 
     def messages_compile_additional(self, uuid_metric: str, uuid: str,
-        warm_start: bool = False, kwargs: dict = None) -> list:
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Compile Additional Mask
 
         Args:
@@ -282,11 +293,22 @@ class Messages(ApiManager):
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            service_profile (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['service_profile']
+        params.get('service_profile')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.messages_compile_additional.
+                __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/messages/{uuid_metric}/compile_additional/{uuid}',
-            warm_start=warm_start, **kwargs)
+            warm_start=warm_start, params=params, **kwargs)
         return response

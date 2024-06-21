@@ -154,3 +154,38 @@ class CostTreeResources(ApiManager):
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
+
+    def cost_tree_resources_unfully_assigned_resources(self, uuid_view: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Get Unfully Assigned Resources
+
+        Args:
+            uuid_view (str, required): uuid_view
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['date_start', 'date_end', 'resource_id',
+            'limit', 'sort_by']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'resource_id'), params.get('limit'), params.get('sort_by')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                cost_tree_resources_unfully_assigned_resources.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_resources/{uuid_view}/unfully_assigned_resources/',
+            warm_start=warm_start, params=params, **kwargs)
+        return response

@@ -618,6 +618,41 @@ class Downtimes(ApiManager):
             **kwargs)
         return response
 
+    def downtimes_groups_bulk(self, payload: list, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Read Groups Downtimes
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.downtimes_groups_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=f'/downtimes/bulk/read/groups',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, payload=payload, **kwargs)
+        return response
+
     def downtimes_groups_create_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
@@ -681,6 +716,42 @@ class Downtimes(ApiManager):
         response = self.execute('POST', path=
             f'/downtimes/bulk/delete/groups', single_page=single_page,
             page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def downtimes_objects_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
+        """Bulk Read Objects Downtimes
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.downtimes_objects_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=
+            f'/downtimes/bulk/read/objects', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
         return response
 
     def downtimes_objects_create_bulk(self, payload: list,

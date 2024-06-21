@@ -1204,15 +1204,17 @@ class Customers(ApiManager):
             kwargs)
         return response
 
-    def customers_aws_v2_subscription_create(self, kwargs: dict = None, **
-        payload) -> list:
+    def customers_aws_v2_subscription_create(self, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
         """Create Aws Customer Sub
 
         Args:
+            params (dict, optional): additional parameters for the API.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
+            extract_resource_id (boolean optional): additional filter - parameter
             customer (None required): additional filter - payload
             aws_customer (None required): additional filter - payload
 
@@ -1226,19 +1228,22 @@ class Customers(ApiManager):
                 customers_aws_v2_subscription_create.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
-            f'/customers/aws/v2/subscription/', payload=payload, **kwargs)
+            f'/customers/aws/v2/subscription/', params=params, payload=
+            payload, **kwargs)
         return response
 
     def customers_aws_v2_subscription_create_uuid(self, uuid: str,
-        kwargs: dict = None, **payload) -> list:
+        params: dict = False, kwargs: dict = None, **payload) -> list:
         """Create Aws Customer From V2 Sub
 
         Args:
+            params (dict, optional): additional parameters for the API.
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
+            extract_resource_id (boolean optional): additional filter - parameter
             target_company (string required): additional filter - payload
             target_code (string required): additional filter - payload
             address (string optional): additional filter - payload
@@ -1270,8 +1275,8 @@ class Customers(ApiManager):
                 customers_aws_v2_subscription_create.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
-            f'/customers/aws/v2/subscription/{uuid}', payload=payload, **kwargs
-            )
+            f'/customers/aws/v2/subscription/{uuid}', params=params,
+            payload=payload, **kwargs)
         return response
 
     def customers_networks(self, uuid_customer: str,

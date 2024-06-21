@@ -31,16 +31,32 @@ dict_doc = {
 
 
 def find_ref(schemas, schema_ref, key, key_type, name):
+    created = False
     if 'anyOf' in schemas[schema_ref]['properties'][key]:
+        # if '$ref' in schemas[schema_ref]['properties'][key]['anyOf']:
+        #     key_type += find_ref(schemas, schemas[schema_ref]['properties'][key]['$ref'].split('/')[-1], key, key_type, name)
+        #     created = True
+        # else:
+        #     for types in schemas[schema_ref]['properties'][key]['anyOf']:
+        #         if list(types.keys())[0] == 'type':
+        #             key_type.append(types['type'])
+        #             created = True
         for types in schemas[schema_ref]['properties'][key]['anyOf']:
             key_type.append(types['type'])
+            created = True
     elif 'type' in schemas[schema_ref]['properties'][key]:
         key_type.append(schemas[schema_ref]['properties'][key]['type'])
+        created = True
     # elif '$ref' in schemas[schema_ref]['properties'][key]:
     #     key_type = find_ref(schemas, schemas[schema_ref]['properties'][key]['$ref'].split('/')[-1], key, key_type)
     else:
         print(f'wrong requestBody type {name}')
         key_type = None
+        created = True
+
+    if created == False:
+        key_type = None
+
     return key_type
 
 
@@ -53,6 +69,8 @@ def main(**kwargs):
     # print(data)
 
     allowed = {
+        # "/acl_overrides/": ["GET", "POST", "PUT", "DELETE"]
+        # "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["GET", "POST", "PUT", "DELETE"]
         # "/ts_cost_management/": ["GET", "POST", "PUT", "DELETE"],
         # "/ts_cost_management/{uuid_metric}": ["GET", "POST", "PUT", "DELETE"],
         # "/metrics/{uuid}": ["GET", "POST", "DELETE", "PUT"],
@@ -74,7 +92,6 @@ def main(**kwargs):
 
     for name in apis:
         if name != '/openapi.js':
-
             for mode in apis[name]:
                 if (len(allowed) > 0 and name in allowed and mode.upper() in allowed[name]) or (len(allowed) == 0):
                     # if name == '/ts_cost_management/':

@@ -161,14 +161,16 @@ class CostTreeNodes(ApiManager):
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['date_start', 'date_end']
-        params.get('date_start'), params.get('date_end')
+        official_params_list = ['date_start', 'date_end', 'resource_id']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'resource_id')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tree_nodes_navigate_tree.
                 __name__, params, official_params_list)
@@ -193,15 +195,19 @@ class CostTreeNodes(ApiManager):
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['date_start', 'date_end', 'skip', 'limit']
-        params.get('date_start'), params.get('date_end'), params.get('skip'
-            ), params.get('limit')
+        official_params_list = ['date_start', 'date_end', 'resource_id',
+            'skip', 'limit', 'sort_by']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'resource_id'), params.get('skip'), params.get('limit'
+            ), params.get('sort_by')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 cost_tree_nodes_get_node_resources.__name__, params,
@@ -210,4 +216,35 @@ class CostTreeNodes(ApiManager):
             f'/cost_tree_nodes/get_node_resources/{uuid}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
+        return response
+
+    def cost_tree_nodes_previous_period(self, uuid: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Get Previous Period
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['date_start', 'date_end', 'resource_id']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'resource_id')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.cost_tree_nodes_previous_period.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_nodes/previous_period/{uuid}', warm_start=
+            warm_start, params=params, **kwargs)
         return response
