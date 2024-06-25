@@ -112,11 +112,11 @@ def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
             try:
                 return func(*args, **kwargs)
             except requests.exceptions.ReadTimeout:
-                print(f'WARNING: timeout reached on get_session, sleep set to {sleep_time}, on retry num {i}')
+                print(f'WARNING: timeout reached on get_session, sleep set to {sleep_time}, on retry num {i+1}/{max_tries}')
                 time.sleep(sleep_time)
                 count_timeout += 1
             except requests.exceptions.JSONDecodeError:
-                print(f'WARNING: JSONDecodeError, sleep set to {sleep_time}, on retry num {i}')
+                print(f'WARNING: JSONDecodeError, sleep set to {sleep_time}, on retry num {i+1}/{max_tries}')
                 time.sleep(sleep_time)
                 count_json += 1
 
