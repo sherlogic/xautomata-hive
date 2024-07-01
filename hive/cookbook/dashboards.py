@@ -440,7 +440,7 @@ class Dashboards(ApiManager):
             f'/dashboards/{uuid}/customers/{uuid_customer}', **kwargs)
         return response
 
-    def dashboards_dashboards_delete(self, uuid: str, uuid_customer: str,
+    def dashboards_customers_delete(self, uuid: str, uuid_customer: str,
         kwargs: dict = None) -> list:
         """Remove Customer Dashboard Association
 
@@ -453,7 +453,7 @@ class Dashboards(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('DELETE', path=
-            f'/dashboards/{uuid}/dashboards/{uuid_customer}', **kwargs)
+            f'/dashboards/{uuid}/customers/{uuid_customer}', **kwargs)
         return response
 
     def dashboards_bulk(self, payload: list, warm_start: bool = False,
