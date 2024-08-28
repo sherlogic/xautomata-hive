@@ -62,14 +62,17 @@ class CostTreeNodes(ApiManager):
             description (string optional): additional filter - payload
             uuid_view (string required): additional filter - payload
             budget (integer optional): additional filter - payload
+            criteria (array object optional): additional filter - payload
+            virtual (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['uuid_parent', 'code', 'description',
-            'uuid_view', 'budget']
+            'uuid_view', 'budget', 'criteria', 'virtual']
         payload.get('uuid_parent'), payload.get('code'), payload.get(
-            'description'), payload.get('uuid_view'), payload.get('budget')
+            'description'), payload.get('uuid_view'), payload.get('budget'
+            ), payload.get('criteria'), payload.get('virtual')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tree_nodes_create.__name__,
                 payload, official_payload_list)
@@ -119,14 +122,17 @@ class CostTreeNodes(ApiManager):
             description (string optional): additional filter - payload
             uuid_view (string optional): additional filter - payload
             budget (integer optional): additional filter - payload
+            criteria (array object optional): additional filter - payload
+            virtual (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['uuid_parent', 'code', 'description',
-            'uuid_view', 'budget']
+            'uuid_view', 'budget', 'criteria', 'virtual']
         payload.get('uuid_parent'), payload.get('code'), payload.get(
-            'description'), payload.get('uuid_view'), payload.get('budget')
+            'description'), payload.get('uuid_view'), payload.get('budget'
+            ), payload.get('criteria'), payload.get('virtual')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tree_nodes_put.__name__,
                 payload, official_payload_list)
@@ -162,15 +168,17 @@ class CostTreeNodes(ApiManager):
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
             resource_id (string optional): additional filter - parameter
+            previous_period (boolean optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['date_start', 'date_end', 'resource_id']
+        official_params_list = ['date_start', 'date_end', 'resource_id',
+            'previous_period']
         params.get('date_start'), params.get('date_end'), params.get(
-            'resource_id')
+            'resource_id'), params.get('previous_period')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tree_nodes_navigate_tree.
                 __name__, params, official_params_list)
@@ -218,9 +226,9 @@ class CostTreeNodes(ApiManager):
             =params, **kwargs)
         return response
 
-    def cost_tree_nodes_previous_period(self, uuid: str,
+    def cost_tree_nodes_resources_by_criteria(self, uuid: str,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
-        """Get Previous Period
+        """Get Resources From Node By Criteria
 
         Args:
             uuid (str, required): uuid
@@ -231,20 +239,19 @@ class CostTreeNodes(ApiManager):
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
-            resource_id (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['date_start', 'date_end', 'resource_id']
-        params.get('date_start'), params.get('date_end'), params.get(
-            'resource_id')
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tree_nodes_previous_period.
-                __name__, params, official_params_list)
+            warning_wrong_parameters(self.
+                cost_tree_nodes_resources_by_criteria.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
-            f'/cost_tree_nodes/previous_period/{uuid}', warm_start=
+            f'/cost_tree_nodes/{uuid}/resources_by_criteria', warm_start=
             warm_start, params=params, **kwargs)
         return response

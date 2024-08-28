@@ -21,6 +21,7 @@ class CostViews(ApiManager):
             name (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
+            uuid_customer (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -32,11 +33,12 @@ class CostViews(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'name', 'description', 'type',
-            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+            'uuid_customer', 'null_fields', 'skip', 'limit', 'like', 'join',
+            'count']
         params.get('sort_by'), params.get('name'), params.get('description'
-            ), params.get('type'), params.get('null_fields'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            ), params.get('type'), params.get('uuid_customer'), params.get(
+            'null_fields'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_views.__name__, params,
                 official_params_list)
@@ -205,4 +207,30 @@ class CostViews(ApiManager):
             kwargs = dict()
         response = self.execute('DELETE', path=
             f'/cost_views/{uuid}/users/{name}', **kwargs)
+        return response
+
+    def cost_views_assign_resources_create(self, uuid: str,
+        kwargs: dict = None, **params) -> list:
+        """Set Resources From Node By Criteria
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                cost_views_assign_resources_create.__name__, params,
+                official_params_list)
+        response = self.execute('POST', path=
+            f'/cost_views/{uuid}/assign_resources', params=params, **kwargs)
         return response

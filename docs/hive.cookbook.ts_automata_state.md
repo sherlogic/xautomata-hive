@@ -1,0 +1,1 @@
+::: hive.cookbook.ts_automata_state

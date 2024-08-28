@@ -74,12 +74,13 @@ class CostTags(ApiManager):
             payload, **kwargs)
         return response
 
-    def cost_tags_query(self, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
+    def cost_tags_query_bulk(self, payload: dict = False,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Get Ts Costs Rows
 
         Args:
+            payload (dict, optional): additional parameters for the API.
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
@@ -89,30 +90,33 @@ class CostTags(ApiManager):
         Keyword Args:
             date_start (string required): additional filter - parameter
             date_end (string required): additional filter - parameter
-            uuid_view (string required): additional filter - parameter
-            select_operation (None optional): additional filter - parameter
-            selected_tags (string optional): additional filter - parameter
-            unselect_operation (None optional): additional filter - parameter
-            unselected_tags (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+
+        Examples:
+            payload = 
+           {
+            "uuid_view": "string", required
+            "select_operation": "None", required
+            "selected_tags": "array", optional
+            "unselect_operation": "None", required
+            "unselected_tags": "array", optional
+           }
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['date_start', 'date_end', 'uuid_view',
-            'select_operation', 'selected_tags', 'unselect_operation',
-            'unselected_tags', 'skip', 'limit']
-        params.get('date_start'), params.get('date_end'), params.get(
-            'uuid_view'), params.get('select_operation'), params.get(
-            'selected_tags'), params.get('unselect_operation'), params.get(
-            'unselected_tags'), params.get('skip'), params.get('limit')
+        official_params_list = ['date_start', 'date_end', 'skip', 'limit',
+            'sort_by']
+        params.get('date_start'), params.get('date_end'), params.get('skip'
+            ), params.get('limit'), params.get('sort_by')
         if not self._silence_warning:
-            warning_wrong_parameters(self.cost_tags_query.__name__, params,
-                official_params_list)
-        response = self.execute('GET', path=f'/cost_tags/query/',
+            warning_wrong_parameters(self.cost_tags_query_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=f'/cost_tags/query/',
             single_page=single_page, page_size=page_size, warm_start=
-            warm_start, params=params, **kwargs)
+            warm_start, params=params, payload=payload, **kwargs)
         return response
 
     def cost_tag(self, uuid: str, warm_start: bool = False,

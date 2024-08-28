@@ -164,23 +164,23 @@ class Users(ApiManager):
 
         Keyword Args:
             phone (string optional): additional filter - payload
-            verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
             name (string required): additional filter - payload
             email (string required): additional filter - payload
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
             password (string required): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'verified_email', 'profile',
-            'name', 'email', 'active', 'acl', 'uuid_acl_override', 'password']
-        payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('name'), payload.get('email'), payload.get(
-            'active'), payload.get('acl'), payload.get('uuid_acl_override'
+        official_payload_list = ['phone', 'profile', 'name', 'email',
+            'active', 'acl', 'uuid_acl_override', 'verified_email', 'password']
+        payload.get('phone'), payload.get('profile'), payload.get('name'
+            ), payload.get('email'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override'), payload.get('verified_email'
             ), payload.get('password')
         if not self._silence_warning:
             warning_wrong_parameters(self.users_create.__name__, payload,
@@ -202,22 +202,22 @@ class Users(ApiManager):
         Keyword Args:
             send_mail (boolean optional): additional filter - parameter
             phone (string optional): additional filter - payload
-            verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
             name (string required): additional filter - payload
             email (string required): additional filter - payload
             active (boolean required): additional filter - payload
             acl (object required): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'verified_email', 'profile',
-            'name', 'email', 'active', 'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('name'), payload.get('email'), payload.get(
-            'active'), payload.get('acl'), payload.get('uuid_acl_override')
+        official_payload_list = ['phone', 'profile', 'name', 'email',
+            'active', 'acl', 'uuid_acl_override', 'verified_email']
+        payload.get('phone'), payload.get('profile'), payload.get('name'
+            ), payload.get('email'), payload.get('active'), payload.get('acl'
+            ), payload.get('uuid_acl_override'), payload.get('verified_email')
         if not self._silence_warning:
             warning_wrong_parameters(self.users_create.__name__, payload,
                 official_payload_list)
@@ -251,24 +251,24 @@ class Users(ApiManager):
 
         Keyword Args:
             phone (string optional): additional filter - payload
-            verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
-            password (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
+            password (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'verified_email', 'profile',
-            'password', 'email', 'stage', 'active', 'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('password'), payload.get('email'
-            ), payload.get('stage'), payload.get('active'), payload.get('acl'
-            ), payload.get('uuid_acl_override')
+        official_payload_list = ['phone', 'profile', 'email', 'stage',
+            'password', 'active', 'acl', 'uuid_acl_override', 'verified_email']
+        payload.get('phone'), payload.get('profile'), payload.get('email'
+            ), payload.get('stage'), payload.get('password'), payload.get(
+            'active'), payload.get('acl'), payload.get('uuid_acl_override'
+            ), payload.get('verified_email')
         if not self._silence_warning:
             warning_wrong_parameters(self.users_put.__name__, payload,
                 official_payload_list)

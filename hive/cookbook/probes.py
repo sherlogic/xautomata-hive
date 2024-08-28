@@ -133,17 +133,19 @@ class Probes(ApiManager):
             notes (string optional): additional filter - payload
             status (string optional): additional filter - payload
             last_seen (string optional): additional filter - payload
+            ingest_frequency (number optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['uuid_virtual_domain', 'uuid_probe_type',
             'uuid_host', 'name', 'description', 'data_profile', 'notes',
-            'status', 'last_seen']
+            'status', 'last_seen', 'ingest_frequency']
         payload.get('uuid_virtual_domain'), payload.get('uuid_probe_type'
             ), payload.get('uuid_host'), payload.get('name'), payload.get(
             'description'), payload.get('data_profile'), payload.get('notes'
-            ), payload.get('status'), payload.get('last_seen')
+            ), payload.get('status'), payload.get('last_seen'), payload.get(
+            'ingest_frequency')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_put.__name__, payload,
                 official_payload_list)
@@ -175,24 +177,24 @@ class Probes(ApiManager):
 
         Keyword Args:
             phone (string optional): additional filter - payload
-            verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
-            password (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
+            password (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
+            verified_email (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'verified_email', 'profile',
-            'password', 'email', 'stage', 'active', 'acl', 'uuid_acl_override']
-        payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('password'), payload.get('email'
-            ), payload.get('stage'), payload.get('active'), payload.get('acl'
-            ), payload.get('uuid_acl_override')
+        official_payload_list = ['phone', 'profile', 'email', 'stage',
+            'password', 'active', 'acl', 'uuid_acl_override', 'verified_email']
+        payload.get('phone'), payload.get('profile'), payload.get('email'
+            ), payload.get('stage'), payload.get('password'), payload.get(
+            'active'), payload.get('acl'), payload.get('uuid_acl_override'
+            ), payload.get('verified_email')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_agent_put.__name__,
                 payload, official_payload_list)

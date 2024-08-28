@@ -72,6 +72,7 @@ nav:
           - acl_overrides: hive.cookbook.acl_overrides
           - analytics: hive.cookbook.analytics
           - anomalies: hive.cookbook.anomalies
+          - automata_ingest: hive.cookbook.automata_ingest
           - calendars: hive.cookbook.calendars
           - contacts: hive.cookbook.contacts
           - cost_tagging: hive.cookbook.cost_tagging
@@ -111,6 +112,7 @@ nav:
           - sites: hive.cookbook.sites
           - terms_and_conditions: hive.cookbook.terms_and_conditions
           - tree_hierarchy: hive.cookbook.tree_hierarchy
+          - ts_automata_state: hive.cookbook.ts_automata_state
           - ts_cost_azure_raw: hive.cookbook.ts_cost_azure_raw
           - ts_cost_management: hive.cookbook.ts_cost_management
           - ts_metric_status: hive.cookbook.ts_metric_status

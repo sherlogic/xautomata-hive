@@ -145,21 +145,20 @@ class Login(ApiManager):
 
         Keyword Args:
             phone (string optional): additional filter - payload
-            verified_email (boolean optional): additional filter - payload
             profile (string optional): additional filter - payload
-            password (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
+            password (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'verified_email', 'profile',
-            'password', 'email', 'stage', 'active']
-        payload.get('phone'), payload.get('verified_email'), payload.get(
-            'profile'), payload.get('password'), payload.get('email'
-            ), payload.get('stage'), payload.get('active')
+        official_payload_list = ['phone', 'profile', 'email', 'stage',
+            'password', 'active']
+        payload.get('phone'), payload.get('profile'), payload.get('email'
+            ), payload.get('stage'), payload.get('password'), payload.get(
+            'active')
         if not self._silence_warning:
             warning_wrong_parameters(self.login_current_user_put.__name__,
                 payload, official_payload_list)
@@ -443,4 +442,42 @@ class Login(ApiManager):
         response = self.execute('POST', path=
             f'/login/current_user/terms_and_conditions', payload=payload,
             **kwargs)
+        return response
+
+    def login_current_user_verify_email_put(self, kwargs: dict = None, **params
+        ) -> list:
+        """Verify Current User Email
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            verification_code (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['verification_code']
+        params.get('verification_code')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                login_current_user_verify_email_put.__name__, params,
+                official_params_list)
+        response = self.execute('PUT', path=
+            f'/login/current_user/verify_email', params=params, **kwargs)
+        return response
+
+    def login_current_user_verify_email_create(self, kwargs: dict = None
+        ) -> list:
+        """Send Request To Verify Current User Email
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/login/current_user/verify_email', **kwargs)
         return response

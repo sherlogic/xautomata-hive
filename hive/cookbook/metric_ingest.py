@@ -18,29 +18,29 @@ class MetricIngest(ApiManager):
             payload = 
           [
            {
+            "extended_attributes_0": "string", optional
             "uuid_metric_0": "string", required
             "uuid_probe_0": "string", required
             "timestamp_0": "integer", required
             "object_type_0": "None", optional
-            "extended_attributes_0": "string", optional
             "value_0": "string", required
             "unit_0": "string", required
             "description_0": "string", required
             "status_0": "None", required
             "ranking_0": "integer", required
+            "extended_attributes_1": "string", optional
             "uuid_metric_1": "string", required
             "uuid_probe_1": "string", required
             "timestamp_1": "integer", required
             "object_type_1": "None", optional
-            "extended_attributes_1": "string", optional
             "status_1": "None", required
             "ranking_1": "integer", required
             "description_1": "string", required
+            "extended_attributes_2": "string", required
             "uuid_metric_2": "string", required
             "uuid_probe_2": "string", required
             "timestamp_2": "integer", required
             "object_type_2": "None", optional
-            "extended_attributes_2": "string", required
             "description_2": "string", optional
             "uuid_metric_3": "string", required
             "uuid_probe_3": "string", required
