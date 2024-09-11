@@ -9,7 +9,6 @@ from requests import HTTPError
 from hive.decorators import ratelimiter, refresh, paginate, warmstart, timeout_retry
 from hive.exceptions import UnauthorizedException
 from hive.infrastrucure_keys import Keys
-import warnings
 import gc
 import functools
 import logging
@@ -56,7 +55,7 @@ class ApiManager:
 
     def __init__(self, root, user, password, ssl_verify: bool = True):
 
-        if 'api/v' not in root: warnings.warn(f'{root} does not have the api/v* in the root, mandatory to point at the API')
+        if 'api/v' not in root: logger.warning(f'{root} does not have the api/v* in the root, mandatory to point at the API')
 
         self._SSL_verify = ssl_verify
         self.root = root.rstrip('/')
@@ -411,7 +410,7 @@ class ApiManager:
                 uuid_res.append(val['uuid'])
 
         if none_count > 0:
-            warnings.warn(f'{none_count} elements have not been matched with a uuid and can be found as None in the resutl list')
+            logger.warning(f'{none_count} elements have not been matched with a uuid and can be found as None in the resutl list')
 
         return uuid_res, get_count, post_count, put_count
 
@@ -468,7 +467,7 @@ def warning_wrong_parameters(func_name: str, params_from_user: dict, ufficial_pa
     if ufficial_params_list is None: ufficial_params_list = []
     for par in params_from_user:
         if par not in ufficial_params_list:
-            print(f'WARNING: from {func_name}, {par} is not in the official list of params.')
+            logger.warning(f'from {func_name}, {par} is not in the official list of params.')
 
 
 # gli import vengono messi qui per evitare una parziale import di api.py
