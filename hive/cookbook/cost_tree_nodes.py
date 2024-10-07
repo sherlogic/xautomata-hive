@@ -140,18 +140,28 @@ class CostTreeNodes(ApiManager):
             payload=payload, **kwargs)
         return response
 
-    def cost_tree_nodes_delete(self, uuid: str, kwargs: dict = None) -> list:
+    def cost_tree_nodes_delete(self, uuid: str, kwargs: dict = None, **params
+        ) -> list:
         """Delete Cost Tree Node
 
         Args:
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            delete_resources (boolean optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['delete_resources']
+        params.get('delete_resources')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.cost_tree_nodes_delete.__name__,
+                params, official_params_list)
         response = self.execute('DELETE', path=f'/cost_tree_nodes/{uuid}',
-            **kwargs)
+            params=params, **kwargs)
         return response
 
     def cost_tree_nodes_navigate_tree(self, uuid: str,

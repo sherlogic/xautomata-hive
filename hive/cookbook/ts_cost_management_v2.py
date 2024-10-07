@@ -1,10 +1,10 @@
 from hive.api import ApiManager, handling_single_page_methods, warning_wrong_parameters
 
 
-class TsCostManagement(ApiManager):
-    """Class that handles all the XAutomata ts_cost_management APIs"""
+class TsCostManagementV2(ApiManager):
+    """Class that handles all the XAutomata ts_cost_management_v2 APIs"""
 
-    def ts_cost_management(self, warm_start: bool = False,
+    def ts_cost_management_v2(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Read Costs
@@ -69,14 +69,14 @@ class TsCostManagement(ApiManager):
             'resource_id'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management.__name__,
+            warning_wrong_parameters(self.ts_cost_management_v2.__name__,
                 params, official_params_list)
-        response = self.execute('GET', path=f'/ts_cost_management/',
+        response = self.execute('GET', path=f'/ts_cost_management_v2/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_create(self, payload: list,
+    def ts_cost_management_v2_create(self, payload: list,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None
         ) -> list:
         """Create Cost Multi
@@ -131,12 +131,12 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        response = self.execute('POST', path=f'/ts_cost_management/',
+        response = self.execute('POST', path=f'/ts_cost_management_v2/',
             single_page=single_page, page_size=page_size, payload=payload,
             **kwargs)
         return response
 
-    def ts_cost_management_grouped(self, uuid_customer: str,
+    def ts_cost_management_v2_grouped(self, uuid_customer: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Query Group By Date
@@ -184,15 +184,15 @@ class TsCostManagement(ApiManager):
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_grouped.
+            warning_wrong_parameters(self.ts_cost_management_v2_grouped.
                 __name__, params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/grouped/{uuid_customer}', single_page=
+            f'/ts_cost_management_v2/grouped/{uuid_customer}', single_page=
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, **kwargs)
         return response
 
-    def ts_cost_management_uuid_metric(self, uuid_metric: str,
+    def ts_cost_management_v2_uuid_metric(self, uuid_metric: str,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Read Cost
 
@@ -213,14 +213,14 @@ class TsCostManagement(ApiManager):
         official_params_list = ['date']
         params.get('date')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management.__name__,
+            warning_wrong_parameters(self.ts_cost_management_v2.__name__,
                 params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/{uuid_metric}', warm_start=warm_start,
+            f'/ts_cost_management_v2/{uuid_metric}', warm_start=warm_start,
             params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_date(self, uuid_customer: str,
+    def ts_cost_management_v2_ccm_by_date(self, uuid_customer: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Query Group By Cloud Provider Subscription Type Resource Group
@@ -252,15 +252,15 @@ class TsCostManagement(ApiManager):
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_ccm_by_date.
-                __name__, params, official_params_list)
+            warning_wrong_parameters(self.ts_cost_management_v2_ccm_by_date
+                .__name__, params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_date/{uuid_customer}', single_page
-            =single_page, page_size=page_size, warm_start=warm_start,
-            params=params, **kwargs)
+            f'/ts_cost_management_v2/ccm_by_date/{uuid_customer}',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_subscription_type(self,
+    def ts_cost_management_v2_ccm_by_subscription_type(self,
         uuid_customer: str, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
@@ -293,15 +293,15 @@ class TsCostManagement(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_ccm_by_subscription_type.__name__,
+                ts_cost_management_v2_ccm_by_subscription_type.__name__,
                 params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_subscription_type/{uuid_customer}',
+            f'/ts_cost_management_v2/ccm_by_subscription_type/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_category(self, uuid_customer: str,
+    def ts_cost_management_v2_ccm_by_category(self, uuid_customer: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Query Group By Category
@@ -333,15 +333,15 @@ class TsCostManagement(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_ccm_by_category.__name__, params,
+                ts_cost_management_v2_ccm_by_category.__name__, params,
                 official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_category/{uuid_customer}',
+            f'/ts_cost_management_v2/ccm_by_category/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_resource_location(self,
+    def ts_cost_management_v2_ccm_by_resource_location(self,
         uuid_customer: str, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
@@ -374,17 +374,18 @@ class TsCostManagement(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_ccm_by_resource_location.__name__,
+                ts_cost_management_v2_ccm_by_resource_location.__name__,
                 params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_resource_location/{uuid_customer}',
+            f'/ts_cost_management_v2/ccm_by_resource_location/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_resource_group(self, uuid_customer: str,
-        warm_start: bool = False, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+    def ts_cost_management_v2_ccm_by_resource_group(self,
+        uuid_customer: str, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
         """Query Group By Resource Group
 
         Args:
@@ -414,15 +415,15 @@ class TsCostManagement(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_ccm_by_resource_group.__name__, params,
-                official_params_list)
+                ts_cost_management_v2_ccm_by_resource_group.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_resource_group/{uuid_customer}',
+            f'/ts_cost_management_v2/ccm_by_resource_group/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_ccm_by_subscription(self, uuid_customer: str,
+    def ts_cost_management_v2_ccm_by_subscription(self, uuid_customer: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Query Group By Subscription
@@ -454,15 +455,15 @@ class TsCostManagement(ApiManager):
             ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_ccm_by_subscription.__name__, params,
+                ts_cost_management_v2_ccm_by_subscription.__name__, params,
                 official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/ccm_by_subscription/{uuid_customer}',
+            f'/ts_cost_management_v2/ccm_by_subscription/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_anomalies(self, warm_start: bool = False,
+    def ts_cost_management_v2_anomalies(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Query Anomalies
@@ -492,16 +493,16 @@ class TsCostManagement(ApiManager):
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_anomalies.
+            warning_wrong_parameters(self.ts_cost_management_v2_anomalies.
                 __name__, params, official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/anomalies/', single_page=single_page,
+            f'/ts_cost_management_v2/anomalies/', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
             )
         return response
 
-    def ts_cost_management_anomaly_selector(self, warm_start: bool = False,
-        kwargs: dict = None, **params) -> list:
+    def ts_cost_management_v2_anomaly_selector(self,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Query Anomaly Selector
 
         Args:
@@ -534,14 +535,14 @@ class TsCostManagement(ApiManager):
             ), params.get('category')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_anomaly_selector.__name__, params,
+                ts_cost_management_v2_anomaly_selector.__name__, params,
                 official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/anomaly_selector/', warm_start=warm_start,
-            params=params, **kwargs)
+            f'/ts_cost_management_v2/anomaly_selector/', warm_start=
+            warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_anomaly_selector_geo(self,
+    def ts_cost_management_v2_anomaly_selector_geo(self,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Query Anomaly Selector Geo
 
@@ -574,14 +575,14 @@ class TsCostManagement(ApiManager):
             'resource_location')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                ts_cost_management_anomaly_selector_geo.__name__, params,
+                ts_cost_management_v2_anomaly_selector_geo.__name__, params,
                 official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/anomaly_selector_geo/', warm_start=
+            f'/ts_cost_management_v2/anomaly_selector_geo/', warm_start=
             warm_start, params=params, **kwargs)
         return response
 
-    def ts_cost_management_anomalies_geo(self, warm_start: bool = False,
+    def ts_cost_management_v2_anomalies_geo(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Query Anomalies Geo
@@ -611,15 +612,16 @@ class TsCostManagement(ApiManager):
             ), params.get('limit'), params.get('like'), params.get('join'
             ), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_anomalies_geo.
-                __name__, params, official_params_list)
+            warning_wrong_parameters(self.
+                ts_cost_management_v2_anomalies_geo.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=
-            f'/ts_cost_management/anomalies_geo/', single_page=single_page,
-            page_size=page_size, warm_start=warm_start, params=params, **kwargs
-            )
+            f'/ts_cost_management_v2/anomalies_geo/', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
         return response
 
-    def ts_cost_management_probe_delete(self, uuid_probe: str,
+    def ts_cost_management_v2_probe_delete(self, uuid_probe: str,
         kwargs: dict = None, **params) -> list:
         """Delete By Uuid Probe And Date Range
 
@@ -642,9 +644,10 @@ class TsCostManagement(ApiManager):
         params.get('tenant_id'), params.get('date_start'), params.get(
             'date_end'), params.get('profile')
         if not self._silence_warning:
-            warning_wrong_parameters(self.ts_cost_management_probe_delete.
-                __name__, params, official_params_list)
+            warning_wrong_parameters(self.
+                ts_cost_management_v2_probe_delete.__name__, params,
+                official_params_list)
         response = self.execute('DELETE', path=
-            f'/ts_cost_management/probe/{uuid_probe}/', params=params, **kwargs
-            )
+            f'/ts_cost_management_v2/probe/{uuid_probe}/', params=params,
+            **kwargs)
         return response

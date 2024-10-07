@@ -140,7 +140,7 @@ class ApiManager:
 
             # il controllo qui impedisce di fare chiamate se in modalita POST DELETE PUT se in modalita test,
             # con l'eccezione della presenza della parola read nel path che indica una bulk in lettura
-            if self._get_only and not(read and bulk) and not query:
+            if self._get_only and not (read and bulk) and not query:
                 raise ValueError('you are trying to access a not get_only API')
 
             # tutto quello che non è bulk e query gli viene impedito di paginare
@@ -508,17 +508,21 @@ from hive.cookbook.opening_reasons import OpeningReasons
 from hive.cookbook.probes import Probes
 from hive.cookbook.probe_types import ProbeTypes
 from hive.cookbook.profile_topics import ProfileTopics
+from hive.cookbook.questions import Questions
 from hive.cookbook.reason_for_closure import ReasonForClosure
 from hive.cookbook.retention_rules import RetentionRules
 from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
 from hive.cookbook.last_status import LastStatus
+from hive.cookbook.last_status_v2 import LastStatusV2
 from hive.cookbook.terms_and_conditions import TermsAndConditions
 from hive.cookbook.tree_hierarchy import TreeHierarchy
+from hive.cookbook.tree_hierarchy_v2 import TreeHierarchyV2
 from hive.cookbook.ts_automata_state import TsAutomataState
 from hive.cookbook.ts_cost_azure_raw import TsCostAzureRaw
 from hive.cookbook.ts_cost_management import TsCostManagement
+from hive.cookbook.ts_cost_management_v2 import TsCostManagementV2
 from hive.cookbook.ts_metric_status import TsMetricStatus
 from hive.cookbook.ts_metric_value import TsMetricValue
 from hive.cookbook.ts_ntop_flows import TsNtopFlows
@@ -533,7 +537,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, TermsAndConditions, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastStatusV2, TermsAndConditions, TreeHierarchy, TreeHierarchyV2, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsCostManagementV2, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

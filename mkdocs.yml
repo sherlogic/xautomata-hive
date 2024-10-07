@@ -91,6 +91,7 @@ nav:
           - groups: hive.cookbook.groups
           - jobs: hive.cookbook.jobs
           - last_status: hive.cookbook.last_status
+          - last_status_v2: hive.cookbook.last_status_v2
           - login: hive.cookbook.login
           - messages: hive.cookbook.messages
           - metrics: hive.cookbook.metrics
@@ -105,6 +106,7 @@ nav:
           - probes_log_ingest: hive.cookbook.probes_log_ingest
           - probe_types: hive.cookbook.probe_types
           - profile_topics: hive.cookbook.profile_topics
+          - questions: hive.cookbook.questions
           - reason_for_closure: hive.cookbook.reason_for_closure
           - retention_rules: hive.cookbook.retention_rules
           - schedules: hive.cookbook.schedules
@@ -112,9 +114,11 @@ nav:
           - sites: hive.cookbook.sites
           - terms_and_conditions: hive.cookbook.terms_and_conditions
           - tree_hierarchy: hive.cookbook.tree_hierarchy
+          - tree_hierarchy_v2: hive.cookbook.tree_hierarchy_v2
           - ts_automata_state: hive.cookbook.ts_automata_state
           - ts_cost_azure_raw: hive.cookbook.ts_cost_azure_raw
           - ts_cost_management: hive.cookbook.ts_cost_management
+          - ts_cost_management_v2: hive.cookbook.ts_cost_management_v2
           - ts_metric_status: hive.cookbook.ts_metric_status
           - ts_metric_value: hive.cookbook.ts_metric_value
           - ts_ntop_flows: hive.cookbook.ts_ntop_flows

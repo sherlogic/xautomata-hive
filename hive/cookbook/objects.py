@@ -386,6 +386,7 @@ class Objects(ApiManager):
             status (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
+            active_at_or_after_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -396,12 +397,15 @@ class Objects(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['not_in', 'code', 'status',
-            'active_at_timestamp', 'active_after_timestamp', 'skip',
-            'limit', 'like', 'join', 'count']
+            'active_at_timestamp', 'active_after_timestamp',
+            'active_at_or_after_timestamp', 'skip', 'limit', 'like', 'join',
+            'count']
         params.get('not_in'), params.get('code'), params.get('status'
             ), params.get('active_at_timestamp'), params.get(
-            'active_after_timestamp'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'active_after_timestamp'), params.get(
+            'active_at_or_after_timestamp'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.objects_downtimes.__name__,
                 params, official_params_list)
@@ -710,7 +714,7 @@ class Objects(ApiManager):
     def objects_downtimes_bulk(self, payload: list,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 50, kwargs: dict = None, **params) -> list:
-        """Bulk Read Downtimes
+        """Bulk Read Objects Downtimes
 
         Args:
             payload (list[dict], optional): List dict to create.
@@ -721,15 +725,10 @@ class Objects(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            code (string optional): additional filter - parameter
-            status (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
-            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
-            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
-            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            active_at_or_after_timestamp (string optional): additional filter - parameter
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
-            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
 
         Examples:
             payload = 
@@ -740,17 +739,15 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['code', 'status', 'active_at_timestamp',
-            'active_after_timestamp', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('code'), params.get('status'), params.get(
-            'active_at_timestamp'), params.get('active_after_timestamp'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['active_at_timestamp',
+            'active_after_timestamp', 'active_at_or_after_timestamp', 'join']
+        params.get('active_at_timestamp'), params.get('active_after_timestamp'
+            ), params.get('active_at_or_after_timestamp'), params.get('join')
         if not self._silence_warning:
             warning_wrong_parameters(self.objects_downtimes_bulk.__name__,
                 params, official_params_list)
         response = self.execute('POST', path=
-            f'/objects/bulk/read/downtimes/', single_page=single_page,
+            f'/objects/bulk/read/downtimes', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params,
             payload=payload, **kwargs)
         return response
