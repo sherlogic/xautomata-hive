@@ -20,6 +20,7 @@ class Calendars(ApiManager):
             null_fields (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
             local_public_holidays (boolean optional): additional filter - parameter
+            timezone (string optional): additional filter - parameter
             mon_int1_start (string optional): additional filter - parameter
             mon_int1_end (string optional): additional filter - parameter
             mon_int2_start (string optional): additional filter - parameter
@@ -58,35 +59,35 @@ class Calendars(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'name',
-            'local_public_holidays', 'mon_int1_start', 'mon_int1_end',
-            'mon_int2_start', 'mon_int2_end', 'tue_int1_start',
-            'tue_int1_end', 'tue_int2_start', 'tue_int2_end',
-            'wed_int1_start', 'wed_int1_end', 'wed_int2_start',
-            'wed_int2_end', 'thu_int1_start', 'thu_int1_end',
-            'thu_int2_start', 'thu_int2_end', 'fri_int1_start',
-            'fri_int1_end', 'fri_int2_start', 'fri_int2_end',
-            'sat_int1_start', 'sat_int1_end', 'sat_int2_start',
-            'sat_int2_end', 'sun_int1_start', 'sun_int1_end',
-            'sun_int2_start', 'sun_int2_end', 'skip', 'limit', 'like',
-            'join', 'count']
+            'local_public_holidays', 'timezone', 'mon_int1_start',
+            'mon_int1_end', 'mon_int2_start', 'mon_int2_end',
+            'tue_int1_start', 'tue_int1_end', 'tue_int2_start',
+            'tue_int2_end', 'wed_int1_start', 'wed_int1_end',
+            'wed_int2_start', 'wed_int2_end', 'thu_int1_start',
+            'thu_int1_end', 'thu_int2_start', 'thu_int2_end',
+            'fri_int1_start', 'fri_int1_end', 'fri_int2_start',
+            'fri_int2_end', 'sat_int1_start', 'sat_int1_end',
+            'sat_int2_start', 'sat_int2_end', 'sun_int1_start',
+            'sun_int1_end', 'sun_int2_start', 'sun_int2_end', 'skip',
+            'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('name'
-            ), params.get('local_public_holidays'), params.get('mon_int1_start'
-            ), params.get('mon_int1_end'), params.get('mon_int2_start'
-            ), params.get('mon_int2_end'), params.get('tue_int1_start'
-            ), params.get('tue_int1_end'), params.get('tue_int2_start'
-            ), params.get('tue_int2_end'), params.get('wed_int1_start'
-            ), params.get('wed_int1_end'), params.get('wed_int2_start'
-            ), params.get('wed_int2_end'), params.get('thu_int1_start'
-            ), params.get('thu_int1_end'), params.get('thu_int2_start'
-            ), params.get('thu_int2_end'), params.get('fri_int1_start'
-            ), params.get('fri_int1_end'), params.get('fri_int2_start'
-            ), params.get('fri_int2_end'), params.get('sat_int1_start'
-            ), params.get('sat_int1_end'), params.get('sat_int2_start'
-            ), params.get('sat_int2_end'), params.get('sun_int1_start'
-            ), params.get('sun_int1_end'), params.get('sun_int2_start'
-            ), params.get('sun_int2_end'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            ), params.get('local_public_holidays'), params.get('timezone'
+            ), params.get('mon_int1_start'), params.get('mon_int1_end'
+            ), params.get('mon_int2_start'), params.get('mon_int2_end'
+            ), params.get('tue_int1_start'), params.get('tue_int1_end'
+            ), params.get('tue_int2_start'), params.get('tue_int2_end'
+            ), params.get('wed_int1_start'), params.get('wed_int1_end'
+            ), params.get('wed_int2_start'), params.get('wed_int2_end'
+            ), params.get('thu_int1_start'), params.get('thu_int1_end'
+            ), params.get('thu_int2_start'), params.get('thu_int2_end'
+            ), params.get('fri_int1_start'), params.get('fri_int1_end'
+            ), params.get('fri_int2_start'), params.get('fri_int2_end'
+            ), params.get('sat_int1_start'), params.get('sat_int1_end'
+            ), params.get('sat_int2_start'), params.get('sat_int2_end'
+            ), params.get('sun_int1_start'), params.get('sun_int1_end'
+            ), params.get('sun_int2_start'), params.get('sun_int2_end'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.calendars.__name__, params,
                 official_params_list)
@@ -104,6 +105,7 @@ class Calendars(ApiManager):
 
         Keyword Args:
             name (string required): additional filter - payload
+            timezone (string required): additional filter - payload
             local_public_holidays (boolean required): additional filter - payload
             mon_int1_start (string optional): additional filter - payload
             mon_int1_end (string optional): additional filter - payload
@@ -137,31 +139,33 @@ class Calendars(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'local_public_holidays',
-            'mon_int1_start', 'mon_int1_end', 'mon_int2_start',
-            'mon_int2_end', 'tue_int1_start', 'tue_int1_end',
-            'tue_int2_start', 'tue_int2_end', 'wed_int1_start',
-            'wed_int1_end', 'wed_int2_start', 'wed_int2_end',
-            'thu_int1_start', 'thu_int1_end', 'thu_int2_start',
-            'thu_int2_end', 'fri_int1_start', 'fri_int1_end',
-            'fri_int2_start', 'fri_int2_end', 'sat_int1_start',
-            'sat_int1_end', 'sat_int2_start', 'sat_int2_end',
-            'sun_int1_start', 'sun_int1_end', 'sun_int2_start', 'sun_int2_end']
-        payload.get('name'), payload.get('local_public_holidays'), payload.get(
-            'mon_int1_start'), payload.get('mon_int1_end'), payload.get(
-            'mon_int2_start'), payload.get('mon_int2_end'), payload.get(
-            'tue_int1_start'), payload.get('tue_int1_end'), payload.get(
-            'tue_int2_start'), payload.get('tue_int2_end'), payload.get(
-            'wed_int1_start'), payload.get('wed_int1_end'), payload.get(
-            'wed_int2_start'), payload.get('wed_int2_end'), payload.get(
-            'thu_int1_start'), payload.get('thu_int1_end'), payload.get(
-            'thu_int2_start'), payload.get('thu_int2_end'), payload.get(
-            'fri_int1_start'), payload.get('fri_int1_end'), payload.get(
-            'fri_int2_start'), payload.get('fri_int2_end'), payload.get(
-            'sat_int1_start'), payload.get('sat_int1_end'), payload.get(
-            'sat_int2_start'), payload.get('sat_int2_end'), payload.get(
-            'sun_int1_start'), payload.get('sun_int1_end'), payload.get(
-            'sun_int2_start'), payload.get('sun_int2_end')
+        official_payload_list = ['name', 'timezone',
+            'local_public_holidays', 'mon_int1_start', 'mon_int1_end',
+            'mon_int2_start', 'mon_int2_end', 'tue_int1_start',
+            'tue_int1_end', 'tue_int2_start', 'tue_int2_end',
+            'wed_int1_start', 'wed_int1_end', 'wed_int2_start',
+            'wed_int2_end', 'thu_int1_start', 'thu_int1_end',
+            'thu_int2_start', 'thu_int2_end', 'fri_int1_start',
+            'fri_int1_end', 'fri_int2_start', 'fri_int2_end',
+            'sat_int1_start', 'sat_int1_end', 'sat_int2_start',
+            'sat_int2_end', 'sun_int1_start', 'sun_int1_end',
+            'sun_int2_start', 'sun_int2_end']
+        payload.get('name'), payload.get('timezone'), payload.get(
+            'local_public_holidays'), payload.get('mon_int1_start'
+            ), payload.get('mon_int1_end'), payload.get('mon_int2_start'
+            ), payload.get('mon_int2_end'), payload.get('tue_int1_start'
+            ), payload.get('tue_int1_end'), payload.get('tue_int2_start'
+            ), payload.get('tue_int2_end'), payload.get('wed_int1_start'
+            ), payload.get('wed_int1_end'), payload.get('wed_int2_start'
+            ), payload.get('wed_int2_end'), payload.get('thu_int1_start'
+            ), payload.get('thu_int1_end'), payload.get('thu_int2_start'
+            ), payload.get('thu_int2_end'), payload.get('fri_int1_start'
+            ), payload.get('fri_int1_end'), payload.get('fri_int2_start'
+            ), payload.get('fri_int2_end'), payload.get('sat_int1_start'
+            ), payload.get('sat_int1_end'), payload.get('sat_int2_start'
+            ), payload.get('sat_int2_end'), payload.get('sun_int1_start'
+            ), payload.get('sun_int1_end'), payload.get('sun_int2_start'
+            ), payload.get('sun_int2_end')
         if not self._silence_warning:
             warning_wrong_parameters(self.calendars_create.__name__,
                 payload, official_payload_list)
@@ -195,6 +199,7 @@ class Calendars(ApiManager):
 
         Keyword Args:
             name (string optional): additional filter - payload
+            timezone (string optional): additional filter - payload
             local_public_holidays (boolean optional): additional filter - payload
             mon_int1_start (string optional): additional filter - payload
             mon_int1_end (string optional): additional filter - payload
@@ -228,31 +233,33 @@ class Calendars(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['name', 'local_public_holidays',
-            'mon_int1_start', 'mon_int1_end', 'mon_int2_start',
-            'mon_int2_end', 'tue_int1_start', 'tue_int1_end',
-            'tue_int2_start', 'tue_int2_end', 'wed_int1_start',
-            'wed_int1_end', 'wed_int2_start', 'wed_int2_end',
-            'thu_int1_start', 'thu_int1_end', 'thu_int2_start',
-            'thu_int2_end', 'fri_int1_start', 'fri_int1_end',
-            'fri_int2_start', 'fri_int2_end', 'sat_int1_start',
-            'sat_int1_end', 'sat_int2_start', 'sat_int2_end',
-            'sun_int1_start', 'sun_int1_end', 'sun_int2_start', 'sun_int2_end']
-        payload.get('name'), payload.get('local_public_holidays'), payload.get(
-            'mon_int1_start'), payload.get('mon_int1_end'), payload.get(
-            'mon_int2_start'), payload.get('mon_int2_end'), payload.get(
-            'tue_int1_start'), payload.get('tue_int1_end'), payload.get(
-            'tue_int2_start'), payload.get('tue_int2_end'), payload.get(
-            'wed_int1_start'), payload.get('wed_int1_end'), payload.get(
-            'wed_int2_start'), payload.get('wed_int2_end'), payload.get(
-            'thu_int1_start'), payload.get('thu_int1_end'), payload.get(
-            'thu_int2_start'), payload.get('thu_int2_end'), payload.get(
-            'fri_int1_start'), payload.get('fri_int1_end'), payload.get(
-            'fri_int2_start'), payload.get('fri_int2_end'), payload.get(
-            'sat_int1_start'), payload.get('sat_int1_end'), payload.get(
-            'sat_int2_start'), payload.get('sat_int2_end'), payload.get(
-            'sun_int1_start'), payload.get('sun_int1_end'), payload.get(
-            'sun_int2_start'), payload.get('sun_int2_end')
+        official_payload_list = ['name', 'timezone',
+            'local_public_holidays', 'mon_int1_start', 'mon_int1_end',
+            'mon_int2_start', 'mon_int2_end', 'tue_int1_start',
+            'tue_int1_end', 'tue_int2_start', 'tue_int2_end',
+            'wed_int1_start', 'wed_int1_end', 'wed_int2_start',
+            'wed_int2_end', 'thu_int1_start', 'thu_int1_end',
+            'thu_int2_start', 'thu_int2_end', 'fri_int1_start',
+            'fri_int1_end', 'fri_int2_start', 'fri_int2_end',
+            'sat_int1_start', 'sat_int1_end', 'sat_int2_start',
+            'sat_int2_end', 'sun_int1_start', 'sun_int1_end',
+            'sun_int2_start', 'sun_int2_end']
+        payload.get('name'), payload.get('timezone'), payload.get(
+            'local_public_holidays'), payload.get('mon_int1_start'
+            ), payload.get('mon_int1_end'), payload.get('mon_int2_start'
+            ), payload.get('mon_int2_end'), payload.get('tue_int1_start'
+            ), payload.get('tue_int1_end'), payload.get('tue_int2_start'
+            ), payload.get('tue_int2_end'), payload.get('wed_int1_start'
+            ), payload.get('wed_int1_end'), payload.get('wed_int2_start'
+            ), payload.get('wed_int2_end'), payload.get('thu_int1_start'
+            ), payload.get('thu_int1_end'), payload.get('thu_int2_start'
+            ), payload.get('thu_int2_end'), payload.get('fri_int1_start'
+            ), payload.get('fri_int1_end'), payload.get('fri_int2_start'
+            ), payload.get('fri_int2_end'), payload.get('sat_int1_start'
+            ), payload.get('sat_int1_end'), payload.get('sat_int2_start'
+            ), payload.get('sat_int2_end'), payload.get('sun_int1_start'
+            ), payload.get('sun_int1_end'), payload.get('sun_int2_start'
+            ), payload.get('sun_int2_end')
         if not self._silence_warning:
             warning_wrong_parameters(self.calendars_put.__name__, payload,
                 official_payload_list)
@@ -328,6 +335,7 @@ class Calendars(ApiManager):
           [
            {
             "name": "string", required
+            "timezone": "string", required
             "local_public_holidays": "boolean", required
             "mon_int1_start": "string", optional
             "mon_int1_end": "string", optional

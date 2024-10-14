@@ -86,6 +86,7 @@ nav:
           - downtimes: hive.cookbook.downtimes
           - external_tickets: hive.cookbook.external_tickets
           - features: hive.cookbook.features
+          - files: hive.cookbook.files
           - firmware_updates: hive.cookbook.firmware_updates
           - google: hive.cookbook.google
           - groups: hive.cookbook.groups

@@ -106,7 +106,17 @@ def main(**kwargs):
 
                     payload = dict()
                     if 'requestBody' in apis[name][mode]:
-                        application = 'application/json' if 'application/json' in apis[name][mode]['requestBody']['content'] else 'application/x-www-form-urlencoded'
+                        # application = 'application/json' if 'application/json' in apis[name][mode]['requestBody']['content'] else 'application/x-www-form-urlencoded'
+                        application = ''
+                        if 'application/json' in apis[name][mode]['requestBody']['content']:
+                            application = 'application/json'
+                        elif 'application/x-www-form-urlencoded' in apis[name][mode]['requestBody']['content']:
+                            application = 'application/x-www-form-urlencoded'
+                        elif 'multipart/form-data' in apis[name][mode]['requestBody']['content']:
+                            application = 'multipart/form-data'
+                        else:
+                            raise ValueError('new application insert here')  # se scatta questo errore probabilmente c'e' una nuova application che deve essere inserita nel if else
+
                         if '$ref' in apis[name][mode]['requestBody']['content'][application]['schema']:
                             schema_ref = apis[name][mode]['requestBody']['content'][application]['schema']['$ref'].split('/')[-1]
 
