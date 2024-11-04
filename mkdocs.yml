@@ -91,6 +91,7 @@ nav:
           - google: hive.cookbook.google
           - groups: hive.cookbook.groups
           - jobs: hive.cookbook.jobs
+          - last_object_status: hive.cookbook.last_object_status
           - last_status: hive.cookbook.last_status
           - last_status_v2: hive.cookbook.last_status_v2
           - login: hive.cookbook.login

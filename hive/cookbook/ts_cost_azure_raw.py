@@ -592,3 +592,57 @@ class TsCostAzureRaw(ApiManager):
             f'/ts_cost_azure_raw/compute/tenant/{uuid_tenant}/', params=
             params, **kwargs)
         return response
+
+    def ts_cost_azure_raw_compute_import_tags_tenant_create(self,
+        uuid_tenant: str, kwargs: dict = None, **params) -> list:
+        """Bulk Import Tags Tenant
+
+        Args:
+            uuid_tenant (str, required): uuid_tenant
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_azure_raw_compute_import_tags_tenant_create.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/ts_cost_azure_raw/compute/import_tags/tenant/{uuid_tenant}',
+            params=params, **kwargs)
+        return response
+
+    def ts_cost_azure_raw_compute_import_tags_customer_create(self,
+        uuid_customer: str, kwargs: dict = None, **params) -> list:
+        """Bulk Import Tags Customer
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                ts_cost_azure_raw_compute_import_tags_customer_create.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/ts_cost_azure_raw/compute/import_tags/customer/{uuid_customer}',
+            params=params, **kwargs)
+        return response

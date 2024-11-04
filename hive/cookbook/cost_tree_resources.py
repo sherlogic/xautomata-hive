@@ -119,6 +119,48 @@ class CostTreeResources(ApiManager):
             =params, **kwargs)
         return response
 
+    def cost_tree_resources_all_resource_ids_v2(self,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Resource Ids V2
+
+        Args:
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+            uuid_customer (string optional): additional filter - parameter
+            uuid_view (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['date_start', 'date_end', 'uuid_customer',
+            'uuid_view', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'uuid_customer'), params.get('uuid_view'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                cost_tree_resources_all_resource_ids_v2.__name__, params,
+                official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_resources/all_resource_ids/v2', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
+        return response
+
     def cost_tree_resources_unfully_assigned_resource_ids(self,
         uuid_view: str, warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
@@ -152,6 +194,42 @@ class CostTreeResources(ApiManager):
         response = self.execute('GET', path=
             f'/cost_tree_resources/{uuid_view}/unfully_assigned_resource_ids/',
             single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def cost_tree_resources_unfully_assigned_resource_ids_v2(self,
+        uuid_view: str, warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Unfully Assigned Resource Ids V2
+
+        Args:
+            uuid_view (str, required): uuid_view
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
+        params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                cost_tree_resources_unfully_assigned_resource_ids_v2.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_resources/{uuid_view}/unfully_assigned_resource_ids/v2'
+            , single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
 

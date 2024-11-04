@@ -516,6 +516,7 @@ from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
 from hive.cookbook.last_status import LastStatus
+from hive.cookbook.last_object_status import LastObjectStatus
 from hive.cookbook.last_status_v2 import LastStatusV2
 from hive.cookbook.terms_and_conditions import TermsAndConditions
 from hive.cookbook.tree_hierarchy import TreeHierarchy
@@ -538,7 +539,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastStatusV2, TermsAndConditions, TreeHierarchy, TreeHierarchyV2, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsCostManagementV2, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, LastStatusV2, TermsAndConditions, TreeHierarchy, TreeHierarchyV2, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsCostManagementV2, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

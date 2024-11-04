@@ -197,6 +197,39 @@ class CostTreeNodes(ApiManager):
             params=params, **kwargs)
         return response
 
+    def cost_tree_nodes_navigate_tree_v2(self, uuid: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Get Tree From Node V2
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string required): additional filter - parameter
+            date_end (string required): additional filter - parameter
+            resource_id (string optional): additional filter - parameter
+            previous_period (boolean optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
+            =params)
+        official_params_list = ['date_start', 'date_end', 'resource_id',
+            'previous_period']
+        params.get('date_start'), params.get('date_end'), params.get(
+            'resource_id'), params.get('previous_period')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.cost_tree_nodes_navigate_tree_v2.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/cost_tree_nodes/navigate_tree/{uuid}/v2', warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
     def cost_tree_nodes_get_node_resources(self, uuid: str,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
