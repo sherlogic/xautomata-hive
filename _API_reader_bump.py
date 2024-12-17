@@ -42,8 +42,9 @@ def find_ref(schemas, schema_ref, key, key_type, name):
         #             key_type.append(types['type'])
         #             created = True
         for types in schemas[schema_ref]['properties'][key]['anyOf']:
-            key_type.append(types['type'])
-            created = True
+            if 'type' in types:
+                key_type.append(types['type'])
+                created = True
     elif 'type' in schemas[schema_ref]['properties'][key]:
         key_type.append(schemas[schema_ref]['properties'][key]['type'])
         created = True
@@ -67,11 +68,11 @@ def main(**kwargs):
     with open(file_path, 'r') as json_file:
         data = json.load(json_file)
 
-    spell = Invoker(get_config(**kwargs), **kwargs)
-    data = spell.openapi()
+    # spell = Invoker(get_config(**kwargs), **kwargs)
+    # data = spell.openapi()
+
     apis = data['paths']
     schemas = data['components']['schemas']
-    # print(data)
 
     allowed = {
         # "/acl_overrides/": ["GET", "POST", "PUT", "DELETE"]
@@ -95,7 +96,7 @@ def main(**kwargs):
         # "/objects/bulk/create/": ["POST"],
         # "/webhooks/{webhook_type}": ["POST"]
         # "/anomalies/{uuid}": ["DELETE"]
-        "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["GET", "POST", "PUT", "DELETE"]
+        "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["POST"]
     }
 
     api_dict = DeepDict()
