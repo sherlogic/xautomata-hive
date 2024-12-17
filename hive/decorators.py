@@ -131,29 +131,55 @@ def timeout_retry(func=None, max_tries: int = 2, sleep_time: int = 60):
 
 
 def paginate(single_page: bool, page_size: int, skip: int, limit: int, bulk: bool):
+    """Questa funzione è un decorator che abilita la paginazione per una funzione.
+
+    Args:
+        single_page: se True, restituisce solo una singola "pagina" di risultati.
+        page_size: dimensione della pagina (numero massimo di elementi per chiamata).
+        skip: numero di elementi da saltare all'inizio.
+        limit: numero massimo di elementi da restituire.
+        bulk: se True, gestisce il payload in modalità "bulk", suddividendolo in chunk.
+    """
     def attributes(func):
+        # Questo è il decorator interno che avvolge la funzione passata (`func`).
         @functools.wraps(func)
         def behaviour(mode, url, headers, payload, params, **kwargs) -> list:
-            result = []
+            # `behaviour` è la funzione wrapper che implementa la logica di paginazione.
+            # Accetta i parametri della funzione originale (`func`) e aggiunge il supporto alla paginazione.
+            result = []  # Lista che conterrà i risultati aggregati.
 
             # se la chiamata è bulk, il payload deve essere un lista e qui viene divisa in chunk e viene chiamata un
             # chunk per volta, ogni chunk ha la dimensione del page_size
             if bulk and not single_page:  # se la bulk viene richiesta in single_page, ricade nell'uso normale
+                # Divide il payload in chunk della dimensione specificata da `page_size`.
                 c_payload = chunks(payload, page_size)
+                # Per ogni chunk:
                 for c in c_payload:
+                    # Chiama la funzione originale (`func`) con il chunk corrente.
                     result_partial = func(mode, url, headers, c, params, **kwargs)
+                    # Se il risultato non è una lista, lo converte in una lista.
                     if not isinstance(result_partial, list): result_partial = [result_partial]
+                    # Aggiunge i risultati parziali alla lista complessiva `result`.
                     result += result_partial
 
-            else:
-                size = page_size if not single_page else limit
-                params['skip'] = skip
-                params['limit'] = min(size, limit)
-                while True:
+            else:  # Se non è in modalità bulk o se è richiesto single_page:
+                size = page_size if not single_page else limit  # Determina la dimensione della pagina.
+                params['skip'] = skip  # Imposta il valore iniziale di `skip` nei parametri.
+                params['limit'] = min(size, limit)  # Imposta il limite massimo per la pagina corrente.
+                while True:  # Ciclo per iterare attraverso le pagine.
+                    # Chiama la funzione originale (`func`) con i parametri della pagina corrente.
                     result_partial = func(mode, url, headers, payload, params, **kwargs)
+                    # Se il risultato non è una lista, lo converte in una lista.
                     if not isinstance(result_partial, list): result_partial = [result_partial]
+                    # Aggiunge i risultati parziali alla lista complessiva `result`.
                     result += result_partial
+                    # Aggiorna il valore di `skip` per passare alla pagina successiva.
                     params['skip'] = params['skip'] + size
+                    # Interrompe il ciclo se:
+                    # - Non ci sono più risultati (`result_partial` è vuoto).
+                    # - Il numero di risultati è inferiore alla dimensione della pagina.
+                    # - Il numero totale di risultati supera il limite specificato.
+                    # - È richiesto il single_page.
                     if not result_partial or len(result_partial) < size or len(result) > limit or single_page: break
 
             # se count è True il result è una lista con dentro una tupla, in questa maniera viene trasmessa solo la tupla

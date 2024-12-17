@@ -86,6 +86,10 @@ def main(**kwargs):
         # "/sites/{uuid}": ["GET", "PUT"],
         # "/services/query/": ["GET", "POST"],
         # "/last_status/": ["GET", "POST"]
+        # "/webhooks/": ["GET"],
+        # "/objects/bulk/create/": ["POST"],
+        # "/webhooks/{webhook_type}": ["POST"]
+        # "/anomalies/{uuid}": ["DELETE"]
     }
 
     api_dict = DeepDict()
@@ -131,6 +135,9 @@ def main(**kwargs):
                             for schemas_ref in apis[name][mode]['requestBody']['content'][application]['schema']['items']['anyOf']:
                                 if '$ref' in schemas_ref: schema_ref.append(schemas_ref['$ref'].split('/')[-1])
 
+                        elif 'anyOf' in apis[name][mode]['requestBody']['content'][application]['schema']:
+                            schema_ref = 'empty'
+
                         elif 'items' in apis[name][mode]['requestBody']['content'][application]['schema'] and \
                                 'required' in apis[name][mode]['requestBody']:
                             schema_ref = 'missing'
@@ -142,7 +149,7 @@ def main(**kwargs):
                         schema_ref = [schema_ref] if not isinstance(schema_ref, list) else schema_ref
 
                         for ii, schema in enumerate(schema_ref):
-                            if schema is not None and schema != 'missing':
+                            if schema is not None and schema != 'missing' and schema != 'empty':
                                 for key in schemas[schema]['properties']:
                                     key_type = []
                                     key_type = find_ref(schemas, schema, key, key_type, name)
@@ -154,11 +161,19 @@ def main(**kwargs):
                                     key_name = f'{key}_{ii}' if len(schema_ref) > 1 else key
                                     payload[key_name] = {'type': key_type,
                                                          'required': key_required}
+
+                            elif schema == 'empty':
+                                payload = {}
+
                             elif schema == 'missing':
                                 payload['uuid'] = {'type': 'str',
                                                    'required': True}
+
                             else:
-                                payload = {}
+                                payload = None
+
+                    else:
+                        payload = None
 
                     api_dict = api_interpreter(mode.upper(), name, description, params, payload, api_dict)
 
@@ -211,9 +226,6 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
 
     #############################################################################################################
 
-    # if name == '/ts_cost_management/' and mode == "GET":
-    #     print(name)
-
     function_name, additional_param, uuid_counter = name_gen(name, mode)
 
     skip_limit = True if 'skip' in params else False  # se skip e' tra i parametri allora si puo paginare se no non si puo
@@ -240,7 +252,9 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     query = True if 'query' in name else False
 
     hidden_query = ['last_status']
+    hidden_querry_exact_name = []
     hidden_bulk_post = ['metric_ingest', 'probes_log_ingest', 'ts_cost_management']
+    hidden_bulk_post_exact_name = ['/webhooks/{webhook_type}']
 
     if mode == 'POST':
         for hidden in hidden_query:
@@ -249,8 +263,18 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
                 function_name = hidden+'_bulk'
                 bulk, bulk_read = True, True
                 break
+        for hidden in hidden_querry_exact_name:
+            if hidden in name:
+                query = True
+                function_name = hidden+'_bulk'
+                bulk, bulk_read = True, True
+                break
         for hidden in hidden_bulk_post:
             if hidden in function_name:
+                bulk, bulk_read = True, False
+                break
+        for hidden in hidden_bulk_post_exact_name:
+            if hidden in name:
                 bulk, bulk_read = True, False
                 break
 
@@ -279,27 +303,27 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
 
     if mode in ['POST', 'PUT', 'DELETE']:
         if bulk:
-            if len(payload) == 0 and len(params) > 0:
+            if payload is None and len(params) > 0:
                 function_kwarg = 'params'
                 key_params = ' params=params, '
-            elif len(payload) > 0 and len(params) == 0:
+            elif payload is not None and len(params) == 0:
                 function_arg = [payload_body_query if query else payload_body] + function_arg
                 function_doc = [payload_doc_query if query else payload_doc_bulk] + function_doc
                 key_payload = ' payload=payload, '
-            elif len(payload) > 0 and len(params) > 0:
+            elif payload is not None and len(params) > 0:
                 function_arg = [payload_body_query if query else payload_body] + function_arg
                 function_doc = [payload_doc_query if query else payload_doc_bulk] + function_doc
                 function_kwarg = 'params'
                 key_params = ' params=params, '
                 key_payload = ' payload=payload, '
         else:
-            if len(payload) == 0 and len(params) > 0:
+            if payload is None and len(params) > 0:
                 function_kwarg = 'params'
                 key_params = ' params=params, '
-            elif len(payload) > 0 and len(params) == 0:
+            elif payload is not None and len(params) == 0:
                 function_kwarg = 'payload'
                 key_payload = ' payload=payload, '
-            elif len(payload) > 0 and len(params) > 0:
+            elif payload is not None and len(params) > 0:
                 function_arg += [params_body]
                 function_doc = [params_doc2] + function_doc
                 function_kwarg = 'payload'
@@ -336,15 +360,17 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
         text_doc = dict_doc[param] if param in dict_doc else 'additional filter'
         full_params_doc.append(f"            {param} ({params[param]['type']} {required_dict[params[param]['required']]}): {text_doc} - parameter")
 
-    if bulk:
+    if bulk and (payload is not None):
         for param in payload:
             type_doc = " ".join(payload[param]['type']) if isinstance(payload[param]['type'], list) else payload[param]['type']
             example_doc.append(f'            "{param}": "{type_doc}", {required_dict[payload[param]["required"]]}')
-    else:
+    elif payload is not None:
         for param in payload:
             text_doc = dict_doc[param] if param in dict_doc else 'additional filter'
             type_doc = " ".join(payload[param]['type']) if isinstance(payload[param]['type'], list) else payload[param]['type']
             full_params_doc.append(f"            {param} ({type_doc} {required_dict[payload[param]['required']]}): {text_doc} - payload")
+    else:
+        pass
 
     args_doc = '\n        Args:'
     kwargs_title_doc = '\n        Keyword Args:'

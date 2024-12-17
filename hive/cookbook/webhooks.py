@@ -115,16 +115,19 @@ class Webhooks(ApiManager):
         return response
 
     def webhooks_create_webhook_type(self, webhook_type: str,
-        kwargs: dict = None) -> list:
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
         """Post Webhook
 
         Args:
             webhook_type (str, required): webhook_type
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         response = self.execute('POST', path=f'/webhooks/{webhook_type}',
-            **kwargs)
+            single_page=single_page, page_size=page_size, **kwargs)
         return response

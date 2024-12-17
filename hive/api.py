@@ -52,6 +52,7 @@ class ApiManager:
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
     _silence_warning = False  # da implementare
     num_items = None  # serve per quando si mette la count a True, di default vale 0
+    response = []  # variabile in cui mettere la risposta degli endpoing per poter accedere alla versione originale
 
     def __init__(self, root, user, password, ssl_verify: bool = True):
 
@@ -155,6 +156,8 @@ class ApiManager:
 
         url = f'{self.root}{path}'
 
+        self.response = []  # reset dell'attributo responce, cosi da non accodare risposte proveninenti da richieste diverse
+
         @warmstart(active=warm_start, args_ex=[2], verbose=False)
         @paginate(single_page=single_page, page_size=page_size, skip=_params_['skip'], limit=_params_['limit'], bulk=bulk)
         @timeout_retry(max_tries=self._timeout_retry, sleep_time=self._timeout_sleep_time)
@@ -166,7 +169,8 @@ class ApiManager:
             logger.debug(f'request params (skip and limit may differ from your setting due pagination): {_params}')
             logger.debug(f'request payload: {_payload}')
 
-            response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request(_mode, url=_url, json=_payload, params=_params, headers=_headers, verify=self._SSL_verify, **_kwargs)
+            response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request(_mode, url=_url, json=_payload, params=_params,
+                                                                                                                                     headers=_headers, verify=self._SSL_verify, **_kwargs)
             if response.status_code == 401: raise UnauthorizedException
             if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
                 logger.error(response.json())
@@ -177,6 +181,8 @@ class ApiManager:
 
             logger.debug(f'responce: {response.json()}')
             logger.debug(f'header: {response.headers}')
+
+            self.response.append(response)  # sotto forma di lista perche se la risposta viene paginata questa viene spezzata su piu risposte
 
             return response.json()
 
