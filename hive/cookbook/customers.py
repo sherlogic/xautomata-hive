@@ -261,7 +261,7 @@ class Customers(ApiManager):
     def customers_groups(self, uuid: str, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """List Groups
+        """List Groups V2
 
         Args:
             uuid (str, required): uuid
@@ -304,58 +304,7 @@ class Customers(ApiManager):
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_groups.__name__, params,
                 official_params_list)
-        response = self.execute('GET', path=f'/customers/{uuid}/groups',
-            single_page=single_page, page_size=page_size, warm_start=
-            warm_start, params=params, **kwargs)
-        return response
-
-    def customers_groups_v2(self, uuid: str, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 5000,
-        kwargs: dict = None, **params) -> list:
-        """List Groups V2
-
-        Args:
-            uuid (str, required): uuid
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
-
-        Keyword Args:
-            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            null_fields (string optional): additional filter - parameter
-            uuid_parent (string optional): additional filter - parameter
-            uuid_site (string optional): additional filter - parameter
-            uuid_virtual_domain (string optional): additional filter - parameter
-            object_profile (string optional): additional filter - parameter
-            type (string optional): additional filter - parameter
-            name (string optional): additional filter - parameter
-            description (string optional): additional filter - parameter
-            status (string optional): additional filter - parameter
-            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
-            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
-            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
-            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
-            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_parent',
-            'uuid_site', 'uuid_virtual_domain', 'object_profile', 'type',
-            'name', 'description', 'status', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_parent'), params.get('uuid_site'), params.get(
-            'uuid_virtual_domain'), params.get('object_profile'), params.get(
-            'type'), params.get('name'), params.get('description'), params.get(
-            'status'), params.get('skip'), params.get('limit'), params.get(
-            'like'), params.get('join'), params.get('count')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.customers_groups_v2.__name__,
-                params, official_params_list)
-        response = self.execute('GET', path=f'/customers/{uuid}/groups/v2/',
+        response = self.execute('GET', path=f'/customers/{uuid}/groups/',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
@@ -1326,6 +1275,76 @@ class Customers(ApiManager):
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/{uuid}', payload=payload, **kwargs
+            )
+        return response
+
+    def customers_gcp_v2_subscription_create(self, kwargs: dict = None, **
+        payload) -> list:
+        """Create Gcp Customer Sub
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            customer (None required): additional filter - payload
+            gcp_customer (None required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['customer', 'gcp_customer']
+        payload.get('customer'), payload.get('gcp_customer')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_gcp_v2_subscription_create.__name__, payload,
+                official_payload_list)
+        response = self.execute('POST', path=
+            f'/customers/gcp/v2/subscription/', payload=payload, **kwargs)
+        return response
+
+    def customers_gcp_v2_subscription_create_uuid(self, uuid: str,
+        kwargs: dict = None, **payload) -> list:
+        """Create Gcp Customer From V2 Sub
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            target_company (string required): additional filter - payload
+            target_code (string required): additional filter - payload
+            address (string optional): additional filter - payload
+            zip_code (string optional): additional filter - payload
+            city (string optional): additional filter - payload
+            country (string optional): additional filter - payload
+            state_province (string optional): additional filter - payload
+            paying_customer (boolean optional): additional filter - payload
+            uuid_virtual_domain (string optional): additional filter - payload
+            uuid_probe_type (string optional): additional filter - payload
+            uuid_object (string optional): additional filter - payload
+            subscriptions (array required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['target_company', 'target_code', 'address',
+            'zip_code', 'city', 'country', 'state_province',
+            'paying_customer', 'uuid_virtual_domain', 'uuid_probe_type',
+            'uuid_object', 'subscriptions']
+        payload.get('target_company'), payload.get('target_code'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
+            ), payload.get('paying_customer'), payload.get(
+            'uuid_virtual_domain'), payload.get('uuid_probe_type'
+            ), payload.get('uuid_object'), payload.get('subscriptions')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_gcp_v2_subscription_create.__name__, payload,
+                official_payload_list)
+        response = self.execute('POST', path=
+            f'/customers/gcp/v2/subscription/{uuid}', payload=payload, **kwargs
             )
         return response
 

@@ -91,7 +91,7 @@ class Probes(ApiManager):
 
     def probe(self, uuid: str, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
-        """Read Probe
+        """Read Probe V2
 
         Args:
             uuid (str, required): uuid
@@ -166,34 +166,6 @@ class Probes(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('DELETE', path=f'/probes/{uuid}', **kwargs)
-        return response
-
-    def probes_v2(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None, **params) -> list:
-        """Read Probe V2
-
-        Args:
-            uuid (str, required): uuid
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
-
-        Keyword Args:
-            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
-            extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
-        official_params_list = ['join', 'extract_severity']
-        params.get('join'), params.get('extract_severity')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.probes_v2.__name__, params,
-                official_params_list)
-        response = self.execute('GET', path=f'/probes/{uuid}/v2/',
-            warm_start=warm_start, params=params, **kwargs)
         return response
 
     def probes_agent_put(self, uuid: str, kwargs: dict = None, **payload

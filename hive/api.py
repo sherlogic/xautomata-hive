@@ -296,6 +296,7 @@ class ApiManager:
             uuid (list[str]): lista di tutti gli uuid degli oggetti richiesti, ordinati come il vettore post_params
             get_count (int): 1 se il metodo e' risultato in una get e 0 se e' risultato in una post
             post_count (int): 1 se il metodo e' risutltato in una post e 0 se e' risultato in una get
+            put_count (int): 1 se il metodo e' risutlato in una put e 0 se e' risultato in una put
         """
 
         # se viene dato il solo elemento dell'url, questo viene convertito nella sua versione bulk
@@ -503,6 +504,7 @@ from hive.cookbook.metric_ingest import MetricIngest
 from hive.cookbook.microsoft import Microsoft
 from hive.cookbook.google import Google
 from hive.cookbook.login import Login
+from hive.cookbook.qr_code import QrCode
 from hive.cookbook.jobs import Jobs
 from hive.cookbook.messages import Messages
 from hive.cookbook.metrics import Metrics
@@ -523,14 +525,11 @@ from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
 from hive.cookbook.last_status import LastStatus
 from hive.cookbook.last_object_status import LastObjectStatus
-from hive.cookbook.last_status_v2 import LastStatusV2
 from hive.cookbook.terms_and_conditions import TermsAndConditions
 from hive.cookbook.tree_hierarchy import TreeHierarchy
-from hive.cookbook.tree_hierarchy_v2 import TreeHierarchyV2
 from hive.cookbook.ts_automata_state import TsAutomataState
 from hive.cookbook.ts_cost_azure_raw import TsCostAzureRaw
 from hive.cookbook.ts_cost_management import TsCostManagement
-from hive.cookbook.ts_cost_management_v2 import TsCostManagementV2
 from hive.cookbook.ts_metric_status import TsMetricStatus
 from hive.cookbook.ts_metric_value import TsMetricValue
 from hive.cookbook.ts_ntop_flows import TsNtopFlows
@@ -545,7 +544,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, LastStatusV2, TermsAndConditions, TreeHierarchy, TreeHierarchyV2, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsCostManagementV2, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

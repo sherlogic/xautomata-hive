@@ -52,7 +52,7 @@ class LastObjectStatus(ApiManager):
             last_value_uuid_probe (string optional): additional filter - parameter
             last_value_timestamp_start (string optional): additional filter - parameter
             last_value_timestamp_end (string optional): additional filter - parameter
-            last_value_object_type (string optional): additional filter - parameter
+            last_value_object_type (None optional): additional filter - parameter
             last_value_name (string optional): additional filter - parameter
             last_value_value (string optional): additional filter - parameter
             last_value_unit (string optional): additional filter - parameter

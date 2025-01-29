@@ -280,6 +280,33 @@ class Calendars(ApiManager):
         response = self.execute('DELETE', path=f'/calendars/{uuid}', **kwargs)
         return response
 
+    def calendars_is_local_holiday_create(self, kwargs: dict = None, **params
+        ) -> list:
+        """Is Local Holiday
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            country (string required): additional filter - parameter
+            ts (string required): additional filter - parameter
+            timezone (string required): additional filter - parameter
+            state_province (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['country', 'ts', 'timezone', 'state_province']
+        params.get('country'), params.get('ts'), params.get('timezone'
+            ), params.get('state_province')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.calendars_is_local_holiday_create
+                .__name__, params, official_params_list)
+        response = self.execute('POST', path=f'/calendars/is_local_holiday',
+            params=params, **kwargs)
+        return response
+
     def calendars_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:

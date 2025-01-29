@@ -108,6 +108,7 @@ nav:
           - probes_log_ingest: hive.cookbook.probes_log_ingest
           - probe_types: hive.cookbook.probe_types
           - profile_topics: hive.cookbook.profile_topics
+          - qr_code: hive.cookbook.qr_code
           - questions: hive.cookbook.questions
           - reason_for_closure: hive.cookbook.reason_for_closure
           - retention_rules: hive.cookbook.retention_rules
