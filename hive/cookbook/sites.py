@@ -29,7 +29,9 @@ class Sites(ApiManager):
             notes (string optional): additional filter - parameter
             state_province (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
+            severity (None optional): additional filter - parameter
             filter_group_types (string optional): additional filter - parameter
+            count_children (boolean optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -42,15 +44,16 @@ class Sites(ApiManager):
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
             'type', 'code', 'description', 'address', 'zip_code', 'city',
-            'country', 'notes', 'state_province', 'status',
-            'filter_group_types', 'extract_severity', 'skip', 'limit',
-            'like', 'join', 'count']
+            'country', 'notes', 'state_province', 'status', 'severity',
+            'filter_group_types', 'count_children', 'extract_severity',
+            'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_customer'), params.get('type'), params.get('code'
             ), params.get('description'), params.get('address'), params.get(
             'zip_code'), params.get('city'), params.get('country'), params.get(
             'notes'), params.get('state_province'), params.get('status'
-            ), params.get('filter_group_types'), params.get('extract_severity'
+            ), params.get('severity'), params.get('filter_group_types'
+            ), params.get('count_children'), params.get('extract_severity'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:

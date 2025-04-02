@@ -98,9 +98,9 @@ class CostTags(ApiManager):
             payload = 
            {
             "uuid_view": "string", required
-            "select_operation": "None", required
+            "select_operation": "None", optional
             "selected_tags": "array", optional
-            "unselect_operation": "None", required
+            "unselect_operation": "None", optional
             "unselected_tags": "array", optional
            }
 

@@ -320,9 +320,9 @@ class Dashboards(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            index (integer required): additional filter - payload
-            width (integer required): additional filter - payload
-            height (integer required): additional filter - payload
+            index (integer optional): additional filter - payload
+            width (integer optional): additional filter - payload
+            height (integer optional): additional filter - payload
             grid_x (integer optional): additional filter - payload
             grid_y (integer optional): additional filter - payload
             settings (array object optional): additional filter - payload
@@ -646,9 +646,9 @@ class Dashboards(ApiManager):
             payload = 
           [
            {
-            "index": "integer", required
-            "width": "integer", required
-            "height": "integer", required
+            "index": "integer", optional
+            "width": "integer", optional
+            "height": "integer", optional
             "grid_x": "integer", optional
             "grid_y": "integer", optional
             "settings": "array object", optional

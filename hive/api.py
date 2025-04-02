@@ -503,6 +503,7 @@ from hive.cookbook.automata_ingest import AutomataIngest
 from hive.cookbook.metric_ingest import MetricIngest
 from hive.cookbook.microsoft import Microsoft
 from hive.cookbook.google import Google
+from hive.cookbook.apple import Apple
 from hive.cookbook.login import Login
 from hive.cookbook.qr_code import QrCode
 from hive.cookbook.jobs import Jobs
@@ -544,7 +545,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Analytics, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Apple, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """

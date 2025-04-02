@@ -25,7 +25,9 @@ class MetricTypes(ApiManager):
             feedback_for_operator (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
+            severity (None optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
+            count_children (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -37,14 +39,15 @@ class MetricTypes(ApiManager):
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_object',
             'name', 'description', 'feedback_for_operator', 'profile',
-            'status', 'extract_severity', 'skip', 'limit', 'like', 'join',
-            'count']
+            'status', 'severity', 'extract_severity', 'count_children',
+            'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_object'), params.get('name'), params.get('description'
             ), params.get('feedback_for_operator'), params.get('profile'
-            ), params.get('status'), params.get('extract_severity'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            ), params.get('status'), params.get('severity'), params.get(
+            'extract_severity'), params.get('count_children'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.metric_types.__name__, params,
                 official_params_list)

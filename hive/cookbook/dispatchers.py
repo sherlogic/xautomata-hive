@@ -836,3 +836,402 @@ class Dispatchers(ApiManager):
             f'/dispatchers/bulk/delete/contacts', single_page=single_page,
             page_size=page_size, payload=payload, **kwargs)
         return response
+
+    def dispatchers_groups_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
+        """Bulk Read Groups Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_groups_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/read/groups', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
+        return response
+
+    def dispatchers_groups_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Groups
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_group": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_groups_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/create/groups', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_groups_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Groups
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_group": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/delete/groups', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_objects_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
+        """Bulk Read Objects Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_objects_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/read/objects', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params,
+            payload=payload, **kwargs)
+        return response
+
+    def dispatchers_objects_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Objects
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_object": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_objects_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/create/objects', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_objects_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Objects
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_object": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/delete/objects', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_metric_types_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Metric Types
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                dispatchers_metric_types_create_bulk.__name__, params,
+                official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/create/metric_types', single_page=
+            single_page, page_size=page_size, params=params, payload=
+            payload, **kwargs)
+        return response
+
+    def dispatchers_metric_types_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Metric Types
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/delete/metric_types', single_page=
+            single_page, page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_metrics_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Metrics
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_metrics_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/create/metrics', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_metrics_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Metrics
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/delete/metrics', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_services_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Services
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_service": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_services_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/create/services', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def dispatchers_services_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Services
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_service": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/dispatchers/bulk/delete/services', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
