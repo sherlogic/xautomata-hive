@@ -854,96 +854,96 @@ class Services(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def last_status_bulk(self, payload: dict = False,
-        warm_start: bool = False, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
-        """Service Query Last Status List
-
-        Args:
-            payload (dict, optional): additional parameters for the API.
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
-
-        Keyword Args:
-            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
-            null_fields (string optional): additional filter - parameter
-            timestamp_start (string optional): additional filter - parameter
-            timestamp_end (string optional): additional filter - parameter
-            database_timestamp_start (string optional): additional filter - parameter
-            database_timestamp_end (string optional): additional filter - parameter
-            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
-            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
-            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
-            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
-            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
-
-        Examples:
-            payload = 
-           {
-            "uuid_customer": "array", optional
-            "customer_code": "array", optional
-            "customer_status": "array", optional
-            "uuid_site": "array", optional
-            "site_code": "array", optional
-            "site_description": "array", optional
-            "site_address": "array", optional
-            "site_zip_code": "array", optional
-            "site_city": "array", optional
-            "site_country": "array", optional
-            "site_state_province": "array", optional
-            "site_status": "array", optional
-            "uuid_group": "array", optional
-            "group_name": "array", optional
-            "group_status": "array", optional
-            "group_type": "array", optional
-            "group_uuid_virtual_domain": "array", optional
-            "uuid_object": "array", optional
-            "object_name": "array", optional
-            "object_status": "array", optional
-            "object_profile": "array", optional
-            "uuid_metric_type": "array", optional
-            "metric_type_name": "array", optional
-            "metric_type_status": "array", optional
-            "uuid_metric": "array", optional
-            "metric_name": "array", optional
-            "metric_status": "array", optional
-            "metric_profile": "array", optional
-            "service_uuid_parent": "array", optional
-            "uuid_service": "array", optional
-            "service_profile": "array", optional
-            "service_name": "array", optional
-            "service_description": "array", optional
-            "service_status": "array", optional
-            "service_automata_domain": "array", optional
-            "service_uuid_customer": "array", optional
-            "status": "array", optional
-            "ranking": "array", optional
-            "description": "array", optional
-            "unit": "array", optional
-            "value": "array", optional
-           }
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'timestamp_start',
-            'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'timestamp_start'), params.get('timestamp_end'), params.get(
-            'database_timestamp_start'), params.get('database_timestamp_end'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.last_status_bulk.__name__, params,
-                official_params_list)
-        response = self.execute('POST', path=f'/services/query/last_status',
-            single_page=single_page, page_size=page_size, warm_start=
-            warm_start, params=params, payload=payload, **kwargs)
-        return response
+    # def last_status_bulk(self, payload: dict = False,
+    #     warm_start: bool = False, single_page: bool = False,
+    #     page_size: int = 5000, kwargs: dict = None, **params) -> list:
+    #     """Service Query Last Status List
+    #
+    #     Args:
+    #         payload (dict, optional): additional parameters for the API.
+    #         warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+    #         single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+    #         page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+    #         kwargs (dict, optional): additional parameters for execute. Default to None.
+    #         **params: additional parameters for the API.
+    #
+    #     Keyword Args:
+    #         sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+    #         null_fields (string optional): additional filter - parameter
+    #         timestamp_start (string optional): additional filter - parameter
+    #         timestamp_end (string optional): additional filter - parameter
+    #         database_timestamp_start (string optional): additional filter - parameter
+    #         database_timestamp_end (string optional): additional filter - parameter
+    #         skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+    #         limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+    #         like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+    #         join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+    #         count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+    #
+    #     Examples:
+    #         payload =
+    #        {
+    #         "uuid_customer": "array", optional
+    #         "customer_code": "array", optional
+    #         "customer_status": "array", optional
+    #         "uuid_site": "array", optional
+    #         "site_code": "array", optional
+    #         "site_description": "array", optional
+    #         "site_address": "array", optional
+    #         "site_zip_code": "array", optional
+    #         "site_city": "array", optional
+    #         "site_country": "array", optional
+    #         "site_state_province": "array", optional
+    #         "site_status": "array", optional
+    #         "uuid_group": "array", optional
+    #         "group_name": "array", optional
+    #         "group_status": "array", optional
+    #         "group_type": "array", optional
+    #         "group_uuid_virtual_domain": "array", optional
+    #         "uuid_object": "array", optional
+    #         "object_name": "array", optional
+    #         "object_status": "array", optional
+    #         "object_profile": "array", optional
+    #         "uuid_metric_type": "array", optional
+    #         "metric_type_name": "array", optional
+    #         "metric_type_status": "array", optional
+    #         "uuid_metric": "array", optional
+    #         "metric_name": "array", optional
+    #         "metric_status": "array", optional
+    #         "metric_profile": "array", optional
+    #         "service_uuid_parent": "array", optional
+    #         "uuid_service": "array", optional
+    #         "service_profile": "array", optional
+    #         "service_name": "array", optional
+    #         "service_description": "array", optional
+    #         "service_status": "array", optional
+    #         "service_automata_domain": "array", optional
+    #         "service_uuid_customer": "array", optional
+    #         "status": "array", optional
+    #         "ranking": "array", optional
+    #         "description": "array", optional
+    #         "unit": "array", optional
+    #         "value": "array", optional
+    #        }
+    #
+    #     Returns: list"""
+    #     if kwargs is None:
+    #         kwargs = dict()
+    #     official_params_list = ['sort_by', 'null_fields', 'timestamp_start',
+    #         'timestamp_end', 'database_timestamp_start',
+    #         'database_timestamp_end', 'skip', 'limit', 'like', 'join', 'count']
+    #     params.get('sort_by'), params.get('null_fields'), params.get(
+    #         'timestamp_start'), params.get('timestamp_end'), params.get(
+    #         'database_timestamp_start'), params.get('database_timestamp_end'
+    #         ), params.get('skip'), params.get('limit'), params.get('like'
+    #         ), params.get('join'), params.get('count')
+    #     if not self._silence_warning:
+    #         warning_wrong_parameters(self.last_status_bulk.__name__, params,
+    #             official_params_list)
+    #     response = self.execute('POST', path=f'/services/query/last_status',
+    #         single_page=single_page, page_size=page_size, warm_start=
+    #         warm_start, params=params, payload=payload, **kwargs)
+    #     return response
 
     def services_check_rules_create(self, params: dict = False,
         kwargs: dict = None, **payload) -> list:
