@@ -63,14 +63,13 @@ def find_ref(schemas, schema_ref, key, key_type, name):
 
 def main(**kwargs):
 
-    import json
-    file_path = 'bump_openapi.json'
-    with open(file_path, 'r') as json_file:
-        data = json.load(json_file)
+#    import json
+#    file_path = 'bump_openapi.json'
+#    with open(file_path, 'r') as json_file:
+#        data = json.load(json_file)
 
-    # spell = Invoker(get_config(**kwargs), **kwargs)
-    # data = spell.openapi()
-
+    spell = Invoker(get_config(**kwargs), **kwargs)
+    data = spell.openapi()
     apis = data['paths']
     schemas = data['components']['schemas']
 
@@ -106,7 +105,7 @@ def main(**kwargs):
             for mode in apis[name]:
                 if (len(allowed) > 0 and name in allowed and mode.upper() in allowed[name]) or (len(allowed) == 0):
                     # if name == '/ts_cost_management/':
-                    # print(name)
+                    #     print(name)
                     description = apis[name][mode]['summary']
 
                     params = dict()
@@ -258,7 +257,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     bulk_read = True if 'bulk/read' in name or ('query' in name) else False
     query = True if 'query' in name else False
 
-    hidden_query = ['last_status']
+    hidden_query = ['services_last_status_query', 'last_status']
     hidden_querry_exact_name = []
     hidden_bulk_post = ['metric_ingest', 'probes_log_ingest', 'ts_cost_management']
     hidden_bulk_post_exact_name = ['/webhooks/{webhook_type}']
