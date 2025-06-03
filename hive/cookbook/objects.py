@@ -492,6 +492,54 @@ class Objects(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
+    def objects_dispatchers_v2(self, uuid: str, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """List Dispatchers V2
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            not_in (boolean optional): additional filter - parameter
+            code (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            active_at_timestamp (string optional): additional filter - parameter
+            active_after_timestamp (string optional): additional filter - parameter
+            active_at_or_after_timestamp (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['not_in', 'code', 'status',
+            'active_at_timestamp', 'active_after_timestamp',
+            'active_at_or_after_timestamp', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('not_in'), params.get('code'), params.get('status'
+            ), params.get('active_at_timestamp'), params.get(
+            'active_after_timestamp'), params.get(
+            'active_at_or_after_timestamp'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.objects_dispatchers_v2.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/objects/{uuid}/dispatchers/v2', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, params=params, **kwargs
+            )
+        return response
+
     def objects_dispatchers_create(self, uuid: str, uuid_dispatcher: str,
         kwargs: dict = None) -> list:
         """Add Dispatcher

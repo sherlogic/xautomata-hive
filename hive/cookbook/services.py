@@ -1062,7 +1062,7 @@ class Services(ApiManager):
            {
             "uuid_customer": "string", required
             "profile": "string", required
-            "name": "string", required
+            "name": "string", optional
            }
           ]
 

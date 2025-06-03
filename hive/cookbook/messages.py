@@ -268,14 +268,15 @@ class Messages(ApiManager):
 
         Keyword Args:
             service_profile (string optional): additional filter - parameter
+            timestamp (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['service_profile']
-        params.get('service_profile')
+        official_params_list = ['service_profile', 'timestamp']
+        params.get('service_profile'), params.get('timestamp')
         if not self._silence_warning:
             warning_wrong_parameters(self.messages_compile.__name__, params,
                 official_params_list)
@@ -297,14 +298,15 @@ class Messages(ApiManager):
 
         Keyword Args:
             service_profile (string optional): additional filter - parameter
+            timestamp (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs, params
             =params)
-        official_params_list = ['service_profile']
-        params.get('service_profile')
+        official_params_list = ['service_profile', 'timestamp']
+        params.get('service_profile'), params.get('timestamp')
         if not self._silence_warning:
             warning_wrong_parameters(self.messages_compile_additional.
                 __name__, params, official_params_list)
