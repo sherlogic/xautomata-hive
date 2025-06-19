@@ -7,7 +7,7 @@ class MetricTypes(ApiManager):
     def metric_types(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Read Metric Types V2
+        """Read Metric Types
 
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -19,6 +19,7 @@ class MetricTypes(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
+            not_fields (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
@@ -37,17 +38,17 @@ class MetricTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_object',
-            'name', 'description', 'feedback_for_operator', 'profile',
-            'status', 'severity', 'extract_severity', 'count_children',
-            'skip', 'limit', 'like', 'join', 'count']
+        official_params_list = ['sort_by', 'null_fields', 'not_fields',
+            'uuid_object', 'name', 'description', 'feedback_for_operator',
+            'profile', 'status', 'severity', 'extract_severity',
+            'count_children', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_object'), params.get('name'), params.get('description'
-            ), params.get('feedback_for_operator'), params.get('profile'
-            ), params.get('status'), params.get('severity'), params.get(
-            'extract_severity'), params.get('count_children'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            'not_fields'), params.get('uuid_object'), params.get('name'
+            ), params.get('description'), params.get('feedback_for_operator'
+            ), params.get('profile'), params.get('status'), params.get(
+            'severity'), params.get('extract_severity'), params.get(
+            'count_children'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.metric_types.__name__, params,
                 official_params_list)
@@ -303,48 +304,6 @@ class MetricTypes(ApiManager):
             code (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
-            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
-            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
-            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
-            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
-            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_params_list = ['not_in', 'code', 'status',
-            'active_at_timestamp', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('not_in'), params.get('code'), params.get('status'
-            ), params.get('active_at_timestamp'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.metric_types_dispatchers.__name__,
-                params, official_params_list)
-        response = self.execute('GET', path=
-            f'/metric_types/{uuid}/dispatchers', single_page=single_page,
-            page_size=page_size, warm_start=warm_start, params=params, **kwargs
-            )
-        return response
-
-    def metric_types_dispatchers_v2(self, uuid: str,
-        warm_start: bool = False, single_page: bool = False,
-        page_size: int = 5000, kwargs: dict = None, **params) -> list:
-        """List Dispatchers V2
-
-        Args:
-            uuid (str, required): uuid
-            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
-            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
-            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
-
-        Keyword Args:
-            not_in (boolean optional): additional filter - parameter
-            code (string optional): additional filter - parameter
-            status (string optional): additional filter - parameter
-            active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
             active_at_or_after_timestamp (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -367,10 +326,10 @@ class MetricTypes(ApiManager):
             'limit'), params.get('like'), params.get('join'), params.get(
             'count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.metric_types_dispatchers_v2.
-                __name__, params, official_params_list)
+            warning_wrong_parameters(self.metric_types_dispatchers.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=
-            f'/metric_types/{uuid}/dispatchers/v2', single_page=single_page,
+            f'/metric_types/{uuid}/dispatchers', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
             )
         return response

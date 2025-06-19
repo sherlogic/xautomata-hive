@@ -6,7 +6,7 @@ class Sites(ApiManager):
 
     def sites(self, warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
-        """Read Sites V2
+        """Read Sites
 
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -18,6 +18,7 @@ class Sites(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
+            not_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             code (string optional): additional filter - parameter
@@ -42,20 +43,20 @@ class Sites(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
-            'type', 'code', 'description', 'address', 'zip_code', 'city',
-            'country', 'notes', 'state_province', 'status', 'severity',
-            'filter_group_types', 'count_children', 'extract_severity',
-            'skip', 'limit', 'like', 'join', 'count']
+        official_params_list = ['sort_by', 'null_fields', 'not_fields',
+            'uuid_customer', 'type', 'code', 'description', 'address',
+            'zip_code', 'city', 'country', 'notes', 'state_province',
+            'status', 'severity', 'filter_group_types', 'count_children',
+            'extract_severity', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('type'), params.get('code'
-            ), params.get('description'), params.get('address'), params.get(
-            'zip_code'), params.get('city'), params.get('country'), params.get(
-            'notes'), params.get('state_province'), params.get('status'
-            ), params.get('severity'), params.get('filter_group_types'
-            ), params.get('count_children'), params.get('extract_severity'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            'not_fields'), params.get('uuid_customer'), params.get('type'
+            ), params.get('code'), params.get('description'), params.get(
+            'address'), params.get('zip_code'), params.get('city'), params.get(
+            'country'), params.get('notes'), params.get('state_province'
+            ), params.get('status'), params.get('severity'), params.get(
+            'filter_group_types'), params.get('count_children'), params.get(
+            'extract_severity'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.sites.__name__, params,
                 official_params_list)

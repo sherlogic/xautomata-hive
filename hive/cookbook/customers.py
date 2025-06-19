@@ -261,7 +261,7 @@ class Customers(ApiManager):
     def customers_groups(self, uuid: str, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """List Groups V2
+        """List Groups
 
         Args:
             uuid (str, required): uuid
