@@ -74,6 +74,7 @@ def main(**kwargs):
     schemas = data['components']['schemas']
 
     allowed = {
+        # "/automata_ingest/": ["POST"]
         # "/acl_overrides/": ["GET", "POST", "PUT", "DELETE"]
         # "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["GET", "POST", "PUT", "DELETE"]
         # "/ts_cost_management/": ["GET", "POST", "PUT", "DELETE"],
@@ -87,7 +88,7 @@ def main(**kwargs):
         # "/metrics/bulk/delete/": ["POST"],
         # "/metrics/bulk/create/services": ["POST"],
         # "/metrics/bulk/delete/services": ["POST"],
-        # "/sites/": ["POST"],
+        # "/sites/": ["GET"],
         # "/sites/{uuid}": ["GET", "PUT"],
         # "/services/query/": ["GET", "POST"],
         # "/last_status/": ["GET", "POST"]
@@ -95,7 +96,7 @@ def main(**kwargs):
         # "/objects/bulk/create/": ["POST"],
         # "/webhooks/{webhook_type}": ["POST"]
         # "/anomalies/{uuid}": ["DELETE"]
-        "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["POST"]
+        # "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["POST"]
     }
 
     api_dict = DeepDict()
@@ -111,7 +112,34 @@ def main(**kwargs):
                     params = dict()
                     if 'parameters' in apis[name][mode]:
                         for param in apis[name][mode]['parameters']:
-                            param_type = param['schema']['type'] if 'type' in param['schema'] else None
+                            if 'type' in param['schema']:
+                                param_type = param['schema']['type']
+
+                            elif 'anyOf' in param['schema']:
+
+                                schema_ref, param_type = '', ''
+                                for ii in param['schema']['anyOf']:
+                                    if '$ref' in ii:
+                                        schema_ref = ii['$ref'].split('/')[-1]
+                                        param_type = schemas[schema_ref]['type']
+
+                                    if 'type' in ii and ii['type'] is not None and ii['type'] != 'null':
+                                        schema_ref = 'ok'
+                                        param_type = ii['type']
+
+                                if schema_ref == '' or param_type == '':
+                                    raise NotImplementedError
+
+                                del schema_ref
+
+                            elif '$ref' in param['schema']:
+                                schema_ref = param['schema']['$ref'].split('/')[-1]
+                                param_type = schemas[schema_ref]['type']
+
+                            else:
+                                raise NotImplementedError
+
+                            # param_type = param['schema']['type'] if 'type' in param['schema'] else None
                             params[param['name']] = {'type': param_type, 'required': param['required']}
 
                     payload = dict()
@@ -159,6 +187,9 @@ def main(**kwargs):
                                 for key in schemas[schema]['properties']:
                                     key_type = []
                                     key_type = find_ref(schemas, schema, key, key_type, name)
+                                    if isinstance(key_type, list):
+                                        if 'null' in key_type:
+                                            key_type = [x for x in key_type if x != 'null']
 
                                     key_required = False
                                     if 'required' in schemas[schema] and key in schemas[schema]['required']:
