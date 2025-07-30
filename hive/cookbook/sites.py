@@ -30,7 +30,7 @@ class Sites(ApiManager):
             notes (string optional): additional filter - parameter
             state_province (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             filter_group_types (string optional): additional filter - parameter
             count_children (boolean optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
@@ -261,32 +261,6 @@ class Sites(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def sites_contacts_put(self, uuid: str, uuid_contact: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Contact
-
-        Args:
-            uuid (str, required): uuid
-            uuid_contact (str, required): uuid_contact
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            type (string required): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['type']
-        payload.get('type')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.sites_contacts_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs
-            )
-        return response
-
     def sites_contacts_create(self, uuid: str, uuid_contact: str,
         kwargs: dict = None, **payload) -> list:
         """Add Contact
@@ -309,6 +283,32 @@ class Sites(ApiManager):
             warning_wrong_parameters(self.sites_contacts_create.__name__,
                 payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs
+            )
+        return response
+
+    def sites_contacts_put(self, uuid: str, uuid_contact: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Contact
+
+        Args:
+            uuid (str, required): uuid
+            uuid_contact (str, required): uuid_contact
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            type (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.sites_contacts_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/sites/{uuid}/contacts/{uuid_contact}', payload=payload, **kwargs
             )
         return response

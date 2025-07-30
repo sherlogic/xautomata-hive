@@ -14,7 +14,7 @@ class Login(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            value_refresh_token (None optional): additional filter - parameter
+            value_refresh_token (string optional): additional filter - parameter
             refresh (string optional): additional filter - parameter
             grant_type (string optional): additional filter - payload
             username (string required): additional filter - payload
@@ -144,21 +144,21 @@ class Login(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            password (string optional): additional filter - payload
             phone (string optional): additional filter - payload
             profile (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
-            password (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'profile', 'email', 'stage',
-            'password', 'active']
-        payload.get('phone'), payload.get('profile'), payload.get('email'
-            ), payload.get('stage'), payload.get('password'), payload.get(
-            'active')
+        official_payload_list = ['password', 'phone', 'profile', 'email',
+            'stage', 'active']
+        payload.get('password'), payload.get('phone'), payload.get('profile'
+            ), payload.get('email'), payload.get('stage'), payload.get('active'
+            )
         if not self._silence_warning:
             warning_wrong_parameters(self.login_current_user_put.__name__,
                 payload, official_payload_list)
@@ -480,6 +480,20 @@ class Login(ApiManager):
             **kwargs)
         return response
 
+    def login_current_user_verify_email_create(self, kwargs: dict = None
+        ) -> list:
+        """Send Request To Verify Current User Email
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/login/current_user/verify_email', **kwargs)
+        return response
+
     def login_current_user_verify_email_put(self, kwargs: dict = None, **params
         ) -> list:
         """Verify Current User Email
@@ -502,18 +516,4 @@ class Login(ApiManager):
                 official_params_list)
         response = self.execute('PUT', path=
             f'/login/current_user/verify_email', params=params, **kwargs)
-        return response
-
-    def login_current_user_verify_email_create(self, kwargs: dict = None
-        ) -> list:
-        """Send Request To Verify Current User Email
-
-        Args:
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        response = self.execute('POST', path=
-            f'/login/current_user/verify_email', **kwargs)
         return response

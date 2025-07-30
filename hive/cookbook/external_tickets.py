@@ -31,20 +31,20 @@ class ExternalTickets(ApiManager):
             opening_date_end (string optional): additional filter - parameter
             closing_date_start (string optional): additional filter - parameter
             closing_date_end (string optional): additional filter - parameter
-            ticket_type (None optional): additional filter - parameter
-            mode (None optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            ticket_type (string optional): additional filter - parameter
+            mode (string optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             organization (string optional): additional filter - parameter
-            responsibility (None optional): additional filter - parameter
-            stage_start_sla_l1 (number optional): additional filter - parameter
-            working_period_l1 (number optional): additional filter - parameter
-            target_stage_start_sla_l1 (number optional): additional filter - parameter
-            stage_start_sla_l2 (number optional): additional filter - parameter
-            working_period_l2 (number optional): additional filter - parameter
-            target_stage_start_sla_l2 (number optional): additional filter - parameter
-            resolution_sla (number optional): additional filter - parameter
-            working_period_resolution (number optional): additional filter - parameter
-            target_period_resolution (number optional): additional filter - parameter
+            responsibility (string optional): additional filter - parameter
+            stage_start_sla_l1 (string optional): additional filter - parameter
+            working_period_l1 (string optional): additional filter - parameter
+            target_stage_start_sla_l1 (string optional): additional filter - parameter
+            stage_start_sla_l2 (string optional): additional filter - parameter
+            working_period_l2 (string optional): additional filter - parameter
+            target_stage_start_sla_l2 (string optional): additional filter - parameter
+            resolution_sla (string optional): additional filter - parameter
+            working_period_resolution (string optional): additional filter - parameter
+            target_period_resolution (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -113,15 +113,15 @@ class ExternalTickets(ApiManager):
             severity (None required): additional filter - payload
             organization (string required): additional filter - payload
             responsibility (None required): additional filter - payload
-            stage_start_sla_l1 (number required): additional filter - payload
-            working_period_l1 (number required): additional filter - payload
-            target_stage_start_sla_l1 (number required): additional filter - payload
-            stage_start_sla_l2 (number required): additional filter - payload
-            working_period_l2 (number required): additional filter - payload
-            target_stage_start_sla_l2 (number required): additional filter - payload
-            resolution_sla (number required): additional filter - payload
-            working_period_resolution (number required): additional filter - payload
-            target_period_resolution (number required): additional filter - payload
+            stage_start_sla_l1 (string required): additional filter - payload
+            working_period_l1 (string required): additional filter - payload
+            target_stage_start_sla_l1 (string required): additional filter - payload
+            stage_start_sla_l2 (string required): additional filter - payload
+            working_period_l2 (string required): additional filter - payload
+            target_stage_start_sla_l2 (string required): additional filter - payload
+            resolution_sla (string required): additional filter - payload
+            working_period_resolution (string required): additional filter - payload
+            target_period_resolution (string required): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -202,20 +202,20 @@ class ExternalTickets(ApiManager):
             external_ticket (string optional): additional filter - payload
             opening_date (string optional): additional filter - payload
             closing_date (string optional): additional filter - payload
-            ticket_type (None optional): additional filter - payload
-            mode (None optional): additional filter - payload
-            severity (None optional): additional filter - payload
+            ticket_type ( optional): additional filter - payload
+            mode ( optional): additional filter - payload
+            severity ( optional): additional filter - payload
             organization (string optional): additional filter - payload
-            responsibility (None optional): additional filter - payload
-            stage_start_sla_l1 (number optional): additional filter - payload
-            working_period_l1 (number optional): additional filter - payload
-            target_stage_start_sla_l1 (number optional): additional filter - payload
-            stage_start_sla_l2 (number optional): additional filter - payload
-            working_period_l2 (number optional): additional filter - payload
-            target_stage_start_sla_l2 (number optional): additional filter - payload
-            resolution_sla (number optional): additional filter - payload
-            working_period_resolution (number optional): additional filter - payload
-            target_period_resolution (number optional): additional filter - payload
+            responsibility ( optional): additional filter - payload
+            stage_start_sla_l1 (string optional): additional filter - payload
+            working_period_l1 (string optional): additional filter - payload
+            target_stage_start_sla_l1 (string optional): additional filter - payload
+            stage_start_sla_l2 (string optional): additional filter - payload
+            working_period_l2 (string optional): additional filter - payload
+            target_stage_start_sla_l2 (string optional): additional filter - payload
+            resolution_sla (string optional): additional filter - payload
+            working_period_resolution (string optional): additional filter - payload
+            target_period_resolution (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -515,15 +515,15 @@ class ExternalTickets(ApiManager):
             "severity": "None", required
             "organization": "string", required
             "responsibility": "None", required
-            "stage_start_sla_l1": "number", required
-            "working_period_l1": "number", required
-            "target_stage_start_sla_l1": "number", required
-            "stage_start_sla_l2": "number", required
-            "working_period_l2": "number", required
-            "target_stage_start_sla_l2": "number", required
-            "resolution_sla": "number", required
-            "working_period_resolution": "number", required
-            "target_period_resolution": "number", required
+            "stage_start_sla_l1": "string", required
+            "working_period_l1": "string", required
+            "target_stage_start_sla_l1": "string", required
+            "stage_start_sla_l2": "string", required
+            "working_period_l2": "string", required
+            "target_stage_start_sla_l2": "string", required
+            "resolution_sla": "string", required
+            "working_period_resolution": "string", required
+            "target_period_resolution": "string", required
            }
           ]
 

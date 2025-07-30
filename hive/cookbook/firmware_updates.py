@@ -24,7 +24,7 @@ class FirmwareUpdates(ApiManager):
             model (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             firmware (string optional): additional filter - parameter
-            status (None optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -64,13 +64,13 @@ class FirmwareUpdates(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            column (None required): additional filter - parameter
+            column (string required): additional filter - parameter
             code (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             model (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             firmware (string optional): additional filter - parameter
-            status (None optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
 

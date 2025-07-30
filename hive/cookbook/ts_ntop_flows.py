@@ -23,8 +23,8 @@ class TsNtopFlows(ApiManager):
             uuid_site_src (string optional): additional filter - parameter
             uuid_site_dst (string optional): additional filter - parameter
             l7_proto (string optional): additional filter - parameter
-            ip_src_addr (None optional): additional filter - parameter
-            ip_dst_addr (None optional): additional filter - parameter
+            ip_src_addr (string optional): additional filter - parameter
+            ip_dst_addr (string optional): additional filter - parameter
             l4_dst_port (integer optional): additional filter - parameter
             fqdn_src_addr (string optional): additional filter - parameter
             fqdn_dst_addr (string optional): additional filter - parameter
@@ -85,9 +85,9 @@ class TsNtopFlows(ApiManager):
             "uuid_site_src": "string", optional
             "uuid_site_dst": "string", optional
             "l7_proto": "string", optional
+            "l4_dst_port": "integer", optional
             "ip_src_addr": "integer string string", optional
             "ip_dst_addr": "integer string string", optional
-            "l4_dst_port": "integer", optional
             "fqdn_src_addr": "string", optional
             "fqdn_dst_addr": "string", optional
             "in_bytes": "integer", optional

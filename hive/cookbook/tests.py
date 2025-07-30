@@ -14,7 +14,7 @@ class Tests(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
-            source (None required): additional filter - parameter
+            source (string required): additional filter - parameter
             ts_start (string optional): additional filter - parameter
 
         Returns: list"""

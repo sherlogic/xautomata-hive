@@ -201,7 +201,7 @@ class Dispatchers(ApiManager):
             not_in (boolean optional): additional filter - parameter
             name (string optional): additional filter - parameter
             send_email (boolean optional): additional filter - parameter
-            role_email (None optional): additional filter - parameter
+            role_email (string optional): additional filter - parameter
             send_sms (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -226,37 +226,6 @@ class Dispatchers(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def dispatchers_contacts_put(self, uuid: str, uuid_contact: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Contact
-
-        Args:
-            uuid (str, required): uuid
-            uuid_contact (str, required): uuid_contact
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            send_email (boolean optional): additional filter - payload
-            role_email (None optional): additional filter - payload
-            send_sms (boolean optional): additional filter - payload
-            endpoint (array object optional): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['send_email', 'role_email', 'send_sms',
-            'endpoint']
-        payload.get('send_email'), payload.get('role_email'), payload.get(
-            'send_sms'), payload.get('endpoint')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.dispatchers_contacts_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/dispatchers/{uuid}/contacts/{uuid_contact}', payload=payload,
-            **kwargs)
-        return response
-
     def dispatchers_contacts_create(self, uuid: str, uuid_contact: str,
         kwargs: dict = None, **payload) -> list:
         """Add Contact
@@ -269,7 +238,7 @@ class Dispatchers(ApiManager):
 
         Keyword Args:
             send_email (boolean required): additional filter - payload
-            role_email (None optional): additional filter - payload
+            role_email ( optional): additional filter - payload
             send_sms (boolean required): additional filter - payload
             endpoint (array object optional): additional filter - payload
 
@@ -284,6 +253,37 @@ class Dispatchers(ApiManager):
             warning_wrong_parameters(self.dispatchers_contacts_create.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/dispatchers/{uuid}/contacts/{uuid_contact}', payload=payload,
+            **kwargs)
+        return response
+
+    def dispatchers_contacts_put(self, uuid: str, uuid_contact: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Contact
+
+        Args:
+            uuid (str, required): uuid
+            uuid_contact (str, required): uuid_contact
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            send_email (boolean optional): additional filter - payload
+            role_email ( optional): additional filter - payload
+            send_sms (boolean optional): additional filter - payload
+            endpoint (array object optional): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.dispatchers_contacts_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/dispatchers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
         return response
@@ -790,7 +790,7 @@ class Dispatchers(ApiManager):
             "uuid_contact": "string", required
             "uuid_dispatcher": "string", required
             "send_email": "boolean", optional
-            "role_email": "None", optional
+            "role_email": "", optional
             "send_sms": "boolean", optional
             "endpoint": "array object", optional
            }

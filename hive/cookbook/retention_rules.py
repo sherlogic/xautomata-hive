@@ -62,7 +62,7 @@ class RetentionRules(ApiManager):
             metric_profile (string optional): additional filter - payload
             priority (integer required): additional filter - payload
             average_after_days (integer optional): additional filter - payload
-            average_over_minutes (None optional): additional filter - payload
+            average_over_minutes ( optional): additional filter - payload
             deletion_after_days (integer optional): additional filter - payload
 
         Returns: list"""
@@ -112,7 +112,7 @@ class RetentionRules(ApiManager):
             metric_profile (string optional): additional filter - payload
             priority (integer optional): additional filter - payload
             average_after_days (integer optional): additional filter - payload
-            average_over_minutes (None optional): additional filter - payload
+            average_over_minutes ( optional): additional filter - payload
             deletion_after_days (integer optional): additional filter - payload
 
         Returns: list"""

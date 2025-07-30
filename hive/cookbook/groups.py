@@ -28,7 +28,7 @@ class Groups(ApiManager):
             status (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             count_children (boolean optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -190,7 +190,7 @@ class Groups(ApiManager):
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             count_children (boolean optional): additional filter - parameter
             object_profile (string optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter

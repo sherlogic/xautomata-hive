@@ -26,7 +26,7 @@ class MetricTypes(ApiManager):
             feedback_for_operator (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             count_children (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter

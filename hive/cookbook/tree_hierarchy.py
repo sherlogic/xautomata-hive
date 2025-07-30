@@ -333,8 +333,8 @@ class TreeHierarchy(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
-            ts_start (string optional): additional filter - parameter
-            ts_end (string optional): additional filter - parameter
+            ts_start (string required): additional filter - parameter
+            ts_end (string required): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter

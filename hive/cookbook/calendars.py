@@ -21,7 +21,7 @@ class Calendars(ApiManager):
             name (string optional): additional filter - parameter
             local_public_holidays (boolean optional): additional filter - parameter
             timezone (string optional): additional filter - parameter
-            type (None optional): additional filter - parameter
+            type (string optional): additional filter - parameter
             mon_int1_start (string optional): additional filter - parameter
             mon_int1_end (string optional): additional filter - parameter
             mon_int2_start (string optional): additional filter - parameter
@@ -137,7 +137,7 @@ class Calendars(ApiManager):
             sun_int2_start (string optional): additional filter - payload
             sun_int2_end (string optional): additional filter - payload
             ical (string optional): additional filter - payload
-            type (None optional): additional filter - payload
+            type ( optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -234,7 +234,7 @@ class Calendars(ApiManager):
             sun_int2_start (string optional): additional filter - payload
             sun_int2_end (string optional): additional filter - payload
             ical (string optional): additional filter - payload
-            type (None optional): additional filter - payload
+            type ( optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -285,6 +285,38 @@ class Calendars(ApiManager):
         if kwargs is None:
             kwargs = dict()
         response = self.execute('DELETE', path=f'/calendars/{uuid}', **kwargs)
+        return response
+
+    def calendars_downtimes(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None) -> list:
+        """Read Downtimes
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('GET', path=f'/calendars/{uuid}/downtimes',
+            warm_start=warm_start, **kwargs)
+        return response
+
+    def calendars_dispatchers(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None) -> list:
+        """Read Dispatchers
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('GET', path=
+            f'/calendars/{uuid}/dispatchers', warm_start=warm_start, **kwargs)
         return response
 
     def calendars_is_local_holiday_create(self, kwargs: dict = None, **params
@@ -400,7 +432,7 @@ class Calendars(ApiManager):
             "sun_int2_start": "string", optional
             "sun_int2_end": "string", optional
             "ical": "string", optional
-            "type": "None", optional
+            "type": "", optional
            }
           ]
 

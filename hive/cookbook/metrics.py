@@ -25,7 +25,7 @@ class Metrics(ApiManager):
             feedback_for_operator (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -266,7 +266,7 @@ class Metrics(ApiManager):
 
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
-            extract_automata_domain (None optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
@@ -301,12 +301,12 @@ class Metrics(ApiManager):
             last_value_uuid_probe (string optional): additional filter - parameter
             last_value_timestamp_start (string optional): additional filter - parameter
             last_value_timestamp_end (string optional): additional filter - parameter
-            last_value_object_type (None optional): additional filter - parameter
+            last_value_object_type (string optional): additional filter - parameter
             last_value_name (string optional): additional filter - parameter
             last_value_value (string optional): additional filter - parameter
             last_value_unit (string optional): additional filter - parameter
             last_value_description (string optional): additional filter - parameter
-            last_value_status (None optional): additional filter - parameter
+            last_value_status (string optional): additional filter - parameter
             last_value_ranking (integer optional): additional filter - parameter
             service_uuid_parent (string optional): additional filter - parameter
             uuid_service (string optional): additional filter - parameter
@@ -396,7 +396,7 @@ class Metrics(ApiManager):
 
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
-            extract_automata_domain (None optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             last_value_timestamp_start (string optional): additional filter - parameter
@@ -492,7 +492,7 @@ class Metrics(ApiManager):
 
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
-            extract_automata_domain (None optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
@@ -527,12 +527,12 @@ class Metrics(ApiManager):
             last_value_uuid_probe (string optional): additional filter - parameter
             last_value_timestamp_start (string optional): additional filter - parameter
             last_value_timestamp_end (string optional): additional filter - parameter
-            last_value_object_type (None optional): additional filter - parameter
+            last_value_object_type (string optional): additional filter - parameter
             last_value_name (string optional): additional filter - parameter
             last_value_value (string optional): additional filter - parameter
             last_value_unit (string optional): additional filter - parameter
             last_value_description (string optional): additional filter - parameter
-            last_value_status (None optional): additional filter - parameter
+            last_value_status (string optional): additional filter - parameter
             last_value_ranking (integer optional): additional filter - parameter
             service_uuid_parent (string optional): additional filter - parameter
             uuid_service (string optional): additional filter - parameter
@@ -623,7 +623,7 @@ class Metrics(ApiManager):
 
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
-            extract_automata_domain (None optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             last_value_timestamp_start (string optional): additional filter - parameter

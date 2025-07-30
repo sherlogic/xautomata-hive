@@ -27,7 +27,7 @@ class Probes(ApiManager):
             notes (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -72,17 +72,18 @@ class Probes(ApiManager):
             data_profile (array object required): additional filter - payload
             notes (string optional): additional filter - payload
             status (string required): additional filter - payload
+            data_profile_backup (array object optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['uuid_virtual_domain', 'uuid_probe_type',
             'uuid_host', 'name', 'description', 'data_profile', 'notes',
-            'status']
+            'status', 'data_profile_backup']
         payload.get('uuid_virtual_domain'), payload.get('uuid_probe_type'
             ), payload.get('uuid_host'), payload.get('name'), payload.get(
             'description'), payload.get('data_profile'), payload.get('notes'
-            ), payload.get('status')
+            ), payload.get('status'), payload.get('data_profile_backup')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_create.__name__, payload,
                 official_payload_list)
@@ -135,20 +136,21 @@ class Probes(ApiManager):
             data_profile (array object optional): additional filter - payload
             notes (string optional): additional filter - payload
             status (string optional): additional filter - payload
+            data_profile_backup (array object optional): additional filter - payload
             last_seen (string optional): additional filter - payload
-            ingest_frequency (number optional): additional filter - payload
+            ingest_frequency (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['uuid_virtual_domain', 'uuid_probe_type',
             'uuid_host', 'name', 'description', 'data_profile', 'notes',
-            'status', 'last_seen', 'ingest_frequency']
+            'status', 'data_profile_backup', 'last_seen', 'ingest_frequency']
         payload.get('uuid_virtual_domain'), payload.get('uuid_probe_type'
             ), payload.get('uuid_host'), payload.get('name'), payload.get(
             'description'), payload.get('data_profile'), payload.get('notes'
-            ), payload.get('status'), payload.get('last_seen'), payload.get(
-            'ingest_frequency')
+            ), payload.get('status'), payload.get('data_profile_backup'
+            ), payload.get('last_seen'), payload.get('ingest_frequency')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_put.__name__, payload,
                 official_payload_list)
@@ -179,11 +181,11 @@ class Probes(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            password (string optional): additional filter - payload
             phone (string optional): additional filter - payload
             profile (string optional): additional filter - payload
             email (string optional): additional filter - payload
             stage (string optional): additional filter - payload
-            password (string optional): additional filter - payload
             active (boolean optional): additional filter - payload
             acl (object optional): additional filter - payload
             uuid_acl_override (string optional): additional filter - payload
@@ -192,11 +194,11 @@ class Probes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['phone', 'profile', 'email', 'stage',
-            'password', 'active', 'acl', 'uuid_acl_override', 'verified_email']
-        payload.get('phone'), payload.get('profile'), payload.get('email'
-            ), payload.get('stage'), payload.get('password'), payload.get(
-            'active'), payload.get('acl'), payload.get('uuid_acl_override'
+        official_payload_list = ['password', 'phone', 'profile', 'email',
+            'stage', 'active', 'acl', 'uuid_acl_override', 'verified_email']
+        payload.get('password'), payload.get('phone'), payload.get('profile'
+            ), payload.get('email'), payload.get('stage'), payload.get('active'
+            ), payload.get('acl'), payload.get('uuid_acl_override'
             ), payload.get('verified_email')
         if not self._silence_warning:
             warning_wrong_parameters(self.probes_agent_put.__name__,
@@ -338,6 +340,7 @@ class Probes(ApiManager):
             "data_profile": "array object", required
             "notes": "string", optional
             "status": "string", required
+            "data_profile_backup": "array object", optional
            }
           ]
 

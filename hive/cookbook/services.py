@@ -615,7 +615,7 @@ class Services(ApiManager):
             timestamp_end (string optional): additional filter - parameter
             database_timestamp_start (string optional): additional filter - parameter
             database_timestamp_end (string optional): additional filter - parameter
-            status (None optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             ranking (integer optional): additional filter - parameter
             description (string optional): additional filter - parameter
             unit (string optional): additional filter - parameter

@@ -26,7 +26,7 @@ class Objects(ApiManager):
             status (string optional): additional filter - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             count_children (boolean optional): additional filter - parameter
-            severity (None optional): additional filter - parameter
+            severity (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -568,9 +568,9 @@ class Objects(ApiManager):
         return response
 
     def objects_read_by_bulk(self, payload: list, warm_start: bool = False,
-        single_page: bool = False, page_size: int = 50, kwargs: dict = None
-        ) -> list:
-        """Bulk Read By Code
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Read By Name
 
         Args:
             payload (list[dict], optional): List dict to create.
@@ -578,6 +578,10 @@ class Objects(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
 
         Examples:
             payload = 
@@ -588,9 +592,14 @@ class Objects(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.objects_read_by_bulk.__name__,
+                params, official_params_list)
         response = self.execute('POST', path=f'/objects/bulk/read_by/',
             single_page=single_page, page_size=page_size, warm_start=
-            warm_start, payload=payload, **kwargs)
+            warm_start, params=params, payload=payload, **kwargs)
         return response
 
     def objects_create_bulk(self, payload: list, single_page: bool = False,

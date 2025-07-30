@@ -113,18 +113,18 @@ class CostTagging(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            tag_code (string optional): additional filter - payload
             cost_category_value (string optional): additional filter - payload
             cost_category (string optional): additional filter - payload
             uuid_view (string optional): additional filter - payload
-            uuid_tag (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['cost_category_value', 'cost_category',
-            'uuid_view', 'uuid_tag']
-        payload.get('cost_category_value'), payload.get('cost_category'
-            ), payload.get('uuid_view'), payload.get('uuid_tag')
+        official_payload_list = ['tag_code', 'cost_category_value',
+            'cost_category', 'uuid_view']
+        payload.get('tag_code'), payload.get('cost_category_value'
+            ), payload.get('cost_category'), payload.get('uuid_view')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tagging_put.__name__,
                 payload, official_payload_list)

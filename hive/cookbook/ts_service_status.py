@@ -23,7 +23,7 @@ class TsServiceStatus(ApiManager):
             timestamp_end (string optional): additional filter - parameter
             database_timestamp_start (string optional): additional filter - parameter
             database_timestamp_end (string optional): additional filter - parameter
-            status (None optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             ranking (integer optional): additional filter - parameter
             description (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
@@ -65,7 +65,7 @@ class TsServiceStatus(ApiManager):
         Keyword Args:
             uuid_service (string required): additional filter - payload
             timestamp (string required): additional filter - payload
-            status (None optional): additional filter - payload
+            status ( optional): additional filter - payload
             ranking (integer optional): additional filter - payload
             description (string optional): additional filter - payload
             extended_attributes (array object optional): additional filter - payload
@@ -132,7 +132,7 @@ class TsServiceStatus(ApiManager):
             description (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
             ts_description (string optional): additional filter - parameter
-            ts_status (None optional): additional filter - parameter
+            ts_status (string optional): additional filter - parameter
             ts_timestamp_start (string optional): additional filter - parameter
             ts_timestamp_end (string optional): additional filter - parameter
             ts_ranking (integer optional): additional filter - parameter
@@ -219,7 +219,7 @@ class TsServiceStatus(ApiManager):
            {
             "uuid_service": "string", required
             "timestamp": "string", required
-            "status": "None", optional
+            "status": "", optional
             "ranking": "integer", optional
             "description": "string", optional
             "extended_attributes": "array object", optional

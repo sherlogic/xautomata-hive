@@ -216,31 +216,6 @@ class Contacts(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def contacts_sites_put(self, uuid: str, uuid_site: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Site
-
-        Args:
-            uuid (str, required): uuid
-            uuid_site (str, required): uuid_site
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            type (string required): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['type']
-        payload.get('type')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.contacts_sites_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/contacts/{uuid}/sites/{uuid_site}', payload=payload, **kwargs)
-        return response
-
     def contacts_sites_create(self, uuid: str, uuid_site: str,
         kwargs: dict = None, **payload) -> list:
         """Add Site
@@ -263,6 +238,31 @@ class Contacts(ApiManager):
             warning_wrong_parameters(self.contacts_sites_create.__name__,
                 payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/contacts/{uuid}/sites/{uuid_site}', payload=payload, **kwargs)
+        return response
+
+    def contacts_sites_put(self, uuid: str, uuid_site: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Site
+
+        Args:
+            uuid (str, required): uuid
+            uuid_site (str, required): uuid_site
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            type (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.contacts_sites_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/contacts/{uuid}/sites/{uuid_site}', payload=payload, **kwargs)
         return response
 
@@ -320,32 +320,6 @@ class Contacts(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def contacts_customers_put(self, uuid: str, uuid_customer: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Customer
-
-        Args:
-            uuid (str, required): uuid
-            uuid_customer (str, required): uuid_customer
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            type (string required): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['type']
-        payload.get('type')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.contacts_customers_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/contacts/{uuid}/customers/{uuid_customer}', payload=payload,
-            **kwargs)
-        return response
-
     def contacts_customers_create(self, uuid: str, uuid_customer: str,
         kwargs: dict = None, **payload) -> list:
         """Add Customer
@@ -368,6 +342,32 @@ class Contacts(ApiManager):
             warning_wrong_parameters(self.contacts_customers_create.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/contacts/{uuid}/customers/{uuid_customer}', payload=payload,
+            **kwargs)
+        return response
+
+    def contacts_customers_put(self, uuid: str, uuid_customer: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Customer
+
+        Args:
+            uuid (str, required): uuid
+            uuid_customer (str, required): uuid_customer
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            type (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.contacts_customers_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/contacts/{uuid}/customers/{uuid_customer}', payload=payload,
             **kwargs)
         return response
@@ -431,37 +431,6 @@ class Contacts(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def contacts_dispatchers_put(self, uuid: str, uuid_dispatcher: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Dispatcher
-
-        Args:
-            uuid (str, required): uuid
-            uuid_dispatcher (str, required): uuid_dispatcher
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            send_email (boolean optional): additional filter - payload
-            role_email (None optional): additional filter - payload
-            send_sms (boolean optional): additional filter - payload
-            endpoint (array object optional): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['send_email', 'role_email', 'send_sms',
-            'endpoint']
-        payload.get('send_email'), payload.get('role_email'), payload.get(
-            'send_sms'), payload.get('endpoint')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.contacts_dispatchers_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/contacts/{uuid}/dispatchers/{uuid_dispatcher}', payload=
-            payload, **kwargs)
-        return response
-
     def contacts_dispatchers_create(self, uuid: str, uuid_dispatcher: str,
         kwargs: dict = None, **payload) -> list:
         """Add Dispatcher
@@ -474,7 +443,7 @@ class Contacts(ApiManager):
 
         Keyword Args:
             send_email (boolean required): additional filter - payload
-            role_email (None optional): additional filter - payload
+            role_email ( optional): additional filter - payload
             send_sms (boolean required): additional filter - payload
             endpoint (array object optional): additional filter - payload
 
@@ -489,6 +458,37 @@ class Contacts(ApiManager):
             warning_wrong_parameters(self.contacts_dispatchers_create.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/contacts/{uuid}/dispatchers/{uuid_dispatcher}', payload=
+            payload, **kwargs)
+        return response
+
+    def contacts_dispatchers_put(self, uuid: str, uuid_dispatcher: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Dispatcher
+
+        Args:
+            uuid (str, required): uuid
+            uuid_dispatcher (str, required): uuid_dispatcher
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            send_email (boolean optional): additional filter - payload
+            role_email ( optional): additional filter - payload
+            send_sms (boolean optional): additional filter - payload
+            endpoint (array object optional): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['send_email', 'role_email', 'send_sms',
+            'endpoint']
+        payload.get('send_email'), payload.get('role_email'), payload.get(
+            'send_sms'), payload.get('endpoint')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.contacts_dispatchers_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/contacts/{uuid}/dispatchers/{uuid_dispatcher}', payload=
             payload, **kwargs)
         return response
@@ -703,7 +703,7 @@ class Contacts(ApiManager):
             "uuid_contact": "string", required
             "uuid_dispatcher": "string", required
             "send_email": "boolean", optional
-            "role_email": "None", optional
+            "role_email": "", optional
             "send_sms": "boolean", optional
             "endpoint": "array object", optional
            }

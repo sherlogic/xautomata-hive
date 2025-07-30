@@ -92,7 +92,7 @@ class TsCostManagement(ApiManager):
           [
            {
             "uuid_metric": "string", required
-            "date": "string", required
+            "date": "string integer", required
             "cloud_provider": "string", required
             "resource_location": "string", required
             "subscription_type": "string", optional
@@ -123,7 +123,7 @@ class TsCostManagement(ApiManager):
             "resource_group": "string", required
             "reservation_name": "string", required
             "publisher_name": "string", required
-            "resource_id": "string", required
+            "resource_id": "string integer", required
             "tenant_id": "string", optional
            }
           ]
@@ -160,7 +160,7 @@ class TsCostManagement(ApiManager):
             category (string optional): additional filter - parameter
             subscription (string optional): additional filter - parameter
             subscription_type (string optional): additional filter - parameter
-            interval (None optional): additional filter - parameter
+            interval (string optional): additional filter - parameter
             detailed (boolean optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -236,7 +236,7 @@ class TsCostManagement(ApiManager):
         Keyword Args:
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
-            interval (None optional): additional filter - parameter
+            interval (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -513,7 +513,7 @@ class TsCostManagement(ApiManager):
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
-            sampling (None optional): additional filter - parameter
+            sampling (string optional): additional filter - parameter
             uuid_customer (string required): additional filter - parameter
             cloud_provider (string required): additional filter - parameter
             description (string required): additional filter - parameter
@@ -554,7 +554,7 @@ class TsCostManagement(ApiManager):
             count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
             date_start (string optional): additional filter - parameter
             date_end (string optional): additional filter - parameter
-            sampling (None optional): additional filter - parameter
+            sampling (string optional): additional filter - parameter
             uuid_customer (string required): additional filter - parameter
             cloud_provider (string required): additional filter - parameter
             description (string required): additional filter - parameter

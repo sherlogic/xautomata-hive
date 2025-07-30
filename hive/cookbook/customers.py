@@ -191,23 +191,23 @@ class Customers(ApiManager):
 
         Keyword Args:
             app_id (string optional): additional filter - parameter
+            vat_id (string required): additional filter - payload
             company_name (string required): additional filter - payload
             address (string required): additional filter - payload
             zip_code (string required): additional filter - payload
             city (string required): additional filter - payload
             country (string required): additional filter - payload
-            vat_id (string required): additional filter - payload
             state_province (string optional): additional filter - payload
             currency (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['company_name', 'address', 'zip_code',
-            'city', 'country', 'vat_id', 'state_province', 'currency']
-        payload.get('company_name'), payload.get('address'), payload.get(
-            'zip_code'), payload.get('city'), payload.get('country'
-            ), payload.get('vat_id'), payload.get('state_province'
+        official_payload_list = ['vat_id', 'company_name', 'address',
+            'zip_code', 'city', 'country', 'state_province', 'currency']
+        payload.get('vat_id'), payload.get('company_name'), payload.get(
+            'address'), payload.get('zip_code'), payload.get('city'
+            ), payload.get('country'), payload.get('state_province'
             ), payload.get('currency')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_register_create.
@@ -525,32 +525,6 @@ class Customers(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def customers_contacts_put(self, uuid: str, uuid_contact: str,
-        kwargs: dict = None, **payload) -> list:
-        """Update Contact
-
-        Args:
-            uuid (str, required): uuid
-            uuid_contact (str, required): uuid_contact
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
-
-        Keyword Args:
-            type (string required): additional filter - payload
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        official_payload_list = ['type']
-        payload.get('type')
-        if not self._silence_warning:
-            warning_wrong_parameters(self.customers_contacts_put.__name__,
-                payload, official_payload_list)
-        response = self.execute('PUT', path=
-            f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
-            **kwargs)
-        return response
-
     def customers_contacts_create(self, uuid: str, uuid_contact: str,
         kwargs: dict = None, **payload) -> list:
         """Add Contact
@@ -573,6 +547,32 @@ class Customers(ApiManager):
             warning_wrong_parameters(self.customers_contacts_create.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=
+            f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
+            **kwargs)
+        return response
+
+    def customers_contacts_put(self, uuid: str, uuid_contact: str,
+        kwargs: dict = None, **payload) -> list:
+        """Update Contact
+
+        Args:
+            uuid (str, required): uuid
+            uuid_contact (str, required): uuid_contact
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            type (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['type']
+        payload.get('type')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_contacts_put.__name__,
+                payload, official_payload_list)
+        response = self.execute('PUT', path=
             f'/customers/{uuid}/contacts/{uuid_contact}', payload=payload,
             **kwargs)
         return response
