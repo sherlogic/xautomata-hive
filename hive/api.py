@@ -4,6 +4,7 @@ from uuid import uuid4
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
+from urllib3.exceptions import InsecureRequestWarning
 from tqdm import tqdm
 from requests import HTTPError
 from hive.decorators import ratelimiter, refresh, paginate, warmstart, timeout_retry
@@ -12,6 +13,7 @@ from hive.infrastrucure_keys import Keys
 import gc
 import functools
 import logging
+import warnings
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
 # METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
@@ -64,6 +66,8 @@ class ApiManager:
         self.token = 'UNDEFINED'
         self.authenticate()
         self._get_only = False
+
+        if not self._SSL_verify: warnings.filterwarnings("ignore", category=InsecureRequestWarning)
 
     ################################################################################################################
 
