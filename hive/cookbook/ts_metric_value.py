@@ -95,3 +95,29 @@ class TsMetricValue(ApiManager):
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, payload=payload, **kwargs)
         return response
+
+    def ts_metric_value_plot_create(self, kwargs: dict = None, **payload
+        ) -> list:
+        """Plot Ts
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            title (string optional): additional filter - payload
+            filename (string optional): additional filter - payload
+            time_series (array required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['title', 'filename', 'time_series']
+        payload.get('title'), payload.get('filename'), payload.get(
+            'time_series')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_metric_value_plot_create.
+                __name__, payload, official_payload_list)
+        response = self.execute('POST', path=f'/ts_metric_value/plot/',
+            payload=payload, **kwargs)
+        return response

@@ -139,6 +139,7 @@ class ProbeTypes(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -148,9 +149,10 @@ class ProbeTypes(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
-        params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['extract_severity', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('extract_severity'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.probe_types_probes.__name__,
                 params, official_params_list)
