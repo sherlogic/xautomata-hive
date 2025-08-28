@@ -173,22 +173,49 @@ class ApiManager:
             logger.debug(f'request params (skip and limit may differ from your setting due pagination): {_params}')
             logger.debug(f'request payload: {_payload}')
 
-            response = get_session(self._timeout, self._timeout_get_session_retry, self._timeout_get_session_backoff_factor).request(_mode, url=_url, json=_payload, params=_params,
-                                                                                                                                     headers=_headers, verify=self._SSL_verify, **_kwargs)
+            response = get_session(
+                self._timeout,
+                self._timeout_get_session_retry,
+                self._timeout_get_session_backoff_factor
+                ).request(
+                          _mode,
+                          url=_url,
+                          json=_payload,
+                          params=_params,
+                          headers=_headers,
+                          verify=self._SSL_verify,
+                          **_kwargs)
+
             if response.status_code == 401: raise UnauthorizedException
+
             if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
-                logger.error(response.json())
+                try:
+                    logger.error(response.json())
+                except ValueError:
+                    logger.error(f'Non-JSON error response: {response.text}')
+
             response.raise_for_status()
 
             if response.status_code == 200 and _params.get('count', False):
                 self.num_items = response.headers.get('x-num-items', None)
 
-            logger.debug(f'responce: {response.json()}')
+            # Decodifica della risposta in base al tipo di contenuto
+            content_type = response.headers.get('Content-Type', '')
+            if 'application/json' in content_type:
+                body = response.json()
+            elif 'text/html' in content_type or 'text/plain' in content_type:
+                body = response.text
+            else:
+                # fallback per contenuti non gestiti esplicitamente
+                logger.warning(f'Unknown content type "{content_type}", returning raw content.')
+                body = response.content
+
+            logger.debug(f'Response: {body}')
             logger.debug(f'header: {response.headers}')
 
             self.response.append(response)  # sotto forma di lista perche se la risposta viene paginata questa viene spezzata su piu risposte
 
-            return response.json()
+            return body
 
         return run_request(mode, url, _headers_, _payload_, _params_, **kwargs)
 
