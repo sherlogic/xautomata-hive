@@ -382,7 +382,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
 
     non_paginabili = ''
     if not skip_limit and mode == 'GET' and ('params' in function_kwarg or 'params' in function_arg):
-        non_paginabili = 'kwargs, params = handling_single_page_methods(kwargs=kwargs, params=params)'
+        non_paginabili = 'kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(), params=params.copy())'
 
     execute = f"response = self.execute('{mode}', path=f'{name}',{key_single_page}{key_page_size}{key_warm_start}{key_params}{key_payload} **kwargs)"
     response = 'return response'

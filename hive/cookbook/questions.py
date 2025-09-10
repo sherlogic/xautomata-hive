@@ -126,8 +126,8 @@ class Questions(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['q-token']
         params.get('q-token')
         if not self._silence_warning:

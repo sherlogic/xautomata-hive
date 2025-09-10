@@ -77,8 +77,8 @@ class FirmwareUpdates(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['column', 'code', 'uuid_metric', 'model',
             'type', 'firmware', 'status', 'date_start', 'date_end']
         params.get('column'), params.get('code'), params.get('uuid_metric'

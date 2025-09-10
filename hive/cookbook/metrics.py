@@ -105,8 +105,8 @@ class Metrics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['join']
         params.get('join')
         if not self._silence_warning:
@@ -1235,8 +1235,8 @@ class Metrics(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['num_messages', 'group']
         params.get('num_messages'), params.get('group')
         if not self._silence_warning:

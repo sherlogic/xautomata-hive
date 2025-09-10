@@ -401,8 +401,8 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['not_in']
         params.get('not_in')
         if not self._silence_warning:
@@ -1564,8 +1564,8 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['offset', 'limit']
         params.get('offset'), params.get('limit')
         if not self._silence_warning:

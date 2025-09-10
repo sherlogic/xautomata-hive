@@ -273,8 +273,8 @@ class Messages(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['service_profile', 'timestamp']
         params.get('service_profile'), params.get('timestamp')
         if not self._silence_warning:
@@ -303,8 +303,8 @@ class Messages(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['service_profile', 'timestamp']
         params.get('service_profile'), params.get('timestamp')
         if not self._silence_warning:

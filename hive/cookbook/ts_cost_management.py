@@ -208,8 +208,8 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date']
         params.get('date')
         if not self._silence_warning:
@@ -523,8 +523,8 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['count', 'date_start', 'date_end',
             'sampling', 'uuid_customer', 'cloud_provider', 'description',
             'family', 'category']
@@ -563,8 +563,8 @@ class TsCostManagement(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['count', 'date_start', 'date_end',
             'sampling', 'uuid_customer', 'cloud_provider', 'description',
             'resource_location']

@@ -171,8 +171,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['join']
         params.get('join')
         if not self._silence_warning:
@@ -282,8 +282,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
@@ -313,8 +313,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
@@ -342,8 +342,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
@@ -372,8 +372,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
@@ -403,8 +403,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
@@ -432,8 +432,8 @@ class ExternalTickets(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs, params
-            =params)
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
         official_params_list = ['date_start', 'date_end']
         params.get('date_start'), params.get('date_end')
         if not self._silence_warning:
