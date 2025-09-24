@@ -56,6 +56,7 @@ class Files(ApiManager):
 
         Keyword Args:
             uuid_service (string optional): additional filter - parameter
+            expires_at (string optional): additional filter - parameter
             file (string required): additional filter - payload
 
         Returns: list"""
@@ -84,6 +85,55 @@ class Files(ApiManager):
             kwargs = dict()
         response = self.execute('GET', path=f'/files/{uuid}', warm_start=
             warm_start, **kwargs)
+        return response
+
+    def files_put(self, uuid: str, kwargs: dict = None, **payload) -> list:
+        """Update Expire User File
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            expires_at (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['expires_at']
+        payload.get('expires_at')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.files_put.__name__, payload,
+                official_payload_list)
+        response = self.execute('PUT', path=f'/files/{uuid}', payload=
+            payload, **kwargs)
+        return response
+
+    def files_delete(self, uuid: str, kwargs: dict = None) -> list:
+        """Delete User File
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=f'/files/{uuid}', **kwargs)
+        return response
+
+    def files_reset_put(self, uuid: str, kwargs: dict = None) -> list:
+        """Reset Expire User File
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('PUT', path=f'/files/{uuid}/reset', **kwargs)
         return response
 
     def files_download(self, uuid: str, warm_start: bool = False,
