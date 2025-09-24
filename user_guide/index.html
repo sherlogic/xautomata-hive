@@ -1,0 +1,2587 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="python wrapper for the XAUTOMATA API">
+      
+      
+      
+        <link rel="canonical" href="https://www.xautomata.com/user_guide/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../info/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>User Guide - Hive</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#manuale-duso" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Hive" class="md-header__button md-logo" aria-label="Hive" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hive
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sherlogic/xautomata-hive.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xautomata-hive
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Hive" class="md-nav__button md-logo" aria-label="Hive" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Hive
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sherlogic/xautomata-hive.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xautomata-hive
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    User Guide
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    User Guide
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#api-come-metodi" class="md-nav__link">
+    <span class="md-ellipsis">
+      API come metodi
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API come metodi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chiamate-in-modalita-multi" class="md-nav__link">
+    <span class="md-ellipsis">
+      chiamate in modalita multi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chiamate-in-modalita-get_post" class="md-nav__link">
+    <span class="md-ellipsis">
+      chiamate in modalita get_post
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-della-documentazione-delle-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso della documentazione delle API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-come-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      API come url
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tips and tricks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    XA information
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    hive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            hive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.api" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    api
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.decorators" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    decorators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.exceptions" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.infrastrucure_keys" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    infrastrucure_keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.tools" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.version" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    version
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_7" id="__nav_5_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    cookbook
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            cookbook
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.acl_docs" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    acl_docs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.acl_overrides" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    acl_overrides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.analytics" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    analytics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.anomalies" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    anomalies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.apple" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    apple
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.automata_ingest" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    automata_ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.calendars" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    calendars
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.contacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    contacts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.cost_tagging" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cost_tagging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.cost_tags" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cost_tags
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.cost_tree_nodes" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cost_tree_nodes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.cost_tree_resources" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cost_tree_resources
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.cost_views" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cost_views
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.customers" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    customers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.dashboards" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dashboards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.dispatchers" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dispatchers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.downtimes" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    downtimes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.external_tickets" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    external_tickets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.features" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.files" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.firmware_updates" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    firmware_updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.google" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    google
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.groups" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    groups
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.jobs" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.last_object_status" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    last_object_status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.last_status" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    last_status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.last_status_v2" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    last_status_v2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.login" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    login
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.messages" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    messages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.metrics" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.metric_ingest" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    metric_ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.metric_types" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    metric_types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.microsoft" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    microsoft
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.notification_providers" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    notification_providers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.notification_provider_types" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    notification_provider_types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.objects" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.opening_reasons" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    opening_reasons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.probes" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    probes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.probes_log_ingest" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    probes_log_ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.probe_types" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    probe_types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.profile_topics" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    profile_topics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.qr_code" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    qr_code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.questions" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.reason_for_closure" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    reason_for_closure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.retention_rules" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    retention_rules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.schedules" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    schedules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.services" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    services
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.sites" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.terms_and_conditions" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    terms_and_conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.tree_hierarchy" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    tree_hierarchy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.tree_hierarchy_v2" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    tree_hierarchy_v2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_automata_state" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_automata_state
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_cost_azure_raw" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_cost_azure_raw
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_cost_management" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_cost_management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_cost_management_v2" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_cost_management_v2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_metric_status" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_metric_status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_metric_value" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_metric_value
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_ntop_flows" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_ntop_flows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_service_status" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_service_status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.ts_service_value" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ts_service_value
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.users" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.users_notifications" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    users_notifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.virtual_domains" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    virtual_domains
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.webhooks" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    webhooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.widgets" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive.cookbook.widget_groups" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    widget_groups
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#api-come-metodi" class="md-nav__link">
+    <span class="md-ellipsis">
+      API come metodi
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API come metodi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chiamate-in-modalita-multi" class="md-nav__link">
+    <span class="md-ellipsis">
+      chiamate in modalita multi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chiamate-in-modalita-get_post" class="md-nav__link">
+    <span class="md-ellipsis">
+      chiamate in modalita get_post
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-della-documentazione-delle-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso della documentazione delle API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-come-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      API come url
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tips and tricks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="manuale-duso">Manuale d'uso</h1>
+<p>La libreria <em>hive</em> è stata pensata per facilitare l'interazione con le API di XAutomata.
+Di seguito si trova un esempio dove viene chiesta la lista dei customers con codice DEMO, e si chiede di ottere il 
+risultato paginato di 50 elementi per volta. Il risultato ottenuto (ricompattato in un unica lista) vine poi
+usato per estrarre lo uuid del primo customer per chiedere tutti i siti attivi di quel customer scelto.</p>
+<p>L'uso di questa libreria garantisce una serie di feature aggiuntive automatiche, gestite dietro le quinte, di cui l'operatore non deve preoccuparsi:
+- warmstart: gestione di una cache locale per non rifare piu volte la stessa chiamata se non serve.
+- ratelimiter: vengono limitate le chiamate massime al minuto che si possono fare, garantendo l'impossibilita di dare fastidio al server inavvertitamente.
+- riautenticazione: se l'autenticazione usata scade per il troppo tempo passato, viene gestita in automatico la riatuenticazione.
+- paginazione: le chiamate troppo grandi vengono suddivise in automatico in sottochiamate per non chiedere tutto assieme.
+- richiamate: se una chiamata fallisce vengono fatti una serie di tentativi prima di restituire un errore.</p>
+<p><strong>Ogni metodo usato restituisce sempre una lista di elementi.</strong></p>
+<p>Le API trovate sullo swagger del proprio ambiente XAUTOMATA sono chiamabili in maniera semplificata come metodi della
+libreria <em>XautomataAPI</em>. In alternativa si puo usare una metodologia piu simile alla libreria <em>request</em> che richiede l'url
+dell'API. Di seguito i due tipi di approccio.</p>
+<h2 id="api-come-metodi">API come metodi</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">root</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">passw</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">root</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">passw</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">customers</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s1">&#39;DEMO&#39;</span><span class="p">,</span> <span class="n">like</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">uuid_c</span> <span class="o">=</span> <span class="n">customers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">sites</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">sites</span><span class="p">(</span><span class="n">uuid_customer</span><span class="o">=</span><span class="n">uuid_c</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Si puo vedere come le chiamate alle API hanno la stessa terminologie trovata sullo swagger
+cosi come tutti i parametri di filtro evidenziati dentro lo swagger.
+Suddetti filtri vengono selezionati semplicemente aggiungendo la chiave:valore nel metodo scelto.
+In aggiunta ai filtri degli specifici endpoint sono presenti in aggiunta:
+- single_page: XautomataApi pagina sempre la chiamata, ma se impostato a single_page=True, la paginazione viene inibita
+- page_size: paginando in automatico, è sempre presente un valore di elementi per pagina. Importante ricordare che il risultato non viene restituito paginato ma sempre ricompattato in una unica risposta.
+- warm_start: per le chiamate in lettura è sempre possibile attivare la modalita warmstart che crea una hard cache locale, salvado la risposta in un file. Ogni volta che viene rifatta la stessa chiamata con gli stessi parametri (se in modalita warm_start), il risultato viene preso dal file locale invece che fare la chiamata al server.
+- kwargs: questa chiave prevede di ricevere un dizionario e sono valori vengono passati direttamente a <em>request</em>. Utile sono a chi sa cosa sta facendo e vuole un comportamento di request diverso dal default.</p>
+<p>L'uso di ogni API è specializzato ai parametri specifici di quel API, per avere un dettaglio dei parametri usabili si puo consultare sia il docstring di ogni metodo,
+che contiene il dettaglio dei parametri usabili, cosi come lo swagger stesso. Ogni parametro presente nello swagger è riportato un modo speculare nei parametri di XautomataApi.</p>
+<p>Nelle situazioni in cui viene richiesto un corpo delle API sotto forma di una lista di oggetti, la lista deve essere fornita per intero, come nell'esempio che segue:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">lista_uuid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uuid1&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid2&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid3&#39;</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">sites_bulk</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">lista_uuid</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="chiamate-in-modalita-multi">chiamate in modalita multi</h3>
+<p>E' anche possibile iterare un metodo sopra una lista di chiavi con il metodo multi built-in.
+Questo metodo esegue un semplice for su ogni chiave della lista che si vuole investigare, ma a differenza di un ciclo normale, gestisce l'eventuale paginazione e warm_start come fosse un unica chiamata, rendendo il tutto piu efficiente.
+Un esempio di uso e' il seguente:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">lista_uuid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uuid1&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid2&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid3&#39;</span><span class="p">]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">uuid_objects_w_probes</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">multi_method</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">xa</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span> <span class="n">name_to_cicle</span><span class="o">=</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>                                        <span class="n">multi_uuid</span><span class="o">=</span><span class="n">lista_uuid</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+In questo esempio vengono chiesti gli uuid di piu metriche in un ciclo che chiama l'API <strong>metric</strong> per ciascun uuid.
+In casi dove il risultato puo essere ottenuto anche con un metodo bulk, il metodo bulk e' preferibile sia per performance che rapidita di esecuzione.</p>
+<h3 id="chiamate-in-modalita-get_post">chiamate in modalita get_post</h3>
+<p>Questo metodo permette di chiamare un endpoint in forma di GET, se si riceve una risposta ma il contenuto e' parzialmente diverso da quello usato viene fatta automaticamente una PUT, mentre se non e' presente viene eseguita automaticamente una POST.
+Esistono due versioni di questo metodo, una versione singola <strong>get_post</strong> ed una versione bulk <strong>get_post_bulk</strong>.
+La versione bulk permette di fornire una lista di elementi da verificare tutti assieme.</p>
+<p>L'uso e' mostrato nell'esempio sottostante</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">newgroup</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;uuid_site&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="s2">&quot;uuid_virtual_domain&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s1">&#39;IT&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;description group&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">getgroup</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="s2">&quot;uuid_site&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="s2">&quot;uuid_virtual_domain&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">uuid</span><span class="p">,</span> <span class="n">get_count</span><span class="p">,</span> <span class="n">post_count</span><span class="p">,</span> <span class="n">put_count</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">get_post</span><span class="p">(</span><span class="n">url_get</span><span class="o">=</span><span class="s1">&#39;/groups/&#39;</span><span class="p">,</span> <span class="n">get_params</span><span class="o">=</span><span class="n">getgroup</span><span class="p">,</span> <span class="n">post_params</span><span class="o">=</span><span class="n">newgroup</span><span class="p">)</span>
+</code></pre></div>
+<p>Il modo migliore di usare i parametri della get e' usando solo quelli obligatori lasciando quelli optionali nella post, cosi se avviene un cambiamento dei parametri optionali l'oggetto viene ugualmente trovato.
+Se la post avviene su un url diverso, puo essere usata la chiave <em>url_post</em>. Se l'api in scrittura chiede dei parametri aggiuntivi (come il site per la geolocalizzazione), questi possono essere aggiunti con la chiave <strong>add_post_params</strong>.</p>
+<p>Nella risposta del metodo viene dato l'uuid dell'elemento e un valore intero che dice se l'uuid e' stato ottenuto con una GET, PUT o POST.</p>
+<p>La versione bulk deve essere scritta come segue:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="p">{</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="s2">&quot;uuid_site&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="s2">&quot;uuid_virtual_domain&quot;</span><span class="p">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s1">&#39;IT&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s1">&#39;name0&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;description group0&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="p">},</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="p">{</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="s2">&quot;uuid_site&quot;</span><span class="p">:</span> <span class="s1">&#39;111&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="s2">&quot;uuid_virtual_domain&quot;</span><span class="p">:</span> <span class="s1">&#39;111&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s1">&#39;TLC&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s1">&#39;name1&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;description group1&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="p">}</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="p">]</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="n">uuid</span><span class="p">,</span> <span class="n">get_count</span><span class="p">,</span> <span class="n">post_count</span><span class="p">,</span> <span class="n">put_count</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">spell</span><span class="o">.</span><span class="n">get_post_bulk</span><span class="p">(</span><span class="n">url_get</span><span class="o">=</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="n">post_params</span><span class="o">=</span><span class="n">groups</span><span class="p">)</span>
+</code></pre></div>
+<p>La versione bulk e' piu diretta e semplica da usare. Puo essere dato il solo url della get se la post usa lo stesso nome.
+Si usano solo i parametri della post, e' il metodo internamente che nella get opera con i soli parametri obligatori.
+Se necessario possono essere aggiunti parametri alle API con le chiavi <strong>add_get_params</strong> e <strong>add_post_params</strong>.
+La risposta e' una lista di uuid restituita nello stesso ordine degli elementi dati in ingresso.
+I conteggi di get, put e post sono il numero totale di quanti ne sono avvenuti.</p>
+<h2 id="uso-della-documentazione-delle-api">Uso della documentazione delle API</h2>
+<p>Su questo sito di documentazione e' anche presente la documentazione dettagliata di ogni metodo creato.
+La documentazione e' stata scritta con delle linee guida:
+- le chiavi <strong>payload</strong> e <strong>params</strong> sono usate come contenitori di piu parametri. I parametri usabili tramite queste due chiavi sono descritti nella sezione <strong>Kyeword Args</strong>. Ciascun parametro porta alla fine della sua descrizione la parola <strong>payload</strong> o <strong>params</strong> per aiutare a distinguere a quale chiave appartiene.
+- se un metodo e' di write, delete o update, sara esplicitato nel nome del metodo stesso. Mentre se il metodo e' di sola lettura, non sara espicitato nulla nel nome.
+- tutti i metodi bulk richiedono la costruzione di una lista con dei dizionari dentro e in tutti i casi questo oggetto va dentro a <strong>payload</strong> indipendetemente se e' GET, POST, DELETE
+- Non esistono metodi bulk PUT
+- Gli schema dei dati che si possono mettere dentro al <strong>payload</strong> viene riportato negli <strong>Examples</strong>
+- Se un metodo ha piu di uno schema dei dati che si possono inviare, le chiavi appartenenti ai diversi schema hanno un postilla numerica che rappresenta lo schema di appartenenza: <em>uuid_1, name_1, uuid_2, status_2</em> - in questo esempio lo schema 1 contiene uuid e name, mentre lo schema 2 contiene uuid e status
+- Se sono presenti sia <strong>payload</strong> che <strong>params</strong> solo uno dei due sara nella versione kwargs (esempio <em><em>params), l'altro dovra essere scritto come oggetto unico non scomponibile, con la tipologia indicata nella documentazione, tipicamente o </em>dizionario</em> o <em>lista</em></p>
+<h2 id="api-come-url">API come url</h2>
+<p>In alternativa e' possibile usare XautomataApi tramite l'url dell'endpoint. La differenza chiave sul passare tramite
+questo approccio e' che si possono chiamare anche API non ancora implemetate in modalita metodi, o manipolare in modo piu
+diretto cosa viene passato alla chiamata. Resta ugualmente preferibile usare XautomataApi rispetto a <em>request</em>
+perche anche tramite la chiamta url vengono mantenute le proprieta di paginazione, cache, riautenticazione etc.</p>
+<p>Qui di seguito si puo vedere la chiamata fatta per ottenere i clienti con codice 'DEMO' in modalita url.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;DEMO&#39;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>          <span class="s1">&#39;like&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/customers/&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</code></pre></div>
+<p>a differenza della modalita per metodi, in questo caso i parametri devono essere inseriti all'interno di un dizionario
+che viene passato a <strong>params</strong> se si sta fornendo un parametri, e a <strong>payload</strong> se si sta fornendo un <em>corpo</em> (tipicamente
+usato per le post)</p>
+<h2 id="tips-and-tricks">tips and tricks</h2>
+<p>esiste un parametri privato <em>_get_only</em> che se forzato a True impedisce di usare API di POST/PUT/DELETE. Fatta eccezione
+delle bulk e query dove vengono inibite solo le chiamtate che andrebbero ad apportare modifiche al db</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">hive.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">XautomataApi</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">xa</span> <span class="o">=</span> <span class="n">XautomataApi</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;passw&#39;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">xa</span><span class="o">.</span><span class="n">_get_only</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<p>con il parametro privato <em>_timeout_retry</em> si possono impostare un numero di retry per le situazioni in cui si fallisca le
+request in caso di timeout, e il tempo tra un retry e quello successivo e' impostabile con <em>_timeout_sleep_time</em>.</p>
+<p>con il parametro privato <em>_timeout_get_session_retry</em> si possono impostare un numero di retry per la libreria request su errori
+noti, e il tempo tra un retry e quello successivo e' impostabile con una formula basata sul valore  <em>_timeout_get_session_backoff_factor</em>.
+Di default <em>_timeout_get_session_retry</em> = 5 e <em>_timeout_get_session_backoff_factor</em> = 5.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      MIT
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "content.tabs.link", "content.tooltips", "navigation.sections", "navigation.top", "navigation.expand", "content.code.annotate", "content.code.copy", "content.code.select", "toc.follow", "header.autohide"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
