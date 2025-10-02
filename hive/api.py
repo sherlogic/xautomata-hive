@@ -188,7 +188,9 @@ class ApiManager:
 
             if response.status_code == 401: raise UnauthorizedException
 
-            if response.status_code != 200 and response.status_code != 504:  # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
+            # 504 non e' gestito dalle API per cui la responce non sarebbe json serializable
+            # 204 e' semplicemente vuoto
+            if response.status_code != 200 and response.status_code != 504 and response.status_code != 204:
                 try:
                     logger.error(response.json())
                 except ValueError:
@@ -198,6 +200,12 @@ class ApiManager:
 
             if response.status_code == 200 and _params.get('count', False):
                 self.num_items = response.headers.get('x-num-items', None)
+
+            # 204 rappresenta risposta vuota ma se non mi viene dato il type del content viene matenuto dentro alla risposta una stringa 'b'
+            # che rappresenta la fine di uno streaming di dati vuoto. Per evitare questo problema, in assenza di Content-Type, lo aggiorno
+            # a text, cosi che poi venga gestito correttamente dal response.text che toglie la 'b' di chiusura streaming.
+            if response.status_code == 204 and response.headers.get('Content-Type', None) is None:
+                response.headers['Content-Type'] = 'text/plain'
 
             # Decodifica della risposta in base al tipo di contenuto
             content_type = response.headers.get('Content-Type', '')
