@@ -818,6 +818,16 @@ class Customers(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+            uuid_calendar (string optional): additional filter - parameter
+            start (string optional): additional filter - parameter
+            end (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
+            description (string optional): additional filter - parameter
+            country (string optional): additional filter - parameter
+            state_province (string optional): additional filter - parameter
+            null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -827,9 +837,15 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
-        params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['sort_by', 'uuid_calendar', 'start', 'end',
+            'status', 'code', 'description', 'country', 'state_province',
+            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('uuid_calendar'), params.get('start'
+            ), params.get('end'), params.get('status'), params.get('code'
+            ), params.get('description'), params.get('country'), params.get(
+            'state_province'), params.get('null_fields'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_downtimes.__name__,
                 params, official_params_list)
@@ -852,6 +868,16 @@ class Customers(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+            null_fields (string optional): additional filter - parameter
+            uuid_notification_provider (string optional): additional filter - parameter
+            uuid_calendar (string optional): additional filter - parameter
+            uuid_message (string optional): additional filter - parameter
+            uuid_opening_reason (string optional): additional filter - parameter
+            uuid_reason_for_closure (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
+            description (string optional): additional filter - parameter
+            level (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -861,9 +887,17 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['skip', 'limit', 'like', 'join', 'count']
-        params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['sort_by', 'null_fields',
+            'uuid_notification_provider', 'uuid_calendar', 'uuid_message',
+            'uuid_opening_reason', 'uuid_reason_for_closure', 'code',
+            'description', 'level', 'skip', 'limit', 'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_notification_provider'), params.get('uuid_calendar'
+            ), params.get('uuid_message'), params.get('uuid_opening_reason'
+            ), params.get('uuid_reason_for_closure'), params.get('code'
+            ), params.get('description'), params.get('level'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_dispatchers.__name__,
                 params, official_params_list)
