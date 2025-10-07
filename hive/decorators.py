@@ -156,7 +156,13 @@ def paginate(single_page: bool, page_size: int, skip: int, limit: int, bulk: boo
                 # Per ogni chunk:
                 for c in c_payload:
                     # Chiama la funzione originale (`func`) con il chunk corrente.
-                    result_partial = func(mode, url, headers, c, params, **kwargs)
+                    # il codice che arriva dai decoratori prima non viene passato ai decoratori dopo
+                    result_partial, response_code = func(mode, url, headers, c, params, **kwargs)
+
+                    # se la chiamata e' un 204 e il contenuto e' None o stringa viene sostituito con una lista vuota
+                    if response_code == 204 and (result_partial is None or (isinstance(result_partial, str) and result_partial == '')):
+                        result_partial = []
+
                     # Se il risultato non è una lista, lo converte in una lista.
                     if not isinstance(result_partial, list): result_partial = [result_partial]
                     # Aggiunge i risultati parziali alla lista complessiva `result`.
@@ -168,7 +174,13 @@ def paginate(single_page: bool, page_size: int, skip: int, limit: int, bulk: boo
                 params['limit'] = min(size, limit)  # Imposta il limite massimo per la pagina corrente.
                 while True:  # Ciclo per iterare attraverso le pagine.
                     # Chiama la funzione originale (`func`) con i parametri della pagina corrente.
-                    result_partial = func(mode, url, headers, payload, params, **kwargs)
+                    # il codice che arriva dai decoratori prima non viene passato ai decoratori dopo
+                    result_partial, response_code = func(mode, url, headers, payload, params, **kwargs)
+
+                    # se la chiamata e' un 204 e il contenuto e' None o stringa viene sostituito con una lista vuota
+                    if response_code == 204 and (result_partial is None or (isinstance(result_partial, str) and result_partial == '')):
+                        result_partial = []
+
                     # Se il risultato non è una lista, lo converte in una lista.
                     if not isinstance(result_partial, list): result_partial = [result_partial]
                     # Aggiunge i risultati parziali alla lista complessiva `result`.
@@ -181,10 +193,6 @@ def paginate(single_page: bool, page_size: int, skip: int, limit: int, bulk: boo
                     # - Il numero totale di risultati supera il limite specificato.
                     # - È richiesto il single_page.
                     if not result_partial or len(result_partial) < size or len(result) > limit or single_page: break
-
-            # se count è True il result è una lista con dentro una tupla, in questa maniera viene trasmessa solo la tupla
-            if params.get('count', False):
-                result = result[0]
 
             return result
 

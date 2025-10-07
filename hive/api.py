@@ -53,6 +53,7 @@ class ApiManager:
     _timeout_retry = 1  # di default non si fanno retry sui timeout
     _timeout_sleep_time = 120  # tempo di attesa tra un retry e quello successivo in caso di timeout
     _silence_warning = False  # da implementare
+    _rate_limit_per_minute = 1000  # numero di chiamate al minuto consentite prima di un delay per rallentare il numero di chimate
     num_items = None  # serve per quando si mette la count a True, di default vale 0
     response = []  # variabile in cui mettere la risposta degli endpoing per poter accedere alla versione originale
 
@@ -165,7 +166,7 @@ class ApiManager:
         @warmstart(active=warm_start, args_ex=[2], verbose=False)
         @paginate(single_page=single_page, page_size=page_size, skip=_params_['skip'], limit=_params_['limit'], bulk=bulk)
         @timeout_retry(max_tries=self._timeout_retry, sleep_time=self._timeout_sleep_time)
-        @ratelimiter
+        @ratelimiter(per_minute=self._rate_limit_per_minute)
         def run_request(_mode, _url, _headers, _payload, _params, **_kwargs):
             self.num_items = None  # inizializzo a 0 il valore della count, cosi che non possa leggere il numero sbagliato dopo una richiesta non corretta
 
@@ -223,7 +224,8 @@ class ApiManager:
 
             self.response.append(response)  # sotto forma di lista perche se la risposta viene paginata questa viene spezzata su piu risposte
 
-            return body
+            # viene inviato il codice della chiamata cosi che in fase di paginazione possa gestire alcune casisteche speciali
+            return body, response.status_code
 
         return run_request(mode, url, _headers_, _payload_, _params_, **kwargs)
 
