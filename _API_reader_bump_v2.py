@@ -101,6 +101,8 @@ def main(**kwargs):
         # "/webhooks/{webhook_type}": ["POST"]
         # "/anomalies/{uuid}": ["DELETE"]
         # "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["POST"]
+        # "/services/query/last_status": ["GET", "POST"],
+        # "/services/query/last_status_v2": ["POST"]
     }
 
     api_dict = DeepDict()
@@ -292,7 +294,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     bulk_read = True if 'bulk/read' in name or ('query' in name) else False
     query = True if 'query' in name else False
 
-    hidden_query = ['services_last_status_query', 'last_status']
+    hidden_query = ['services_last_status_v2_query', 'services_last_status_query', 'last_status']
     hidden_querry_exact_name = []
     hidden_bulk_post = ['metric_ingest', 'probes_log_ingest', 'ts_cost_management']
     hidden_bulk_post_exact_name = ['/webhooks/{webhook_type}']
