@@ -16,6 +16,7 @@ class Files(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             name (string optional): additional filter - parameter
             username (string optional): additional filter - parameter
             uuid_service (string optional): additional filter - parameter
@@ -31,12 +32,14 @@ class Files(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['name', 'username', 'uuid_service', 'type',
-            'start_ts', 'end_ts', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('name'), params.get('username'), params.get('uuid_service'
-            ), params.get('type'), params.get('start_ts'), params.get('end_ts'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['sort_by', 'name', 'username',
+            'uuid_service', 'type', 'start_ts', 'end_ts', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('name'), params.get('username'
+            ), params.get('uuid_service'), params.get('type'), params.get(
+            'start_ts'), params.get('end_ts'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.files.__name__, params,
                 official_params_list)
