@@ -95,7 +95,7 @@ def main(**kwargs):
         # "/sites/": ["GET"],
         # "/sites/{uuid}": ["GET", "PUT"],
         # "/services/query/": ["GET", "POST"],
-        # "/last_status/": ["GET", "POST"]
+        # "/last_status/": ["GET", "POST"],
         # "/webhooks/": ["GET"],
         # "/objects/bulk/create/": ["POST"],
         # "/webhooks/{webhook_type}": ["POST"]
@@ -103,6 +103,7 @@ def main(**kwargs):
         # "/contacts/{uuid}/dispatchers/{uuid_dispatcher}": ["POST"]
         # "/services/query/last_status": ["GET", "POST"],
         # "/services/query/last_status_v2": ["POST"]
+        # "/last_status_v2/": ["GET", "POST"]
     }
 
     api_dict = DeepDict()
@@ -268,8 +269,13 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     docstring_class = f'Class that handles all the XAutomata {file_name} APIs'
 
     #############################################################################################################
+    # se dentro all'url si trova la dicitura v2 lo tengo a mente per usarlo dopo
+    v2 = True if 'v2' in name else False
 
     function_name, additional_param, uuid_counter = name_gen(name, mode)
+
+    # se l'url ha v2, controlle se e' rimasto nel nome della funzione e lo tolgo
+    if v2: function_name = function_name.replace('_v2', '')
 
     skip_limit = True if 'skip' in params else False  # se skip e' tra i parametri allora si puo paginare se no non si puo
 
@@ -294,7 +300,7 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
     bulk_read = True if 'bulk/read' in name or ('query' in name) else False
     query = True if 'query' in name else False
 
-    hidden_query = ['services_last_status_v2_query', 'services_last_status_query', 'last_status']
+    hidden_query = ['services_last_status_query', 'last_status']
     hidden_querry_exact_name = []
     hidden_bulk_post = ['metric_ingest', 'probes_log_ingest', 'ts_cost_management']
     hidden_bulk_post_exact_name = ['/webhooks/{webhook_type}']
@@ -372,6 +378,9 @@ def api_interpreter(mode, name, description, params, payload, api_dict):
                 function_kwarg = 'payload'
                 key_params = ' params=params, '
                 key_payload = ' payload=payload, '
+
+    # riaggiungo il v2 tolto prima, sul fondo della funzione
+    if v2: function_name += '_v2'
 
     function_arg += ['kwargs: dict = None']
     function_arg = ['self'] + function_arg
