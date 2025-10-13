@@ -1,1 +1,0 @@
-::: hive.cookbook.last_status_v2
