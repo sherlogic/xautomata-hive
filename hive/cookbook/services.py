@@ -768,7 +768,7 @@ class Services(ApiManager):
             warm_start, params=params, payload=payload, **kwargs)
         return response
 
-    def services_last_status_v2_query(self, warm_start: bool = False,
+    def services_last_status_query_v2(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
         """Service Query Last Status V2
@@ -881,7 +881,7 @@ class Services(ApiManager):
             'limit'), params.get('like'), params.get('join'), params.get(
             'count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.services_last_status_v2_query.
+            warning_wrong_parameters(self.services_last_status_query_v2.
                 __name__, params, official_params_list)
         response = self.execute('GET', path=
             f'/services/query/last_status_v2', single_page=single_page,
@@ -889,7 +889,7 @@ class Services(ApiManager):
             )
         return response
 
-    def last_status_bulk(self, payload: dict = False,
+    def services_last_status_query_bulk_v2(self, payload: dict = False,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 5000, kwargs: dict = None, **params) -> list:
         """Service Query Last Status List V2
@@ -974,7 +974,8 @@ class Services(ApiManager):
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
-            warning_wrong_parameters(self.last_status_bulk.__name__, params,
+            warning_wrong_parameters(self.
+                services_last_status_query_bulk_v2.__name__, params,
                 official_params_list)
         response = self.execute('POST', path=
             f'/services/query/last_status_v2', single_page=single_page,
