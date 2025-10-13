@@ -1174,7 +1174,7 @@ class Customers(ApiManager):
             page_size=page_size, payload=payload, **kwargs)
         return response
 
-    def customers_azure_v2_create(self, kwargs: dict = None, **payload
+    def customers_azure_create_v2(self, kwargs: dict = None, **payload
         ) -> list:
         """Create Azure Customer V2
 
@@ -1192,13 +1192,13 @@ class Customers(ApiManager):
         official_payload_list = ['customer', 'azure_customer']
         payload.get('customer'), payload.get('azure_customer')
         if not self._silence_warning:
-            warning_wrong_parameters(self.customers_azure_v2_create.
+            warning_wrong_parameters(self.customers_azure_create_v2.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/',
             payload=payload, **kwargs)
         return response
 
-    def customers_azure_v2_subscription_create(self, kwargs: dict = None,
+    def customers_azure_subscription_create_v2(self, kwargs: dict = None,
         **payload) -> list:
         """Create Azure Customer Sub
 
@@ -1217,13 +1217,13 @@ class Customers(ApiManager):
         payload.get('customer'), payload.get('azure_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_azure_v2_subscription_create.__name__, payload,
+                customers_azure_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/', payload=payload, **kwargs)
         return response
 
-    def customers_azure_v2_create_uuid(self, uuid: str, kwargs: dict = None,
+    def customers_azure_create_v2_uuid(self, uuid: str, kwargs: dict = None,
         **payload) -> list:
         """Create Azure Customer From V2
 
@@ -1260,13 +1260,13 @@ class Customers(ApiManager):
             ), payload.get('reserved_margin'), payload.get('azure_customer_id'
             ), payload.get('uuid_virtual_domain')
         if not self._silence_warning:
-            warning_wrong_parameters(self.customers_azure_v2_create.
+            warning_wrong_parameters(self.customers_azure_create_v2.
                 __name__, payload, official_payload_list)
         response = self.execute('POST', path=f'/customers/azure/v2/{uuid}',
             payload=payload, **kwargs)
         return response
 
-    def customers_azure_v2_subscription_create_uuid(self, uuid: str,
+    def customers_azure_subscription_create_v2_uuid(self, uuid: str,
         kwargs: dict = None, **payload) -> list:
         """Create Azure Customer From V2 Sub
 
@@ -1304,14 +1304,14 @@ class Customers(ApiManager):
             ), payload.get('uuid_object'), payload.get('subscriptions')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_azure_v2_subscription_create.__name__, payload,
+                customers_azure_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/azure/v2/subscription/{uuid}', payload=payload, **
             kwargs)
         return response
 
-    def customers_aws_v2_subscription_create(self, kwargs: dict = None, **
+    def customers_aws_subscription_create_v2(self, kwargs: dict = None, **
         payload) -> list:
         """Create Aws Customer Sub
 
@@ -1330,13 +1330,13 @@ class Customers(ApiManager):
         payload.get('customer'), payload.get('aws_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_aws_v2_subscription_create.__name__, payload,
+                customers_aws_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/', payload=payload, **kwargs)
         return response
 
-    def customers_aws_v2_subscription_create_uuid(self, uuid: str,
+    def customers_aws_subscription_create_v2_uuid(self, uuid: str,
         kwargs: dict = None, **payload) -> list:
         """Create Aws Customer From V2 Sub
 
@@ -1374,14 +1374,14 @@ class Customers(ApiManager):
             ), payload.get('uuid_object'), payload.get('subscriptions')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_aws_v2_subscription_create.__name__, payload,
+                customers_aws_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/aws/v2/subscription/{uuid}', payload=payload, **kwargs
             )
         return response
 
-    def customers_gcp_v2_subscription_create(self, kwargs: dict = None, **
+    def customers_gcp_subscription_create_v2(self, kwargs: dict = None, **
         payload) -> list:
         """Create Gcp Customer Sub
 
@@ -1400,13 +1400,13 @@ class Customers(ApiManager):
         payload.get('customer'), payload.get('gcp_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_gcp_v2_subscription_create.__name__, payload,
+                customers_gcp_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/gcp/v2/subscription/', payload=payload, **kwargs)
         return response
 
-    def customers_gcp_v2_subscription_create_uuid(self, uuid: str,
+    def customers_gcp_subscription_create_v2_uuid(self, uuid: str,
         kwargs: dict = None, **payload) -> list:
         """Create Gcp Customer From V2 Sub
 
@@ -1444,7 +1444,7 @@ class Customers(ApiManager):
             ), payload.get('uuid_object'), payload.get('subscriptions')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                customers_gcp_v2_subscription_create.__name__, payload,
+                customers_gcp_subscription_create_v2.__name__, payload,
                 official_payload_list)
         response = self.execute('POST', path=
             f'/customers/gcp/v2/subscription/{uuid}', payload=payload, **kwargs
