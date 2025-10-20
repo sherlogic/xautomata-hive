@@ -1231,14 +1231,16 @@ class Metrics(ApiManager):
         Keyword Args:
             num_messages (integer optional): additional filter - parameter
             group (string optional): additional filter - parameter
+            compute_lag (boolean optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
             params=params.copy())
-        official_params_list = ['num_messages', 'group']
-        params.get('num_messages'), params.get('group')
+        official_params_list = ['num_messages', 'group', 'compute_lag']
+        params.get('num_messages'), params.get('group'), params.get(
+            'compute_lag')
         if not self._silence_warning:
             warning_wrong_parameters(self.metrics_topic_consumer.__name__,
                 params, official_params_list)
