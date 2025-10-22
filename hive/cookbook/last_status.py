@@ -129,6 +129,8 @@ class LastStatus(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_valueless_metrics (boolean optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -182,11 +184,13 @@ class LastStatus(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'skip', 'limit',
-            'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+        official_params_list = ['extract_valueless_metrics',
+            'extract_automata_domain', 'sort_by', 'null_fields', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('extract_valueless_metrics'), params.get(
+            'extract_automata_domain'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.last_status_bulk.__name__, params,
                 official_params_list)

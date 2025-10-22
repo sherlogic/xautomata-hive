@@ -476,3 +476,27 @@ class Probes(ApiManager):
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
         return response
+
+    def probes_customers_create(self, uuid: str, kwargs: dict = None, **params
+        ) -> list:
+        """Create Probe User Customers Relationship
+
+        Args:
+            uuid (str, required): uuid
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            replace (boolean optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['replace']
+        params.get('replace')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_customers_create.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=f'/probes/{uuid}/customers',
+            params=params, **kwargs)
+        return response
