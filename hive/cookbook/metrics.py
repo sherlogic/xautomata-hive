@@ -1219,18 +1219,48 @@ class Metrics(ApiManager):
             page_size=page_size, payload=payload, **kwargs)
         return response
 
-    def metrics_topic_consumer(self, warm_start: bool = False,
+    def metrics_topic_consumer_create(self, group: str, kwargs: dict = None
+        ) -> list:
+        """Create Kafka Consumer
+
+        Args:
+            group (str, required): group
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/metrics/topic/consumer/{group}', **kwargs)
+        return response
+
+    def metrics_topic_consumer_delete(self, group: str, kwargs: dict = None
+        ) -> list:
+        """Delete Kafka Consumer
+
+        Args:
+            group (str, required): group
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/metrics/topic/consumer/{group}', **kwargs)
+        return response
+
+    def metrics_topic_consumer(self, group: str, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
         """Kafka Consumer
 
         Args:
+            group (str, required): group
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **params: additional parameters for the API.
 
         Keyword Args:
             num_messages (integer optional): additional filter - parameter
-            group (string optional): additional filter - parameter
             compute_lag (boolean optional): additional filter - parameter
 
         Returns: list"""
@@ -1238,12 +1268,58 @@ class Metrics(ApiManager):
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
             params=params.copy())
-        official_params_list = ['num_messages', 'group', 'compute_lag']
-        params.get('num_messages'), params.get('group'), params.get(
-            'compute_lag')
+        official_params_list = ['num_messages', 'compute_lag']
+        params.get('num_messages'), params.get('compute_lag')
         if not self._silence_warning:
             warning_wrong_parameters(self.metrics_topic_consumer.__name__,
                 params, official_params_list)
-        response = self.execute('GET', path=f'/metrics/topic/consumer',
-            warm_start=warm_start, params=params, **kwargs)
+        response = self.execute('GET', path=
+            f'/metrics/topic/consumer/{group}', warm_start=warm_start,
+            params=params, **kwargs)
+        return response
+
+    def metrics_topic_consumer_lag(self, group: str,
+        warm_start: bool = False, kwargs: dict = None) -> list:
+        """Get Lag Kafka Consumer
+
+        Args:
+            group (str, required): group
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('GET', path=
+            f'/metrics/topic/consumer/{group}/lag', warm_start=warm_start,
+            **kwargs)
+        return response
+
+    def metrics_topic_consumer_seek(self, group: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Seek Kafka Consumer
+
+        Args:
+            group (str, required): group
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            offset (integer optional): additional filter - parameter
+            position (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['offset', 'position']
+        params.get('offset'), params.get('position')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_topic_consumer_seek.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/metrics/topic/consumer/{group}/seek', warm_start=warm_start,
+            params=params, **kwargs)
         return response

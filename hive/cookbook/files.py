@@ -99,13 +99,14 @@ class Files(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
+            uuid_service (string optional): additional filter - payload
             expires_at (string required): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['expires_at']
-        payload.get('expires_at')
+        official_payload_list = ['uuid_service', 'expires_at']
+        payload.get('uuid_service'), payload.get('expires_at')
         if not self._silence_warning:
             warning_wrong_parameters(self.files_put.__name__, payload,
                 official_payload_list)

@@ -995,6 +995,7 @@ class Services(ApiManager):
         Keyword Args:
             uuid_group (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - parameter
+            uuid_metric_type (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             services_rules (array required): additional filter - payload
             default_service (None required): additional filter - payload
