@@ -15,9 +15,9 @@ with open("hive/version.py", "r") as f:
 version = version[0].split("'")[1]
 
 # version go
-requests = 'requests==2.31.0'
-tqdm = 'tqdm==4.64.1'
-urllib3 = 'urllib3==2.0.4'
+requests = 'requests==2.32.5'
+tqdm = 'tqdm==4.67.1'
+urllib3 = 'urllib3==2.5.0'
 # version end
 
 setup(
