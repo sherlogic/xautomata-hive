@@ -198,3 +198,18 @@ class LastStatus(ApiManager):
             single_page, page_size=page_size, warm_start=warm_start, params
             =params, payload=payload, **kwargs)
         return response
+
+    def last_status_delete(self, uuid_metric: str, kwargs: dict = None
+        ) -> list:
+        """Delete Last Admin Status
+
+        Args:
+            uuid_metric (str, required): uuid_metric
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/last_status/{uuid_metric}', **kwargs)
+        return response

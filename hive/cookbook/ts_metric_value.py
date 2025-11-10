@@ -121,3 +121,27 @@ class TsMetricValue(ApiManager):
         response = self.execute('POST', path=f'/ts_metric_value/plot/',
             payload=payload, **kwargs)
         return response
+
+    def ts_metric_value_delete(self, uuid_metric: str, kwargs: dict = None,
+        **params) -> list:
+        """Delete Value Metric
+
+        Args:
+            uuid_metric (str, required): uuid_metric
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            timestamp (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['timestamp']
+        params.get('timestamp')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_metric_value_delete.__name__,
+                params, official_params_list)
+        response = self.execute('DELETE', path=
+            f'/ts_metric_value/{uuid_metric}', params=params, **kwargs)
+        return response

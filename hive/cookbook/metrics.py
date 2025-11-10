@@ -1323,3 +1323,44 @@ class Metrics(ApiManager):
             f'/metrics/topic/consumer/{group}/seek', warm_start=warm_start,
             params=params, **kwargs)
         return response
+
+    def metrics_topic_consumer_filter_create(self, group: str,
+        kwargs: dict = None, **payload) -> list:
+        """Bulk Create Metrics Consumer Group
+
+        Args:
+            group (str, required): group
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            uuid (str required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['uuid']
+        payload.get('uuid')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                metrics_topic_consumer_filter_create.__name__, payload,
+                official_payload_list)
+        response = self.execute('POST', path=
+            f'/metrics/topic/consumer/{group}/filter', payload=payload, **
+            kwargs)
+        return response
+
+    def metrics_topic_consumer_delete_group(self, group: str,
+        kwargs: dict = None) -> list:
+        """Bulk Delete Metrics Consumer Group
+
+        Args:
+            group (str, required): group
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/metrics/topic/consumer/{group}/delete', **kwargs)
+        return response
