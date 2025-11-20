@@ -61,7 +61,7 @@ class TsMetricValue(ApiManager):
     def ts_metric_value_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Value Metrics
+        """Bulk Read Value Metrics
 
         Args:
             payload (list[dict], optional): List dict to create.

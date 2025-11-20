@@ -1475,6 +1475,7 @@ class Customers(ApiManager):
             status (string optional): additional filter - parameter
             description (string optional): additional filter - parameter
             name (string optional): additional filter - parameter
+            ip_cidr (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -1486,13 +1487,14 @@ class Customers(ApiManager):
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_object',
             'country', 'city', 'address', 'zip_code', 'status',
-            'description', 'name', 'skip', 'limit', 'like', 'join', 'count']
+            'description', 'name', 'ip_cidr', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_object'), params.get('country'), params.get('city'
             ), params.get('address'), params.get('zip_code'), params.get(
             'status'), params.get('description'), params.get('name'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            ), params.get('ip_cidr'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.customers_networks.__name__,
                 params, official_params_list)
