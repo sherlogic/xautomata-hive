@@ -391,7 +391,7 @@ class Objects(ApiManager):
         Keyword Args:
             not_in (boolean optional): additional filter - parameter
             code (string optional): additional filter - parameter
-            status (boolean optional): additional filter - parameter
+            status (string optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
             active_at_or_after_timestamp (string optional): additional filter - parameter

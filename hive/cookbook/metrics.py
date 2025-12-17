@@ -165,19 +165,30 @@ class Metrics(ApiManager):
         return response
 
     def metrics_last_value(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None) -> list:
+        kwargs: dict = None, **params) -> list:
         """Get Last Value
 
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['join']
+        params.get('join')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_last_value.__name__,
+                params, official_params_list)
         response = self.execute('GET', path=f'/metrics/{uuid}/last_value',
-            warm_start=warm_start, **kwargs)
+            warm_start=warm_start, params=params, **kwargs)
         return response
 
     def metrics_services(self, uuid: str, warm_start: bool = False,

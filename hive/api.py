@@ -522,7 +522,6 @@ def warning_wrong_parameters(func_name: str, params_from_user: dict, ufficial_pa
 # hive imports start
 from hive.cookbook.acl_docs import AclDocs
 from hive.cookbook.acl_overrides import AclOverrides
-from hive.cookbook.anomalies import Anomalies
 from hive.cookbook.calendars import Calendars
 from hive.cookbook.cost_tagging import CostTagging
 from hive.cookbook.cost_tags import CostTags
@@ -537,7 +536,6 @@ from hive.cookbook.downtimes import Downtimes
 from hive.cookbook.external_tickets import ExternalTickets
 from hive.cookbook.features import Features
 from hive.cookbook.files import Files
-from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
 from hive.cookbook.automata_ingest import AutomataIngest
 from hive.cookbook.metric_ingest import MetricIngest
@@ -554,14 +552,11 @@ from hive.cookbook.metric_types import MetricTypes
 from hive.cookbook.notification_providers import NotificationProviders
 from hive.cookbook.notification_provider_types import NotificationProviderTypes
 from hive.cookbook.objects import Objects
-from hive.cookbook.opening_reasons import OpeningReasons
 from hive.cookbook.probes import Probes
 from hive.cookbook.probe_types import ProbeTypes
 from hive.cookbook.profile_topics import ProfileTopics
 from hive.cookbook.questions import Questions
-from hive.cookbook.reason_for_closure import ReasonForClosure
 from hive.cookbook.retention_rules import RetentionRules
-from hive.cookbook.schedules import Schedules
 from hive.cookbook.services import Services
 from hive.cookbook.sites import Sites
 from hive.cookbook.last_status import LastStatus
@@ -586,7 +581,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Anomalies, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Apple, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, OpeningReasons, Probes, ProbeTypes, ProfileTopics, Questions, ReasonForClosure, RetentionRules, Schedules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, Tests, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, Groups, AutomataIngest, MetricIngest, Microsoft, Google, Apple, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, Probes, ProbeTypes, ProfileTopics, Questions, RetentionRules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, Tests, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
