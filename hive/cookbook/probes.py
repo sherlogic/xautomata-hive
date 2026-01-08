@@ -449,6 +449,136 @@ class Probes(ApiManager):
             **kwargs)
         return response
 
+    def probes_metric_types_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Metric Types
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_probe": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_metric_types_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/probes/bulk/create/metric_types', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def probes_metric_types_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Metric Types
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_probe": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/probes/bulk/delete/metric_types', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def probes_metrics_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Metrics
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_probe": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_metrics_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=f'/probes/bulk/create/metrics',
+            single_page=single_page, page_size=page_size, params=params,
+            payload=payload, **kwargs)
+        return response
+
+    def probes_metrics_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Metrics
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_probe": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=f'/probes/bulk/delete/metrics',
+            single_page=single_page, page_size=page_size, payload=payload,
+            **kwargs)
+        return response
+
     def probes_logs(self, uuid: str, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
