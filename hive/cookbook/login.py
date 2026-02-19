@@ -85,7 +85,7 @@ class Login(ApiManager):
 
     def login_refresh_invalidate_user_create(self, kwargs: dict = None, **
         params) -> list:
-        """Invalidate User Tokens
+        """Invalidate User
 
         Args:
             kwargs (dict, optional): additional parameters for execute. Default to None.
@@ -169,7 +169,7 @@ class Login(ApiManager):
     def login_current_user_dashboards(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Get Current User
+        """Get Current User Dashboards
 
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
@@ -180,6 +180,7 @@ class Login(ApiManager):
 
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+            scope (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -189,10 +190,11 @@ class Login(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'skip', 'limit', 'like', 'join',
-            'count']
-        params.get('sort_by'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['sort_by', 'scope', 'skip', 'limit', 'like',
+            'join', 'count']
+        params.get('sort_by'), params.get('scope'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.login_current_user_dashboards.
                 __name__, params, official_params_list)
@@ -200,6 +202,34 @@ class Login(ApiManager):
             f'/login/current_user/dashboards', single_page=single_page,
             page_size=page_size, warm_start=warm_start, params=params, **kwargs
             )
+        return response
+
+    def login_current_user_virtual_domains(self, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """Get Virtual Domains
+
+        Args:
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['sort_by']
+        params.get('sort_by')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                login_current_user_virtual_domains.__name__, params,
+                official_params_list)
+        response = self.execute('GET', path=
+            f'/login/current_user/virtual_domains', warm_start=warm_start,
+            params=params, **kwargs)
         return response
 
     def login_current_user_image(self, warm_start: bool = False,

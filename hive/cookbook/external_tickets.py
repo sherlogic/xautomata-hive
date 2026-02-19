@@ -108,11 +108,11 @@ class ExternalTickets(ApiManager):
             external_ticket (string required): additional filter - payload
             opening_date (string required): additional filter - payload
             closing_date (string required): additional filter - payload
-            ticket_type (None required): additional filter - payload
-            mode (None required): additional filter - payload
-            severity (None required): additional filter - payload
+            ticket_type (string required): additional filter - payload
+            mode (string required): additional filter - payload
+            severity (string required): additional filter - payload
             organization (string required): additional filter - payload
-            responsibility (None required): additional filter - payload
+            responsibility (string required): additional filter - payload
             stage_start_sla_l1 (string required): additional filter - payload
             working_period_l1 (string required): additional filter - payload
             target_stage_start_sla_l1 (string required): additional filter - payload
@@ -122,6 +122,7 @@ class ExternalTickets(ApiManager):
             resolution_sla (string required): additional filter - payload
             working_period_resolution (string required): additional filter - payload
             target_period_resolution (string required): additional filter - payload
+            data_profile (array object optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -134,7 +135,8 @@ class ExternalTickets(ApiManager):
             'working_period_l1', 'target_stage_start_sla_l1',
             'stage_start_sla_l2', 'working_period_l2',
             'target_stage_start_sla_l2', 'resolution_sla',
-            'working_period_resolution', 'target_period_resolution']
+            'working_period_resolution', 'target_period_resolution',
+            'data_profile']
         payload.get('uuid_customer'), payload.get('uuid_virtual_domain'
             ), payload.get('uuid_object'), payload.get('object'), payload.get(
             'metric_type'), payload.get('metric'), payload.get('external_itsm'
@@ -147,7 +149,8 @@ class ExternalTickets(ApiManager):
             'stage_start_sla_l2'), payload.get('working_period_l2'
             ), payload.get('target_stage_start_sla_l2'), payload.get(
             'resolution_sla'), payload.get('working_period_resolution'
-            ), payload.get('target_period_resolution')
+            ), payload.get('target_period_resolution'), payload.get(
+            'data_profile')
         if not self._silence_warning:
             warning_wrong_parameters(self.external_tickets_create.__name__,
                 payload, official_payload_list)
@@ -202,11 +205,11 @@ class ExternalTickets(ApiManager):
             external_ticket (string optional): additional filter - payload
             opening_date (string optional): additional filter - payload
             closing_date (string optional): additional filter - payload
-            ticket_type ( optional): additional filter - payload
-            mode ( optional): additional filter - payload
-            severity ( optional): additional filter - payload
+            ticket_type (string optional): additional filter - payload
+            mode (string optional): additional filter - payload
+            severity (string optional): additional filter - payload
             organization (string optional): additional filter - payload
-            responsibility ( optional): additional filter - payload
+            responsibility (string optional): additional filter - payload
             stage_start_sla_l1 (string optional): additional filter - payload
             working_period_l1 (string optional): additional filter - payload
             target_stage_start_sla_l1 (string optional): additional filter - payload
@@ -216,6 +219,7 @@ class ExternalTickets(ApiManager):
             resolution_sla (string optional): additional filter - payload
             working_period_resolution (string optional): additional filter - payload
             target_period_resolution (string optional): additional filter - payload
+            data_profile (array object optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -228,7 +232,8 @@ class ExternalTickets(ApiManager):
             'working_period_l1', 'target_stage_start_sla_l1',
             'stage_start_sla_l2', 'working_period_l2',
             'target_stage_start_sla_l2', 'resolution_sla',
-            'working_period_resolution', 'target_period_resolution']
+            'working_period_resolution', 'target_period_resolution',
+            'data_profile']
         payload.get('uuid_customer'), payload.get('uuid_virtual_domain'
             ), payload.get('uuid_object'), payload.get('object'), payload.get(
             'metric_type'), payload.get('metric'), payload.get('external_itsm'
@@ -241,7 +246,8 @@ class ExternalTickets(ApiManager):
             'stage_start_sla_l2'), payload.get('working_period_l2'
             ), payload.get('target_stage_start_sla_l2'), payload.get(
             'resolution_sla'), payload.get('working_period_resolution'
-            ), payload.get('target_period_resolution')
+            ), payload.get('target_period_resolution'), payload.get(
+            'data_profile')
         if not self._silence_warning:
             warning_wrong_parameters(self.external_tickets_put.__name__,
                 payload, official_payload_list)
@@ -510,11 +516,11 @@ class ExternalTickets(ApiManager):
             "external_ticket": "string", required
             "opening_date": "string", required
             "closing_date": "string", required
-            "ticket_type": "None", required
-            "mode": "None", required
-            "severity": "None", required
+            "ticket_type": "string", required
+            "mode": "string", required
+            "severity": "string", required
             "organization": "string", required
-            "responsibility": "None", required
+            "responsibility": "string", required
             "stage_start_sla_l1": "string", required
             "working_period_l1": "string", required
             "target_stage_start_sla_l1": "string", required
@@ -524,6 +530,7 @@ class ExternalTickets(ApiManager):
             "resolution_sla": "string", required
             "working_period_resolution": "string", required
             "target_period_resolution": "string", required
+            "data_profile": "array object", optional
            }
           ]
 

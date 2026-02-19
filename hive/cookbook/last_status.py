@@ -19,9 +19,11 @@ class LastStatus(ApiManager):
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
             extract_automata_domain (string optional): additional filter - parameter
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            customer_company_name (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
@@ -69,23 +71,25 @@ class LastStatus(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['extract_valueless_metrics',
-            'extract_automata_domain', 'sort_by', 'null_fields',
-            'uuid_customer', 'customer_code', 'customer_status',
-            'uuid_site', 'site_code', 'site_description', 'site_address',
-            'site_zip_code', 'site_city', 'site_country',
-            'site_state_province', 'site_status', 'uuid_group',
-            'group_name', 'group_status', 'group_type', 'uuid_object',
-            'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
-            'topic', 'last_value_uuid_probe', 'last_value_timestamp_start',
+            'extract_automata_domain', 'extract_data_profile', 'sort_by',
+            'null_fields', 'uuid_customer', 'customer_company_name',
+            'customer_code', 'customer_status', 'uuid_site', 'site_code',
+            'site_description', 'site_address', 'site_zip_code',
+            'site_city', 'site_country', 'site_state_province',
+            'site_status', 'uuid_group', 'group_name', 'group_status',
+            'group_type', 'uuid_object', 'object_name', 'object_status',
+            'object_profile', 'uuid_metric_type', 'metric_type_name',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'topic',
+            'last_value_uuid_probe', 'last_value_timestamp_start',
             'last_value_timestamp_end', 'last_value_object_type',
             'last_value_name', 'last_value_value', 'last_value_unit',
             'last_value_description', 'last_value_status',
             'last_value_ranking', 'skip', 'limit', 'like', 'join', 'count']
         params.get('extract_valueless_metrics'), params.get(
-            'extract_automata_domain'), params.get('sort_by'), params.get(
-            'null_fields'), params.get('uuid_customer'), params.get(
+            'extract_automata_domain'), params.get('extract_data_profile'
+            ), params.get('sort_by'), params.get('null_fields'), params.get(
+            'uuid_customer'), params.get('customer_company_name'), params.get(
             'customer_code'), params.get('customer_status'), params.get(
             'uuid_site'), params.get('site_code'), params.get(
             'site_description'), params.get('site_address'), params.get(
@@ -131,6 +135,7 @@ class LastStatus(ApiManager):
         Keyword Args:
             extract_valueless_metrics (boolean optional): additional filter - parameter
             extract_automata_domain (string optional): additional filter - parameter
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
@@ -143,6 +148,7 @@ class LastStatus(ApiManager):
             payload = 
            {
             "uuid_customer": "array", optional
+            "customer_company_name": "array", optional
             "customer_code": "array", optional
             "customer_status": "array", optional
             "uuid_site": "array", optional
@@ -185,12 +191,13 @@ class LastStatus(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['extract_valueless_metrics',
-            'extract_automata_domain', 'sort_by', 'null_fields', 'skip',
-            'limit', 'like', 'join', 'count']
+            'extract_automata_domain', 'extract_data_profile', 'sort_by',
+            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
         params.get('extract_valueless_metrics'), params.get(
-            'extract_automata_domain'), params.get('sort_by'), params.get(
-            'null_fields'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'extract_automata_domain'), params.get('extract_data_profile'
+            ), params.get('sort_by'), params.get('null_fields'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.last_status_bulk.__name__, params,
                 official_params_list)

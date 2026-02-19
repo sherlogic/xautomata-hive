@@ -282,6 +282,149 @@ class Probes(ApiManager):
             f'/probes/{uuid}/objects/{uuid_object}', **kwargs)
         return response
 
+    def probes_metric_types(self, uuid: str, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """List Metric Types
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['not_in', 'name', 'status', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_metric_types.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=f'/probes/{uuid}/metric_types',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def probes_metric_types_create(self, uuid: str, uuid_metric_type: str,
+        kwargs: dict = None) -> list:
+        """Add Metric Type
+
+        Args:
+            uuid (str, required): uuid
+            uuid_metric_type (str, required): uuid_metric_type
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/probes/{uuid}/metric_types/{uuid_metric_type}', **kwargs)
+        return response
+
+    def probes_metric_types_delete(self, uuid: str, uuid_metric_type: str,
+        kwargs: dict = None) -> list:
+        """Remove Metric Type
+
+        Args:
+            uuid (str, required): uuid
+            uuid_metric_type (str, required): uuid_metric_type
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/probes/{uuid}/metric_types/{uuid_metric_type}', **kwargs)
+        return response
+
+    def probes_metrics(self, uuid: str, warm_start: bool = False,
+        single_page: bool = False, page_size: int = 5000,
+        kwargs: dict = None, **params) -> list:
+        """List Metrics
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            not_in (boolean optional): additional filter - parameter
+            name (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            profile (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['not_in', 'name', 'status', 'profile',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('not_in'), params.get('name'), params.get('status'
+            ), params.get('profile'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.probes_metrics.__name__, params,
+                official_params_list)
+        response = self.execute('GET', path=f'/probes/{uuid}/metrics',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def probes_metrics_create(self, uuid: str, uuid_metric: str,
+        kwargs: dict = None) -> list:
+        """Add Metric
+
+        Args:
+            uuid (str, required): uuid
+            uuid_metric (str, required): uuid_metric
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/probes/{uuid}/metrics/{uuid_metric}', **kwargs)
+        return response
+
+    def probes_metrics_delete(self, uuid: str, uuid_metric: str,
+        kwargs: dict = None) -> list:
+        """Remove Metric
+
+        Args:
+            uuid (str, required): uuid
+            uuid_metric (str, required): uuid_metric
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('DELETE', path=
+            f'/probes/{uuid}/metrics/{uuid_metric}', **kwargs)
+        return response
+
     def probes_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:

@@ -329,6 +329,7 @@ class Services(ApiManager):
             fetch_all (boolean optional): additional filter - parameter
             only_actives (boolean optional): additional filter - parameter
             active_at_timestamp (string optional): additional filter - parameter
+            tag (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -339,12 +340,13 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['not_in', 'code', 'status', 'fetch_all',
-            'only_actives', 'active_at_timestamp', 'skip', 'limit', 'like',
-            'join', 'count']
+            'only_actives', 'active_at_timestamp', 'tag', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('not_in'), params.get('code'), params.get('status'
             ), params.get('fetch_all'), params.get('only_actives'), params.get(
-            'active_at_timestamp'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'active_at_timestamp'), params.get('tag'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_dispatchers.__name__,
                 params, official_params_list)
@@ -401,6 +403,7 @@ class Services(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            customer_company_name (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
@@ -433,7 +436,6 @@ class Services(ApiManager):
             service_name (string optional): additional filter - parameter
             service_description (string optional): additional filter - parameter
             service_status (string optional): additional filter - parameter
-            service_automata_domain (string optional): additional filter - parameter
             service_uuid_customer (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -445,26 +447,26 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
-            'customer_code', 'customer_status', 'uuid_site', 'site_code',
-            'site_description', 'site_address', 'site_zip_code',
-            'site_city', 'site_country', 'site_state_province',
-            'site_status', 'uuid_group', 'group_name', 'group_status',
-            'group_type', 'uuid_object', 'object_name', 'object_status',
-            'object_profile', 'uuid_metric_type', 'metric_type_name',
-            'metric_type_status', 'uuid_metric', 'metric_name',
-            'metric_status', 'metric_profile', 'service_uuid_parent',
-            'uuid_service', 'service_profile', 'service_name',
-            'service_description', 'service_status',
-            'service_automata_domain', 'service_uuid_customer', 'skip',
-            'limit', 'like', 'join', 'count']
+            'customer_company_name', 'customer_code', 'customer_status',
+            'uuid_site', 'site_code', 'site_description', 'site_address',
+            'site_zip_code', 'site_city', 'site_country',
+            'site_state_province', 'site_status', 'uuid_group',
+            'group_name', 'group_status', 'group_type', 'uuid_object',
+            'object_name', 'object_status', 'object_profile',
+            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
+            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
+            'service_uuid_parent', 'uuid_service', 'service_profile',
+            'service_name', 'service_description', 'service_status',
+            'service_uuid_customer', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
-            'customer_status'), params.get('uuid_site'), params.get('site_code'
-            ), params.get('site_description'), params.get('site_address'
-            ), params.get('site_zip_code'), params.get('site_city'
-            ), params.get('site_country'), params.get('site_state_province'
-            ), params.get('site_status'), params.get('uuid_group'), params.get(
-            'group_name'), params.get('group_status'), params.get('group_type'
+            'uuid_customer'), params.get('customer_company_name'), params.get(
+            'customer_code'), params.get('customer_status'), params.get(
+            'uuid_site'), params.get('site_code'), params.get(
+            'site_description'), params.get('site_address'), params.get(
+            'site_zip_code'), params.get('site_city'), params.get(
+            'site_country'), params.get('site_state_province'), params.get(
+            'site_status'), params.get('uuid_group'), params.get('group_name'
+            ), params.get('group_status'), params.get('group_type'
             ), params.get('uuid_object'), params.get('object_name'
             ), params.get('object_status'), params.get('object_profile'
             ), params.get('uuid_metric_type'), params.get('metric_type_name'
@@ -473,8 +475,7 @@ class Services(ApiManager):
             ), params.get('metric_profile'), params.get('service_uuid_parent'
             ), params.get('uuid_service'), params.get('service_profile'
             ), params.get('service_name'), params.get('service_description'
-            ), params.get('service_status'), params.get(
-            'service_automata_domain'), params.get('service_uuid_customer'
+            ), params.get('service_status'), params.get('service_uuid_customer'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
@@ -511,6 +512,7 @@ class Services(ApiManager):
             payload = 
            {
             "uuid_customer": "array", optional
+            "customer_company_name": "array", optional
             "customer_code": "array", optional
             "customer_status": "array", optional
             "uuid_site": "array", optional
@@ -575,9 +577,11 @@ class Services(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            customer_company_name (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
@@ -611,7 +615,6 @@ class Services(ApiManager):
             service_name (string optional): additional filter - parameter
             service_description (string optional): additional filter - parameter
             service_status (string optional): additional filter - parameter
-            service_automata_domain (string optional): additional filter - parameter
             service_uuid_customer (string optional): additional filter - parameter
             timestamp_start (string optional): additional filter - parameter
             timestamp_end (string optional): additional filter - parameter
@@ -631,7 +634,8 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
+        official_params_list = ['extract_data_profile', 'sort_by',
+            'null_fields', 'uuid_customer', 'customer_company_name',
             'customer_code', 'customer_status', 'uuid_site', 'site_code',
             'site_description', 'site_address', 'site_zip_code',
             'site_city', 'site_country', 'site_state_province',
@@ -642,12 +646,13 @@ class Services(ApiManager):
             'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
             'service_uuid_parent', 'uuid_service', 'service_profile',
             'service_name', 'service_description', 'service_status',
-            'service_automata_domain', 'service_uuid_customer',
-            'timestamp_start', 'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'status', 'ranking', 'description',
-            'unit', 'value', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
+            'service_uuid_customer', 'timestamp_start', 'timestamp_end',
+            'database_timestamp_start', 'database_timestamp_end', 'status',
+            'ranking', 'description', 'unit', 'value', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('extract_data_profile'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('uuid_customer'), params.get(
+            'customer_company_name'), params.get('customer_code'), params.get(
             'customer_status'), params.get('uuid_site'), params.get('site_code'
             ), params.get('site_description'), params.get('site_address'
             ), params.get('site_zip_code'), params.get('site_city'
@@ -663,8 +668,7 @@ class Services(ApiManager):
             'metric_profile'), params.get('service_uuid_parent'), params.get(
             'uuid_service'), params.get('service_profile'), params.get(
             'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_automata_domain'
-            ), params.get('service_uuid_customer'), params.get(
+            'service_status'), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(
@@ -693,6 +697,7 @@ class Services(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             timestamp_start (string optional): additional filter - parameter
@@ -709,6 +714,7 @@ class Services(ApiManager):
             payload = 
            {
             "uuid_customer": "array", optional
+            "customer_company_name": "array", optional
             "customer_code": "array", optional
             "customer_status": "array", optional
             "uuid_site": "array", optional
@@ -742,7 +748,6 @@ class Services(ApiManager):
             "service_name": "array", optional
             "service_description": "array", optional
             "service_status": "array", optional
-            "service_automata_domain": "array", optional
             "service_uuid_customer": "array", optional
             "status": "array", optional
             "ranking": "array", optional
@@ -754,14 +759,16 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'timestamp_start',
-            'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'timestamp_start'), params.get('timestamp_end'), params.get(
-            'database_timestamp_start'), params.get('database_timestamp_end'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['extract_data_profile', 'sort_by',
+            'null_fields', 'timestamp_start', 'timestamp_end',
+            'database_timestamp_start', 'database_timestamp_end', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('extract_data_profile'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('timestamp_start'), params.get(
+            'timestamp_end'), params.get('database_timestamp_start'
+            ), params.get('database_timestamp_end'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_last_status_query_bulk.
                 __name__, params, official_params_list)
@@ -783,9 +790,11 @@ class Services(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            customer_company_name (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
@@ -819,7 +828,6 @@ class Services(ApiManager):
             service_name (string optional): additional filter - parameter
             service_description (string optional): additional filter - parameter
             service_status (string optional): additional filter - parameter
-            service_automata_domain (string optional): additional filter - parameter
             service_uuid_customer (string optional): additional filter - parameter
             timestamp_start (string optional): additional filter - parameter
             timestamp_end (string optional): additional filter - parameter
@@ -840,7 +848,8 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
+        official_params_list = ['extract_data_profile', 'sort_by',
+            'null_fields', 'uuid_customer', 'customer_company_name',
             'customer_code', 'customer_status', 'uuid_site', 'site_code',
             'site_description', 'site_address', 'site_zip_code',
             'site_city', 'site_country', 'site_state_province',
@@ -851,13 +860,13 @@ class Services(ApiManager):
             'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
             'service_uuid_parent', 'uuid_service', 'service_profile',
             'service_name', 'service_description', 'service_status',
-            'service_automata_domain', 'service_uuid_customer',
-            'timestamp_start', 'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'status', 'ranking', 'description',
-            'unit', 'value', 'fields_to_select', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
+            'service_uuid_customer', 'timestamp_start', 'timestamp_end',
+            'database_timestamp_start', 'database_timestamp_end', 'status',
+            'ranking', 'description', 'unit', 'value', 'fields_to_select',
+            'skip', 'limit', 'like', 'join', 'count']
+        params.get('extract_data_profile'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('uuid_customer'), params.get(
+            'customer_company_name'), params.get('customer_code'), params.get(
             'customer_status'), params.get('uuid_site'), params.get('site_code'
             ), params.get('site_description'), params.get('site_address'
             ), params.get('site_zip_code'), params.get('site_city'
@@ -873,8 +882,7 @@ class Services(ApiManager):
             'metric_profile'), params.get('service_uuid_parent'), params.get(
             'uuid_service'), params.get('service_profile'), params.get(
             'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_automata_domain'
-            ), params.get('service_uuid_customer'), params.get(
+            'service_status'), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(
@@ -905,6 +913,7 @@ class Services(ApiManager):
             **params: additional parameters for the API.
 
         Keyword Args:
+            extract_data_profile (string optional): additional filter - parameter
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             timestamp_start (string optional): additional filter - parameter
@@ -921,6 +930,7 @@ class Services(ApiManager):
             payload = 
            {
             "uuid_customer": "array", optional
+            "customer_company_name": "array", optional
             "customer_code": "array", optional
             "customer_status": "array", optional
             "uuid_site": "array", optional
@@ -954,7 +964,6 @@ class Services(ApiManager):
             "service_name": "array", optional
             "service_description": "array", optional
             "service_status": "array", optional
-            "service_automata_domain": "array", optional
             "service_uuid_customer": "array", optional
             "status": "array", optional
             "ranking": "array", optional
@@ -967,14 +976,16 @@ class Services(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'timestamp_start',
-            'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'timestamp_start'), params.get('timestamp_end'), params.get(
-            'database_timestamp_start'), params.get('database_timestamp_end'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['extract_data_profile', 'sort_by',
+            'null_fields', 'timestamp_start', 'timestamp_end',
+            'database_timestamp_start', 'database_timestamp_end', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('extract_data_profile'), params.get('sort_by'), params.get(
+            'null_fields'), params.get('timestamp_start'), params.get(
+            'timestamp_end'), params.get('database_timestamp_start'
+            ), params.get('database_timestamp_end'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 services_last_status_query_bulk_v2.__name__, params,
@@ -1001,6 +1012,7 @@ class Services(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
+            customer_company_name (string optional): additional filter - parameter
             customer_code (string optional): additional filter - parameter
             customer_status (string optional): additional filter - parameter
             uuid_site (string optional): additional filter - parameter
@@ -1034,7 +1046,6 @@ class Services(ApiManager):
             service_name (string optional): additional filter - parameter
             service_description (string optional): additional filter - parameter
             service_status (string optional): additional filter - parameter
-            service_automata_domain (string optional): additional filter - parameter
             service_uuid_customer (string optional): additional filter - parameter
             timestamp_start (string optional): additional filter - parameter
             timestamp_end (string optional): additional filter - parameter
@@ -1053,28 +1064,29 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'uuid_customer',
-            'customer_code', 'customer_status', 'uuid_site', 'site_code',
-            'site_description', 'site_address', 'site_zip_code',
-            'site_city', 'site_country', 'site_state_province',
-            'site_status', 'uuid_group', 'group_name', 'group_status',
-            'group_type', 'group_uuid_virtual_domain', 'uuid_object',
-            'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
+            'customer_company_name', 'customer_code', 'customer_status',
+            'uuid_site', 'site_code', 'site_description', 'site_address',
+            'site_zip_code', 'site_city', 'site_country',
+            'site_state_province', 'site_status', 'uuid_group',
+            'group_name', 'group_status', 'group_type',
+            'group_uuid_virtual_domain', 'uuid_object', 'object_name',
+            'object_status', 'object_profile', 'uuid_metric_type',
+            'metric_type_name', 'metric_type_status', 'uuid_metric',
+            'metric_name', 'metric_status', 'metric_profile',
             'service_uuid_parent', 'uuid_service', 'service_profile',
             'service_name', 'service_description', 'service_status',
-            'service_automata_domain', 'service_uuid_customer',
-            'timestamp_start', 'timestamp_end', 'database_timestamp_start',
-            'database_timestamp_end', 'status', 'ranking', 'description',
-            'skip', 'limit', 'like', 'join', 'count']
+            'service_uuid_customer', 'timestamp_start', 'timestamp_end',
+            'database_timestamp_start', 'database_timestamp_end', 'status',
+            'ranking', 'description', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_customer'), params.get('customer_code'), params.get(
-            'customer_status'), params.get('uuid_site'), params.get('site_code'
-            ), params.get('site_description'), params.get('site_address'
-            ), params.get('site_zip_code'), params.get('site_city'
-            ), params.get('site_country'), params.get('site_state_province'
-            ), params.get('site_status'), params.get('uuid_group'), params.get(
-            'group_name'), params.get('group_status'), params.get('group_type'
+            'uuid_customer'), params.get('customer_company_name'), params.get(
+            'customer_code'), params.get('customer_status'), params.get(
+            'uuid_site'), params.get('site_code'), params.get(
+            'site_description'), params.get('site_address'), params.get(
+            'site_zip_code'), params.get('site_city'), params.get(
+            'site_country'), params.get('site_state_province'), params.get(
+            'site_status'), params.get('uuid_group'), params.get('group_name'
+            ), params.get('group_status'), params.get('group_type'
             ), params.get('group_uuid_virtual_domain'), params.get(
             'uuid_object'), params.get('object_name'), params.get(
             'object_status'), params.get('object_profile'), params.get(
@@ -1084,8 +1096,7 @@ class Services(ApiManager):
             'metric_profile'), params.get('service_uuid_parent'), params.get(
             'uuid_service'), params.get('service_profile'), params.get(
             'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_automata_domain'
-            ), params.get('service_uuid_customer'), params.get(
+            'service_status'), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(
@@ -1133,7 +1144,7 @@ class Services(ApiManager):
     def services_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Services
+        """Bulk Read Services
 
         Args:
             payload (list[dict], optional): List dict to create.
@@ -1168,7 +1179,7 @@ class Services(ApiManager):
     def services_metrics_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Metrics
+        """Bulk Read Metrics
 
         Args:
             payload (list[dict], optional): List dict to create.

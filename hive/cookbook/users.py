@@ -700,7 +700,7 @@ class Users(ApiManager):
 
     def users_widget_groups_delete(self, name: str, uuid_widget_group: str,
         kwargs: dict = None) -> list:
-        """Mark Customer As Not Starred
+        """Delete Wg Relation
 
         Args:
             name (str, required): name

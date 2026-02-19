@@ -7,7 +7,7 @@ class ProfileTopics(ApiManager):
     def profile_topics(self, warm_start: bool = False,
         single_page: bool = False, page_size: int = 5000,
         kwargs: dict = None, **params) -> list:
-        """Read Profile Topic
+        """Read Profile Topics
 
         Args:
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.

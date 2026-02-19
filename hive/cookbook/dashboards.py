@@ -25,6 +25,7 @@ class Dashboards(ApiManager):
             username (string optional): additional filter - parameter
             priority (integer optional): additional filter - parameter
             refresh_interval (integer optional): additional filter - parameter
+            scope (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -36,12 +37,13 @@ class Dashboards(ApiManager):
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'name',
             'description', 'type', 'username', 'priority',
-            'refresh_interval', 'skip', 'limit', 'like', 'join', 'count']
+            'refresh_interval', 'scope', 'skip', 'limit', 'like', 'join',
+            'count']
         params.get('sort_by'), params.get('null_fields'), params.get('name'
             ), params.get('description'), params.get('type'), params.get(
             'username'), params.get('priority'), params.get('refresh_interval'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            ), params.get('scope'), params.get('skip'), params.get('limit'
+            ), params.get('like'), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards.__name__, params,
                 official_params_list)
@@ -65,15 +67,17 @@ class Dashboards(ApiManager):
             priority (integer optional): additional filter - payload
             refresh_interval (integer optional): additional filter - payload
             image_name (string optional): additional filter - payload
+            scope (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['name', 'type', 'username', 'description',
-            'priority', 'refresh_interval', 'image_name']
+            'priority', 'refresh_interval', 'image_name', 'scope']
         payload.get('name'), payload.get('type'), payload.get('username'
             ), payload.get('description'), payload.get('priority'
-            ), payload.get('refresh_interval'), payload.get('image_name')
+            ), payload.get('refresh_interval'), payload.get('image_name'
+            ), payload.get('scope')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards_create.__name__,
                 payload, official_payload_list)
@@ -125,15 +129,17 @@ class Dashboards(ApiManager):
             priority (integer optional): additional filter - payload
             refresh_interval (integer optional): additional filter - payload
             image_name (string optional): additional filter - payload
+            scope (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         official_payload_list = ['name', 'type', 'username', 'description',
-            'priority', 'refresh_interval', 'image_name']
+            'priority', 'refresh_interval', 'image_name', 'scope']
         payload.get('name'), payload.get('type'), payload.get('username'
             ), payload.get('description'), payload.get('priority'
-            ), payload.get('refresh_interval'), payload.get('image_name')
+            ), payload.get('refresh_interval'), payload.get('image_name'
+            ), payload.get('scope')
         if not self._silence_warning:
             warning_wrong_parameters(self.dashboards_put.__name__, payload,
                 official_payload_list)
@@ -521,6 +527,7 @@ class Dashboards(ApiManager):
             "priority": "integer", optional
             "refresh_interval": "integer", optional
             "image_name": "string", optional
+            "scope": "string", optional
            }
           ]
 

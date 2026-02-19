@@ -28,6 +28,7 @@ class Dispatchers(ApiManager):
             description (string optional): additional filter - parameter
             level (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
+            tag (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -40,15 +41,16 @@ class Dispatchers(ApiManager):
         official_params_list = ['sort_by', 'null_fields',
             'uuid_notification_provider', 'uuid_calendar', 'uuid_message',
             'uuid_opening_reason', 'uuid_reason_for_closure', 'code',
-            'description', 'level', 'status', 'skip', 'limit', 'like',
-            'join', 'count']
+            'description', 'level', 'status', 'tag', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_notification_provider'), params.get('uuid_calendar'
             ), params.get('uuid_message'), params.get('uuid_opening_reason'
             ), params.get('uuid_reason_for_closure'), params.get('code'
             ), params.get('description'), params.get('level'), params.get(
-            'status'), params.get('skip'), params.get('limit'), params.get(
-            'like'), params.get('join'), params.get('count')
+            'status'), params.get('tag'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.dispatchers.__name__, params,
                 official_params_list)
@@ -78,6 +80,7 @@ class Dispatchers(ApiManager):
             state_province (string optional): additional filter - payload
             data_profile (array object optional): additional filter - payload
             remember_it (boolean optional): additional filter - payload
+            tag (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -86,13 +89,14 @@ class Dispatchers(ApiManager):
             'uuid_calendar', 'uuid_message', 'uuid_opening_reason',
             'uuid_reason_for_closure', 'code', 'description', 'delay',
             'status', 'country', 'state_province', 'data_profile',
-            'remember_it']
+            'remember_it', 'tag']
         payload.get('uuid_notification_provider'), payload.get('uuid_calendar'
             ), payload.get('uuid_message'), payload.get('uuid_opening_reason'
             ), payload.get('uuid_reason_for_closure'), payload.get('code'
             ), payload.get('description'), payload.get('delay'), payload.get(
             'status'), payload.get('country'), payload.get('state_province'
-            ), payload.get('data_profile'), payload.get('remember_it')
+            ), payload.get('data_profile'), payload.get('remember_it'
+            ), payload.get('tag')
         if not self._silence_warning:
             warning_wrong_parameters(self.dispatchers_create.__name__,
                 payload, official_payload_list)
@@ -150,6 +154,7 @@ class Dispatchers(ApiManager):
             state_province (string optional): additional filter - payload
             data_profile (array object optional): additional filter - payload
             remember_it (boolean optional): additional filter - payload
+            tag (string optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
@@ -158,13 +163,14 @@ class Dispatchers(ApiManager):
             'uuid_calendar', 'uuid_message', 'uuid_opening_reason',
             'uuid_reason_for_closure', 'code', 'description', 'delay',
             'status', 'country', 'state_province', 'data_profile',
-            'remember_it']
+            'remember_it', 'tag']
         payload.get('uuid_notification_provider'), payload.get('uuid_calendar'
             ), payload.get('uuid_message'), payload.get('uuid_opening_reason'
             ), payload.get('uuid_reason_for_closure'), payload.get('code'
             ), payload.get('description'), payload.get('delay'), payload.get(
             'status'), payload.get('country'), payload.get('state_province'
-            ), payload.get('data_profile'), payload.get('remember_it')
+            ), payload.get('data_profile'), payload.get('remember_it'
+            ), payload.get('tag')
         if not self._silence_warning:
             warning_wrong_parameters(self.dispatchers_put.__name__, payload,
                 official_payload_list)
@@ -729,6 +735,7 @@ class Dispatchers(ApiManager):
             "state_province": "string", optional
             "data_profile": "array object", optional
             "remember_it": "boolean", optional
+            "tag": "string", optional
            }
           ]
 

@@ -420,6 +420,7 @@ class Groups(ApiManager):
             active_at_timestamp (string optional): additional filter - parameter
             active_after_timestamp (string optional): additional filter - parameter
             active_at_or_after_timestamp (string optional): additional filter - parameter
+            tag (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -431,14 +432,14 @@ class Groups(ApiManager):
             kwargs = dict()
         official_params_list = ['not_in', 'code', 'status',
             'active_at_timestamp', 'active_after_timestamp',
-            'active_at_or_after_timestamp', 'skip', 'limit', 'like', 'join',
-            'count']
+            'active_at_or_after_timestamp', 'tag', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('not_in'), params.get('code'), params.get('status'
             ), params.get('active_at_timestamp'), params.get(
             'active_after_timestamp'), params.get(
-            'active_at_or_after_timestamp'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            'active_at_or_after_timestamp'), params.get('tag'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.groups_dispatchers.__name__,
                 params, official_params_list)
@@ -482,7 +483,7 @@ class Groups(ApiManager):
     def groups_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Groups
+        """Bulk Read Groups
 
         Args:
             payload (list[dict], optional): List dict to create.
