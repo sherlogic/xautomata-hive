@@ -655,7 +655,7 @@ class Metrics(ApiManager):
     def metrics_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Metrics
+        """Bulk Read Metrics
 
         Args:
             payload (list[dict], optional): List dict to create.
@@ -690,7 +690,7 @@ class Metrics(ApiManager):
     def metrics_services_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
-        """Read Metrics
+        """Bulk Read Services
 
         Args:
             payload (list[dict], optional): List dict to create.
@@ -726,7 +726,7 @@ class Metrics(ApiManager):
     def metrics_downtimes_bulk(self, payload: list,
         warm_start: bool = False, single_page: bool = False,
         page_size: int = 50, kwargs: dict = None, **params) -> list:
-        """Bulk Read Metrics
+        """Bulk Read Downtimes
 
         Args:
             payload (list[dict], optional): List dict to create.
