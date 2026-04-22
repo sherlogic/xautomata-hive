@@ -20,7 +20,6 @@ class CostTagging(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             uuid_view (string optional): additional filter - parameter
             uuid_tag (string optional): additional filter - parameter
-            tag_code (string optional): additional filter - parameter
             cost_category (string optional): additional filter - parameter
             cost_category_value (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
@@ -34,13 +33,13 @@ class CostTagging(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'uuid_view', 'uuid_tag',
-            'tag_code', 'cost_category', 'cost_category_value',
-            'null_fields', 'skip', 'limit', 'like', 'join', 'count']
+            'cost_category', 'cost_category_value', 'null_fields', 'skip',
+            'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('uuid_view'), params.get('uuid_tag'
-            ), params.get('tag_code'), params.get('cost_category'), params.get(
-            'cost_category_value'), params.get('null_fields'), params.get(
-            'skip'), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            ), params.get('cost_category'), params.get('cost_category_value'
+            ), params.get('null_fields'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tagging.__name__, params,
                 official_params_list)
@@ -113,7 +112,6 @@ class CostTagging(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            tag_code (string optional): additional filter - payload
             cost_category_value (string optional): additional filter - payload
             cost_category (string optional): additional filter - payload
             uuid_view (string optional): additional filter - payload
@@ -121,10 +119,10 @@ class CostTagging(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['tag_code', 'cost_category_value',
-            'cost_category', 'uuid_view']
-        payload.get('tag_code'), payload.get('cost_category_value'
-            ), payload.get('cost_category'), payload.get('uuid_view')
+        official_payload_list = ['cost_category_value', 'cost_category',
+            'uuid_view']
+        payload.get('cost_category_value'), payload.get('cost_category'
+            ), payload.get('uuid_view')
         if not self._silence_warning:
             warning_wrong_parameters(self.cost_tagging_put.__name__,
                 payload, official_payload_list)

@@ -43,6 +43,7 @@ class LastObjectStatus(ApiManager):
             object_profile (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             metric_name (string optional): additional filter - parameter
@@ -76,9 +77,10 @@ class LastObjectStatus(ApiManager):
             'site_state_province', 'site_status', 'uuid_group',
             'group_name', 'group_status', 'group_type', 'uuid_object',
             'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
-            'topic', 'last_value_uuid_probe', 'last_value_timestamp_start',
+            'uuid_metric_type', 'metric_type_name', 'metric_type_profile',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'topic',
+            'last_value_uuid_probe', 'last_value_timestamp_start',
             'last_value_timestamp_end', 'last_value_object_type',
             'last_value_name', 'last_value_value', 'last_value_unit',
             'last_value_description', 'last_value_status',
@@ -96,9 +98,10 @@ class LastObjectStatus(ApiManager):
             ), params.get('uuid_object'), params.get('object_name'
             ), params.get('object_status'), params.get('object_profile'
             ), params.get('uuid_metric_type'), params.get('metric_type_name'
-            ), params.get('metric_type_status'), params.get('uuid_metric'
-            ), params.get('metric_name'), params.get('metric_status'
-            ), params.get('metric_profile'), params.get('topic'), params.get(
+            ), params.get('metric_type_profile'), params.get(
+            'metric_type_status'), params.get('uuid_metric'), params.get(
+            'metric_name'), params.get('metric_status'), params.get(
+            'metric_profile'), params.get('topic'), params.get(
             'last_value_uuid_probe'), params.get('last_value_timestamp_start'
             ), params.get('last_value_timestamp_end'), params.get(
             'last_value_object_type'), params.get('last_value_name'
@@ -154,6 +157,7 @@ class LastObjectStatus(ApiManager):
             object_profile (array optional): additional filter - payload
             uuid_metric_type (array optional): additional filter - payload
             metric_type_name (array optional): additional filter - payload
+            metric_type_profile (array optional): additional filter - payload
             metric_type_status (array optional): additional filter - payload
             uuid_metric (array optional): additional filter - payload
             metric_name (array optional): additional filter - payload
@@ -179,9 +183,10 @@ class LastObjectStatus(ApiManager):
             'site_state_province', 'site_status', 'uuid_group',
             'group_name', 'group_status', 'group_type', 'uuid_object',
             'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
-            'topic', 'last_value_uuid_probe', 'last_value_timestamp',
+            'uuid_metric_type', 'metric_type_name', 'metric_type_profile',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'topic',
+            'last_value_uuid_probe', 'last_value_timestamp',
             'last_value_object_type', 'last_value_name', 'last_value_value',
             'last_value_unit', 'last_value_description',
             'last_value_status', 'last_value_ranking']
@@ -196,15 +201,16 @@ class LastObjectStatus(ApiManager):
             ), payload.get('uuid_object'), payload.get('object_name'
             ), payload.get('object_status'), payload.get('object_profile'
             ), payload.get('uuid_metric_type'), payload.get('metric_type_name'
-            ), payload.get('metric_type_status'), payload.get('uuid_metric'
-            ), payload.get('metric_name'), payload.get('metric_status'
-            ), payload.get('metric_profile'), payload.get('topic'
-            ), payload.get('last_value_uuid_probe'), payload.get(
-            'last_value_timestamp'), payload.get('last_value_object_type'
-            ), payload.get('last_value_name'), payload.get('last_value_value'
-            ), payload.get('last_value_unit'), payload.get(
-            'last_value_description'), payload.get('last_value_status'
-            ), payload.get('last_value_ranking')
+            ), payload.get('metric_type_profile'), payload.get(
+            'metric_type_status'), payload.get('uuid_metric'), payload.get(
+            'metric_name'), payload.get('metric_status'), payload.get(
+            'metric_profile'), payload.get('topic'), payload.get(
+            'last_value_uuid_probe'), payload.get('last_value_timestamp'
+            ), payload.get('last_value_object_type'), payload.get(
+            'last_value_name'), payload.get('last_value_value'), payload.get(
+            'last_value_unit'), payload.get('last_value_description'
+            ), payload.get('last_value_status'), payload.get(
+            'last_value_ranking')
         if not self._silence_warning:
             warning_wrong_parameters(self.last_object_status_create.
                 __name__, payload, official_payload_list)

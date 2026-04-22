@@ -107,21 +107,21 @@ class ExternalTickets(ApiManager):
             external_itsm (string required): additional filter - payload
             external_ticket (string required): additional filter - payload
             opening_date (string required): additional filter - payload
-            closing_date (string required): additional filter - payload
+            closing_date (string optional): additional filter - payload
             ticket_type (string required): additional filter - payload
             mode (string required): additional filter - payload
             severity (string required): additional filter - payload
             organization (string required): additional filter - payload
             responsibility (string required): additional filter - payload
-            stage_start_sla_l1 (string required): additional filter - payload
-            working_period_l1 (string required): additional filter - payload
-            target_stage_start_sla_l1 (string required): additional filter - payload
-            stage_start_sla_l2 (string required): additional filter - payload
-            working_period_l2 (string required): additional filter - payload
-            target_stage_start_sla_l2 (string required): additional filter - payload
-            resolution_sla (string required): additional filter - payload
-            working_period_resolution (string required): additional filter - payload
-            target_period_resolution (string required): additional filter - payload
+            stage_start_sla_l1 (string optional): additional filter - payload
+            working_period_l1 (string optional): additional filter - payload
+            target_stage_start_sla_l1 (string optional): additional filter - payload
+            stage_start_sla_l2 (string optional): additional filter - payload
+            working_period_l2 (string optional): additional filter - payload
+            target_stage_start_sla_l2 (string optional): additional filter - payload
+            resolution_sla (string optional): additional filter - payload
+            working_period_resolution (string optional): additional filter - payload
+            target_period_resolution (string optional): additional filter - payload
             data_profile (array object optional): additional filter - payload
 
         Returns: list"""
@@ -360,6 +360,101 @@ class ExternalTickets(ApiManager):
             =warm_start, params=params, **kwargs)
         return response
 
+    def external_tickets_ticket_by_params_virtual_domain(self,
+        ticket_type: str, uuid_virtual_domain: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Pie Charts Virtual Domain
+
+        Args:
+            ticket_type (str, required): ticket_type
+            uuid_virtual_domain (str, required): uuid_virtual_domain
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string optional): additional filter - parameter
+            date_end (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                external_tickets_ticket_by_params_virtual_domain.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/external_tickets/ticket_by_params/{ticket_type}/{uuid_virtual_domain}/virtual_domain'
+            , warm_start=warm_start, params=params, **kwargs)
+        return response
+
+    def external_tickets_ticket_by_sla_virtual_domain(self,
+        ticket_type: str, uuid_virtual_domain: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Sla Charge And Resolution Virtual Domain
+
+        Args:
+            ticket_type (str, required): ticket_type
+            uuid_virtual_domain (str, required): uuid_virtual_domain
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string optional): additional filter - parameter
+            date_end (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                external_tickets_ticket_by_sla_virtual_domain.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/external_tickets/ticket_by_sla/{ticket_type}/{uuid_virtual_domain}/virtual_domain'
+            , warm_start=warm_start, params=params, **kwargs)
+        return response
+
+    def external_tickets_ticket_by_date_virtual_domain(self,
+        uuid_virtual_domain: str, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """History Virtual Domain
+
+        Args:
+            uuid_virtual_domain (str, required): uuid_virtual_domain
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            date_start (string optional): additional filter - parameter
+            date_end (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['date_start', 'date_end']
+        params.get('date_start'), params.get('date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                external_tickets_ticket_by_date_virtual_domain.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/external_tickets/ticket_by_date/{uuid_virtual_domain}/virtual_domain'
+            , warm_start=warm_start, params=params, **kwargs)
+        return response
+
     def external_tickets_ticket_by_params_customers_filtering(self,
         ticket_type: str, warm_start: bool = False, kwargs: dict = None, **
         params) -> list:
@@ -515,21 +610,21 @@ class ExternalTickets(ApiManager):
             "external_itsm": "string", required
             "external_ticket": "string", required
             "opening_date": "string", required
-            "closing_date": "string", required
+            "closing_date": "string", optional
             "ticket_type": "string", required
             "mode": "string", required
             "severity": "string", required
             "organization": "string", required
             "responsibility": "string", required
-            "stage_start_sla_l1": "string", required
-            "working_period_l1": "string", required
-            "target_stage_start_sla_l1": "string", required
-            "stage_start_sla_l2": "string", required
-            "working_period_l2": "string", required
-            "target_stage_start_sla_l2": "string", required
-            "resolution_sla": "string", required
-            "working_period_resolution": "string", required
-            "target_period_resolution": "string", required
+            "stage_start_sla_l1": "string", optional
+            "working_period_l1": "string", optional
+            "target_stage_start_sla_l1": "string", optional
+            "stage_start_sla_l2": "string", optional
+            "working_period_l2": "string", optional
+            "target_stage_start_sla_l2": "string", optional
+            "resolution_sla": "string", optional
+            "working_period_resolution": "string", optional
+            "target_period_resolution": "string", optional
             "data_profile": "array object", optional
            }
           ]

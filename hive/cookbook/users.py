@@ -61,7 +61,7 @@ class Users(ApiManager):
 
     def users_password_reset_create(self, params: dict = False,
         kwargs: dict = None, **payload) -> list:
-        """Send Mail Password Reset
+        """Send Email Password Reset
 
         Args:
             params (dict, optional): additional parameters for the API.
@@ -200,7 +200,7 @@ class Users(ApiManager):
             **payload: additional parameters for the API.
 
         Keyword Args:
-            send_mail (boolean optional): additional filter - parameter
+            send_email (boolean optional): additional filter - parameter
             phone (string optional): additional filter - payload
             profile (string optional): additional filter - payload
             name (string required): additional filter - payload
@@ -780,6 +780,89 @@ class Users(ApiManager):
             f'/users/{name}/cost_views/{uuid}', **kwargs)
         return response
 
+    def users_create_bulk(self, payload: list, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None, **params) -> list:
+        """Bulk Create Users
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "password": "string", required
+            "phone": "string", optional
+            "profile": "string", optional
+            "name": "string", required
+            "email": "string", required
+            "active": "boolean", required
+            "acl": "object", required
+            "uuid_acl_override": "string", optional
+            "verified_email": "boolean", optional
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_create_bulk.__name__,
+                params, official_params_list)
+        response = self.execute('POST', path=f'/users/bulk/create/',
+            single_page=single_page, page_size=page_size, params=params,
+            payload=payload, **kwargs)
+        return response
+
+    def users_multilinks_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Create Users Multilinks
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "phone": "string", optional
+            "profile": "string", optional
+            "name": "string", required
+            "email": "string", required
+            "active": "boolean", required
+            "acl": "object", required
+            "uuid_acl_override": "string", optional
+            "verified_email": "boolean", optional
+            "password": "string", optional
+            "send_email": "boolean", optional
+            "groups": "array", optional
+            "virtual_domains": "array", optional
+            "customers": "array", optional
+            "widget_groups": "array", optional
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/users/bulk/create/multilinks', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
     def users_customers_create_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
@@ -1038,6 +1121,43 @@ class Users(ApiManager):
         response = self.execute('POST', path=
             f'/users/bulk/delete/virtual_domains', single_page=single_page,
             page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def users_widget_groups_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Widget Groups
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "username": "string", required
+            "uuid_widget_group": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.users_widget_groups_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/users/bulk/create/widget_groups', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
         return response
 
     def users_send_email_template_create(self, template_name: str,

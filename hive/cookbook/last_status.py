@@ -45,6 +45,7 @@ class LastStatus(ApiManager):
             object_profile (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             metric_name (string optional): additional filter - parameter
@@ -79,8 +80,8 @@ class LastStatus(ApiManager):
             'site_status', 'uuid_group', 'group_name', 'group_status',
             'group_type', 'uuid_object', 'object_name', 'object_status',
             'object_profile', 'uuid_metric_type', 'metric_type_name',
-            'metric_type_status', 'uuid_metric', 'metric_name',
-            'metric_status', 'metric_profile', 'topic',
+            'metric_type_profile', 'metric_type_status', 'uuid_metric',
+            'metric_name', 'metric_status', 'metric_profile', 'topic',
             'last_value_uuid_probe', 'last_value_timestamp_start',
             'last_value_timestamp_end', 'last_value_object_type',
             'last_value_name', 'last_value_value', 'last_value_unit',
@@ -100,9 +101,10 @@ class LastStatus(ApiManager):
             ), params.get('uuid_object'), params.get('object_name'
             ), params.get('object_status'), params.get('object_profile'
             ), params.get('uuid_metric_type'), params.get('metric_type_name'
-            ), params.get('metric_type_status'), params.get('uuid_metric'
-            ), params.get('metric_name'), params.get('metric_status'
-            ), params.get('metric_profile'), params.get('topic'), params.get(
+            ), params.get('metric_type_profile'), params.get(
+            'metric_type_status'), params.get('uuid_metric'), params.get(
+            'metric_name'), params.get('metric_status'), params.get(
+            'metric_profile'), params.get('topic'), params.get(
             'last_value_uuid_probe'), params.get('last_value_timestamp_start'
             ), params.get('last_value_timestamp_end'), params.get(
             'last_value_object_type'), params.get('last_value_name'
@@ -170,6 +172,7 @@ class LastStatus(ApiManager):
             "object_profile": "array", optional
             "uuid_metric_type": "array", optional
             "metric_type_name": "array", optional
+            "metric_type_profile": "array", optional
             "metric_type_status": "array", optional
             "uuid_metric": "array", optional
             "metric_name": "array", optional

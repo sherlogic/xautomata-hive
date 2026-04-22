@@ -909,6 +909,51 @@ class Customers(ApiManager):
             )
         return response
 
+    def customers_export(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None) -> list:
+        """Get Customer Export
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('GET', path=f'/customers/{uuid}/export/',
+            warm_start=warm_start, **kwargs)
+        return response
+
+    def customers_export_timeseries(self, uuid: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Get Customer Export Timeseries
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            timestamp_start (string required): additional filter - parameter
+            timestamp_end (string required): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['timestamp_start', 'timestamp_end']
+        params.get('timestamp_start'), params.get('timestamp_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_export_timeseries.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/customers/{uuid}/export/timeseries', warm_start=warm_start,
+            params=params, **kwargs)
+        return response
+
     def customers_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:

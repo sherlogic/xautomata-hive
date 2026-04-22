@@ -534,6 +534,7 @@ class Services(ApiManager):
             "object_profile": "array", optional
             "uuid_metric_type": "array", optional
             "metric_type_name": "array", optional
+            "metric_type_profile": "array", optional
             "metric_type_status": "array", optional
             "uuid_metric": "array", optional
             "metric_name": "array", optional
@@ -604,6 +605,7 @@ class Services(ApiManager):
             object_profile (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             metric_name (string optional): additional filter - parameter
@@ -642,10 +644,11 @@ class Services(ApiManager):
             'site_status', 'uuid_group', 'group_name', 'group_status',
             'group_type', 'group_uuid_virtual_domain', 'uuid_object',
             'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
-            'service_uuid_parent', 'uuid_service', 'service_profile',
-            'service_name', 'service_description', 'service_status',
+            'uuid_metric_type', 'metric_type_name', 'metric_type_profile',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'service_uuid_parent',
+            'uuid_service', 'service_profile', 'service_name',
+            'service_description', 'service_status',
             'service_uuid_customer', 'timestamp_start', 'timestamp_end',
             'database_timestamp_start', 'database_timestamp_end', 'status',
             'ranking', 'description', 'unit', 'value', 'skip', 'limit',
@@ -663,12 +666,13 @@ class Services(ApiManager):
             'uuid_object'), params.get('object_name'), params.get(
             'object_status'), params.get('object_profile'), params.get(
             'uuid_metric_type'), params.get('metric_type_name'), params.get(
-            'metric_type_status'), params.get('uuid_metric'), params.get(
-            'metric_name'), params.get('metric_status'), params.get(
-            'metric_profile'), params.get('service_uuid_parent'), params.get(
-            'uuid_service'), params.get('service_profile'), params.get(
-            'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_uuid_customer'), params.get(
+            'metric_type_profile'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('service_uuid_parent'), params.get('uuid_service'
+            ), params.get('service_profile'), params.get('service_name'
+            ), params.get('service_description'), params.get('service_status'
+            ), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(
@@ -737,6 +741,7 @@ class Services(ApiManager):
             "object_profile": "array", optional
             "uuid_metric_type": "array", optional
             "metric_type_name": "array", optional
+            "metric_type_profile": "array", optional
             "metric_type_status": "array", optional
             "uuid_metric": "array", optional
             "metric_name": "array", optional
@@ -817,6 +822,7 @@ class Services(ApiManager):
             object_profile (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             metric_name (string optional): additional filter - parameter
@@ -856,10 +862,11 @@ class Services(ApiManager):
             'site_status', 'uuid_group', 'group_name', 'group_status',
             'group_type', 'group_uuid_virtual_domain', 'uuid_object',
             'object_name', 'object_status', 'object_profile',
-            'uuid_metric_type', 'metric_type_name', 'metric_type_status',
-            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
-            'service_uuid_parent', 'uuid_service', 'service_profile',
-            'service_name', 'service_description', 'service_status',
+            'uuid_metric_type', 'metric_type_name', 'metric_type_profile',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'service_uuid_parent',
+            'uuid_service', 'service_profile', 'service_name',
+            'service_description', 'service_status',
             'service_uuid_customer', 'timestamp_start', 'timestamp_end',
             'database_timestamp_start', 'database_timestamp_end', 'status',
             'ranking', 'description', 'unit', 'value', 'fields_to_select',
@@ -877,12 +884,13 @@ class Services(ApiManager):
             'uuid_object'), params.get('object_name'), params.get(
             'object_status'), params.get('object_profile'), params.get(
             'uuid_metric_type'), params.get('metric_type_name'), params.get(
-            'metric_type_status'), params.get('uuid_metric'), params.get(
-            'metric_name'), params.get('metric_status'), params.get(
-            'metric_profile'), params.get('service_uuid_parent'), params.get(
-            'uuid_service'), params.get('service_profile'), params.get(
-            'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_uuid_customer'), params.get(
+            'metric_type_profile'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('service_uuid_parent'), params.get('uuid_service'
+            ), params.get('service_profile'), params.get('service_name'
+            ), params.get('service_description'), params.get('service_status'
+            ), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(
@@ -953,6 +961,7 @@ class Services(ApiManager):
             "object_profile": "array", optional
             "uuid_metric_type": "array", optional
             "metric_type_name": "array", optional
+            "metric_type_profile": "array", optional
             "metric_type_status": "array", optional
             "uuid_metric": "array", optional
             "metric_name": "array", optional
@@ -1035,6 +1044,7 @@ class Services(ApiManager):
             object_profile (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            metric_type_profile (string optional): additional filter - parameter
             metric_type_status (string optional): additional filter - parameter
             uuid_metric (string optional): additional filter - parameter
             metric_name (string optional): additional filter - parameter
@@ -1071,8 +1081,8 @@ class Services(ApiManager):
             'group_name', 'group_status', 'group_type',
             'group_uuid_virtual_domain', 'uuid_object', 'object_name',
             'object_status', 'object_profile', 'uuid_metric_type',
-            'metric_type_name', 'metric_type_status', 'uuid_metric',
-            'metric_name', 'metric_status', 'metric_profile',
+            'metric_type_name', 'metric_type_profile', 'metric_type_status',
+            'uuid_metric', 'metric_name', 'metric_status', 'metric_profile',
             'service_uuid_parent', 'uuid_service', 'service_profile',
             'service_name', 'service_description', 'service_status',
             'service_uuid_customer', 'timestamp_start', 'timestamp_end',
@@ -1091,12 +1101,13 @@ class Services(ApiManager):
             'uuid_object'), params.get('object_name'), params.get(
             'object_status'), params.get('object_profile'), params.get(
             'uuid_metric_type'), params.get('metric_type_name'), params.get(
-            'metric_type_status'), params.get('uuid_metric'), params.get(
-            'metric_name'), params.get('metric_status'), params.get(
-            'metric_profile'), params.get('service_uuid_parent'), params.get(
-            'uuid_service'), params.get('service_profile'), params.get(
-            'service_name'), params.get('service_description'), params.get(
-            'service_status'), params.get('service_uuid_customer'), params.get(
+            'metric_type_profile'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('service_uuid_parent'), params.get('uuid_service'
+            ), params.get('service_profile'), params.get('service_name'
+            ), params.get('service_description'), params.get('service_status'
+            ), params.get('service_uuid_customer'), params.get(
             'timestamp_start'), params.get('timestamp_end'), params.get(
             'database_timestamp_start'), params.get('database_timestamp_end'
             ), params.get('status'), params.get('ranking'), params.get(

@@ -120,9 +120,10 @@ class TsNtopFlows(ApiManager):
 
         Keyword Args:
             uuid_site (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
-            data_interval_hours (integer optional): additional filter - parameter
-            list_interval_days (integer optional): additional filter - parameter
+            interval_hours (integer optional): additional filter - parameter
+            l7_proto (array optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -132,11 +133,11 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['uuid_site', 'profile',
-            'data_interval_hours', 'list_interval_days', 'skip', 'limit',
-            'like', 'join', 'count']
-        params.get('uuid_site'), params.get('profile'), params.get(
-            'data_interval_hours'), params.get('list_interval_days'
+        official_params_list = ['uuid_site', 'uuid_service', 'profile',
+            'interval_hours', 'l7_proto', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('uuid_site'), params.get('uuid_service'), params.get(
+            'profile'), params.get('interval_hours'), params.get('l7_proto'
             ), params.get('skip'), params.get('limit'), params.get('like'
             ), params.get('join'), params.get('count')
         if not self._silence_warning:
@@ -163,8 +164,10 @@ class TsNtopFlows(ApiManager):
 
         Keyword Args:
             uuid_site (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
-            data_interval_hours (integer optional): additional filter - parameter
+            interval_hours (integer optional): additional filter - parameter
+            l7_proto (array optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -174,11 +177,13 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['uuid_site', 'profile',
-            'data_interval_hours', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('uuid_site'), params.get('profile'), params.get(
-            'data_interval_hours'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'uuid_service', 'profile',
+            'interval_hours', 'l7_proto', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('uuid_site'), params.get('uuid_service'), params.get(
+            'profile'), params.get('interval_hours'), params.get('l7_proto'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_ntop_flows_top_talkers.
                 __name__, params, official_params_list)
@@ -203,8 +208,10 @@ class TsNtopFlows(ApiManager):
 
         Keyword Args:
             uuid_site (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
-            data_interval_hours (integer optional): additional filter - parameter
+            interval_hours (integer optional): additional filter - parameter
+            l7_proto (array optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -214,11 +221,13 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['uuid_site', 'profile',
-            'data_interval_hours', 'skip', 'limit', 'like', 'join', 'count']
-        params.get('uuid_site'), params.get('profile'), params.get(
-            'data_interval_hours'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'uuid_service', 'profile',
+            'interval_hours', 'l7_proto', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('uuid_site'), params.get('uuid_service'), params.get(
+            'profile'), params.get('interval_hours'), params.get('l7_proto'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.ts_ntop_flows_top_receivers.
                 __name__, params, official_params_list)
@@ -243,9 +252,11 @@ class TsNtopFlows(ApiManager):
 
         Keyword Args:
             uuid_site (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
-            data_interval_hours (integer optional): additional filter - parameter
-            list_interval_days (integer optional): additional filter - parameter
+            interval_hours (integer optional): additional filter - parameter
+            historic_interval_hours (integer optional): additional filter - parameter
+            l7_proto (array optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
             like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
@@ -255,13 +266,14 @@ class TsNtopFlows(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['uuid_site', 'profile',
-            'data_interval_hours', 'list_interval_days', 'skip', 'limit',
-            'like', 'join', 'count']
-        params.get('uuid_site'), params.get('profile'), params.get(
-            'data_interval_hours'), params.get('list_interval_days'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+        official_params_list = ['uuid_site', 'uuid_service', 'profile',
+            'interval_hours', 'historic_interval_hours', 'l7_proto', 'skip',
+            'limit', 'like', 'join', 'count']
+        params.get('uuid_site'), params.get('uuid_service'), params.get(
+            'profile'), params.get('interval_hours'), params.get(
+            'historic_interval_hours'), params.get('l7_proto'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.
                 ts_ntop_flows_top_protocols_history.__name__, params,
@@ -270,4 +282,48 @@ class TsNtopFlows(ApiManager):
             f'/ts_ntop_flows/top_protocols_history/{uuid_customer}',
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, params=params, **kwargs)
+        return response
+
+    def ts_ntop_flows_protocols(self, uuid_customer: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Get Protocols
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
+            uuid_site (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
+            interval_hours (integer optional): additional filter - parameter
+            l7_proto (string optional): additional filter - parameter
+            skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
+            limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
+            like (boolean optional): Se True, eventuali filtri richiesti dalla API vengono presi come porzioni di testo, se False il matching sul campo dei filtri deve essere esatto. Default to True. - parameter
+            join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
+            count (boolean optional): Se True nel header della risposta e' presente la dimensione massima a db della chiamata fatta, sconsigliabile perche raddoppia il tempo per chiamata. Default to False. - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['sort_by', 'uuid_site', 'uuid_service',
+            'interval_hours', 'l7_proto', 'skip', 'limit', 'like', 'join',
+            'count']
+        params.get('sort_by'), params.get('uuid_site'), params.get(
+            'uuid_service'), params.get('interval_hours'), params.get(
+            'l7_proto'), params.get('skip'), params.get('limit'), params.get(
+            'like'), params.get('join'), params.get('count')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.ts_ntop_flows_protocols.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/ts_ntop_flows/protocols/{uuid_customer}', single_page=
+            single_page, page_size=page_size, warm_start=warm_start, params
+            =params, **kwargs)
         return response
