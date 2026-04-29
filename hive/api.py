@@ -16,7 +16,7 @@ import logging
 import warnings
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
-# METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
+METHODS = ["HEAD", "GET", "OPTIONS", "POST", "PUT", "DELETE", "TRACE"]
 
 logger = logging.getLogger('hive')
 
@@ -26,7 +26,10 @@ def get_session(timeout=150, total=5, backoff_factor=5):
     Add retry logic and policies about methods and statuses for requests
     """
     ss = requests.Session()
-    retry_strategy = Retry(total=total, status_forcelist=FORCE_STATUS, backoff_factor=backoff_factor)
+    retry_strategy = Retry(total=total,
+                           status_forcelist=FORCE_STATUS,
+                           backoff_factor=backoff_factor,
+                           allowed_methods=METHODS)
     ss.request = functools.partial(ss.request, timeout=timeout, verify=True)
     ss.mount('https://', HTTPAdapter(max_retries=retry_strategy))
     ss.mount('http://', HTTPAdapter(max_retries=retry_strategy))
