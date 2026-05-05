@@ -1,4 +1,6 @@
 import argparse
+import re
+
 from _API_writers import generate_python_code, underscore_to_camelcase, lib_import_set
 from utilities.dictionary import DeepDict
 import requests
@@ -7,6 +9,91 @@ import json
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
 METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
+
+ENTITY_ENDPOINTS = {
+    'customer_keys': '/customers/',
+    'virtual_domain_keys': '/virtual_domains/',
+    'site_keys': '/sites/',
+    'group_keys': '/groups/',
+    'object_keys': '/objects/',
+    'metric_type_keys': '/metric_types/',
+    'metric_keys': '/metrics/',
+    'service_keys': '/services/',
+}
+
+def extract_max_lengths_from_post(apis, schemas, endpoint):
+    # verifica che l'endpoint esista e abbia un metodo POST
+    if endpoint not in apis or 'post' not in apis[endpoint]:
+        return {}
+    mode_data = apis[endpoint]['post']
+    # verifica che il POST abbia un requestBody
+    if 'requestBody' not in mode_data:
+        return {}
+    content = mode_data['requestBody']['content']
+    # cerca il content type supportato per trovare lo schema del body
+    schema_body = None
+    for app_type in ['application/json', 'application/x-www-form-urlencoded']:
+        if app_type in content:
+            schema_body = content[app_type]['schema']
+            break
+    if schema_body is None:
+        return {}
+    # risolve il riferimento allo schema ($ref) per ottenere il nome del modello
+    if '$ref' in schema_body:
+        schema_ref = schema_body['$ref'].split('/')[-1]
+    elif 'items' in schema_body and '$ref' in schema_body['items']:
+        schema_ref = schema_body['items']['$ref'].split('/')[-1]
+    else:
+        return {}
+    if schema_ref not in schemas or 'properties' not in schemas[schema_ref]:
+        return {}
+    # estrae il maxLength per ogni campo del modello
+    lengths = {}
+    for key, value in schemas[schema_ref]['properties'].items():
+        if 'maxLength' in value:
+            lengths[key] = value['maxLength']
+        elif 'anyOf' in value:
+            # campo nullable: maxLength può essere dentro uno dei tipi in anyOf
+            for t in value['anyOf']:
+                if isinstance(t, dict) and 'maxLength' in t:
+                    lengths[key] = t['maxLength']
+                    break
+    return lengths
+
+
+def update_infrastructure_keys(apis, schemas):
+    # raccoglie i maxLength da tutti gli endpoint definiti in ENTITY_ENDPOINTS
+    entity_lengths = {}
+    for key_name, endpoint in ENTITY_ENDPOINTS.items():
+        lengths = extract_max_lengths_from_post(apis, schemas, endpoint)
+        if lengths:
+            entity_lengths[key_name] = lengths
+
+    try:
+        with open('./hive/infrastrucure_keys.py', 'r') as f:
+            lines = f.readlines()
+    except FileNotFoundError:
+        print('infrastrucure_keys.py not found, skipping update')
+        return
+
+    current_entity = None
+    result_lines = []  # ricostruisce l'intero file riga per riga con i valori aggiornati
+    for line in lines:
+        # rileva in quale sezione (es. customer_keys) ci troviamo
+        key = line.split('=')[0].strip()
+        if key in ENTITY_ENDPOINTS:
+            current_entity = key
+        # se siamo in una sezione con lunghezze note, aggiorna il valore len se presente nella riga
+        if current_entity and current_entity in entity_lengths:
+            for field, max_len in entity_lengths[current_entity].items():
+                pattern = rf'("{re.escape(field)}":\s*\{{[^}}]*"len":\s*)\d+'
+                if re.search(pattern, line):
+                    line = re.sub(pattern, rf'\g<1>{max_len}', line)
+                    break
+        result_lines.append(line)
+
+    with open('./hive/infrastrucure_keys.py', 'w') as f:
+        f.writelines(result_lines)
 
 single_page_doc = "            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False."
 page_size_doc = "            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000."
@@ -76,6 +163,7 @@ def main(**kwargs):
     data = openapi(kwargs['url'])
     apis = data['paths']
     schemas = data['components']['schemas']
+    update_infrastructure_keys(apis, schemas)
 
     allowed = {
         # "/automata_ingest/": ["POST"]
@@ -161,7 +249,7 @@ def main(**kwargs):
                             application = 'multipart/form-data'
                         else:
                             raise ValueError('new application insert here')  # se scatta questo errore probabilmente c'e' una nuova application che deve essere inserita nel if else
-
+                         # guarda application[schema]
                         if '$ref' in apis[name][mode]['requestBody']['content'][application]['schema']:
                             schema_ref = apis[name][mode]['requestBody']['content'][application]['schema']['$ref'].split('/')[-1]
 
