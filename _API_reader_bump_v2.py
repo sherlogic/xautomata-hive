@@ -2,10 +2,10 @@ import argparse
 import re
 
 from _API_writers import generate_python_code, underscore_to_camelcase, lib_import_set
+from hive.infrastrucure_keys import Keys
 from utilities.dictionary import DeepDict
 import requests
 import json
-
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
 METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
@@ -69,31 +69,58 @@ def update_infrastructure_keys(apis, schemas):
         if lengths:
             entity_lengths[key_name] = lengths
 
+    filepath = './hive/infrastrucure_keys.py'
     try:
-        with open('./hive/infrastrucure_keys.py', 'r') as f:
-            lines = f.readlines()
+        with open(filepath, 'r') as f:
+            source = f.read()
     except FileNotFoundError:
-        print('infrastrucure_keys.py not found, skipping update')
-        return
+        raise FileNotFoundError(f"File {filepath} not found")
 
-    current_entity = None
-    result_lines = []  # ricostruisce l'intero file riga per riga con i valori aggiornati
-    for line in lines:
-        # rileva in quale sezione (es. customer_keys) ci troviamo
-        key = line.split('=')[0].strip()
-        if key in ENTITY_ENDPOINTS:
-            current_entity = key
-        # se siamo in una sezione con lunghezze note, aggiorna il valore len se presente nella riga
-        if current_entity and current_entity in entity_lengths:
-            for field, max_len in entity_lengths[current_entity].items():
-                pattern = rf'("{re.escape(field)}":\s*\{{[^}}]*"len":\s*)\d+'
-                if re.search(pattern, line):
-                    line = re.sub(pattern, rf'\g<1>{max_len}', line)
-                    break
-        result_lines.append(line)
+    modified = source
+    for entity_name, fields in entity_lengths.items():
+        # troviamo 'customer_keys', virtual_domain_keys, ... oppure None
+        current_entity = getattr(Keys, entity_name, None)
+        if current_entity is None:
+            continue
 
-    with open('./hive/infrastrucure_keys.py', 'w') as f:
-        f.writelines(result_lines)
+        for section in ('mandatory', 'optional'):
+            # valore contenuto in 'mandatory' dell'entità -> es: customer_keys.get('mandatory', {})
+            section_dict = current_entity.get(section, {})
+            for field, new_len in fields.items():
+                # verifichiamo che il field esista all'interno del dizionario con i valori da controllare
+                if field not in section_dict:
+                    continue
+                field_def = section_dict[field]
+                # verifichiamo la lunghezza
+                current_len = field_def.get('len')
+                if current_len == new_len:
+                    continue  # no change needed
+
+                print(f'Updating {entity_name}.{field}: len {current_len} -> {new_len}')
+
+                # trova dove abbiamo "len" e il suo valore
+                pattern = (
+                    rf'("{re.escape(field)}"'  # key
+                    rf'\s*:\s*\{{[^}}]*'  # opening brace + any content
+                    rf'"len"\s*:\s*)'  # "len":
+                    rf'{re.escape(str(current_len))}'  # old value
+                )
+                replacement = rf'\g<1>{new_len}'
+                # modifichiamo
+                # count ci serve per trovare possibili errori
+                modified, count = re.subn(pattern, replacement, modified)
+                if count == 0:
+                    print(f'WARNING: pattern not found in source for {entity_name}.{field}')
+
+    # se qualcosa è stato modificato allora scriviamo
+    if modified != source:
+        with open(filepath, 'w') as f:
+            f.write(modified)
+        print('infrastrucure_keys.py updated successfully')
+    else:
+        print('No changes needed in infrastrucure_keys.py')
+
+
 
 single_page_doc = "            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False."
 page_size_doc = "            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000."
