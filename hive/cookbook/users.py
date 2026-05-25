@@ -1160,6 +1160,34 @@ class Users(ApiManager):
             page_size=page_size, params=params, payload=payload, **kwargs)
         return response
 
+    def users_widget_groups_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Widget Groups
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "username": "string", required
+            "uuid_widget_group": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/users/bulk/delete/widget_groups', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
     def users_send_email_template_create(self, template_name: str,
         kwargs: dict = None, **payload) -> list:
         """Send Email Template

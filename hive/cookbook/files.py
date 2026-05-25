@@ -60,6 +60,9 @@ class Files(ApiManager):
         Keyword Args:
             uuid_service (string optional): additional filter - parameter
             expires_at (string optional): additional filter - parameter
+            validate (boolean optional): additional filter - parameter
+            sha256 (string optional): additional filter - parameter
+            size (integer optional): additional filter - parameter
             file (string required): additional filter - payload
 
         Returns: list"""
