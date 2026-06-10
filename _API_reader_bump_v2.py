@@ -1,12 +1,126 @@
 import argparse
+import re
+
 from _API_writers import generate_python_code, underscore_to_camelcase, lib_import_set
+from hive.infrastrucure_keys import Keys
 from utilities.dictionary import DeepDict
 import requests
 import json
 
-
 FORCE_STATUS = [429, 500, 502, 503, 504]
 METHODS = ["HEAD", "GET", "OPTIONS", "POST"]
+
+ENTITY_ENDPOINTS = {
+    'customer_keys': '/customers/',
+    'virtual_domain_keys': '/virtual_domains/',
+    'site_keys': '/sites/',
+    'group_keys': '/groups/',
+    'object_keys': '/objects/',
+    'metric_type_keys': '/metric_types/',
+    'metric_keys': '/metrics/',
+    'service_keys': '/services/',
+}
+
+def extract_max_lengths_from_post(apis, schemas, endpoint):
+    # verifica che l'endpoint esista e abbia un metodo POST
+    if endpoint not in apis or 'post' not in apis[endpoint]:
+        return {}
+    mode_data = apis[endpoint]['post']
+    # verifica che il POST abbia un requestBody
+    if 'requestBody' not in mode_data:
+        return {}
+    content = mode_data['requestBody']['content']
+    # cerca il content type supportato per trovare lo schema del body
+    schema_body = None
+    for app_type in ['application/json', 'application/x-www-form-urlencoded']:
+        if app_type in content:
+            schema_body = content[app_type]['schema']
+            break
+    if schema_body is None:
+        return {}
+    # risolve il riferimento allo schema ($ref) per ottenere il nome del modello
+    if '$ref' in schema_body:
+        schema_ref = schema_body['$ref'].split('/')[-1]
+    elif 'items' in schema_body and '$ref' in schema_body['items']:
+        schema_ref = schema_body['items']['$ref'].split('/')[-1]
+    else:
+        return {}
+    if schema_ref not in schemas or 'properties' not in schemas[schema_ref]:
+        return {}
+    # estrae il maxLength per ogni campo del modello
+    lengths = {}
+    for key, value in schemas[schema_ref]['properties'].items():
+        if 'maxLength' in value:
+            lengths[key] = value['maxLength']
+        elif 'anyOf' in value:
+            # campo nullable: maxLength può essere dentro uno dei tipi in anyOf
+            for t in value['anyOf']:
+                if isinstance(t, dict) and 'maxLength' in t:
+                    lengths[key] = t['maxLength']
+                    break
+    return lengths
+
+
+def update_infrastructure_keys(apis, schemas):
+    # raccoglie i maxLength da tutti gli endpoint definiti in ENTITY_ENDPOINTS
+    entity_lengths = {}
+    for key_name, endpoint in ENTITY_ENDPOINTS.items():
+        lengths = extract_max_lengths_from_post(apis, schemas, endpoint)
+        if lengths:
+            entity_lengths[key_name] = lengths
+
+    filepath = './hive/infrastrucure_keys.py'
+    try:
+        with open(filepath, 'r') as f:
+            source = f.read()
+    except FileNotFoundError:
+        raise FileNotFoundError(f"File {filepath} not found")
+
+    modified = source
+    for entity_name, fields in entity_lengths.items():
+        # troviamo 'customer_keys', virtual_domain_keys, ... oppure None
+        current_entity = getattr(Keys, entity_name, None)
+        if current_entity is None:
+            continue
+
+        for section in ('mandatory', 'optional'):
+            # valore contenuto in 'mandatory' dell'entità -> es: customer_keys.get('mandatory', {})
+            section_dict = current_entity.get(section, {})
+            for field, new_len in fields.items():
+                # verifichiamo che il field esista all'interno del dizionario con i valori da controllare
+                if field not in section_dict:
+                    continue
+                field_def = section_dict[field]
+                # verifichiamo la lunghezza
+                current_len = field_def.get('len')
+                if current_len == new_len:
+                    continue  # no change needed
+
+                print(f'Updating {entity_name}.{field}: len {current_len} -> {new_len}')
+
+                # trova dove abbiamo "len" e il suo valore
+                pattern = (
+                    rf'("{re.escape(field)}"'  # key
+                    rf'\s*:\s*\{{[^}}]*'  # opening brace + any content
+                    rf'"len"\s*:\s*)'  # "len":
+                    rf'{re.escape(str(current_len))}'  # old value
+                )
+                replacement = rf'\g<1>{new_len}'
+                # modifichiamo
+                # count ci serve per trovare possibili errori
+                modified, count = re.subn(pattern, replacement, modified)
+                if count == 0:
+                    print(f'WARNING: pattern not found in source for {entity_name}.{field}')
+
+    # se qualcosa è stato modificato allora scriviamo
+    if modified != source:
+        with open(filepath, 'w') as f:
+            f.write(modified)
+        print('infrastrucure_keys.py updated successfully')
+    else:
+        print('No changes needed in infrastrucure_keys.py')
+
+
 
 single_page_doc = "            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False."
 page_size_doc = "            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000."
@@ -76,6 +190,7 @@ def main(**kwargs):
     data = openapi(kwargs['url'])
     apis = data['paths']
     schemas = data['components']['schemas']
+    update_infrastructure_keys(apis, schemas)
 
     allowed = {
         # "/automata_ingest/": ["POST"]
@@ -161,7 +276,7 @@ def main(**kwargs):
                             application = 'multipart/form-data'
                         else:
                             raise ValueError('new application insert here')  # se scatta questo errore probabilmente c'e' una nuova application che deve essere inserita nel if else
-
+                         # guarda application[schema]
                         if '$ref' in apis[name][mode]['requestBody']['content'][application]['schema']:
                             schema_ref = apis[name][mode]['requestBody']['content'][application]['schema']['$ref'].split('/')[-1]
 

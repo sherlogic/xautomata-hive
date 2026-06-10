@@ -116,15 +116,18 @@ class Metrics(ApiManager):
             warm_start, params=params, **kwargs)
         return response
 
-    def metrics_put(self, uuid: str, kwargs: dict = None, **payload) -> list:
+    def metrics_put(self, uuid: str, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
         """Update Metric
 
         Args:
+            params (dict, optional): additional parameters for the API.
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
+            uuid_probe (string optional): additional filter - parameter
             uuid_metric_type (string optional): additional filter - payload
             name (string optional): additional filter - payload
             description (string optional): additional filter - payload
@@ -147,8 +150,8 @@ class Metrics(ApiManager):
         if not self._silence_warning:
             warning_wrong_parameters(self.metrics_put.__name__, payload,
                 official_payload_list)
-        response = self.execute('PUT', path=f'/metrics/{uuid}', payload=
-            payload, **kwargs)
+        response = self.execute('PUT', path=f'/metrics/{uuid}', params=
+            params, payload=payload, **kwargs)
         return response
 
     def metrics_delete(self, uuid: str, kwargs: dict = None) -> list:
@@ -873,6 +876,71 @@ class Metrics(ApiManager):
             **kwargs)
         return response
 
+    def metrics_dispatchers_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.metrics_dispatchers_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/metrics/bulk/create/dispatchers', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def metrics_dispatchers_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/metrics/bulk/delete/dispatchers', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
     def metrics_downtimes_create_bulk(self, payload: list,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
@@ -1100,7 +1168,7 @@ class Metrics(ApiManager):
 
     def metrics_topic_consumer(self, group: str, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
-        """Kafka Consumer
+        """Kafka Consumer By Filter
 
         Args:
             group (str, required): group
@@ -1173,30 +1241,125 @@ class Metrics(ApiManager):
             params=params, **kwargs)
         return response
 
-    def metrics_topic_consumer_filter_create(self, group: str,
-        kwargs: dict = None, **payload) -> list:
-        """Bulk Create Metrics Consumer Group
+    def metrics_topic_consumer_filter_query_bulk(self, group: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None, **params) -> list:
+        """Create Metrics Consumer Group By Query
 
         Args:
             group (str, required): group
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **payload: additional parameters for the API.
+            **params: additional parameters for the API.
 
         Keyword Args:
-            uuid (str required): additional filter - payload
+            extract_valueless_metrics (boolean optional): additional filter - parameter
+            extract_automata_domain (string optional): additional filter - parameter
+            uuid_customer (string optional): additional filter - parameter
+            customer_code (string optional): additional filter - parameter
+            customer_status (string optional): additional filter - parameter
+            uuid_site (string optional): additional filter - parameter
+            site_code (string optional): additional filter - parameter
+            site_description (string optional): additional filter - parameter
+            site_address (string optional): additional filter - parameter
+            site_zip_code (string optional): additional filter - parameter
+            site_city (string optional): additional filter - parameter
+            site_country (string optional): additional filter - parameter
+            site_state_province (string optional): additional filter - parameter
+            site_status (string optional): additional filter - parameter
+            uuid_group (string optional): additional filter - parameter
+            group_uuid_virtual_domain (string optional): additional filter - parameter
+            group_name (string optional): additional filter - parameter
+            group_status (string optional): additional filter - parameter
+            group_type (string optional): additional filter - parameter
+            uuid_object (string optional): additional filter - parameter
+            object_name (string optional): additional filter - parameter
+            object_status (string optional): additional filter - parameter
+            object_profile (string optional): additional filter - parameter
+            uuid_metric_type (string optional): additional filter - parameter
+            metric_type_name (string optional): additional filter - parameter
+            metric_type_status (string optional): additional filter - parameter
+            uuid_metric (string optional): additional filter - parameter
+            metric_name (string optional): additional filter - parameter
+            metric_status (string optional): additional filter - parameter
+            metric_profile (string optional): additional filter - parameter
+            topic (string optional): additional filter - parameter
+            service_uuid_parent (string optional): additional filter - parameter
+            uuid_service (string optional): additional filter - parameter
+            service_profile (string optional): additional filter - parameter
+            service_name (string optional): additional filter - parameter
+            service_description (string optional): additional filter - parameter
+            service_status (string optional): additional filter - parameter
+            service_automata_domain (string optional): additional filter - parameter
+            service_uuid_customer (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['uuid']
-        payload.get('uuid')
+        official_params_list = ['extract_valueless_metrics',
+            'extract_automata_domain', 'uuid_customer', 'customer_code',
+            'customer_status', 'uuid_site', 'site_code', 'site_description',
+            'site_address', 'site_zip_code', 'site_city', 'site_country',
+            'site_state_province', 'site_status', 'uuid_group',
+            'group_uuid_virtual_domain', 'group_name', 'group_status',
+            'group_type', 'uuid_object', 'object_name', 'object_status',
+            'object_profile', 'uuid_metric_type', 'metric_type_name',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'topic',
+            'service_uuid_parent', 'uuid_service', 'service_profile',
+            'service_name', 'service_description', 'service_status',
+            'service_automata_domain', 'service_uuid_customer']
+        params.get('extract_valueless_metrics'), params.get(
+            'extract_automata_domain'), params.get('uuid_customer'
+            ), params.get('customer_code'), params.get('customer_status'
+            ), params.get('uuid_site'), params.get('site_code'), params.get(
+            'site_description'), params.get('site_address'), params.get(
+            'site_zip_code'), params.get('site_city'), params.get(
+            'site_country'), params.get('site_state_province'), params.get(
+            'site_status'), params.get('uuid_group'), params.get(
+            'group_uuid_virtual_domain'), params.get('group_name'), params.get(
+            'group_status'), params.get('group_type'), params.get('uuid_object'
+            ), params.get('object_name'), params.get('object_status'
+            ), params.get('object_profile'), params.get('uuid_metric_type'
+            ), params.get('metric_type_name'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('topic'), params.get('service_uuid_parent'
+            ), params.get('uuid_service'), params.get('service_profile'
+            ), params.get('service_name'), params.get('service_description'
+            ), params.get('service_status'), params.get(
+            'service_automata_domain'), params.get('service_uuid_customer')
         if not self._silence_warning:
             warning_wrong_parameters(self.
-                metrics_topic_consumer_filter_create.__name__, payload,
-                official_payload_list)
+                metrics_topic_consumer_filter_query_bulk.__name__, params,
+                official_params_list)
         response = self.execute('POST', path=
-            f'/metrics/topic/consumer/{group}/filter', payload=payload, **
-            kwargs)
+            f'/metrics/topic/consumer/{group}/filter/by_query', single_page
+            =single_page, page_size=page_size, warm_start=warm_start,
+            params=params, **kwargs)
+        return response
+
+    def metrics_topic_consumer_filter_refresh_query_bulk(self, group: str,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 5000, kwargs: dict = None) -> list:
+        """Refresh Metrics Consumer Group By Query
+
+        Args:
+            group (str, required): group
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 5000.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/metrics/topic/consumer/{group}/filter/by_query/refresh',
+            single_page=single_page, page_size=page_size, warm_start=
+            warm_start, **kwargs)
         return response
 
     def metrics_topic_consumer_delete_group(self, group: str,

@@ -118,16 +118,18 @@ class MetricTypes(ApiManager):
             warm_start=warm_start, params=params, **kwargs)
         return response
 
-    def metric_types_put(self, uuid: str, kwargs: dict = None, **payload
-        ) -> list:
+    def metric_types_put(self, uuid: str, params: dict = False,
+        kwargs: dict = None, **payload) -> list:
         """Update Metric Type
 
         Args:
+            params (dict, optional): additional parameters for the API.
             uuid (str, required): uuid
             kwargs (dict, optional): additional parameters for execute. Default to None.
             **payload: additional parameters for the API.
 
         Keyword Args:
+            uuid_probe (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - payload
             name (string optional): additional filter - payload
             description (string optional): additional filter - payload
@@ -150,8 +152,8 @@ class MetricTypes(ApiManager):
         if not self._silence_warning:
             warning_wrong_parameters(self.metric_types_put.__name__,
                 payload, official_payload_list)
-        response = self.execute('PUT', path=f'/metric_types/{uuid}',
-            payload=payload, **kwargs)
+        response = self.execute('PUT', path=f'/metric_types/{uuid}', params
+            =params, payload=payload, **kwargs)
         return response
 
     def metric_types_delete(self, uuid: str, kwargs: dict = None) -> list:
@@ -497,6 +499,73 @@ class MetricTypes(ApiManager):
         response = self.execute('POST', path=f'/metric_types/bulk/delete/',
             single_page=single_page, page_size=page_size, payload=payload,
             **kwargs)
+        return response
+
+    def metric_types_dispatchers_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                metric_types_dispatchers_create_bulk.__name__, params,
+                official_params_list)
+        response = self.execute('POST', path=
+            f'/metric_types/bulk/create/dispatchers', single_page=
+            single_page, page_size=page_size, params=params, payload=
+            payload, **kwargs)
+        return response
+
+    def metric_types_dispatchers_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Dispatchers
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_dispatcher": "string", required
+            "uuid_metric_type": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/metric_types/bulk/delete/dispatchers', single_page=
+            single_page, page_size=page_size, payload=payload, **kwargs)
         return response
 
     def metric_types_downtimes_create_bulk(self, payload: list,

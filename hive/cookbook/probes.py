@@ -107,14 +107,17 @@ class Probes(ApiManager):
         Keyword Args:
             join (boolean optional): Se join = true, ogni riga restituita conterra' chiavi aggiuntive che fanno riferimento ad altre entita', con cui la riga ha relazioni 1:1. Default to False - parameter
             extract_severity (boolean optional): Se True nella risposta e' anche presente la severita, Default to False. - parameter
+            extract_last_status (boolean optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
             params=params.copy())
-        official_params_list = ['join', 'extract_severity']
-        params.get('join'), params.get('extract_severity')
+        official_params_list = ['join', 'extract_severity',
+            'extract_last_status']
+        params.get('join'), params.get('extract_severity'), params.get(
+            'extract_last_status')
         if not self._silence_warning:
             warning_wrong_parameters(self.probe.__name__, params,
                 official_params_list)

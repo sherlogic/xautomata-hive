@@ -29,6 +29,7 @@ class Sites(ApiManager):
             country (string optional): additional filter - parameter
             notes (string optional): additional filter - parameter
             state_province (string optional): additional filter - parameter
+            region (string optional): additional filter - parameter
             status (string optional): additional filter - parameter
             severity (string optional): additional filter - parameter
             filter_group_types (string optional): additional filter - parameter
@@ -46,17 +47,19 @@ class Sites(ApiManager):
         official_params_list = ['sort_by', 'null_fields', 'not_fields',
             'uuid_customer', 'type', 'code', 'description', 'address',
             'zip_code', 'city', 'country', 'notes', 'state_province',
-            'status', 'severity', 'filter_group_types', 'count_children',
-            'extract_severity', 'skip', 'limit', 'like', 'join', 'count']
+            'region', 'status', 'severity', 'filter_group_types',
+            'count_children', 'extract_severity', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'not_fields'), params.get('uuid_customer'), params.get('type'
             ), params.get('code'), params.get('description'), params.get(
             'address'), params.get('zip_code'), params.get('city'), params.get(
             'country'), params.get('notes'), params.get('state_province'
-            ), params.get('status'), params.get('severity'), params.get(
-            'filter_group_types'), params.get('count_children'), params.get(
-            'extract_severity'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            ), params.get('region'), params.get('status'), params.get(
+            'severity'), params.get('filter_group_types'), params.get(
+            'count_children'), params.get('extract_severity'), params.get(
+            'skip'), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.sites.__name__, params,
                 official_params_list)
@@ -447,6 +450,28 @@ class Sites(ApiManager):
             warm_start=warm_start, **kwargs)
         return response
 
+    def sites_import_create(self, kwargs: dict = None, **payload) -> list:
+        """Get Site Import
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            file (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['file']
+        payload.get('file')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.sites_import_create.__name__,
+                payload, official_payload_list)
+        response = self.execute('POST', path=f'/sites/import/', payload=
+            payload, **kwargs)
+        return response
+
     def sites_export_timeseries(self, uuid: str, warm_start: bool = False,
         kwargs: dict = None, **params) -> list:
         """Get Site Export Timeseries
@@ -474,6 +499,29 @@ class Sites(ApiManager):
         response = self.execute('GET', path=
             f'/sites/{uuid}/export/timeseries', warm_start=warm_start,
             params=params, **kwargs)
+        return response
+
+    def sites_import_timeseries_create(self, kwargs: dict = None, **payload
+        ) -> list:
+        """Import Site Timeseries
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            file (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['file']
+        payload.get('file')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.sites_import_timeseries_create.
+                __name__, payload, official_payload_list)
+        response = self.execute('POST', path=f'/sites/import/timeseries/',
+            payload=payload, **kwargs)
         return response
 
     def sites_bulk(self, payload: list, warm_start: bool = False,

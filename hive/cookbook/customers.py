@@ -925,6 +925,28 @@ class Customers(ApiManager):
             warm_start=warm_start, **kwargs)
         return response
 
+    def customers_import_create(self, kwargs: dict = None, **payload) -> list:
+        """Get Customer Import
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            file (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['file']
+        payload.get('file')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_import_create.__name__,
+                payload, official_payload_list)
+        response = self.execute('POST', path=f'/customers/import/', payload
+            =payload, **kwargs)
+        return response
+
     def customers_export_timeseries(self, uuid: str,
         warm_start: bool = False, kwargs: dict = None, **params) -> list:
         """Get Customer Export Timeseries
@@ -952,6 +974,30 @@ class Customers(ApiManager):
         response = self.execute('GET', path=
             f'/customers/{uuid}/export/timeseries', warm_start=warm_start,
             params=params, **kwargs)
+        return response
+
+    def customers_import_timeseries_create(self, kwargs: dict = None, **payload
+        ) -> list:
+        """Import Customer Timeseries
+
+        Args:
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **payload: additional parameters for the API.
+
+        Keyword Args:
+            file (string required): additional filter - payload
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_payload_list = ['file']
+        payload.get('file')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                customers_import_timeseries_create.__name__, payload,
+                official_payload_list)
+        response = self.execute('POST', path=
+            f'/customers/import/timeseries/', payload=payload, **kwargs)
         return response
 
     def customers_bulk(self, payload: list, warm_start: bool = False,
@@ -1218,6 +1264,71 @@ class Customers(ApiManager):
             kwargs = dict()
         response = self.execute('POST', path=
             f'/customers/bulk/delete/users', single_page=single_page,
+            page_size=page_size, payload=payload, **kwargs)
+        return response
+
+    def customers_dashboards_create_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None,
+        **params) -> list:
+        """Bulk Link Dashboards
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            best_effort (boolean optional): additional filter - parameter
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_customer": "string", required
+            "uuid_dashboard": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        official_params_list = ['best_effort']
+        params.get('best_effort')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.customers_dashboards_create_bulk.
+                __name__, params, official_params_list)
+        response = self.execute('POST', path=
+            f'/customers/bulk/create/dashboards', single_page=single_page,
+            page_size=page_size, params=params, payload=payload, **kwargs)
+        return response
+
+    def customers_dashboards_delete_bulk(self, payload: list,
+        single_page: bool = False, page_size: int = 50, kwargs: dict = None
+        ) -> list:
+        """Bulk Unlink Dashboards
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+           {
+            "uuid_customer": "string", required
+            "uuid_dashboard": "string", required
+           }
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/customers/bulk/delete/dashboards', single_page=single_page,
             page_size=page_size, payload=payload, **kwargs)
         return response
 
@@ -1514,6 +1625,7 @@ class Customers(ApiManager):
         Keyword Args:
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
+            code (string optional): additional filter - parameter
             uuid_object (string optional): additional filter - parameter
             country (string optional): additional filter - parameter
             city (string optional): additional filter - parameter
@@ -1532,13 +1644,13 @@ class Customers(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['sort_by', 'null_fields', 'uuid_object',
-            'country', 'city', 'address', 'zip_code', 'status',
-            'description', 'name', 'ip_cidr', 'skip', 'limit', 'like',
-            'join', 'count']
-        params.get('sort_by'), params.get('null_fields'), params.get(
-            'uuid_object'), params.get('country'), params.get('city'
-            ), params.get('address'), params.get('zip_code'), params.get(
+        official_params_list = ['sort_by', 'null_fields', 'code',
+            'uuid_object', 'country', 'city', 'address', 'zip_code',
+            'status', 'description', 'name', 'ip_cidr', 'skip', 'limit',
+            'like', 'join', 'count']
+        params.get('sort_by'), params.get('null_fields'), params.get('code'
+            ), params.get('uuid_object'), params.get('country'), params.get(
+            'city'), params.get('address'), params.get('zip_code'), params.get(
             'status'), params.get('description'), params.get('name'
             ), params.get('ip_cidr'), params.get('skip'), params.get('limit'
             ), params.get('like'), params.get('join'), params.get('count')
