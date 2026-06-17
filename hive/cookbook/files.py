@@ -158,3 +158,31 @@ class Files(ApiManager):
         response = self.execute('GET', path=f'/files/{uuid}/download',
             warm_start=warm_start, **kwargs)
         return response
+
+    def files_download_direct(self, uuid: str, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """Download User File
+
+        Args:
+            uuid (str, required): uuid
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            refresh (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['refresh']
+        params.get('refresh')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.files_download_direct.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/files/{uuid}/download/direct', warm_start=warm_start, params
+            =params, **kwargs)
+        return response

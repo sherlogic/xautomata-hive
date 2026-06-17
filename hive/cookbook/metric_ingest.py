@@ -23,6 +23,7 @@ class MetricIngest(ApiManager):
             "uuid_probe_0": "string", required
             "timestamp_0": "integer", required
             "object_type_0": "string", optional
+            "ingest_timestamp_0": "integer", optional
             "value_0": "string", required
             "unit_0": "string", required
             "description_0": "string", required
@@ -33,6 +34,7 @@ class MetricIngest(ApiManager):
             "uuid_probe_1": "string", required
             "timestamp_1": "integer", required
             "object_type_1": "string", optional
+            "ingest_timestamp_1": "integer", optional
             "status_1": "None", required
             "ranking_1": "integer", required
             "description_1": "string", required
@@ -41,11 +43,13 @@ class MetricIngest(ApiManager):
             "uuid_probe_2": "string", required
             "timestamp_2": "integer", required
             "object_type_2": "string", optional
+            "ingest_timestamp_2": "integer", optional
             "description_2": "string", optional
             "uuid_metric_3": "string", required
             "uuid_probe_3": "string", required
             "timestamp_3": "integer", required
             "object_type_3": "string", optional
+            "ingest_timestamp_3": "integer", optional
             "unit_3": "string", required
             "value_3": "number", required
            }

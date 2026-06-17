@@ -1361,18 +1361,3 @@ class Metrics(ApiManager):
             single_page=single_page, page_size=page_size, warm_start=
             warm_start, **kwargs)
         return response
-
-    def metrics_topic_consumer_delete_group(self, group: str,
-        kwargs: dict = None) -> list:
-        """Bulk Delete Metrics Consumer Group
-
-        Args:
-            group (str, required): group
-            kwargs (dict, optional): additional parameters for execute. Default to None.
-
-        Returns: list"""
-        if kwargs is None:
-            kwargs = dict()
-        response = self.execute('DELETE', path=
-            f'/metrics/topic/consumer/{group}/delete', **kwargs)
-        return response
