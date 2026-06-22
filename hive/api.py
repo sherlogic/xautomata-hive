@@ -71,9 +71,9 @@ class ApiManager:
         self.authenticate()
         self._get_only = False
         self._return_url_params_payload = False
-        self._url = False
-        self._parmas = False
-        self._payload = _payload
+        self._url_list = False
+        self._params_list = False
+        self._payload_list = False
 
         if not self._SSL_verify: warnings.filterwarnings("ignore", category=InsecureRequestWarning)
 
@@ -170,9 +170,9 @@ class ApiManager:
 
         self.response = []  # reset dell'attributo responce, cosi da non accodare risposte proveninenti da richieste diverse
         if self._return_url_params_payload:
-            self._url = []
-            self._payload = []
-            self._params = []
+            self._url_list = []
+            self._payload_list = []
+            self._params_list = []
 
         @warmstart(active=warm_start, args_ex=[2], verbose=False)
         @paginate(single_page=single_page, page_size=page_size, skip=_params_['skip'], limit=_params_['limit'], bulk=bulk)
@@ -186,9 +186,9 @@ class ApiManager:
             logger.debug(f'request payload: {_payload}')
 
             if self._return_url_params_payload:
-                self._url.append(_url)
-                self._payload.append(_payload)
-                self._params.append(_params)
+                self._url_list.append(_url)
+                self._payload_list.append(_payload)
+                self._params_list.append(_params)
 
             response = get_session(
                 self._timeout,
