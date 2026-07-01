@@ -546,6 +546,74 @@ class ExternalTickets(ApiManager):
             warm_start=warm_start, params=params, **kwargs)
         return response
 
+    def external_tickets_ticket_counts(self, uuid_customer: str,
+        warm_start: bool = False, kwargs: dict = None, **params) -> list:
+        """Ticket Counts
+
+        Args:
+            uuid_customer (str, required): uuid_customer
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            opening_date_start (string optional): additional filter - parameter
+            opening_date_end (string optional): additional filter - parameter
+            closing_date_start (string optional): additional filter - parameter
+            closing_date_end (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['opening_date_start', 'opening_date_end',
+            'closing_date_start', 'closing_date_end']
+        params.get('opening_date_start'), params.get('opening_date_end'
+            ), params.get('closing_date_start'), params.get('closing_date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.external_tickets_ticket_counts.
+                __name__, params, official_params_list)
+        response = self.execute('GET', path=
+            f'/external_tickets/ticket_counts/{uuid_customer}', warm_start=
+            warm_start, params=params, **kwargs)
+        return response
+
+    def external_tickets_ticket_counts_virtual_domain(self,
+        uuid_virtual_domain: str, warm_start: bool = False,
+        kwargs: dict = None, **params) -> list:
+        """Ticket Counts Virtual Domain
+
+        Args:
+            uuid_virtual_domain (str, required): uuid_virtual_domain
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            opening_date_start (string optional): additional filter - parameter
+            opening_date_end (string optional): additional filter - parameter
+            closing_date_start (string optional): additional filter - parameter
+            closing_date_end (string optional): additional filter - parameter
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['opening_date_start', 'opening_date_end',
+            'closing_date_start', 'closing_date_end']
+        params.get('opening_date_start'), params.get('opening_date_end'
+            ), params.get('closing_date_start'), params.get('closing_date_end')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.
+                external_tickets_ticket_counts_virtual_domain.__name__,
+                params, official_params_list)
+        response = self.execute('GET', path=
+            f'/external_tickets/ticket_counts/{uuid_virtual_domain}/virtual_domain'
+            , warm_start=warm_start, params=params, **kwargs)
+        return response
+
     def external_tickets_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:
