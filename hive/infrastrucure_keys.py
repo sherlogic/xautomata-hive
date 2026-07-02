@@ -23,7 +23,7 @@ class Keys:
     virtual_domain_keys = {
         "univocal": ["code"],
         "mandatory": {"code": {"len": 128, "unique": True}},  # unico
-        "optional": {"description": {"len": 255},
+        "optional": {"description": {"len": 256},
                      "status": {"len": 1}}, # aggiunto (07/04/2026)
     }
 
@@ -47,7 +47,7 @@ class Keys:
         "backtrace": {"uuid_site": ["customer code", "site code"], "uuid_virtual_domain": ["virtual_domain code"]},
         "mandatory": {"type": {"len": 8},
                       "name": {"len": 255, "unique": True},  # univoco con la tripla uuid_stie, uuid_vd
-                      "description": {"len": 255},
+                      "description": {"len": 256},
                       "status": {"len": 1}}, # recentemente diminuito da 8 (07/04/2026)
         "optional": {"automata_domain": {"type": 'list'}}
     }
@@ -57,7 +57,7 @@ class Keys:
         "mandatory": {"name": {"len": 255, "unique": True},  # unico
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 255},
+        "optional": {"description": {"len": 256},
                      "feedback_for_operator": {"len": 255},
                      "ip_cidr": {"type": "dict"},
                      "data_profile": {"type": "dict"}}
@@ -70,7 +70,7 @@ class Keys:
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 255},
+        "optional": {"description": {"len": 256},
                      "feedback_for_operator": {"len": 255},
                      "data_profile": {"type": "dict"}}
     }
@@ -82,7 +82,7 @@ class Keys:
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 255},
+        "optional": {"description": {"len": 256},
                      "feedback_for_operator": {"len": 255},
                      "data_profile": {"type": "dict"}}
     }
