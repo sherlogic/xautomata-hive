@@ -848,6 +848,7 @@ class Users(ApiManager):
             "verified_email": "boolean", optional
             "password": "string", optional
             "send_email": "boolean", optional
+            "sso": "boolean", optional
             "groups": "array", optional
             "virtual_domains": "array", optional
             "customers": "array", optional
