@@ -8,6 +8,7 @@ __pycache__/
 *.json
 test/
 temp*
+openapi.txt
 
 # C extensions
 *.so

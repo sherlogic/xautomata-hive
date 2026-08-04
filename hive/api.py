@@ -136,7 +136,7 @@ class ApiManager:
         query = True if path.rstrip('/') == '/last_status' and mode == 'POST' else query  # caso specifico della last_status che non ha features riconoscibili
 
         authentication = {'Authorization': f'Bearer {self.token}'}
-        _headers_ = headers.copy().update(authentication) if headers else authentication
+        _headers_ = {**headers, **authentication} if headers else authentication
 
         _payload_ = payload.copy() if payload is not None else None  # va lasciato in questa dicitura perche in se si usa if payload quando arriva un {} viene considerato False
         _params_ = params.copy() if params else {}
