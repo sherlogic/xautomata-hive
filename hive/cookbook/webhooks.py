@@ -116,7 +116,7 @@ class Webhooks(ApiManager):
 
     def webhooks_create_webhook_type(self, payload: list, webhook_type: str,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
-        **params) -> list:
+        **headers) -> list:
         """Post Webhook
 
         Args:
@@ -125,20 +125,20 @@ class Webhooks(ApiManager):
             single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
             page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
+            **headers: additional HTTP headers required by the API.
 
         Keyword Args:
-            xa-auth-token (string required): additional filter - parameter
+            xa-auth-token (string required): additional filter - header
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_params_list = ['xa-auth-token']
-        params.get('xa-auth-token')
+        official_headers_list = ['xa-auth-token']
+        headers.get('xa-auth-token')
         if not self._silence_warning:
-            warning_wrong_parameters(self.webhooks_create.__name__, params,
-                official_params_list)
+            warning_wrong_parameters(self.webhooks_create.__name__, headers,
+                official_headers_list)
         response = self.execute('POST', path=f'/webhooks/{webhook_type}',
-            single_page=single_page, page_size=page_size, params=params,
+            single_page=single_page, page_size=page_size, headers=headers,
             payload=payload, **kwargs)
         return response

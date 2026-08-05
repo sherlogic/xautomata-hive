@@ -57,7 +57,7 @@ class Keys:
         "mandatory": {"name": {"len": 255, "unique": True},  # unico
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 256},
+        "optional": {"description": {"len": 255},
                      "feedback_for_operator": {"len": 255},
                      "ip_cidr": {"type": "dict"},
                      "data_profile": {"type": "dict"}}
@@ -70,7 +70,7 @@ class Keys:
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 256},
+        "optional": {"description": {"len": 255},
                      "feedback_for_operator": {"len": 255},
                      "data_profile": {"type": "dict"}}
     }
@@ -82,7 +82,7 @@ class Keys:
         "mandatory": {"name": {"len": 255},
                       "profile": {"len": 64},
                       "status": {"len": 1}},
-        "optional": {"description": {"len": 256},
+        "optional": {"description": {"len": 255},
                      "feedback_for_operator": {"len": 255},
                      "data_profile": {"type": "dict"}}
     }

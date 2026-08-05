@@ -111,30 +111,28 @@ class Questions(ApiManager):
         return response
 
     def questions_by_token(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None, **params) -> list:
+        kwargs: dict = None, **headers) -> list:
         """Read Tracking Question By Token
 
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
-            **params: additional parameters for the API.
+            **headers: additional HTTP headers required by the API.
 
         Keyword Args:
-            q-token (string required): additional filter - parameter
+            q-token (string required): additional filter - header
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
-            params=params.copy())
-        official_params_list = ['q-token']
-        params.get('q-token')
+        official_headers_list = ['q-token']
+        headers.get('q-token')
         if not self._silence_warning:
             warning_wrong_parameters(self.questions_by_token.__name__,
-                params, official_params_list)
+                headers, official_headers_list)
         response = self.execute('GET', path=f'/questions/{uuid}/by_token',
-            warm_start=warm_start, params=params, **kwargs)
+            warm_start=warm_start, headers=headers, **kwargs)
         return response
 
     def questions_reset_put(self, uuid: str, kwargs: dict = None, **payload
