@@ -485,14 +485,16 @@ class Sites(ApiManager):
         Keyword Args:
             timestamp_start (string required): additional filter - parameter
             timestamp_end (string required): additional filter - parameter
+            tables (string optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
         kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
             params=params.copy())
-        official_params_list = ['timestamp_start', 'timestamp_end']
-        params.get('timestamp_start'), params.get('timestamp_end')
+        official_params_list = ['timestamp_start', 'timestamp_end', 'tables']
+        params.get('timestamp_start'), params.get('timestamp_end'), params.get(
+            'tables')
         if not self._silence_warning:
             warning_wrong_parameters(self.sites_export_timeseries.__name__,
                 params, official_params_list)
