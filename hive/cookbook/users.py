@@ -1201,6 +1201,7 @@ class Users(ApiManager):
         Keyword Args:
             subject (string required): additional filter - payload
             recipients (array required): additional filter - payload
+            cc_recipients (array optional): additional filter - payload
             ccn_recipients (array optional): additional filter - payload
             attachments (array optional): additional filter - payload
             template_parameters (object optional): additional filter - payload
@@ -1209,11 +1210,12 @@ class Users(ApiManager):
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['subject', 'recipients', 'ccn_recipients',
-            'attachments', 'template_parameters', 'domain']
+        official_payload_list = ['subject', 'recipients', 'cc_recipients',
+            'ccn_recipients', 'attachments', 'template_parameters', 'domain']
         payload.get('subject'), payload.get('recipients'), payload.get(
-            'ccn_recipients'), payload.get('attachments'), payload.get(
-            'template_parameters'), payload.get('domain')
+            'cc_recipients'), payload.get('ccn_recipients'), payload.get(
+            'attachments'), payload.get('template_parameters'), payload.get(
+            'domain')
         if not self._silence_warning:
             warning_wrong_parameters(self.users_send_email_template_create.
                 __name__, payload, official_payload_list)

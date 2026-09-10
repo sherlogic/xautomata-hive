@@ -35,6 +35,7 @@ class TreeHierarchy(ApiManager):
             site_status (string optional): additional filter - parameter
             site_type (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
+            uuid_group_parent (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_description (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -56,9 +57,9 @@ class TreeHierarchy(ApiManager):
             'site_code', 'site_description', 'site_address',
             'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'site_type', 'uuid_group',
-            'group_name', 'group_description', 'group_status', 'group_type',
-            'uuid_virtual_domain', 'virtual_domain_name', 'skip', 'limit',
-            'like', 'join', 'count']
+            'uuid_group_parent', 'group_name', 'group_description',
+            'group_status', 'group_type', 'uuid_virtual_domain',
+            'virtual_domain_name', 'skip', 'limit', 'like', 'join', 'count']
         params.get('extract_severity'), params.get('sort_by'), params.get(
             'null_fields'), params.get('uuid_customer'), params.get(
             'customer_code'), params.get('customer_company_name'), params.get(
@@ -67,11 +68,12 @@ class TreeHierarchy(ApiManager):
             ), params.get('site_zip_code'), params.get('site_city'
             ), params.get('site_country'), params.get('site_state_province'
             ), params.get('site_status'), params.get('site_type'), params.get(
-            'uuid_group'), params.get('group_name'), params.get(
-            'group_description'), params.get('group_status'), params.get(
-            'group_type'), params.get('uuid_virtual_domain'), params.get(
-            'virtual_domain_name'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'uuid_group'), params.get('uuid_group_parent'), params.get(
+            'group_name'), params.get('group_description'), params.get(
+            'group_status'), params.get('group_type'), params.get(
+            'uuid_virtual_domain'), params.get('virtual_domain_name'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_groups.__name__,
                 params, official_params_list)
@@ -154,6 +156,7 @@ class TreeHierarchy(ApiManager):
             site_state_province (string optional): additional filter - parameter
             site_status (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
+            uuid_group_parent (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_description (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -179,10 +182,10 @@ class TreeHierarchy(ApiManager):
             'customer_status', 'uuid_site', 'site_code', 'site_description',
             'site_address', 'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'uuid_group',
-            'group_name', 'group_description', 'group_status', 'group_type',
-            'uuid_object', 'object_name', 'object_status', 'object_profile',
-            'uuid_virtual_domain', 'virtual_domain_name', 'skip', 'limit',
-            'like', 'join', 'count']
+            'uuid_group_parent', 'group_name', 'group_description',
+            'group_status', 'group_type', 'uuid_object', 'object_name',
+            'object_status', 'object_profile', 'uuid_virtual_domain',
+            'virtual_domain_name', 'skip', 'limit', 'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'extract_data_profile'), params.get('extract_severity'
             ), params.get('extract_ip_cidr'), params.get('uuid_customer'
@@ -192,13 +195,14 @@ class TreeHierarchy(ApiManager):
             ), params.get('site_address'), params.get('site_zip_code'
             ), params.get('site_city'), params.get('site_country'), params.get(
             'site_state_province'), params.get('site_status'), params.get(
-            'uuid_group'), params.get('group_name'), params.get(
-            'group_description'), params.get('group_status'), params.get(
-            'group_type'), params.get('uuid_object'), params.get('object_name'
-            ), params.get('object_status'), params.get('object_profile'
-            ), params.get('uuid_virtual_domain'), params.get(
-            'virtual_domain_name'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'uuid_group'), params.get('uuid_group_parent'), params.get(
+            'group_name'), params.get('group_description'), params.get(
+            'group_status'), params.get('group_type'), params.get('uuid_object'
+            ), params.get('object_name'), params.get('object_status'
+            ), params.get('object_profile'), params.get('uuid_virtual_domain'
+            ), params.get('virtual_domain_name'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_objects.__name__,
                 params, official_params_list)
@@ -236,6 +240,7 @@ class TreeHierarchy(ApiManager):
             site_state_province (string optional): additional filter - parameter
             site_status (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
+            uuid_group_parent (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_description (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -261,10 +266,11 @@ class TreeHierarchy(ApiManager):
             'uuid_site', 'site_code', 'site_description', 'site_address',
             'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'uuid_group',
-            'group_name', 'group_description', 'group_status', 'group_type',
-            'uuid_object', 'object_name', 'object_status', 'object_profile',
-            'metric_type_name', 'metric_type_status', 'metric_type_profile',
-            'skip', 'limit', 'like', 'join', 'count']
+            'uuid_group_parent', 'group_name', 'group_description',
+            'group_status', 'group_type', 'uuid_object', 'object_name',
+            'object_status', 'object_profile', 'metric_type_name',
+            'metric_type_status', 'metric_type_profile', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_customer'), params.get('customer_code'), params.get(
             'customer_company_name'), params.get('customer_status'
@@ -272,14 +278,15 @@ class TreeHierarchy(ApiManager):
             'site_description'), params.get('site_address'), params.get(
             'site_zip_code'), params.get('site_city'), params.get(
             'site_country'), params.get('site_state_province'), params.get(
-            'site_status'), params.get('uuid_group'), params.get('group_name'
-            ), params.get('group_description'), params.get('group_status'
-            ), params.get('group_type'), params.get('uuid_object'), params.get(
-            'object_name'), params.get('object_status'), params.get(
-            'object_profile'), params.get('metric_type_name'), params.get(
-            'metric_type_status'), params.get('metric_type_profile'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            'site_status'), params.get('uuid_group'), params.get(
+            'uuid_group_parent'), params.get('group_name'), params.get(
+            'group_description'), params.get('group_status'), params.get(
+            'group_type'), params.get('uuid_object'), params.get('object_name'
+            ), params.get('object_status'), params.get('object_profile'
+            ), params.get('metric_type_name'), params.get('metric_type_status'
+            ), params.get('metric_type_profile'), params.get('skip'
+            ), params.get('limit'), params.get('like'), params.get('join'
+            ), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_metric_types.
                 __name__, params, official_params_list)
@@ -317,6 +324,7 @@ class TreeHierarchy(ApiManager):
             site_state_province (string optional): additional filter - parameter
             site_status (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
+            uuid_group_parent (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_description (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -345,11 +353,12 @@ class TreeHierarchy(ApiManager):
             'uuid_site', 'site_code', 'site_description', 'site_address',
             'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'uuid_group',
-            'group_name', 'group_description', 'group_status', 'group_type',
-            'uuid_object', 'object_name', 'object_status', 'object_profile',
-            'metric_type_name', 'metric_type_status', 'uuid_metric',
-            'metric_name', 'metric_status', 'metric_profile', 'skip',
-            'limit', 'like', 'join', 'count']
+            'uuid_group_parent', 'group_name', 'group_description',
+            'group_status', 'group_type', 'uuid_object', 'object_name',
+            'object_status', 'object_profile', 'metric_type_name',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
             'uuid_customer'), params.get('customer_code'), params.get(
             'customer_company_name'), params.get('customer_status'
@@ -357,15 +366,16 @@ class TreeHierarchy(ApiManager):
             'site_description'), params.get('site_address'), params.get(
             'site_zip_code'), params.get('site_city'), params.get(
             'site_country'), params.get('site_state_province'), params.get(
-            'site_status'), params.get('uuid_group'), params.get('group_name'
-            ), params.get('group_description'), params.get('group_status'
-            ), params.get('group_type'), params.get('uuid_object'), params.get(
-            'object_name'), params.get('object_status'), params.get(
-            'object_profile'), params.get('metric_type_name'), params.get(
-            'metric_type_status'), params.get('uuid_metric'), params.get(
-            'metric_name'), params.get('metric_status'), params.get(
-            'metric_profile'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'site_status'), params.get('uuid_group'), params.get(
+            'uuid_group_parent'), params.get('group_name'), params.get(
+            'group_description'), params.get('group_status'), params.get(
+            'group_type'), params.get('uuid_object'), params.get('object_name'
+            ), params.get('object_status'), params.get('object_profile'
+            ), params.get('metric_type_name'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_metrics.__name__,
                 params, official_params_list)
@@ -405,6 +415,7 @@ class TreeHierarchy(ApiManager):
             site_state_province (string optional): additional filter - parameter
             site_status (string optional): additional filter - parameter
             uuid_group (string optional): additional filter - parameter
+            uuid_group_parent (string optional): additional filter - parameter
             group_name (string optional): additional filter - parameter
             group_description (string optional): additional filter - parameter
             group_status (string optional): additional filter - parameter
@@ -434,11 +445,12 @@ class TreeHierarchy(ApiManager):
             'site_code', 'site_description', 'site_address',
             'site_zip_code', 'site_city', 'site_country',
             'site_state_province', 'site_status', 'uuid_group',
-            'group_name', 'group_description', 'group_status', 'group_type',
-            'uuid_object', 'object_name', 'object_status', 'object_profile',
-            'metric_type_name', 'metric_type_status', 'uuid_metric',
-            'metric_name', 'metric_status', 'metric_profile', 'skip',
-            'limit', 'like', 'join', 'count']
+            'uuid_group_parent', 'group_name', 'group_description',
+            'group_status', 'group_type', 'uuid_object', 'object_name',
+            'object_status', 'object_profile', 'metric_type_name',
+            'metric_type_status', 'uuid_metric', 'metric_name',
+            'metric_status', 'metric_profile', 'skip', 'limit', 'like',
+            'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get('ts_start'
             ), params.get('ts_end'), params.get('uuid_customer'), params.get(
             'customer_code'), params.get('customer_company_name'), params.get(
@@ -447,15 +459,15 @@ class TreeHierarchy(ApiManager):
             ), params.get('site_zip_code'), params.get('site_city'
             ), params.get('site_country'), params.get('site_state_province'
             ), params.get('site_status'), params.get('uuid_group'), params.get(
-            'group_name'), params.get('group_description'), params.get(
-            'group_status'), params.get('group_type'), params.get('uuid_object'
-            ), params.get('object_name'), params.get('object_status'
-            ), params.get('object_profile'), params.get('metric_type_name'
-            ), params.get('metric_type_status'), params.get('uuid_metric'
-            ), params.get('metric_name'), params.get('metric_status'
-            ), params.get('metric_profile'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            'uuid_group_parent'), params.get('group_name'), params.get(
+            'group_description'), params.get('group_status'), params.get(
+            'group_type'), params.get('uuid_object'), params.get('object_name'
+            ), params.get('object_status'), params.get('object_profile'
+            ), params.get('metric_type_name'), params.get('metric_type_status'
+            ), params.get('uuid_metric'), params.get('metric_name'
+            ), params.get('metric_status'), params.get('metric_profile'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.tree_hierarchy_metrics_average.
                 __name__, params, official_params_list)
