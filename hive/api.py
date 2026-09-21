@@ -552,6 +552,7 @@ from hive.cookbook.downtimes import Downtimes
 from hive.cookbook.external_tickets import ExternalTickets
 from hive.cookbook.features import Features
 from hive.cookbook.files import Files
+from hive.cookbook.firmware_updates import FirmwareUpdates
 from hive.cookbook.groups import Groups
 from hive.cookbook.automata_ingest import AutomataIngest
 from hive.cookbook.metric_ingest import MetricIngest
@@ -599,7 +600,7 @@ from hive.cookbook.widget_groups import WidgetGroups
 # hive imports stop
 
 
-class XautomataApi(AclDocs, AclOverrides, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, Groups, AutomataIngest, MetricIngest, IssueReports, Microsoft, Google, Apple, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, Probes, ProbeTypes, ProfileTopics, Questions, Regions, RetentionRules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, Tests, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
+class XautomataApi(AclDocs, AclOverrides, Calendars, CostTagging, CostTags, CostViews, CostTreeNodes, CostTreeResources, Contacts, Customers, Dashboards, Dispatchers, Downtimes, ExternalTickets, Features, Files, FirmwareUpdates, Groups, AutomataIngest, MetricIngest, IssueReports, Microsoft, Google, Apple, Login, QrCode, Jobs, Messages, Metrics, ProbesLogIngest, MetricTypes, NotificationProviders, NotificationProviderTypes, Objects, Probes, ProbeTypes, ProfileTopics, Questions, Regions, RetentionRules, Services, Sites, LastStatus, LastObjectStatus, TermsAndConditions, Tests, TreeHierarchy, TsAutomataState, TsCostAzureRaw, TsCostManagement, TsMetricStatus, TsMetricValue, TsNtopFlows, TsServiceStatus, TsServiceValue, Users, UsersNotifications, VirtualDomains, Widgets, Webhooks, WidgetGroups):
     """
     Class with each specific API, based on the ApiManager Class created for a more general interaction with Xautomata API
     """
