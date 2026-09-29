@@ -690,6 +690,33 @@ class Metrics(ApiManager):
             warm_start, params=params, payload=payload, **kwargs)
         return response
 
+    def metrics_last_value_bulk(self, payload: list,
+        warm_start: bool = False, single_page: bool = False,
+        page_size: int = 50, kwargs: dict = None) -> list:
+        """Bulk Read Metrics Last Value
+
+        Args:
+            payload (list[dict], optional): List dict to create.
+            warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
+            single_page (bool, optional): se False la risposta viene ottenuta a step per non appesantire le API. Default to False.
+            page_size (int, optional): Numero di oggetti per pagina se single_page == False. Default to 50.
+            kwargs (dict, optional): additional parameters for execute. Default to None.
+
+        Examples:
+            payload = 
+          [
+            "uuid": "str", required
+          ]
+
+        Returns: list"""
+        if kwargs is None:
+            kwargs = dict()
+        response = self.execute('POST', path=
+            f'/metrics/bulk/read/last_value/', single_page=single_page,
+            page_size=page_size, warm_start=warm_start, payload=payload, **
+            kwargs)
+        return response
+
     def metrics_services_bulk(self, payload: list, warm_start: bool = False,
         single_page: bool = False, page_size: int = 50, kwargs: dict = None,
         **params) -> list:

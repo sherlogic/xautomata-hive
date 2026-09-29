@@ -38,6 +38,8 @@ class FirmwareUpdates(ApiManager):
             model (string optional): additional filter - parameter
             type (string optional): additional filter - parameter
             brand (string optional): additional filter - parameter
+            codice_soa (string optional): additional filter - parameter
+            sorgente (string optional): additional filter - parameter
             modello_serie (string optional): additional filter - parameter
             marca_modello_serie (string optional): additional filter - parameter
             end_of_life (string optional): additional filter - parameter
@@ -73,14 +75,15 @@ class FirmwareUpdates(ApiManager):
             'site_state_province', 'metric_profile', 'group_name',
             'uuid_virtual_domain', 'virtual_domain_name',
             'virtual_domain_description', 'object_name', 'model', 'type',
-            'brand', 'modello_serie', 'marca_modello_serie', 'end_of_life',
-            'metric_type_name', 'firmware', 'last_firmware_version',
-            'last_value_description', 'password_created_time',
-            'password_expiring_date', 'password_warning_threshold',
-            'password_critical_threshold', 'object_last_check_ts', 'status',
-            'uuid_downtime', 'downtime_code', 'downtime_description',
-            'downtime_start', 'downtime_end', 'date_start', 'date_end',
-            'skip', 'limit', 'like', 'join', 'count']
+            'brand', 'codice_soa', 'sorgente', 'modello_serie',
+            'marca_modello_serie', 'end_of_life', 'metric_type_name',
+            'firmware', 'last_firmware_version', 'last_value_description',
+            'password_created_time', 'password_expiring_date',
+            'password_warning_threshold', 'password_critical_threshold',
+            'object_last_check_ts', 'status', 'uuid_downtime',
+            'downtime_code', 'downtime_description', 'downtime_start',
+            'downtime_end', 'date_start', 'date_end', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('sort_by'), params.get('site_code'), params.get(
             'uuid_customer'), params.get('uuid_metric'), params.get('site_city'
             ), params.get('site_country'), params.get('site_address'
@@ -91,12 +94,13 @@ class FirmwareUpdates(ApiManager):
             ), params.get('virtual_domain_name'), params.get(
             'virtual_domain_description'), params.get('object_name'
             ), params.get('model'), params.get('type'), params.get('brand'
-            ), params.get('modello_serie'), params.get('marca_modello_serie'
-            ), params.get('end_of_life'), params.get('metric_type_name'
-            ), params.get('firmware'), params.get('last_firmware_version'
-            ), params.get('last_value_description'), params.get(
-            'password_created_time'), params.get('password_expiring_date'
-            ), params.get('password_warning_threshold'), params.get(
+            ), params.get('codice_soa'), params.get('sorgente'), params.get(
+            'modello_serie'), params.get('marca_modello_serie'), params.get(
+            'end_of_life'), params.get('metric_type_name'), params.get(
+            'firmware'), params.get('last_firmware_version'), params.get(
+            'last_value_description'), params.get('password_created_time'
+            ), params.get('password_expiring_date'), params.get(
+            'password_warning_threshold'), params.get(
             'password_critical_threshold'), params.get('object_last_check_ts'
             ), params.get('status'), params.get('uuid_downtime'), params.get(
             'downtime_code'), params.get('downtime_description'), params.get(
@@ -148,7 +152,10 @@ class FirmwareUpdates(ApiManager):
             brand (string optional): additional filter - parameter
             modello_serie (string optional): additional filter - parameter
             marca_modello_serie (string optional): additional filter - parameter
+            end_of_life (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
+            codice_soa (string optional): additional filter - parameter
+            sorgente (string optional): additional filter - parameter
             firmware (string optional): additional filter - parameter
             last_firmware_version (string optional): additional filter - parameter
             last_value_description (string optional): additional filter - parameter
@@ -180,14 +187,15 @@ class FirmwareUpdates(ApiManager):
             'site_region', 'metric_profile', 'group_name',
             'uuid_virtual_domain', 'virtual_domain_name',
             'virtual_domain_description', 'object_name', 'model', 'type',
-            'brand', 'modello_serie', 'marca_modello_serie',
-            'metric_type_name', 'firmware', 'last_firmware_version',
-            'last_value_description', 'password_created_time',
-            'password_expiring_date', 'password_warning_threshold',
-            'password_critical_threshold', 'object_last_check_ts', 'status',
-            'uuid_downtime', 'downtime_code', 'downtime_description',
-            'downtime_start', 'downtime_end', 'date_start', 'date_end',
-            'skip', 'limit', 'like', 'join', 'count']
+            'brand', 'modello_serie', 'marca_modello_serie', 'end_of_life',
+            'metric_type_name', 'codice_soa', 'sorgente', 'firmware',
+            'last_firmware_version', 'last_value_description',
+            'password_created_time', 'password_expiring_date',
+            'password_warning_threshold', 'password_critical_threshold',
+            'object_last_check_ts', 'status', 'uuid_downtime',
+            'downtime_code', 'downtime_description', 'downtime_start',
+            'downtime_end', 'date_start', 'date_end', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('column'), params.get('site_code'), params.get('uuid_metric'
             ), params.get('site_city'), params.get('site_country'), params.get(
             'site_address'), params.get('site_zip_code'), params.get(
@@ -198,18 +206,19 @@ class FirmwareUpdates(ApiManager):
             ), params.get('virtual_domain_description'), params.get(
             'object_name'), params.get('model'), params.get('type'
             ), params.get('brand'), params.get('modello_serie'), params.get(
-            'marca_modello_serie'), params.get('metric_type_name'), params.get(
-            'firmware'), params.get('last_firmware_version'), params.get(
-            'last_value_description'), params.get('password_created_time'
-            ), params.get('password_expiring_date'), params.get(
-            'password_warning_threshold'), params.get(
-            'password_critical_threshold'), params.get('object_last_check_ts'
-            ), params.get('status'), params.get('uuid_downtime'), params.get(
-            'downtime_code'), params.get('downtime_description'), params.get(
-            'downtime_start'), params.get('downtime_end'), params.get(
-            'date_start'), params.get('date_end'), params.get('skip'
-            ), params.get('limit'), params.get('like'), params.get('join'
-            ), params.get('count')
+            'marca_modello_serie'), params.get('end_of_life'), params.get(
+            'metric_type_name'), params.get('codice_soa'), params.get(
+            'sorgente'), params.get('firmware'), params.get(
+            'last_firmware_version'), params.get('last_value_description'
+            ), params.get('password_created_time'), params.get(
+            'password_expiring_date'), params.get('password_warning_threshold'
+            ), params.get('password_critical_threshold'), params.get(
+            'object_last_check_ts'), params.get('status'), params.get(
+            'uuid_downtime'), params.get('downtime_code'), params.get(
+            'downtime_description'), params.get('downtime_start'), params.get(
+            'downtime_end'), params.get('date_start'), params.get('date_end'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.firmware_updates_grouped.__name__,
                 params, official_params_list)
@@ -336,6 +345,17 @@ class FirmwareUpdates(ApiManager):
             ultima_attivita (string optional): additional filter - parameter
             sorgente_presente (string optional): additional filter - parameter
             sorgente (string optional): additional filter - parameter
+            tipo_apparato (string optional): additional filter - parameter
+            marca (string optional): additional filter - parameter
+            modello (string optional): additional filter - parameter
+            model (string optional): additional filter - parameter
+            type (string optional): additional filter - parameter
+            brand (string optional): additional filter - parameter
+            modello_serie (string optional): additional filter - parameter
+            marca_modello_serie (string optional): additional filter - parameter
+            metric_type_name (string optional): additional filter - parameter
+            codice_soa (string optional): additional filter - parameter
+            firmware (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -352,8 +372,11 @@ class FirmwareUpdates(ApiManager):
             'site_region', 'uuid_virtual_domain', 'group_name',
             'virtual_domain_name', 'virtual_domain_description',
             'object_name', 'traffico_attivo', 'ultima_attivita',
-            'sorgente_presente', 'sorgente', 'null_fields', 'skip', 'limit',
-            'like', 'join', 'count']
+            'sorgente_presente', 'sorgente', 'tipo_apparato', 'marca',
+            'modello', 'model', 'type', 'brand', 'modello_serie',
+            'marca_modello_serie', 'metric_type_name', 'codice_soa',
+            'firmware', 'null_fields', 'skip', 'limit', 'like', 'join', 'count'
+            ]
         params.get('sort_by'), params.get('uuid_customer'), params.get(
             'site_type'), params.get('site_code'), params.get('site_address'
             ), params.get('site_zip_code'), params.get('site_city'
@@ -364,9 +387,13 @@ class FirmwareUpdates(ApiManager):
             'virtual_domain_description'), params.get('object_name'
             ), params.get('traffico_attivo'), params.get('ultima_attivita'
             ), params.get('sorgente_presente'), params.get('sorgente'
-            ), params.get('null_fields'), params.get('skip'), params.get(
-            'limit'), params.get('like'), params.get('join'), params.get(
-            'count')
+            ), params.get('tipo_apparato'), params.get('marca'), params.get(
+            'modello'), params.get('model'), params.get('type'), params.get(
+            'brand'), params.get('modello_serie'), params.get(
+            'marca_modello_serie'), params.get('metric_type_name'), params.get(
+            'codice_soa'), params.get('firmware'), params.get('null_fields'
+            ), params.get('skip'), params.get('limit'), params.get('like'
+            ), params.get('join'), params.get('count')
         if not self._silence_warning:
             warning_wrong_parameters(self.firmware_updates_discovery_status
                 .__name__, params, official_params_list)
