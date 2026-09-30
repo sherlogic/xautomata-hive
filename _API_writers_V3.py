@@ -18,10 +18,13 @@ Two implementation details are load-bearing and easy to "clean up" by mistake:
    those must be syntactically valid Python source - unlike the signature pieces above.
 """
 import ast
+import logging
 from pathlib import Path
 from typing import List, Optional
 
 import astor
+
+logger = logging.getLogger('hive')
 
 REPO_ROOT = Path(__file__).resolve().parent
 COOKBOOK_DIR = REPO_ROOT / 'hive' / 'cookbook'
@@ -133,6 +136,31 @@ def underscore_to_camelcase(name: str) -> str:
     words = name.split('_')
     camelcase_name = ''.join(word.capitalize() for word in words)
     return camelcase_name
+
+
+def prune_stale_cookbook_files(generated_names: List[str], **kwargs) -> List[str]:
+    """
+    Delete `*.py` files in the cookbook dir that were not (re)generated in this run, i.e. the
+    resource no longer exists in the OpenAPI schema. `__init__.py` is always kept.
+
+    In mock mode nothing is deleted, the stale files are only reported (dry-run).
+    Returns the list of stale file names (deleted, or that would be deleted in mock mode).
+    """
+    target_dir = COOKBOOK_DIR_MOCK if kwargs.get('mock') else COOKBOOK_DIR
+    if not target_dir.is_dir():
+        return []
+
+    keep = set(generated_names) | {'__init__'}
+    stale = sorted(p for p in target_dir.glob('*.py') if p.stem not in keep)
+
+    for path in stale:
+        if kwargs.get('mock'):
+            logger.info(f'[mock] would delete stale cookbook file {path.name}')
+        else:
+            path.unlink()
+            logger.warning(f'deleted stale cookbook file {path.name} (no longer in the schema)')
+
+    return [p.name for p in stale]
 
 
 def lib_import_set(import_link: List[str], class_list: List[str], **kwargs) -> None:

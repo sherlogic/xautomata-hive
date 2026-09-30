@@ -18,7 +18,7 @@ import logging
 import re
 from typing import Optional
 
-from _API_writers_V3 import generate_python_code, underscore_to_camelcase, lib_import_set
+from _API_writers_V3 import generate_python_code, underscore_to_camelcase, lib_import_set, prune_stale_cookbook_files
 from hive.infrastrucure_keys import Keys
 from utilities.dictionary import DeepDict
 import requests
@@ -409,6 +409,10 @@ def main(**kwargs) -> None:
         class_list.append(class_name)
 
     lib_import_set(link_imports, class_list, **kwargs)
+
+    # a partial run (`allowed`) or an empty schema would make every other file look stale
+    if not allowed and api_dict:
+        prune_stale_cookbook_files(list(api_dict), **kwargs)
 
 
 def _apply_hidden_overrides(mode: str, name: str, function_name: str, bulk: bool, bulk_read: bool, query: bool):
