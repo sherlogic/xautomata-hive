@@ -54,13 +54,15 @@ class ProbeTypes(ApiManager):
             app_code (string required): additional filter - payload
             app_name (string optional): additional filter - payload
             endpoint (array object optional): additional filter - payload
+            configuration_schema (array object optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['app_code', 'app_name', 'endpoint']
+        official_payload_list = ['app_code', 'app_name', 'endpoint',
+            'configuration_schema']
         payload.get('app_code'), payload.get('app_name'), payload.get(
-            'endpoint')
+            'endpoint'), payload.get('configuration_schema')
         if not self._silence_warning:
             warning_wrong_parameters(self.probe_types_create.__name__,
                 payload, official_payload_list)
@@ -97,13 +99,15 @@ class ProbeTypes(ApiManager):
             app_code (string optional): additional filter - payload
             app_name (string optional): additional filter - payload
             endpoint (array object optional): additional filter - payload
+            configuration_schema (array object optional): additional filter - payload
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
-        official_payload_list = ['app_code', 'app_name', 'endpoint']
+        official_payload_list = ['app_code', 'app_name', 'endpoint',
+            'configuration_schema']
         payload.get('app_code'), payload.get('app_name'), payload.get(
-            'endpoint')
+            'endpoint'), payload.get('configuration_schema')
         if not self._silence_warning:
             warning_wrong_parameters(self.probe_types_put.__name__, payload,
                 official_payload_list)
@@ -218,6 +222,7 @@ class ProbeTypes(ApiManager):
             "app_code": "string", required
             "app_name": "string", optional
             "endpoint": "array object", optional
+            "configuration_schema": "array object", optional
            }
           ]
 

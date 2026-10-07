@@ -355,7 +355,13 @@ class FirmwareUpdates(ApiManager):
             marca_modello_serie (string optional): additional filter - parameter
             metric_type_name (string optional): additional filter - parameter
             codice_soa (string optional): additional filter - parameter
+            end_of_life (string optional): additional filter - parameter
+            porta (string optional): additional filter - parameter
+            seriale (string optional): additional filter - parameter
             firmware (string optional): additional filter - parameter
+            xautomata (string optional): additional filter - parameter
+            status (string optional): additional filter - parameter
+            stato_xautomata (string optional): additional filter - parameter
             null_fields (string optional): additional filter - parameter
             skip (integer optional): numero di oggetti che si vogliono saltare nella risposta. Default to 0. - parameter
             limit (integer optional): numero di oggetti massimi che si vogliono ottenere. Default to 1_000_000. - parameter
@@ -375,8 +381,9 @@ class FirmwareUpdates(ApiManager):
             'sorgente_presente', 'sorgente', 'tipo_apparato', 'marca',
             'modello', 'model', 'type', 'brand', 'modello_serie',
             'marca_modello_serie', 'metric_type_name', 'codice_soa',
-            'firmware', 'null_fields', 'skip', 'limit', 'like', 'join', 'count'
-            ]
+            'end_of_life', 'porta', 'seriale', 'firmware', 'xautomata',
+            'status', 'stato_xautomata', 'null_fields', 'skip', 'limit',
+            'like', 'join', 'count']
         params.get('sort_by'), params.get('uuid_customer'), params.get(
             'site_type'), params.get('site_code'), params.get('site_address'
             ), params.get('site_zip_code'), params.get('site_city'
@@ -391,9 +398,12 @@ class FirmwareUpdates(ApiManager):
             'modello'), params.get('model'), params.get('type'), params.get(
             'brand'), params.get('modello_serie'), params.get(
             'marca_modello_serie'), params.get('metric_type_name'), params.get(
-            'codice_soa'), params.get('firmware'), params.get('null_fields'
-            ), params.get('skip'), params.get('limit'), params.get('like'
-            ), params.get('join'), params.get('count')
+            'codice_soa'), params.get('end_of_life'), params.get('porta'
+            ), params.get('seriale'), params.get('firmware'), params.get(
+            'xautomata'), params.get('status'), params.get('stato_xautomata'
+            ), params.get('null_fields'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.firmware_updates_discovery_status
                 .__name__, params, official_params_list)
