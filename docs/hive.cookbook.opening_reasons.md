@@ -1,1 +1,0 @@
-::: hive.cookbook.opening_reasons

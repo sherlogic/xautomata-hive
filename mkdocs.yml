@@ -70,8 +70,6 @@ nav:
         - cookbook:
           - acl_docs: hive.cookbook.acl_docs
           - acl_overrides: hive.cookbook.acl_overrides
-          - analytics: hive.cookbook.analytics
-          - anomalies: hive.cookbook.anomalies
           - apple: hive.cookbook.apple
           - automata_ingest: hive.cookbook.automata_ingest
           - calendars: hive.cookbook.calendars
@@ -91,37 +89,36 @@ nav:
           - firmware_updates: hive.cookbook.firmware_updates
           - google: hive.cookbook.google
           - groups: hive.cookbook.groups
+          - ibm: hive.cookbook.ibm
+          - issue_reports: hive.cookbook.issue_reports
           - jobs: hive.cookbook.jobs
           - last_object_status: hive.cookbook.last_object_status
           - last_status: hive.cookbook.last_status
           - login: hive.cookbook.login
           - messages: hive.cookbook.messages
-          - metrics: hive.cookbook.metrics
           - metric_ingest: hive.cookbook.metric_ingest
           - metric_types: hive.cookbook.metric_types
+          - metrics: hive.cookbook.metrics
           - microsoft: hive.cookbook.microsoft
-          - notification_providers: hive.cookbook.notification_providers
           - notification_provider_types: hive.cookbook.notification_provider_types
+          - notification_providers: hive.cookbook.notification_providers
           - objects: hive.cookbook.objects
-          - opening_reasons: hive.cookbook.opening_reasons
+          - probe_types: hive.cookbook.probe_types
           - probes: hive.cookbook.probes
           - probes_log_ingest: hive.cookbook.probes_log_ingest
-          - probe_types: hive.cookbook.probe_types
           - profile_topics: hive.cookbook.profile_topics
           - qr_code: hive.cookbook.qr_code
           - questions: hive.cookbook.questions
-          - reason_for_closure: hive.cookbook.reason_for_closure
+          - regions: hive.cookbook.regions
           - retention_rules: hive.cookbook.retention_rules
-          - schedules: hive.cookbook.schedules
           - services: hive.cookbook.services
           - sites: hive.cookbook.sites
           - terms_and_conditions: hive.cookbook.terms_and_conditions
+          - tests: hive.cookbook.tests
           - tree_hierarchy: hive.cookbook.tree_hierarchy
-          - tree_hierarchy_v2: hive.cookbook.tree_hierarchy_v2
           - ts_automata_state: hive.cookbook.ts_automata_state
           - ts_cost_azure_raw: hive.cookbook.ts_cost_azure_raw
           - ts_cost_management: hive.cookbook.ts_cost_management
-          - ts_cost_management_v2: hive.cookbook.ts_cost_management_v2
           - ts_metric_status: hive.cookbook.ts_metric_status
           - ts_metric_value: hive.cookbook.ts_metric_value
           - ts_ntop_flows: hive.cookbook.ts_ntop_flows
@@ -131,8 +128,8 @@ nav:
           - users_notifications: hive.cookbook.users_notifications
           - virtual_domains: hive.cookbook.virtual_domains
           - webhooks: hive.cookbook.webhooks
-          - widgets: hive.cookbook.widgets
           - widget_groups: hive.cookbook.widget_groups
+          - widgets: hive.cookbook.widgets
 
 copyright:
   MIT

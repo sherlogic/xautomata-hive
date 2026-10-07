@@ -163,6 +163,17 @@ def prune_stale_cookbook_files(generated_names: List[str], **kwargs) -> List[str
     return [p.name for p in stale]
 
 
+def sync_docs(**kwargs) -> None:
+    """
+    Align `docs/*.md` and the cookbook nav in `mkdocs.yml` with the files now in `hive/cookbook/`
+    (see `_docs_sync.py`). Skipped in mock mode, which writes to the test dir instead.
+    """
+    if kwargs.get('mock'):
+        return
+    import _docs_sync
+    _docs_sync.sync()
+
+
 def lib_import_set(import_link: List[str], class_list: List[str], **kwargs) -> None:
     """
     Splice the generated `from hive.cookbook.X import Y` lines and the `XautomataApi(...)`
