@@ -543,19 +543,31 @@ class Sites(ApiManager):
         return response
 
     def sites_export(self, uuid: str, warm_start: bool = False,
-        kwargs: dict = None) -> list:
+        kwargs: dict = None, **params) -> list:
         """Get Site Export
 
         Args:
             uuid (str, required): uuid
             warm_start (bool, optional): salva la risposta in un file e se viene richiamata la stessa funzione con gli stessi argomenti restituisce il contenuto del file. Default to False.
             kwargs (dict, optional): additional parameters for execute. Default to None.
+            **params: additional parameters for the API.
+
+        Keyword Args:
+            export_probe (boolean optional): additional filter - parameter
+            export_downtime (boolean optional): additional filter - parameter
 
         Returns: list"""
         if kwargs is None:
             kwargs = dict()
+        kwargs, params = handling_single_page_methods(kwargs=kwargs.copy(),
+            params=params.copy())
+        official_params_list = ['export_probe', 'export_downtime']
+        params.get('export_probe'), params.get('export_downtime')
+        if not self._silence_warning:
+            warning_wrong_parameters(self.sites_export.__name__, params,
+                official_params_list)
         response = self.execute('GET', path=f'/sites/{uuid}/export/',
-            warm_start=warm_start, **kwargs)
+            warm_start=warm_start, params=params, **kwargs)
         return response
 
     def sites_import_create(self, kwargs: dict = None, **payload) -> list:

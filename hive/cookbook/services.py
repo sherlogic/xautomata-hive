@@ -100,6 +100,7 @@ class Services(ApiManager):
             sort_by (string optional): Stringa separata da virgole di campi su cui ordinare. Si indica uno o piu campi della risposta e si puo chiedere di ottenere i valori di quei campi in ordine ascendente o discendente. Esempio "Customer:Desc". Default to "". - parameter
             null_fields (string optional): additional filter - parameter
             not_fields (string optional): additional filter - parameter
+            uuid (string optional): additional filter - parameter
             uuid_parent (string optional): additional filter - parameter
             uuid_customer (string optional): additional filter - parameter
             profile (string optional): additional filter - parameter
@@ -117,15 +118,16 @@ class Services(ApiManager):
         if kwargs is None:
             kwargs = dict()
         official_params_list = ['sort_by', 'null_fields', 'not_fields',
-            'uuid_parent', 'uuid_customer', 'profile', 'name',
+            'uuid', 'uuid_parent', 'uuid_customer', 'profile', 'name',
             'description', 'status', 'last_value_status', 'skip', 'limit',
             'like', 'join', 'count']
         params.get('sort_by'), params.get('null_fields'), params.get(
-            'not_fields'), params.get('uuid_parent'), params.get(
-            'uuid_customer'), params.get('profile'), params.get('name'
-            ), params.get('description'), params.get('status'), params.get(
-            'last_value_status'), params.get('skip'), params.get('limit'
-            ), params.get('like'), params.get('join'), params.get('count')
+            'not_fields'), params.get('uuid'), params.get('uuid_parent'
+            ), params.get('uuid_customer'), params.get('profile'), params.get(
+            'name'), params.get('description'), params.get('status'
+            ), params.get('last_value_status'), params.get('skip'), params.get(
+            'limit'), params.get('like'), params.get('join'), params.get(
+            'count')
         if not self._silence_warning:
             warning_wrong_parameters(self.services_last_value.__name__,
                 params, official_params_list)
